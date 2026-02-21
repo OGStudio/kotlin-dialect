@@ -9,10 +9,6 @@ function appSet(key, value) {
     KT.appCtrl().set(key, value);
 }
 
-//!<-- Constants -->
-
-//let APP_TMP = "BINARY";
-
 //!<-- Component -->
 
 function AppComponent() {
@@ -49,4 +45,5 @@ function appWriteFile(fileName, contents) {
 let cmp = new AppComponent();
 
 //<!-- Run -->
+
 appSet("didLaunch", true);
