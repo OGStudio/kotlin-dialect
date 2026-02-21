@@ -2,7 +2,6 @@
 
 let fs = require("fs");
 let KT = require("./ver-nodejs-app").org.opengamestudio;
-let F = KT.F;
 
 //!<-- API -->
 
@@ -20,7 +19,7 @@ function AppComponent() {
     this._construct = function() {
         // Effects
         let oneliners = [ 
-            F.inputFile, (c) => { appReadFile(c.inputFile) },
+            "inputFile", (c) => { appReadFile(c.inputFile) },
             "outputFileContents", (c) => { appWriteFile(c.outputFile, c.outputFileContents) },
         ];
         KT.registerOneliners(KT.appCtrl(), oneliners);

@@ -149,11 +149,11 @@ fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
 // 1. At app launch input file was specified with command line argument
 fun appShouldParseInputFilePath(c: AppContext): AppContext {
     if (
-        c.recentField == F.didLaunch &&
+        c.recentField == "didLaunch" &&
         cliArgumentValue(c.arguments, ARGUMENT_FILE).length > 0
     ) {
         c.inputFile = cliArgumentValue(c.arguments, ARGUMENT_FILE)
-        c.recentField = F.inputFile
+        c.recentField = "inputFile"
         return c
     }
 
