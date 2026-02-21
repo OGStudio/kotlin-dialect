@@ -94,10 +94,3 @@ fun setupComponentDebugging(
         println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
     }
 }
-
-// TMP
-@JsExport
-object F {
-    val didLaunch = "didLaunch"
-    val inputFile = "inputFile"
-}
