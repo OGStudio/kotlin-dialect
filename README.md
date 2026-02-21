@@ -9,7 +9,7 @@ Klin is a translator that converts YML to Kotlin.
 
 $ `./util/run-klin-dbg`
 
-# Generation of entity fields
+## Generation of entity fields
 
 | № | YML type | Kotlin type | Default value | YML example | Kotlin example |
 |---|---       |---          |---            |---          |---             |
