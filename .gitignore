@@ -1,7 +1,6 @@
-__pycache__
 .DS_Store
-do-test*
-local.properties
 .gradle
 build
-test-dir/entities.kt
+do-test*
+kotlin-js-store
+local.properties
