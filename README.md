@@ -3,9 +3,9 @@ logic in Kotlin for several platforms.
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
 If you tried Kotlin Multiplatform you surely know how hard it is to set up
-correctly for multiple platforms. This project show one particular way
-to have your code organized if you want to have Kotlin across platforms
-in your **native** apps.
+correctly for multiple platforms. This project dictates one particular way
+to have your code organized to be able to easily have logic in Kotlin
+across platforms in **native** apps.
 
 This project's core concept is a Redux-like architecture.
 
