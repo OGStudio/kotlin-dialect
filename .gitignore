@@ -1,0 +1,7 @@
+__pycache__
+.DS_Store
+do-test*
+local.properties
+.gradle
+build
+test-dir/entities.kt
