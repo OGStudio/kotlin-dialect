@@ -3,6 +3,7 @@ SDIR=$(cd "$(dirname "$0")" ; pwd -P)
 
 BUILD_DIR=$SDIR/../klin/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
 GRADLE_DIR=$SDIR/../klin/ver-nodejs
+KT_SRC_DIR=$SDIR/../klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio
 
 cd $GRADLE_DIR
 ./gradlew kotlinUpgradeYarnLock
@@ -10,5 +11,4 @@ cd $GRADLE_DIR
 
 node $BUILD_DIR/app.js \
     --file=$SDIR/../klin.yml \
-    --out=/tmp/klin.kt
-    #--out=$SDIR/../src/klin.kt
+    --out=$KT_SRC_DIR/klin.kt
