@@ -5,6 +5,8 @@ BUILD_DIR=$SDIR/../klin/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
 GRADLE_DIR=$SDIR/../klin/ver-nodejs
 KT_SRC_DIR=$SDIR/../klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio
 
+base64 -i $KT_SRC_DIR/KDController.kt -o /tmp/kd.b64
+
 cd $GRADLE_DIR
 ./gradlew kotlinUpgradeYarnLock
 ./gradlew jsNodeProductionRun
