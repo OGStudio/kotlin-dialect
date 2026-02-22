@@ -7,6 +7,14 @@
 
 package org.opengamestudio
 
+import kotlin.io.encoding.*
+
+// Convert Base64 string to a decoded string
+@OptIn(ExperimentalEncodingApi::class)
+fun base64ToString(b64: String): String {
+    return Base64.Default.decode(b64).decodeToString()
+}
+
 // Extract command line argument value
 fun cliArgumentValue(
     args: Array<String>,
@@ -93,4 +101,11 @@ fun setupComponentDebugging(
         val value = debugString(c.fieldAny(c.recentField))
         println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
     }
+}
+
+// Convert string to Base64 string
+@OptIn(ExperimentalEncodingApi::class)
+fun stringToBase64(txt: String): String {
+    val arr = txt.encodeToByteArray()
+    return Base64.Default.encode(arr)
 }
