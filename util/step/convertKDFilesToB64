@@ -1,0 +1,10 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Convert KD files to Base64"
+KD_TMP=/tmp/kd.tmp
+KD_TMP_B64=/tmp/kd.tmp.b64
+cat $SRC_DIR/KDContext.kt >> $KD_TMP
+cat $SRC_DIR/KDController.kt >> $KD_TMP
+cat $SRC_DIR/registerOneliners.kt >> $KD_TMP
+base64 -i $KD_TMP -o $KD_TMP_B64

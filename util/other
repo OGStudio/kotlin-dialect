@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Replace a line in a file
+function replace {
+    file=$1
+    was=$2
+    now=$3
+    cmd="sed -i.backup 's|$was|$now|g' $file"
+    eval "$cmd"
+    rm $file.backup
+}
