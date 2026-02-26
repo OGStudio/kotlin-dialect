@@ -10,7 +10,6 @@ T=$SDIR/step
 source $SDIR/other
 
 STEP=0
-source $T/convertKDFilesToB64
-#source $T/embedKDB64
+source $T/embedKDFiles
 source $T/build
 source $T/generateKlinKD
