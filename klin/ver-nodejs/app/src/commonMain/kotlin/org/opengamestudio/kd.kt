@@ -26,6 +26,7 @@ data class AppContext(
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
+    var outputKDContents: String = "",
     // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
@@ -63,6 +64,8 @@ data class AppContext(
             return outputFile as T
         } else if (name == "outputFileContents") {
             return outputFileContents as T
+        } else if (name == "outputKDContents") {
+            return outputKDContents as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
         }
@@ -109,6 +112,8 @@ data class AppContext(
             outputFile = value as String
         } else if (name == "outputFileContents") {
             outputFileContents = value as String
+        } else if (name == "outputKDContents") {
+            outputKDContents = value as String
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
         }

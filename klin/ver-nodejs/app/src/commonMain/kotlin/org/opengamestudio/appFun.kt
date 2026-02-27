@@ -7,6 +7,7 @@
 
 package org.opengamestudio
 
+import kotlin.io.encoding.*
 import kotlin.js.JsExport
 
 //<!-- Shoulds -->
@@ -201,11 +202,27 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 // Generate a final text
 //
 // Conditions:
-// 1. TODO ... Entity field comments are available
+// 1. TODO ... Enti 
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "outputEntityContents") {
+    if (c.recentField == "outputKDContents") {
         c.outputFileContents = c.outputEntityContents
         c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate KDController/Context/registerOneliners/etc. contents
+//
+// Conditions:
+// 1. Output of Kotlin entities' is available
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetOutputKDContents(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        c.outputKDContents = base64ToString(emb64)
+        c.recentField = "outputKDContents"
         return c
     }
 

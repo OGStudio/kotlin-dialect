@@ -26,6 +26,7 @@ object AppProto {
             ::appShouldPrintToConsole,
             ::appShouldParseOutputFilePath,
             ::appShouldResetOutputFileContents,
+            ::appShouldResetOutputKDContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
         }
