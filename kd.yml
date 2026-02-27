@@ -25,6 +25,7 @@ AppContext:
         inputFile: String
         inputFileLines: [String]
         isDbg: Bool
+        outputEntityContents: String
         outputFile: String
         # Contents to write to output file
         outputFileContents: String

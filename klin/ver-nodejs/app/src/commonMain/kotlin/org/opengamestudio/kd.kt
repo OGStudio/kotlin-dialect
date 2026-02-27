@@ -22,6 +22,7 @@ data class AppContext(
     var inputFile: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
+    var outputEntityContents: String = "",
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
@@ -56,6 +57,8 @@ data class AppContext(
             return inputFileLines as T
         } else if (name == "isDbg") {
             return isDbg as T
+        } else if (name == "outputEntityContents") {
+            return outputEntityContents as T
         } else if (name == "outputFile") {
             return outputFile as T
         } else if (name == "outputFileContents") {
@@ -100,6 +103,8 @@ data class AppContext(
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
             isDbg = value as Boolean
+        } else if (name == "outputEntityContents") {
+            outputEntityContents = value as String
         } else if (name == "outputFile") {
             outputFile = value as String
         } else if (name == "outputFileContents") {

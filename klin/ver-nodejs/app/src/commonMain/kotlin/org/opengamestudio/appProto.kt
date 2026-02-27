@@ -25,6 +25,7 @@ object AppProto {
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
             ::appShouldParseOutputFilePath,
+            ::appShouldResetOutputFileContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
         }

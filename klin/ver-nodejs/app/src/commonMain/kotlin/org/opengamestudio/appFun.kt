@@ -126,7 +126,7 @@ fun appShouldCollectRawKotlin(c: AppContext): AppContext {
 // 1. Entity field comments are available
 fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
     if (c.recentField == "entityFieldComments") {
-        c.outputFileContents = genKotlinEntitiesFile(
+        c.outputEntityContents = genKotlinEntitiesFile(
             c.entityComments,
             c.entityFieldComments,
             c.entityFields,
@@ -135,7 +135,7 @@ fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
             c.entityTypes,
             c.rawKotlin
         )
-        c.recentField = "outputFileContents"
+        c.recentField = "outputEntityContents"
         return c
     }
 
@@ -191,6 +191,21 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     ) {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
         c.recentField = "consoleOutput"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate a final text
+//
+// Conditions:
+// 1. TODO ... Entity field comments are available
+fun appShouldResetOutputFileContents(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        c.outputFileContents = c.outputEntityContents
+        c.recentField = "outputFileContents"
         return c
     }
 
