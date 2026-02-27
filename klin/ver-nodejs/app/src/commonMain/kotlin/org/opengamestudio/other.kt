@@ -97,9 +97,10 @@ fun setupComponentDebugging(
     prefix: String
 ) {
     ctrl.registerCallback { c ->
-        //val value = "${c.field<String>(c.recentField)}"
         val value = debugString(c.fieldAny(c.recentField))
-        println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
+        if (c.field("isDbg")) {
+            println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
+        }
     }
 }
 
