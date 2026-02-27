@@ -10,6 +10,11 @@ package org.opengamestudio
 import kotlin.io.encoding.*
 import kotlin.js.JsExport
 
+//<!-- Constants -->
+
+val APP_KD_IMPORT = "import kotlin.js.JsExport"
+val APP_KD_PACKAGE = "package org.opengamestudio"
+
 //<!-- Shoulds -->
 
 // Collect comments of the entities
@@ -205,7 +210,7 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 // 1. TODO ... Enti 
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
     if (c.recentField == "outputKDContents") {
-        c.outputFileContents = c.outputEntityContents
+        c.outputFileContents = c.outputEntityContents + c.outputKDContents
         c.recentField = "outputFileContents"
         return c
     }
@@ -221,7 +226,10 @@ fun appShouldResetOutputFileContents(c: AppContext): AppContext {
 @OptIn(ExperimentalEncodingApi::class)
 fun appShouldResetOutputKDContents(c: AppContext): AppContext {
     if (c.recentField == "outputEntityContents") {
-        c.outputKDContents = base64ToString(emb64)
+        val contents = base64ToString(emb64)
+        c.outputKDContents = contents
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_PACKAGE, "")
         c.recentField = "outputKDContents"
         return c
     }
