@@ -4,5 +4,5 @@ STEP=$((STEP+1))
 echo -e "\n> > > > Step №$STEP. Generate KD for Klin"
 
 node $BUILD_DIR/app.js \
-    --file=$SDIR/../kd.yml \
-    --out=$KD_SRC_DIR/kd.kt
+    --file=$SDIR/../klin/kd.yml \
+    --out=$KLIN_SRC_DIR/kd.kt

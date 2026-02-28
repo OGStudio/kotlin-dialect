@@ -4,7 +4,7 @@ STEP=$((STEP+1))
 echo -e "\n> > > > Step №$STEP. Embed KD files"
 TMP=/tmp/kd.tmp
 TMP64=/tmp/kd.tmp64
-EMB64=$KD_SRC_DIR/emb64.kt
+EMB64=$KLIN_SRC_DIR/emb64.kt
 
 # Combine files
 cat $SRC_DIR/KDContext.kt > $TMP
