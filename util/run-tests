@@ -1,15 +1,14 @@
 #!/bin/bash -e
 SDIR=$(cd "$(dirname "$0")" ; pwd -P)
 
-BUILD_DIR=$SDIR/../klin/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
-GRADLE_DIR=$SDIR/../klin/ver-nodejs
-KD_SRC_DIR=$SDIR/../klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio
-SRC_DIR=$SDIR/../src
-
 T=$SDIR/step
 source $SDIR/other
 
 STEP=0
+# Rebuild Klin just in case
 source $T/embedKDFiles
 source $T/build
 source $T/generateKlinKD
+
+# Proceed with tests
+source $T/generateTestKD
