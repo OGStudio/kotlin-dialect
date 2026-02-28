@@ -5,10 +5,10 @@ T=$SDIR/step
 source $SDIR/other
 
 STEP=0
-# Rebuild Klin just in case
-source $T/embedKDFiles
-source $T/build
-source $T/generateKlinKD
+# Build Klin just in case it wasn't yet built
+source $T/buildKlin
 
 # Proceed with tests
 source $T/generateTestKD
+source $T/stripTestKDJS
+source $T/buildTest

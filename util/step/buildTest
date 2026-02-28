@@ -1,0 +1,14 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Build test"
+mkdir -p $SDIR/../test/build
+kotlinc-native \
+    $SDIR/../test/kd.kt \
+    $SDIR/../test/main.kt \
+    $SDIR/../test/tests.kt \
+    -o $SDIR/../test/build/do-test
+
+# Get rid of the weird `kexe` extension on *nix
+# JetBrains, seriously, drop this
+mv $SDIR/../test/build/do-test{.kexe,}
