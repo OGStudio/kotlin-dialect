@@ -12,3 +12,4 @@ source $T/buildKlin
 source $T/generateTestKD
 source $T/stripTestKDJS
 source $T/buildTest
+source $T/runTest

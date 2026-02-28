@@ -1,0 +1,5 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Run test"
+$SDIR/../test/build/do-test
