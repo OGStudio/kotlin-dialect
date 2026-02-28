@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Reusable
+BUILD_DIR=$SDIR/../klin/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
+GRADLE_DIR=$SDIR/../klin/ver-nodejs
+KLIN_SRC_DIR=$SDIR/../klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio
+SRC_DIR=$SDIR/../src
+
 # Replace a line in a file
 function replace {
     file=$1
