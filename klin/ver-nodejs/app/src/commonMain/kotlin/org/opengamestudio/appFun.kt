@@ -204,10 +204,26 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
+// Generate a special structure to reference fields
+//
+// Conditions:
+// 1. Embeddable KD files' content is ready
+fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
+    if (c.recentField == "outputKDContents") {
+        val fields = collectFields(c.entityFields)
+        c.outputFieldContents = genFObject(fields)
+        c.recentField = "outputFieldContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate a final text
 //
 // Conditions:
-// 1. TODO ... Enti 
+// 1. Embeddable KD files' content is ready
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
     if (c.recentField == "outputKDContents") {
         c.outputFileContents = c.outputEntityContents + c.outputKDContents

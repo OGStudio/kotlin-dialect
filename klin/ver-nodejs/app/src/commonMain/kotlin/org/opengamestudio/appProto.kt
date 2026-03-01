@@ -25,6 +25,7 @@ object AppProto {
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
             ::appShouldParseOutputFilePath,
+            ::appShouldResetOutputFieldContents,
             ::appShouldResetOutputFileContents,
             ::appShouldResetOutputKDContents,
         ).forEach { f ->

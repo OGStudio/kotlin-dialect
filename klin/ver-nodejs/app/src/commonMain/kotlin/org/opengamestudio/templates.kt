@@ -7,6 +7,14 @@
 
 package org.opengamestudio
 
+const val TEMPLATE_F_OBJECT = """
+object F {
+%ITEMS%
+}
+"""
+const val TEMPLATE_F_OBJECT_ITEM = """    const val %NAME% = "%NAME%"
+"""
+
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
 %PREFIX%
