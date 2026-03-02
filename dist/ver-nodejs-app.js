@@ -45,10 +45,10 @@
   var Default_getInstance = kotlin_kotlin.$_$.d;
   var decodeToString = kotlin_kotlin.$_$.d1;
   var substring_0 = kotlin_kotlin.$_$.j1;
-  var ensureNotNull = kotlin_kotlin.$_$.m1;
-  var println = kotlin_kotlin.$_$.n;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
   var copyToArray = kotlin_kotlin.$_$.g;
+  var ensureNotNull = kotlin_kotlin.$_$.m1;
+  var println = kotlin_kotlin.$_$.n;
   var last_0 = kotlin_kotlin.$_$.k;
   var dropLast = kotlin_kotlin.$_$.e1;
   var capitalize = kotlin_kotlin.$_$.b1;
@@ -1197,27 +1197,21 @@
     return '';
   }
   function collectFields(entityFields) {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var items = [];
+    // Inline function 'kotlin.collections.mutableMapOf' call
+    var d = LinkedHashMap_init_$Create$();
     var _iterator__ex2g4s = entityFields.x().f();
     while (_iterator__ex2g4s.g()) {
       var fields = _iterator__ex2g4s.h();
       var _iterator__ex2g4s_0 = fields.w().f();
       while (_iterator__ex2g4s_0.g()) {
         var fieldName = _iterator__ex2g4s_0.h();
-        // Inline function 'kotlin.collections.plus' call
-        // Inline function 'kotlin.js.asDynamic' call
-        var tmp$ret$3 = items;
-        // Inline function 'kotlin.arrayOf' call
-        // Inline function 'kotlin.js.unsafeCast' call
-        // Inline function 'kotlin.js.asDynamic' call
-        var tmp$ret$6 = [fieldName];
-        items = tmp$ret$3.concat(tmp$ret$6);
+        // Inline function 'kotlin.collections.set' call
+        d.y1(fieldName, true);
       }
     }
-    return items;
+    // Inline function 'kotlin.collections.toTypedArray' call
+    var this_0 = d.w();
+    return copyToArray(this_0);
   }
   function debugString(v) {
     if (typeof v === 'string') {

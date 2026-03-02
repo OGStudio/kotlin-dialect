@@ -47,13 +47,16 @@ fun cliHasArgument(
 fun collectFields(
     entityFields: Map<Int, Map<String, String>>
 ): Array<String> {
-    var items = arrayOf<String>()
+    // Collect
+    var d = mutableMapOf<String, Boolean>()
     for (fields in entityFields.values) {
         for (fieldName in fields.keys) {
-            items += fieldName
+            d[fieldName] = true
         }
     }
-    return items
+
+    // Only return unique items
+    return d.keys.toTypedArray()
 }
 
 // Debug representation of a value
