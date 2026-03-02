@@ -277,3 +277,26 @@ fun registerOneliners(
         ctrl.registerFieldCallback(field, callback);
     }
 }
+
+object F {
+    const val arguments = "arguments"
+    const val consoleOutput = "consoleOutput"
+    const val didLaunch = "didLaunch"
+    const val entityComments = "entityComments"
+    const val entityFieldComments = "entityFieldComments"
+    const val entityFields = "entityFields"
+    const val entityNames = "entityNames"
+    const val entityPrefixesKotlin = "entityPrefixesKotlin"
+    const val entityTypes = "entityTypes"
+    const val didWriteOutputFile = "didWriteOutputFile"
+    const val inputFile = "inputFile"
+    const val inputFileLines = "inputFileLines"
+    const val isDbg = "isDbg"
+    const val outputEntityContents = "outputEntityContents"
+    const val outputFieldContents = "outputFieldContents"
+    const val outputFile = "outputFile"
+    const val outputFileContents = "outputFileContents"
+    const val outputKDContents = "outputKDContents"
+    const val rawKotlin = "rawKotlin"
+
+}

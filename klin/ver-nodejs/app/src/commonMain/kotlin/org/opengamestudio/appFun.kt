@@ -223,10 +223,10 @@ fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
 // Generate a final text
 //
 // Conditions:
-// 1. Embeddable KD files' content is ready
+// 1. F object is ready
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "outputKDContents") {
-        c.outputFileContents = c.outputEntityContents + c.outputKDContents
+    if (c.recentField == "outputFieldContents") {
+        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.outputFieldContents
         c.recentField = "outputFileContents"
         return c
     }
