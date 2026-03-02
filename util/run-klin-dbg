@@ -8,3 +8,4 @@ STEP=0
 source $T/embedKDFiles
 source $T/buildKlin
 source $T/generateKlinKD
+source $T/distributeKlin
