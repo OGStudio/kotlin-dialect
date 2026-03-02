@@ -22,13 +22,13 @@ val APP_KD_PACKAGE = "package org.opengamestudio"
 // Conditions:
 // 1. Entity names are available
 fun appShouldCollectEntityComments(c: AppContext): AppContext {
-    if (c.recentField == "entityNames") {
+    if (c.recentField == F.entityNames) {
         c.entityComments = parseEntityComments(c.inputFileLines)
-        c.recentField = "entityComments"
+        c.recentField = F.entityComments
         return c
     }
 
-    c.recentField = "none"
+    c.recentField = F.none
     return c
 }
 
@@ -210,7 +210,9 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 // 1. Embeddable KD files' content is ready
 fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
     if (c.recentField == "outputKDContents") {
-        val fields = collectFields(c.entityFields)
+        var fields = collectFields(c.entityFields)
+        fields += "none"
+        fields.sort()
         c.outputFieldContents = genFObject(fields)
         c.recentField = "outputFieldContents"
         return c
@@ -225,9 +227,9 @@ fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
 // Conditions:
 // 1. F object is ready
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "outputFieldContents") {
+    if (c.recentField == F.outputFieldContents) {
         c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.outputFieldContents
-        c.recentField = "outputFileContents"
+        c.recentField = F.outputFileContents
         return c
     }
 
