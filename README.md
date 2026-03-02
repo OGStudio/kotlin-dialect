@@ -9,11 +9,19 @@ across platforms in **native** apps.
 
 This project's core concept is a Redux-like architecture.
 
-# Klin
+# Building and distributing Klin
 
 Klin is a translator that converts YML to Kotlin.
 
+To build and distribute it, run:
+
 $ `./util/run-klin-dbg`
+
+The resulting Node.js application is located in `dist`
+
+# Running Klin
+
+$ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
 
 ## Generation of entity fields
 
