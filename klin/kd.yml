@@ -35,5 +35,6 @@ AppContext:
         # Contents to write to output file
         outputFileContents: String
         outputKDContents: String
+        outputPaths: [String: String]
         # Kotlin source code to insert as is at the beginning of each generated file
         rawKotlin: String

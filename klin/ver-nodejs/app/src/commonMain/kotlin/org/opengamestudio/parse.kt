@@ -189,3 +189,32 @@ fun parseEntityTypes(lines: Array<String>): Map<Int, String> {
 
     return d
 }
+
+// Collect output paths
+fun parseOutputPaths(lines: Array<String>): Map<String, String> {
+    var d = mutableMapOf<String, String>()
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_OUTPUT_JS)) {
+            val prefixLen = PREFIX_OUTPUT_JS.length
+            val path = ln.substring(prefixLen)
+            d[OUTPUT_JS] = path
+        }
+        else if (ln.startsWith(PREFIX_OUTPUT_JVM)) {
+            val prefixLen = PREFIX_OUTPUT_JVM.length
+            val path = ln.substring(prefixLen)
+            d[OUTPUT_JVM] = path
+        }
+        else if (ln.startsWith(PREFIX_OUTPUT_IOS)) {
+            val prefixLen = PREFIX_OUTPUT_IOS.length
+            val path = ln.substring(prefixLen)
+            d[OUTPUT_IOS] = path
+        }
+        else if (ln.startsWith(PREFIX_OUTPUT_IOS_SDK)) {
+            val prefixLen = PREFIX_OUTPUT_IOS_SDK.length
+            val path = ln.substring(prefixLen)
+            d[OUTPUT_IOS_SDK] = path
+        }
+    }
+
+    return d
+}

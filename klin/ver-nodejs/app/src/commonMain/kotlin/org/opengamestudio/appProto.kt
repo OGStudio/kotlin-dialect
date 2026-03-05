@@ -20,6 +20,7 @@ object AppProto {
             ::appShouldCollectEntityNames,
             ::appShouldCollectEntityPrefixesKotlin,
             ::appShouldCollectEntityTypes,
+            ::appShouldCollectOutputPaths,
             ::appShouldCollectRawKotlin,
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,

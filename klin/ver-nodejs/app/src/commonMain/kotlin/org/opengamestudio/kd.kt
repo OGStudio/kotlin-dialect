@@ -28,6 +28,7 @@ data class AppContext(
     // Contents to write to output file
     var outputFileContents: String = "",
     var outputKDContents: String = "",
+    var outputPaths: Map<String, String> = mapOf(),
     // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
@@ -69,6 +70,8 @@ data class AppContext(
             return outputFileContents as T
         } else if (name == "outputKDContents") {
             return outputKDContents as T
+        } else if (name == "outputPaths") {
+            return outputPaths as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
         }
@@ -119,6 +122,8 @@ data class AppContext(
             outputFileContents = value as String
         } else if (name == "outputKDContents") {
             outputKDContents = value as String
+        } else if (name == "outputPaths") {
+            outputPaths = value as Map<String, String>
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
         }
@@ -298,6 +303,7 @@ object F {
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
     const val outputKDContents = "outputKDContents"
+    const val outputPaths = "outputPaths"
     const val rawKotlin = "rawKotlin"
 
 }

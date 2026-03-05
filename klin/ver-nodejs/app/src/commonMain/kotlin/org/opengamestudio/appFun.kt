@@ -111,6 +111,20 @@ fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     return c
 }
 
+// Collect output paths
+//
+// 1. Input file contents are available
+fun appShouldCollectOutputPaths(c: AppContext): AppContext {
+    if (c.recentField == F.inputFileLines) {
+        c.outputPaths = parseOutputPaths(c.inputFileLines)
+        c.recentField = F.outputPaths
+        return c
+    }
+
+    c.recentField = F.none
+    return c
+}
+
 // Collect raw Kotlin source code
 //
 // Conditions:
