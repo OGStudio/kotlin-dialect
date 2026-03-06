@@ -181,6 +181,24 @@ fun appShouldParseInputFilePath(c: AppContext): AppContext {
     return c
 }
 
+// Parse output file path
+//
+// Conditions:
+// 1. At app launch output file was specified with command line argument
+fun appShouldParseOutputFilePath(c: AppContext): AppContext {
+    if (
+        c.recentField == "didLaunch" &&
+        cliArgumentValue(c.arguments, ARGUMENT_OUT).length > 0
+    ) {
+        c.outputFile = cliArgumentValue(c.arguments, ARGUMENT_OUT)
+        c.recentField = "outputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Print to console
 //
 // Conditions:
@@ -194,20 +212,6 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
         c.recentField = "consoleOutput"
         return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
-// Cycle through all the paths to save
-//
-// Conditions:
-// 1. F object is ready
-fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
-    if (c.recentField == "outputFieldContents") {
-        c.currentOutputPathId = 0
-        c.recentField = "currentOutputPathId"
     }
 
     c.recentField = "none"
@@ -237,26 +241,9 @@ fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
 // Conditions:
 // 1. F object is ready
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "outputFieldContents") {
+    if (c.recentField == F.outputFieldContents) {
         c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.outputFieldContents
         c.recentField = F.outputFileContents
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
-// Reset output file path
-//
-// Conditions:
-// 1. Current path id changed
-fun appShouldResetOutputFilePath(c: AppContext): AppContext {
-    if (c.recentField == "currentOutputPathId") {
-        val target = c.outputPaths.keys[c.currentOutputPathId]
-        val value = c.outputPaths[target]
-        c.outputFile = value
-        c.recentField = "outputFile"
         return c
     }
 
