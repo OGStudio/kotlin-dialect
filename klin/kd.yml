@@ -1,7 +1,8 @@
 version: 2
 
 output:
-    js: ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio/kd.kt
+    js: klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio/kd.kt
+    jvm: test/kd.kt
 
 kotlin: package org.opengamestudio
 kotlin: import kotlin.js.JsExport
