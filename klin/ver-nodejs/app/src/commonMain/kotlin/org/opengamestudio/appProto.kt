@@ -25,9 +25,10 @@ object AppProto {
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
-            ::appShouldParseOutputFilePath,
+            ::appShouldResetCurrentOutputPathId,
             ::appShouldResetOutputFieldContents,
             ::appShouldResetOutputFileContents,
+            ::appShouldResetOutputFilePath,
             ::appShouldResetOutputKDContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }

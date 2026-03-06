@@ -13,6 +13,7 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        currentOutputPathId: Int
         didLaunch: Bool
         # Entity comments with entities referenced by index
         entityComments: [Int: String]
