@@ -1,3 +1,6 @@
 version: 1
 
+output:
+    jvm: kd.kt
+
 kotlin: package org.opengamestudio
