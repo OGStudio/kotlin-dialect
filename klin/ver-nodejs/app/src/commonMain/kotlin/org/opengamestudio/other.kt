@@ -43,22 +43,6 @@ fun cliHasArgument(
     return false
 }
 
-// Collect fields of all contexts
-fun collectFields(
-    entityFields: Map<Int, Map<String, String>>
-): Array<String> {
-    // Collect
-    var d = mutableMapOf<String, Boolean>()
-    for (fields in entityFields.values) {
-        for (fieldName in fields.keys) {
-            d[fieldName] = true
-        }
-    }
-
-    // Only return unique items
-    return d.keys.toTypedArray()
-}
-
 // Debug representation of a value
 fun debugString(v: Any): String {
     // Prepend a string with its length
@@ -94,20 +78,6 @@ fun debugString(v: Any): String {
 
     // For other types return whatever Kotlin returns by default
     return "$v"
-}
-
-// Generate F object
-fun genFObject(fieldNames: Array<String>): String {
-    // Items
-    var itemContents = ""
-    for (name in fieldNames) {
-        itemContents += TEMPLATE_F_OBJECT_ITEM
-            .replace("%NAME%", name)
-    }
-
-    // F Object
-    return TEMPLATE_F_OBJECT
-        .replace("%ITEMS%", itemContents)
 }
 
 // Collect raw Kotlin source code

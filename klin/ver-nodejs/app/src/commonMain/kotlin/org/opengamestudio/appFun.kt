@@ -222,13 +222,12 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 //
 // Conditions:
 // 1. Embeddable KD files' content is ready
-fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
+fun appShouldResetFObjContents(c: AppContext): AppContext {
     if (c.recentField == "outputKDContents") {
-        var fields = collectFields(c.entityFields)
-        fields += "none"
-        fields.sort()
-        c.outputFieldContents = genFObject(fields)
-        c.recentField = "outputFieldContents"
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjContents = fobjJVM(fields)
+        c.recentField = "fobjContents"
         return c
     }
 
@@ -241,9 +240,9 @@ fun appShouldResetOutputFieldContents(c: AppContext): AppContext {
 // Conditions:
 // 1. F object is ready
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == F.outputFieldContents) {
-        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.outputFieldContents
-        c.recentField = F.outputFileContents
+    if (c.recentField == "fobjContents") {
+        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.fobjContents
+        c.recentField = "outputFileContents"
         return c
     }
 

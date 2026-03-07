@@ -19,11 +19,11 @@ data class AppContext(
     var entityNames: Array<String> = arrayOf(),
     var entityPrefixesKotlin: Map<Int, String> = mapOf(),
     var entityTypes: Map<Int, String> = mapOf(),
+    var fobjContents: String = "",
     var inputFile: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
     var outputEntityContents: String = "",
-    var outputFieldContents: String = "",
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
@@ -54,6 +54,8 @@ data class AppContext(
             return entityPrefixesKotlin as T
         } else if (name == "entityTypes") {
             return entityTypes as T
+        } else if (name == "fobjContents") {
+            return fobjContents as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileLines") {
@@ -62,8 +64,6 @@ data class AppContext(
             return isDbg as T
         } else if (name == "outputEntityContents") {
             return outputEntityContents as T
-        } else if (name == "outputFieldContents") {
-            return outputFieldContents as T
         } else if (name == "outputFile") {
             return outputFile as T
         } else if (name == "outputFileContents") {
@@ -106,6 +106,8 @@ data class AppContext(
             entityPrefixesKotlin = value as Map<Int, String>
         } else if (name == "entityTypes") {
             entityTypes = value as Map<Int, String>
+        } else if (name == "fobjContents") {
+            fobjContents = value as String
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileLines") {
@@ -114,8 +116,6 @@ data class AppContext(
             isDbg = value as Boolean
         } else if (name == "outputEntityContents") {
             outputEntityContents = value as String
-        } else if (name == "outputFieldContents") {
-            outputFieldContents = value as String
         } else if (name == "outputFile") {
             outputFile = value as String
         } else if (name == "outputFileContents") {
@@ -294,12 +294,12 @@ object F {
     const val entityNames = "entityNames"
     const val entityPrefixesKotlin = "entityPrefixesKotlin"
     const val entityTypes = "entityTypes"
+    const val fobjContents = "fobjContents"
     const val inputFile = "inputFile"
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
     const val none = "none"
     const val outputEntityContents = "outputEntityContents"
-    const val outputFieldContents = "outputFieldContents"
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
     const val outputKDContents = "outputKDContents"
