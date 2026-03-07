@@ -115,16 +115,16 @@ if (typeof String.prototype.startsWith === 'undefined') {
   initMetadataForClass(AbstractCollection, 'AbstractCollection', VOID, VOID, [Collection]);
   initMetadataForClass(AbstractMutableCollection, 'AbstractMutableCollection', VOID, AbstractCollection, [AbstractCollection, Collection]);
   initMetadataForClass(IteratorImpl, 'IteratorImpl');
-  initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtList, Collection]);
+  initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtList]);
   initMetadataForClass(AbstractMap, 'AbstractMap', VOID, VOID, [KtMap]);
   initMetadataForClass(AbstractMutableMap, 'AbstractMutableMap', VOID, AbstractMap, [AbstractMap, KtMap]);
-  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtSet]);
+  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtSet, Collection]);
   initMetadataForCompanion(Companion_2);
-  initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, KtList, Collection]);
+  initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, Collection, KtList]);
   initMetadataForClass(HashMap, 'HashMap', HashMap_init_$Create$, AbstractMutableMap, [AbstractMutableMap, KtMap]);
-  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapValues, 'HashMapValues', VOID, AbstractMutableCollection, [Collection, AbstractMutableCollection]);
-  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapEntrySet, 'HashMapEntrySet', VOID, HashMapEntrySetBase);
   initMetadataForClass(HashMapKeysDefault$iterator$1);
   initMetadataForClass(HashMapKeysDefault, 'HashMapKeysDefault', VOID, AbstractMutableSet);
@@ -362,19 +362,6 @@ if (typeof String.prototype.startsWith === 'undefined') {
       throw NoSuchElementException_init_$Create$_0('List is empty.');
     return _this__u8e3s4.k(get_lastIndex_0(_this__u8e3s4));
   }
-  function single(_this__u8e3s4) {
-    if (isInterface(_this__u8e3s4, KtList))
-      return single_0(_this__u8e3s4);
-    else {
-      var iterator = _this__u8e3s4.f();
-      if (!iterator.g())
-        throw NoSuchElementException_init_$Create$_0('Collection is empty.');
-      var single = iterator.h();
-      if (iterator.g())
-        throw IllegalArgumentException_init_$Create$_0('Collection has more than one element.');
-      return single;
-    }
-  }
   function toList(_this__u8e3s4) {
     if (isInterface(_this__u8e3s4, Collection)) {
       var tmp;
@@ -405,6 +392,30 @@ if (typeof String.prototype.startsWith === 'undefined') {
       return toMutableList_0(_this__u8e3s4);
     return toCollection(_this__u8e3s4, ArrayList_init_$Create$());
   }
+  function toMutableList_0(_this__u8e3s4) {
+    return ArrayList_init_$Create$_1(_this__u8e3s4);
+  }
+  function toCollection(_this__u8e3s4, destination) {
+    var _iterator__ex2g4s = _this__u8e3s4.f();
+    while (_iterator__ex2g4s.g()) {
+      var item = _iterator__ex2g4s.h();
+      destination.l(item);
+    }
+    return destination;
+  }
+  function single(_this__u8e3s4) {
+    if (isInterface(_this__u8e3s4, KtList))
+      return single_0(_this__u8e3s4);
+    else {
+      var iterator = _this__u8e3s4.f();
+      if (!iterator.g())
+        throw NoSuchElementException_init_$Create$_0('Collection is empty.');
+      var single = iterator.h();
+      if (iterator.g())
+        throw IllegalArgumentException_init_$Create$_0('Collection has more than one element.');
+      return single;
+    }
+  }
   function single_0(_this__u8e3s4) {
     var tmp;
     switch (_this__u8e3s4.i()) {
@@ -417,17 +428,6 @@ if (typeof String.prototype.startsWith === 'undefined') {
         throw IllegalArgumentException_init_$Create$_0('List has more than one element.');
     }
     return tmp;
-  }
-  function toMutableList_0(_this__u8e3s4) {
-    return ArrayList_init_$Create$_1(_this__u8e3s4);
-  }
-  function toCollection(_this__u8e3s4, destination) {
-    var _iterator__ex2g4s = _this__u8e3s4.f();
-    while (_iterator__ex2g4s.g()) {
-      var item = _iterator__ex2g4s.h();
-      destination.l(item);
-    }
-    return destination;
   }
   function until(_this__u8e3s4, to) {
     if (to <= -2147483648)
@@ -1732,15 +1732,15 @@ if (typeof String.prototype.startsWith === 'undefined') {
     // Inline function 'kotlin.js.asDynamic' call
     _this__u8e3s4.fill(element, fromIndex, toIndex);
   }
-  function sort(_this__u8e3s4) {
-    if (_this__u8e3s4.length > 1) {
-      sortArray(_this__u8e3s4);
-    }
-  }
   function asList(_this__u8e3s4) {
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
     return new ArrayList(_this__u8e3s4);
+  }
+  function sort(_this__u8e3s4) {
+    if (_this__u8e3s4.length > 1) {
+      sortArray(_this__u8e3s4);
+    }
   }
   function copyOf(_this__u8e3s4, newSize) {
     // Inline function 'kotlin.require' call
@@ -1785,16 +1785,6 @@ if (typeof String.prototype.startsWith === 'undefined') {
   function collectionToArray(collection) {
     return collectionToArrayCommonImpl(collection);
   }
-  function listOf(element) {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp$ret$2 = [element];
-    return new ArrayList(tmp$ret$2);
-  }
-  function sort_0(_this__u8e3s4) {
-    collectionsSort(_this__u8e3s4, naturalOrder());
-  }
   function copyToArray(collection) {
     var tmp;
     // Inline function 'kotlin.js.asDynamic' call
@@ -1808,6 +1798,16 @@ if (typeof String.prototype.startsWith === 'undefined') {
       tmp = collectionToArray(collection);
     }
     return tmp;
+  }
+  function sort_0(_this__u8e3s4) {
+    collectionsSort(_this__u8e3s4, naturalOrder());
+  }
+  function listOf(element) {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$2 = [element];
+    return new ArrayList(tmp$ret$2);
   }
   function collectionsSort(list, comparator) {
     if (list.i() <= 1)
@@ -5132,34 +5132,33 @@ if (typeof String.prototype.startsWith === 'undefined') {
   _.$_$.j = last_0;
   _.$_$.k = last;
   _.$_$.l = sorted;
-  _.$_$.m = sort;
-  _.$_$.n = println;
-  _.$_$.o = charSequenceLength;
-  _.$_$.p = defineProp;
-  _.$_$.q = equals;
-  _.$_$.r = getBooleanHashCode;
-  _.$_$.s = getStringHashCode;
-  _.$_$.t = hashCode;
-  _.$_$.u = initMetadataForClass;
-  _.$_$.v = initMetadataForInterface;
-  _.$_$.w = initMetadataForObject;
-  _.$_$.x = isArray;
-  _.$_$.y = isInterface;
-  _.$_$.z = protoOf;
-  _.$_$.a1 = toString_1;
-  _.$_$.b1 = capitalize;
-  _.$_$.c1 = contains;
-  _.$_$.d1 = decodeToString;
-  _.$_$.e1 = dropLast;
-  _.$_$.f1 = endsWith;
-  _.$_$.g1 = replace;
-  _.$_$.h1 = split;
-  _.$_$.i1 = startsWith;
-  _.$_$.j1 = substring_0;
-  _.$_$.k1 = substring;
-  _.$_$.l1 = take;
-  _.$_$.m1 = THROW_CCE;
-  _.$_$.n1 = ensureNotNull;
+  _.$_$.m = println;
+  _.$_$.n = charSequenceLength;
+  _.$_$.o = defineProp;
+  _.$_$.p = equals;
+  _.$_$.q = getBooleanHashCode;
+  _.$_$.r = getStringHashCode;
+  _.$_$.s = hashCode;
+  _.$_$.t = initMetadataForClass;
+  _.$_$.u = initMetadataForInterface;
+  _.$_$.v = initMetadataForObject;
+  _.$_$.w = isArray;
+  _.$_$.x = isInterface;
+  _.$_$.y = protoOf;
+  _.$_$.z = toString_1;
+  _.$_$.a1 = capitalize;
+  _.$_$.b1 = contains;
+  _.$_$.c1 = decodeToString;
+  _.$_$.d1 = dropLast;
+  _.$_$.e1 = endsWith;
+  _.$_$.f1 = replace;
+  _.$_$.g1 = split;
+  _.$_$.h1 = startsWith;
+  _.$_$.i1 = substring_0;
+  _.$_$.j1 = substring;
+  _.$_$.k1 = take;
+  _.$_$.l1 = THROW_CCE;
+  _.$_$.m1 = ensureNotNull;
   //endregion
   return _;
 }));

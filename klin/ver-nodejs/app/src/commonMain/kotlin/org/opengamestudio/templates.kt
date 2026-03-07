@@ -8,6 +8,7 @@
 package org.opengamestudio
 
 const val TEMPLATE_FOBJ = """
+// Special object to reference context fields with a compile time validation
 object F {
 %ITEMS%
 }

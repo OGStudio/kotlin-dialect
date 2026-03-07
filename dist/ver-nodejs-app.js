@@ -13,46 +13,45 @@
   'use strict';
   //region block: imports
   var imul = Math.imul;
-  var sort = kotlin_kotlin.$_$.m;
-  var replace = kotlin_kotlin.$_$.g1;
-  var THROW_CCE = kotlin_kotlin.$_$.m1;
+  var replace = kotlin_kotlin.$_$.f1;
+  var THROW_CCE = kotlin_kotlin.$_$.l1;
   var Unit_instance = kotlin_kotlin.$_$.e;
-  var protoOf = kotlin_kotlin.$_$.z;
-  var initMetadataForObject = kotlin_kotlin.$_$.w;
-  var charSequenceLength = kotlin_kotlin.$_$.o;
-  var emptyMap = kotlin_kotlin.$_$.h;
-  var startsWith = kotlin_kotlin.$_$.i1;
-  var endsWith = kotlin_kotlin.$_$.f1;
-  var contains = kotlin_kotlin.$_$.c1;
+  var protoOf = kotlin_kotlin.$_$.y;
+  var initMetadataForObject = kotlin_kotlin.$_$.v;
+  var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
+  var ensureNotNull = kotlin_kotlin.$_$.m1;
   var sorted = kotlin_kotlin.$_$.l;
-  var substring = kotlin_kotlin.$_$.k1;
+  var copyToArray = kotlin_kotlin.$_$.g;
+  var charSequenceLength = kotlin_kotlin.$_$.n;
+  var emptyMap = kotlin_kotlin.$_$.h;
+  var startsWith = kotlin_kotlin.$_$.h1;
+  var endsWith = kotlin_kotlin.$_$.e1;
+  var contains = kotlin_kotlin.$_$.b1;
+  var substring = kotlin_kotlin.$_$.j1;
   var VOID = kotlin_kotlin.$_$.a;
-  var split = kotlin_kotlin.$_$.h1;
+  var split = kotlin_kotlin.$_$.g1;
   var first = kotlin_kotlin.$_$.i;
   var last = kotlin_kotlin.$_$.j;
-  var isArray = kotlin_kotlin.$_$.x;
+  var isArray = kotlin_kotlin.$_$.w;
   var KtMap = kotlin_kotlin.$_$.f;
-  var isInterface = kotlin_kotlin.$_$.y;
-  var toString = kotlin_kotlin.$_$.a1;
-  var hashCode = kotlin_kotlin.$_$.t;
-  var getStringHashCode = kotlin_kotlin.$_$.s;
-  var getBooleanHashCode = kotlin_kotlin.$_$.r;
-  var equals = kotlin_kotlin.$_$.q;
-  var defineProp = kotlin_kotlin.$_$.p;
-  var initMetadataForClass = kotlin_kotlin.$_$.u;
-  var initMetadataForInterface = kotlin_kotlin.$_$.v;
+  var isInterface = kotlin_kotlin.$_$.x;
+  var toString = kotlin_kotlin.$_$.z;
+  var hashCode = kotlin_kotlin.$_$.s;
+  var getStringHashCode = kotlin_kotlin.$_$.r;
+  var getBooleanHashCode = kotlin_kotlin.$_$.q;
+  var equals = kotlin_kotlin.$_$.p;
+  var defineProp = kotlin_kotlin.$_$.o;
+  var initMetadataForClass = kotlin_kotlin.$_$.t;
+  var initMetadataForInterface = kotlin_kotlin.$_$.u;
   var ArrayList_init_$Create$ = kotlin_kotlin.$_$.b;
   var Default_getInstance = kotlin_kotlin.$_$.d;
-  var decodeToString = kotlin_kotlin.$_$.d1;
-  var substring_0 = kotlin_kotlin.$_$.j1;
-  var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
-  var copyToArray = kotlin_kotlin.$_$.g;
-  var take = kotlin_kotlin.$_$.l1;
-  var ensureNotNull = kotlin_kotlin.$_$.n1;
-  var println = kotlin_kotlin.$_$.n;
+  var decodeToString = kotlin_kotlin.$_$.c1;
+  var substring_0 = kotlin_kotlin.$_$.i1;
+  var take = kotlin_kotlin.$_$.k1;
+  var println = kotlin_kotlin.$_$.m;
   var last_0 = kotlin_kotlin.$_$.k;
-  var dropLast = kotlin_kotlin.$_$.e1;
-  var capitalize = kotlin_kotlin.$_$.b1;
+  var dropLast = kotlin_kotlin.$_$.d1;
+  var capitalize = kotlin_kotlin.$_$.a1;
   //endregion
   //region block: pre-declaration
   initMetadataForObject(AppProto, 'AppProto');
@@ -183,28 +182,20 @@
     c.f9_1 = 'none';
     return c;
   }
-  function appShouldResetOutputFieldContents(c) {
+  function appShouldResetFObjContents(c) {
     if (c.f9_1 === 'outputKDContents') {
-      var fields = collectFields(c.entityFields);
-      // Inline function 'kotlin.collections.plus' call
-      // Inline function 'kotlin.js.asDynamic' call
-      var tmp$ret$0 = fields;
-      // Inline function 'kotlin.arrayOf' call
-      // Inline function 'kotlin.js.unsafeCast' call
-      // Inline function 'kotlin.js.asDynamic' call
-      var tmp$ret$3 = ['none'];
-      fields = tmp$ret$0.concat(tmp$ret$3);
-      sort(fields);
-      c.outputFieldContents = genFObject(fields);
-      c.f9_1 = 'outputFieldContents';
+      var ids = fobjContexts(c.entityTypes);
+      var fields = fobjFields(c.entityFields, ids);
+      c.fobjContents = fobjJVM(fields);
+      c.f9_1 = 'fobjContents';
       return c;
     }
     c.f9_1 = 'none';
     return c;
   }
   function appShouldResetOutputFileContents(c) {
-    if (c.f9_1 === 'outputFieldContents') {
-      c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.outputFieldContents;
+    if (c.f9_1 === 'fobjContents') {
+      c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.fobjContents;
       c.f9_1 = 'outputFileContents';
       return c;
     }
@@ -305,11 +296,11 @@
     l.callableName = 'appShouldParseOutputFilePath';
     return l;
   }
-  function appShouldResetOutputFieldContents$ref() {
+  function appShouldResetFObjContents$ref() {
     var l = function (p0) {
-      return appShouldResetOutputFieldContents(p0);
+      return appShouldResetFObjContents(p0);
     };
-    l.callableName = 'appShouldResetOutputFieldContents';
+    l.callableName = 'appShouldResetFObjContents';
     return l;
   }
   function appShouldResetOutputFileContents$ref() {
@@ -347,7 +338,7 @@
     var tmp_8 = appShouldParseInputFilePath$ref();
     var tmp_9 = appShouldPrintToConsole$ref();
     var tmp_10 = appShouldParseOutputFilePath$ref();
-    var tmp_11 = appShouldResetOutputFieldContents$ref();
+    var tmp_11 = appShouldResetFObjContents$ref();
     var tmp_12 = appShouldResetOutputFileContents$ref();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
@@ -372,6 +363,65 @@
     return emb64;
   }
   var emb64;
+  function fobjContexts(entityTypes) {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var ids = [];
+    // Inline function 'kotlin.collections.iterator' call
+    var _iterator__ex2g4s = entityTypes.y().f();
+    while (_iterator__ex2g4s.g()) {
+      var _destruct__k2r9zo = _iterator__ex2g4s.h();
+      // Inline function 'kotlin.collections.component1' call
+      var id = _destruct__k2r9zo.r();
+      // Inline function 'kotlin.collections.component2' call
+      var type = _destruct__k2r9zo.s();
+      if (type === 'context') {
+        // Inline function 'kotlin.collections.plus' call
+        // Inline function 'kotlin.js.asDynamic' call
+        var tmp$ret$6 = ids;
+        // Inline function 'kotlin.arrayOf' call
+        // Inline function 'kotlin.js.unsafeCast' call
+        // Inline function 'kotlin.js.asDynamic' call
+        var tmp$ret$9 = [id];
+        ids = tmp$ret$6.concat(tmp$ret$9);
+      }
+    }
+    return ids;
+  }
+  function fobjFields(entityFields, ids) {
+    // Inline function 'kotlin.collections.mutableMapOf' call
+    var d = LinkedHashMap_init_$Create$();
+    // Inline function 'kotlin.collections.set' call
+    d.y1('none', true);
+    var inductionVariable = 0;
+    var last = ids.length;
+    while (inductionVariable < last) {
+      var id = ids[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      var fieldTypes = ensureNotNull(entityFields.v(id));
+      var _iterator__ex2g4s = fieldTypes.w().f();
+      while (_iterator__ex2g4s.g()) {
+        var fieldName = _iterator__ex2g4s.h();
+        // Inline function 'kotlin.collections.set' call
+        d.y1(fieldName, true);
+      }
+    }
+    // Inline function 'kotlin.collections.toTypedArray' call
+    var this_0 = sorted(d.w());
+    return copyToArray(this_0);
+  }
+  function fobjJVM(fieldNames) {
+    var itemContents = '';
+    var inductionVariable = 0;
+    var last = fieldNames.length;
+    while (inductionVariable < last) {
+      var name = fieldNames[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      itemContents = itemContents + replace('    const val %NAME% = "%NAME%"\n', '%NAME%', name);
+    }
+    return replace('\n// Special object to reference context fields with a compile time validation\nobject F {\n%ITEMS%\n}\n', '%ITEMS%', itemContents);
+  }
   function genKotlinComment(comment) {
     // Inline function 'kotlin.text.isEmpty' call
     if (!(charSequenceLength(comment) === 0)) {
@@ -551,7 +601,7 @@
     return contents;
   }
   var KD_FIELD_NONE;
-  function AppContext(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) {
+  function AppContext(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) {
     var tmp;
     if (arguments_0 === VOID) {
       // Inline function 'kotlin.arrayOf' call
@@ -615,6 +665,7 @@
       tmp_5 = entityTypes;
     }
     entityTypes = tmp_5;
+    fobjContents = fobjContents === VOID ? '' : fobjContents;
     inputFile = inputFile === VOID ? '' : inputFile;
     var tmp_6;
     if (inputFileLines === VOID) {
@@ -628,7 +679,6 @@
     inputFileLines = tmp_6;
     isDbg = isDbg === VOID ? false : isDbg;
     outputEntityContents = outputEntityContents === VOID ? '' : outputEntityContents;
-    outputFieldContents = outputFieldContents === VOID ? '' : outputFieldContents;
     outputFile = outputFile === VOID ? '' : outputFile;
     outputFileContents = outputFileContents === VOID ? '' : outputFileContents;
     outputKDContents = outputKDContents === VOID ? '' : outputKDContents;
@@ -652,11 +702,11 @@
     this.entityNames = entityNames;
     this.entityPrefixesKotlin = entityPrefixesKotlin;
     this.entityTypes = entityTypes;
+    this.fobjContents = fobjContents;
     this.inputFile = inputFile;
     this.inputFileLines = inputFileLines;
     this.isDbg = isDbg;
     this.outputEntityContents = outputEntityContents;
-    this.outputFieldContents = outputFieldContents;
     this.outputFile = outputFile;
     this.outputFileContents = outputFileContents;
     this.outputKDContents = outputKDContents;
@@ -725,34 +775,34 @@
     return this.entityTypes;
   };
   protoOf(AppContext).aa = function (_set____db54di) {
-    this.inputFile = _set____db54di;
+    this.fobjContents = _set____db54di;
   };
   protoOf(AppContext).ba = function () {
-    return this.inputFile;
+    return this.fobjContents;
   };
   protoOf(AppContext).ca = function (_set____db54di) {
-    this.inputFileLines = _set____db54di;
+    this.inputFile = _set____db54di;
   };
   protoOf(AppContext).da = function () {
-    return this.inputFileLines;
+    return this.inputFile;
   };
   protoOf(AppContext).ea = function (_set____db54di) {
-    this.isDbg = _set____db54di;
+    this.inputFileLines = _set____db54di;
   };
   protoOf(AppContext).fa = function () {
-    return this.isDbg;
+    return this.inputFileLines;
   };
   protoOf(AppContext).ga = function (_set____db54di) {
-    this.outputEntityContents = _set____db54di;
+    this.isDbg = _set____db54di;
   };
   protoOf(AppContext).ha = function () {
-    return this.outputEntityContents;
+    return this.isDbg;
   };
   protoOf(AppContext).ia = function (_set____db54di) {
-    this.outputFieldContents = _set____db54di;
+    this.outputEntityContents = _set____db54di;
   };
   protoOf(AppContext).ja = function () {
-    return this.outputFieldContents;
+    return this.outputEntityContents;
   };
   protoOf(AppContext).ka = function (_set____db54di) {
     this.outputFile = _set____db54di;
@@ -822,20 +872,20 @@
       case 'entityTypes':
         var tmp_8 = this.entityTypes;
         return !(tmp_8 == null) ? tmp_8 : THROW_CCE();
-      case 'inputFile':
-        var tmp_9 = this.inputFile;
+      case 'fobjContents':
+        var tmp_9 = this.fobjContents;
         return !(tmp_9 == null) ? tmp_9 : THROW_CCE();
-      case 'inputFileLines':
-        var tmp_10 = this.inputFileLines;
+      case 'inputFile':
+        var tmp_10 = this.inputFile;
         return !(tmp_10 == null) ? tmp_10 : THROW_CCE();
-      case 'isDbg':
-        var tmp_11 = this.isDbg;
+      case 'inputFileLines':
+        var tmp_11 = this.inputFileLines;
         return !(tmp_11 == null) ? tmp_11 : THROW_CCE();
-      case 'outputEntityContents':
-        var tmp_12 = this.outputEntityContents;
+      case 'isDbg':
+        var tmp_12 = this.isDbg;
         return !(tmp_12 == null) ? tmp_12 : THROW_CCE();
-      case 'outputFieldContents':
-        var tmp_13 = this.outputFieldContents;
+      case 'outputEntityContents':
+        var tmp_13 = this.outputEntityContents;
         return !(tmp_13 == null) ? tmp_13 : THROW_CCE();
       case 'outputFile':
         var tmp_14 = this.outputFile;
@@ -900,25 +950,25 @@
         var tmp_8 = this;
         tmp_8.entityTypes = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
-      case 'inputFile':
+      case 'fobjContents':
         var tmp_9 = this;
-        tmp_9.inputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        tmp_9.fobjContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        break;
+      case 'inputFile':
+        var tmp_10 = this;
+        tmp_10.inputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'inputFileLines':
-        var tmp_10 = this;
-        tmp_10.inputFileLines = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
+        var tmp_11 = this;
+        tmp_11.inputFileLines = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
         break;
       case 'isDbg':
-        var tmp_11 = this;
-        tmp_11.isDbg = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
+        var tmp_12 = this;
+        tmp_12.isDbg = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
         break;
       case 'outputEntityContents':
-        var tmp_12 = this;
-        tmp_12.outputEntityContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
-        break;
-      case 'outputFieldContents':
         var tmp_13 = this;
-        tmp_13.outputFieldContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        tmp_13.outputEntityContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputFile':
         var tmp_14 = this;
@@ -973,19 +1023,19 @@
     return this.entityTypes;
   };
   protoOf(AppContext).eb = function () {
-    return this.inputFile;
+    return this.fobjContents;
   };
   protoOf(AppContext).fb = function () {
-    return this.inputFileLines;
+    return this.inputFile;
   };
   protoOf(AppContext).gb = function () {
-    return this.isDbg;
+    return this.inputFileLines;
   };
   protoOf(AppContext).hb = function () {
-    return this.outputEntityContents;
+    return this.isDbg;
   };
   protoOf(AppContext).ib = function () {
-    return this.outputFieldContents;
+    return this.outputEntityContents;
   };
   protoOf(AppContext).jb = function () {
     return this.outputFile;
@@ -1005,10 +1055,10 @@
   protoOf(AppContext).ob = function () {
     return this.f9_1;
   };
-  protoOf(AppContext).pb = function (arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) {
-    return new AppContext(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField);
+  protoOf(AppContext).pb = function (arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) {
+    return new AppContext(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField);
   };
-  protoOf(AppContext).copy = function (arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField, $super) {
+  protoOf(AppContext).copy = function (arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField, $super) {
     arguments_0 = arguments_0 === VOID ? this.arguments : arguments_0;
     consoleOutput = consoleOutput === VOID ? this.consoleOutput : consoleOutput;
     didLaunch = didLaunch === VOID ? this.didLaunch : didLaunch;
@@ -1019,21 +1069,21 @@
     entityNames = entityNames === VOID ? this.entityNames : entityNames;
     entityPrefixesKotlin = entityPrefixesKotlin === VOID ? this.entityPrefixesKotlin : entityPrefixesKotlin;
     entityTypes = entityTypes === VOID ? this.entityTypes : entityTypes;
+    fobjContents = fobjContents === VOID ? this.fobjContents : fobjContents;
     inputFile = inputFile === VOID ? this.inputFile : inputFile;
     inputFileLines = inputFileLines === VOID ? this.inputFileLines : inputFileLines;
     isDbg = isDbg === VOID ? this.isDbg : isDbg;
     outputEntityContents = outputEntityContents === VOID ? this.outputEntityContents : outputEntityContents;
-    outputFieldContents = outputFieldContents === VOID ? this.outputFieldContents : outputFieldContents;
     outputFile = outputFile === VOID ? this.outputFile : outputFile;
     outputFileContents = outputFileContents === VOID ? this.outputFileContents : outputFileContents;
     outputKDContents = outputKDContents === VOID ? this.outputKDContents : outputKDContents;
     outputPaths = outputPaths === VOID ? this.outputPaths : outputPaths;
     rawKotlin = rawKotlin === VOID ? this.rawKotlin : rawKotlin;
     recentField = recentField === VOID ? this.f9_1 : recentField;
-    return $super === VOID ? this.pb(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) : $super.pb.call(this, arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, inputFile, inputFileLines, isDbg, outputEntityContents, outputFieldContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField);
+    return $super === VOID ? this.pb(arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField) : $super.pb.call(this, arguments_0, consoleOutput, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjContents, inputFile, inputFileLines, isDbg, outputEntityContents, outputFile, outputFileContents, outputKDContents, outputPaths, rawKotlin, recentField);
   };
   protoOf(AppContext).toString = function () {
-    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', inputFile=' + this.inputFile + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputEntityContents=' + this.outputEntityContents + ', outputFieldContents=' + this.outputFieldContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputKDContents=' + this.outputKDContents + ', outputPaths=' + toString(this.outputPaths) + ', rawKotlin=' + this.rawKotlin + ', recentField=' + this.f9_1 + ')';
+    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', fobjContents=' + this.fobjContents + ', inputFile=' + this.inputFile + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputEntityContents=' + this.outputEntityContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputKDContents=' + this.outputKDContents + ', outputPaths=' + toString(this.outputPaths) + ', rawKotlin=' + this.rawKotlin + ', recentField=' + this.f9_1 + ')';
   };
   protoOf(AppContext).hashCode = function () {
     var result = hashCode(this.arguments);
@@ -1046,11 +1096,11 @@
     result = imul(result, 31) + hashCode(this.entityNames) | 0;
     result = imul(result, 31) + hashCode(this.entityPrefixesKotlin) | 0;
     result = imul(result, 31) + hashCode(this.entityTypes) | 0;
+    result = imul(result, 31) + getStringHashCode(this.fobjContents) | 0;
     result = imul(result, 31) + getStringHashCode(this.inputFile) | 0;
     result = imul(result, 31) + hashCode(this.inputFileLines) | 0;
     result = imul(result, 31) + getBooleanHashCode(this.isDbg) | 0;
     result = imul(result, 31) + getStringHashCode(this.outputEntityContents) | 0;
-    result = imul(result, 31) + getStringHashCode(this.outputFieldContents) | 0;
     result = imul(result, 31) + getStringHashCode(this.outputFile) | 0;
     result = imul(result, 31) + getStringHashCode(this.outputFileContents) | 0;
     result = imul(result, 31) + getStringHashCode(this.outputKDContents) | 0;
@@ -1085,6 +1135,8 @@
       return false;
     if (!equals(this.entityTypes, tmp0_other_with_cast.entityTypes))
       return false;
+    if (!(this.fobjContents === tmp0_other_with_cast.fobjContents))
+      return false;
     if (!(this.inputFile === tmp0_other_with_cast.inputFile))
       return false;
     if (!equals(this.inputFileLines, tmp0_other_with_cast.inputFileLines))
@@ -1092,8 +1144,6 @@
     if (!(this.isDbg === tmp0_other_with_cast.isDbg))
       return false;
     if (!(this.outputEntityContents === tmp0_other_with_cast.outputEntityContents))
-      return false;
-    if (!(this.outputFieldContents === tmp0_other_with_cast.outputFieldContents))
       return false;
     if (!(this.outputFile === tmp0_other_with_cast.outputFile))
       return false;
@@ -1243,23 +1293,6 @@
     }
     return '';
   }
-  function collectFields(entityFields) {
-    // Inline function 'kotlin.collections.mutableMapOf' call
-    var d = LinkedHashMap_init_$Create$();
-    var _iterator__ex2g4s = entityFields.x().f();
-    while (_iterator__ex2g4s.g()) {
-      var fields = _iterator__ex2g4s.h();
-      var _iterator__ex2g4s_0 = fields.w().f();
-      while (_iterator__ex2g4s_0.g()) {
-        var fieldName = _iterator__ex2g4s_0.h();
-        // Inline function 'kotlin.collections.set' call
-        d.y1(fieldName, true);
-      }
-    }
-    // Inline function 'kotlin.collections.toTypedArray' call
-    var this_0 = d.w();
-    return copyToArray(this_0);
-  }
   function debugString(v) {
     if (typeof v === 'string') {
       var limv = take(v, 50);
@@ -1301,17 +1334,6 @@
       return 'D(' + v.i() + ')' + out_0;
     }
     return toString(v);
-  }
-  function genFObject(fieldNames) {
-    var itemContents = '';
-    var inductionVariable = 0;
-    var last = fieldNames.length;
-    while (inductionVariable < last) {
-      var name = fieldNames[inductionVariable];
-      inductionVariable = inductionVariable + 1 | 0;
-      itemContents = itemContents + replace('    const val %NAME% = "%NAME%"\n', '%NAME%', name);
-    }
-    return replace('\nobject F {\n%ITEMS%\n}\n', '%ITEMS%', itemContents);
   }
   function parseRawKotlin(lines) {
     var contents = '';
