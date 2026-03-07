@@ -57,12 +57,6 @@ if (typeof Math.clz32 === 'undefined') {
     };
   }(Math.log, Math.LN2);
 }
-if (typeof String.prototype.startsWith === 'undefined') {
-  Object.defineProperty(String.prototype, 'startsWith', {value: function (searchString, position) {
-    position = position || 0;
-    return this.lastIndexOf(searchString, position) === position;
-  }});
-}
 if (typeof String.prototype.endsWith === 'undefined') {
   Object.defineProperty(String.prototype, 'endsWith', {value: function (searchString, position) {
     var subjectString = this.toString();
@@ -72,6 +66,12 @@ if (typeof String.prototype.endsWith === 'undefined') {
     position -= searchString.length;
     var lastIndex = subjectString.indexOf(searchString, position);
     return lastIndex !== -1 && lastIndex === position;
+  }});
+}
+if (typeof String.prototype.startsWith === 'undefined') {
+  Object.defineProperty(String.prototype, 'startsWith', {value: function (searchString, position) {
+    position = position || 0;
+    return this.lastIndexOf(searchString, position) === position;
   }});
 }
 //endregion
@@ -118,13 +118,13 @@ if (typeof String.prototype.endsWith === 'undefined') {
   initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtList, Collection]);
   initMetadataForClass(AbstractMap, 'AbstractMap', VOID, VOID, [KtMap]);
   initMetadataForClass(AbstractMutableMap, 'AbstractMutableMap', VOID, AbstractMap, [AbstractMap, KtMap]);
-  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtSet, Collection]);
+  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtSet]);
   initMetadataForCompanion(Companion_2);
   initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, KtList, Collection]);
   initMetadataForClass(HashMap, 'HashMap', HashMap_init_$Create$, AbstractMutableMap, [AbstractMutableMap, KtMap]);
-  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
+  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
   initMetadataForClass(HashMapValues, 'HashMapValues', VOID, AbstractMutableCollection, [Collection, AbstractMutableCollection]);
-  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
+  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
   initMetadataForClass(HashMapEntrySet, 'HashMapEntrySet', VOID, HashMapEntrySetBase);
   initMetadataForClass(HashMapKeysDefault$iterator$1);
   initMetadataForClass(HashMapKeysDefault, 'HashMapKeysDefault', VOID, AbstractMutableSet);
@@ -462,14 +462,6 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(asIterable$$inlined$Iterable$1).f = function () {
     return this.o_1.f();
   };
-  function dropLast(_this__u8e3s4, n) {
-    // Inline function 'kotlin.require' call
-    if (!(n >= 0)) {
-      var message = 'Requested character count ' + n + ' is less than zero.';
-      throw IllegalArgumentException_init_$Create$_0(toString_1(message));
-    }
-    return take(_this__u8e3s4, coerceAtLeast(_this__u8e3s4.length - n | 0, 0));
-  }
   function take(_this__u8e3s4, n) {
     // Inline function 'kotlin.require' call
     if (!(n >= 0)) {
@@ -477,6 +469,14 @@ if (typeof String.prototype.endsWith === 'undefined') {
       throw IllegalArgumentException_init_$Create$_0(toString_1(message));
     }
     return substring(_this__u8e3s4, 0, coerceAtMost(n, _this__u8e3s4.length));
+  }
+  function dropLast(_this__u8e3s4, n) {
+    // Inline function 'kotlin.require' call
+    if (!(n >= 0)) {
+      var message = 'Requested character count ' + n + ' is less than zero.';
+      throw IllegalArgumentException_init_$Create$_0(toString_1(message));
+    }
+    return take(_this__u8e3s4, coerceAtLeast(_this__u8e3s4.length - n | 0, 0));
   }
   function _Char___init__impl__6a9atx(value) {
     return value;
@@ -5157,8 +5157,9 @@ if (typeof String.prototype.endsWith === 'undefined') {
   _.$_$.i1 = startsWith;
   _.$_$.j1 = substring_0;
   _.$_$.k1 = substring;
-  _.$_$.l1 = THROW_CCE;
-  _.$_$.m1 = ensureNotNull;
+  _.$_$.l1 = take;
+  _.$_$.m1 = THROW_CCE;
+  _.$_$.n1 = ensureNotNull;
   //endregion
   return _;
 }));

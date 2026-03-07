@@ -62,8 +62,10 @@ fun collectFields(
 // Debug representation of a value
 fun debugString(v: Any): String {
     // Prepend a string with its length
+    // Only return 50 symbols
     if (v is String) {
-        return "S(${v.length})$v"
+        val limv = v.take(50)
+        return "S(${v.length})$limv"
     }
 
     // Prepend an array with its size

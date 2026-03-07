@@ -15,7 +15,7 @@
   var imul = Math.imul;
   var sort = kotlin_kotlin.$_$.m;
   var replace = kotlin_kotlin.$_$.g1;
-  var THROW_CCE = kotlin_kotlin.$_$.l1;
+  var THROW_CCE = kotlin_kotlin.$_$.m1;
   var Unit_instance = kotlin_kotlin.$_$.e;
   var protoOf = kotlin_kotlin.$_$.z;
   var initMetadataForObject = kotlin_kotlin.$_$.w;
@@ -47,7 +47,8 @@
   var substring_0 = kotlin_kotlin.$_$.j1;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
   var copyToArray = kotlin_kotlin.$_$.g;
-  var ensureNotNull = kotlin_kotlin.$_$.m1;
+  var take = kotlin_kotlin.$_$.l1;
+  var ensureNotNull = kotlin_kotlin.$_$.n1;
   var println = kotlin_kotlin.$_$.n;
   var last_0 = kotlin_kotlin.$_$.k;
   var dropLast = kotlin_kotlin.$_$.e1;
@@ -1261,7 +1262,8 @@
   }
   function debugString(v) {
     if (typeof v === 'string') {
-      return 'S(' + v.length + ')' + v;
+      var limv = take(v, 50);
+      return 'S(' + v.length + ')' + limv;
     }
     if (isArray(v)) {
       var out = '';
