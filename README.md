@@ -7,19 +7,20 @@ correctly for multiple platforms. This project dictates one particular way
 to have your code organized to be able to easily have logic in Kotlin
 across platforms in **native** apps.
 
-This project's core concept is a Redux-like architecture.
+Key concepts:
 
-# Building and distributing Klin
+* Redux-like architecture
+* Klin, a translator to convert YML to Kotlin
 
-Klin is a translator that converts YML to Kotlin.
+* Build:
 
-To build and distribute it, run:
+$ `./util/build-klin`
 
-$ `./util/run-klin-dbg`
+* Distribute:
 
-The resulting Node.js application is located in `dist`
+$ `./util/dist-klin`
 
-# Running Klin
+* Use:
 
 $ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
 
