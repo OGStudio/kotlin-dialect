@@ -12,15 +12,15 @@ Key concepts:
 * Redux-like architecture
 * Klin, a translator to convert YML to Kotlin
 
-* Build:
+## Build
 
 $ `./util/build-klin`
 
-* Distribute:
+## Distribute
 
 $ `./util/dist-klin`
 
-* Use:
+## Run
 
 $ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
 
