@@ -7,6 +7,15 @@
 
 package org.opengamestudio
 
+const val TEMPLATE_FOBJ = """
+// Special object to reference context fields with a compile time validation
+object F {
+%ITEMS%
+}
+"""
+const val TEMPLATE_FOBJ_ITEM = """    const val %NAME% = "%NAME%"
+"""
+
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
 %PREFIX%

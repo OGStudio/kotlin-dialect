@@ -12,7 +12,7 @@ object AppProto {
 
     init {
         ctrl = KDController(AppContext())
-        //setupComponentDebugging(ctrl, "App")
+        setupComponentDebugging(ctrl, "App")
         arrayOf(
             ::appShouldCollectEntityComments,
             ::appShouldCollectEntityFieldComments,
@@ -20,11 +20,15 @@ object AppProto {
             ::appShouldCollectEntityNames,
             ::appShouldCollectEntityPrefixesKotlin,
             ::appShouldCollectEntityTypes,
+            ::appShouldCollectOutputPaths,
             ::appShouldCollectRawKotlin,
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
             ::appShouldParseOutputFilePath,
+            ::appShouldResetFObjContents,
+            ::appShouldResetOutputFileContents,
+            ::appShouldResetOutputKDContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
         }

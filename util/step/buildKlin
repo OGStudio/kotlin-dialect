@@ -1,0 +1,7 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Build Klin"
+cd $GRADLE_DIR
+./gradlew kotlinUpgradeYarnLock
+./gradlew jsNodeProductionRun

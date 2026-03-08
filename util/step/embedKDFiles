@@ -1,0 +1,21 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Embed KD files"
+TMP=/tmp/kd.tmp
+TMP64=/tmp/kd.tmp64
+EMB64=$KLIN_SRC_DIR/emb64.kt
+
+# Combine files
+cat $SRC_DIR/KDContext.kt > $TMP
+cat $SRC_DIR/KDController.kt >> $TMP
+cat $SRC_DIR/registerOneliners.kt >> $TMP
+
+# Convert to Base64
+base64 -i $TMP -o $TMP64
+
+# Generate source code file
+echo "package org.opengamestudio" > $EMB64
+echo -n "val emb64=\"" >> $EMB64
+cat $TMP64 | tr -d '\n' >> $EMB64
+echo "\"" >> $EMB64

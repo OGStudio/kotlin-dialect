@@ -1,0 +1,8 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Generate KD for Klin"
+
+node $SDIR/../dist/app.js \
+    --file=$SDIR/../klin/kd.yml \
+    --out=$KLIN_SRC_DIR/kd.kt

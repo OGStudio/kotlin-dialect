@@ -7,7 +7,13 @@
 
 package org.opengamestudio
 
+import kotlin.io.encoding.*
 import kotlin.js.JsExport
+
+//<!-- Constants -->
+
+val APP_KD_IMPORT = "import kotlin.js.JsExport"
+val APP_KD_PACKAGE = "package org.opengamestudio"
 
 //<!-- Shoulds -->
 
@@ -16,13 +22,13 @@ import kotlin.js.JsExport
 // Conditions:
 // 1. Entity names are available
 fun appShouldCollectEntityComments(c: AppContext): AppContext {
-    if (c.recentField == "entityNames") {
+    if (c.recentField == F.entityNames) {
         c.entityComments = parseEntityComments(c.inputFileLines)
-        c.recentField = "entityComments"
+        c.recentField = F.entityComments
         return c
     }
 
-    c.recentField = "none"
+    c.recentField = F.none
     return c
 }
 
@@ -105,6 +111,20 @@ fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     return c
 }
 
+// Collect output paths
+//
+// 1. Input file contents are available
+fun appShouldCollectOutputPaths(c: AppContext): AppContext {
+    if (c.recentField == F.inputFileLines) {
+        c.outputPaths = parseOutputPaths(c.inputFileLines)
+        c.recentField = F.outputPaths
+        return c
+    }
+
+    c.recentField = F.none
+    return c
+}
+
 // Collect raw Kotlin source code
 //
 // Conditions:
@@ -126,7 +146,7 @@ fun appShouldCollectRawKotlin(c: AppContext): AppContext {
 // 1. Entity field comments are available
 fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
     if (c.recentField == "entityFieldComments") {
-        c.outputFileContents = genKotlinEntitiesFile(
+        c.outputEntityContents = genKotlinEntitiesFile(
             c.entityComments,
             c.entityFieldComments,
             c.entityFields,
@@ -135,7 +155,7 @@ fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
             c.entityTypes,
             c.rawKotlin
         )
-        c.recentField = "outputFileContents"
+        c.recentField = "outputEntityContents"
         return c
     }
 
@@ -191,6 +211,57 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     ) {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
         c.recentField = "consoleOutput"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate a special structure to reference fields
+//
+// Conditions:
+// 1. Embeddable KD files' content is ready
+fun appShouldResetFObjContents(c: AppContext): AppContext {
+    if (c.recentField == "outputKDContents") {
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjContents = fobjJVM(fields)
+        c.recentField = "fobjContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate a final text
+//
+// Conditions:
+// 1. F object is ready
+fun appShouldResetOutputFileContents(c: AppContext): AppContext {
+    if (c.recentField == "fobjContents") {
+        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.fobjContents
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate KDController/Context/registerOneliners/etc. contents
+//
+// Conditions:
+// 1. Output of Kotlin entities' is available
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetOutputKDContents(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        val contents = base64ToString(emb64)
+        c.outputKDContents = contents
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_PACKAGE, "")
+        c.recentField = "outputKDContents"
         return c
     }
 
