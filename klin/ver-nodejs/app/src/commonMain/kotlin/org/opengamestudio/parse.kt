@@ -220,7 +220,7 @@ fun parseOutputPaths(lines: Array<String>): Map<String, String> {
             ln.startsWith(PREFIX_OUTPUT_PATH)
         ) {
             val prefixLen = PREFIX_OUTPUT_PATH.length
-            val totalLen = ln.length - prefixLen - 1 /* Exclude `:` at the end */
+            val totalLen = ln.length - 1 /* Exclude `:` at the end */
             val path = ln.substring(prefixLen, totalLen)
             lastPath = path
             println("ИГР parseOP-2 lastP: '$lastPath'")
