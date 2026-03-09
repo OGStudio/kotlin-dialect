@@ -23,12 +23,13 @@ data class AppContext(
     var inputFile: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
+    // Paths to save generated contents to
+    var output: Map<String, String> = mapOf(),
     var outputEntityContents: String = "",
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
     var outputKDContents: String = "",
-    var outputPaths: Map<String, String> = mapOf(),
     // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
@@ -62,6 +63,8 @@ data class AppContext(
             return inputFileLines as T
         } else if (name == "isDbg") {
             return isDbg as T
+        } else if (name == "output") {
+            return output as T
         } else if (name == "outputEntityContents") {
             return outputEntityContents as T
         } else if (name == "outputFile") {
@@ -70,8 +73,6 @@ data class AppContext(
             return outputFileContents as T
         } else if (name == "outputKDContents") {
             return outputKDContents as T
-        } else if (name == "outputPaths") {
-            return outputPaths as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
         }
@@ -114,6 +115,8 @@ data class AppContext(
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
             isDbg = value as Boolean
+        } else if (name == "output") {
+            output = value as Map<String, String>
         } else if (name == "outputEntityContents") {
             outputEntityContents = value as String
         } else if (name == "outputFile") {
@@ -122,8 +125,6 @@ data class AppContext(
             outputFileContents = value as String
         } else if (name == "outputKDContents") {
             outputKDContents = value as String
-        } else if (name == "outputPaths") {
-            outputPaths = value as Map<String, String>
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
         }
@@ -283,6 +284,7 @@ fun registerOneliners(
     }
 }
 
+// Special object to reference context fields with a compile time validation
 object F {
     const val arguments = "arguments"
     const val consoleOutput = "consoleOutput"
@@ -299,11 +301,11 @@ object F {
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
     const val none = "none"
+    const val output = "output"
     const val outputEntityContents = "outputEntityContents"
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
     const val outputKDContents = "outputKDContents"
-    const val outputPaths = "outputPaths"
     const val rawKotlin = "rawKotlin"
 
 }

@@ -111,20 +111,6 @@ fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     return c
 }
 
-// Collect output paths
-//
-// 1. Input file contents are available
-fun appShouldCollectOutputPaths(c: AppContext): AppContext {
-    if (c.recentField == F.inputFileLines) {
-        c.outputPaths = parseOutputPaths(c.inputFileLines)
-        c.recentField = F.outputPaths
-        return c
-    }
-
-    c.recentField = F.none
-    return c
-}
-
 // Collect raw Kotlin source code
 //
 // Conditions:
@@ -181,7 +167,21 @@ fun appShouldParseInputFilePath(c: AppContext): AppContext {
     return c
 }
 
-// Parse output file path
+// Parse output paths
+//
+// 1. Input file contents are available
+fun appShouldParseOutput(c: AppContext): AppContext {
+    if (c.recentField == "inputFileLines") {
+        c.output = parseOutputPaths(c.inputFileLines)
+        c.recentField = "output"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// TODO: REMOVE Parse output file path
 //
 // Conditions:
 // 1. At app launch output file was specified with command line argument
