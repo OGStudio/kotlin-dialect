@@ -1,5 +1,9 @@
 version: 1
 
+output:
+    ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio/kd.kt:
+        type: jsexport
+
 kotlin: package org.opengamestudio
 kotlin: import kotlin.js.JsExport
 
@@ -26,11 +30,13 @@ AppContext:
         inputFile: String
         inputFileLines: [String]
         isDbg: Bool
+        # Paths to save generated contents to
+        output: [String: String]
         outputEntityContents: String
         outputFile: String
         # Contents to write to output file
         outputFileContents: String
         outputKDContents: String
-        outputPaths: [String: String]
+
         # Kotlin source code to insert as is at the beginning of each generated file
         rawKotlin: String
