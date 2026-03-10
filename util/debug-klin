@@ -6,4 +6,4 @@ source $SDIR/other
 
 STEP=0
 source $T/generateKlinDebugKD
-source $T/generateKOMDebugKD
+#source $T/generateKOMDebugKD

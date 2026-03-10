@@ -221,9 +221,9 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 // Generate a special structure to reference fields
 //
 // Conditions:
-// 1. Embeddable KD files' content is ready
+// 1. Output of Kotlin entities' is available
 fun appShouldResetFObjContents(c: AppContext): AppContext {
-    if (c.recentField == "outputKDContents") {
+    if (c.recentField == "outputEntityContents") {
         val ids = fobjContexts(c.entityTypes)
         var fields = fobjFields(c.entityFields, ids)
         c.fobjContents = fobjJVM(fields)
@@ -235,6 +235,43 @@ fun appShouldResetFObjContents(c: AppContext): AppContext {
     return c
 }
 
+// Generate KDController/Context/registerOneliners/etc. contents
+//
+// Conditions:
+// 1. Output of Kotlin entities' is available
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetKDSrc(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        val contents = base64ToString(emb64)
+        // Remove duplicated import and package lines
+        c.kdSrc = contents
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_PACKAGE, "")
+        c.recentField = "kdSrc"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate output for `jsexport` type
+//
+// Conditions:
+// 1. KD src is ready
+fun appShouldResetOutputJSExport(c: AppContext): AppContext {
+    if (c.recentField == "kdSrc") {
+        c.outputJSExport = c.outputEntityContents + c.kdSrc + c.fobjContents
+        c.recentField = "outputJSExport"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+
+/*
 // Generate a final text
 //
 // Conditions:
@@ -249,25 +286,7 @@ fun appShouldResetOutputFileContents(c: AppContext): AppContext {
     c.recentField = "none"
     return c
 }
-
-// Generate KDController/Context/registerOneliners/etc. contents
-//
-// Conditions:
-// 1. Output of Kotlin entities' is available
-@OptIn(ExperimentalEncodingApi::class)
-fun appShouldResetOutputKDContents(c: AppContext): AppContext {
-    if (c.recentField == "outputEntityContents") {
-        val contents = base64ToString(emb64)
-        c.outputKDContents = contents
-            .replace(APP_KD_IMPORT, "")
-            .replace(APP_KD_PACKAGE, "")
-        c.recentField = "outputKDContents"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
+*/
 
 //<!-- Other functions -->
 

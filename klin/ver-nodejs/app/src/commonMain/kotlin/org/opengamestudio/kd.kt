@@ -23,13 +23,22 @@ data class AppContext(
     var inputFile: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
+    // Source code from root src/ dir files
+    var kdSrc: String = "",
     // Paths to save generated contents to
     var output: Map<String, String> = mapOf(),
+    // Output of type `c++`
+    var outputCPP: String = "",
     var outputEntityContents: String = "",
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
-    var outputKDContents: String = "",
+    // Output of type `jsexport`
+    var outputJSExport: String = "",
+    // Output of type `kotlin`
+    var outputKotlin: String = "",
+    // Output of type `swift`
+    var outputSwift: String = "",
     // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
@@ -63,16 +72,24 @@ data class AppContext(
             return inputFileLines as T
         } else if (name == "isDbg") {
             return isDbg as T
+        } else if (name == "kdSrc") {
+            return kdSrc as T
         } else if (name == "output") {
             return output as T
+        } else if (name == "outputCPP") {
+            return outputCPP as T
         } else if (name == "outputEntityContents") {
             return outputEntityContents as T
         } else if (name == "outputFile") {
             return outputFile as T
         } else if (name == "outputFileContents") {
             return outputFileContents as T
-        } else if (name == "outputKDContents") {
-            return outputKDContents as T
+        } else if (name == "outputJSExport") {
+            return outputJSExport as T
+        } else if (name == "outputKotlin") {
+            return outputKotlin as T
+        } else if (name == "outputSwift") {
+            return outputSwift as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
         }
@@ -115,16 +132,24 @@ data class AppContext(
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
             isDbg = value as Boolean
+        } else if (name == "kdSrc") {
+            kdSrc = value as String
         } else if (name == "output") {
             output = value as Map<String, String>
+        } else if (name == "outputCPP") {
+            outputCPP = value as String
         } else if (name == "outputEntityContents") {
             outputEntityContents = value as String
         } else if (name == "outputFile") {
             outputFile = value as String
         } else if (name == "outputFileContents") {
             outputFileContents = value as String
-        } else if (name == "outputKDContents") {
-            outputKDContents = value as String
+        } else if (name == "outputJSExport") {
+            outputJSExport = value as String
+        } else if (name == "outputKotlin") {
+            outputKotlin = value as String
+        } else if (name == "outputSwift") {
+            outputSwift = value as String
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
         }
@@ -300,12 +325,16 @@ object F {
     const val inputFile = "inputFile"
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
+    const val kdSrc = "kdSrc"
     const val none = "none"
     const val output = "output"
+    const val outputCPP = "outputCPP"
     const val outputEntityContents = "outputEntityContents"
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
-    const val outputKDContents = "outputKDContents"
+    const val outputJSExport = "outputJSExport"
+    const val outputKotlin = "outputKotlin"
+    const val outputSwift = "outputSwift"
     const val rawKotlin = "rawKotlin"
 
 }
