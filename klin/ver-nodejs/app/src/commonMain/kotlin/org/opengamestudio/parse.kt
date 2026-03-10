@@ -211,7 +211,6 @@ fun parseOutputPaths(lines: Array<String>): Map<String, String> {
         ) {
             val prefixLen = PREFIX_OUTPUT_TYPE.length
             val type = ln.substring(prefixLen)
-            println("ИГР parseOP-1 type: '$type'")
             d[lastPath] = type
         }
         // Path
@@ -223,7 +222,6 @@ fun parseOutputPaths(lines: Array<String>): Map<String, String> {
             val totalLen = ln.length - 1 /* Exclude `:` at the end */
             val path = ln.substring(prefixLen, totalLen)
             lastPath = path
-            println("ИГР parseOP-2 lastP: '$lastPath'")
         }
     }
 

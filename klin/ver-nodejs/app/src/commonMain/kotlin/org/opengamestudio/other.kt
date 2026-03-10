@@ -43,13 +43,18 @@ fun cliHasArgument(
     return false
 }
 
+// Shortened debug string
+fun debugShortString(v: Any): String {
+    val str = debugString(v)
+    // Only return 100 symbols
+    return str.take(100)
+}
+
 // Debug representation of a value
 fun debugString(v: Any): String {
     // Prepend a string with its length
-    // Only return 50 symbols
     if (v is String) {
-        val limv = v.take(50)
-        return "S(${v.length})$limv"
+        return "S(${v.length})$v"
     }
 
     // Prepend an array with its size
@@ -99,7 +104,7 @@ fun setupComponentDebugging(
     prefix: String
 ) {
     ctrl.registerCallback { c ->
-        val value = debugString(c.fieldAny(c.recentField))
+        val value = debugShortString(c.fieldAny(c.recentField))
         if (c.field("isDbg")) {
             println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
         }
