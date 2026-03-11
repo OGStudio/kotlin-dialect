@@ -29,6 +29,7 @@ object AppProto {
             ::appShouldResetFObjContents,
             ::appShouldResetKDSrc,
             ::appShouldResetOutputJSExport,
+            ::appShouldResetOutputKotlin,
             //::appShouldResetOutputFileContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }

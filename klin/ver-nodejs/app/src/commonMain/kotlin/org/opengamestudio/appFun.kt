@@ -13,6 +13,7 @@ import kotlin.js.JsExport
 //<!-- Constants -->
 
 val APP_KD_IMPORT = "import kotlin.js.JsExport"
+val APP_KD_JSEXPORT= "@JsExport"
 val APP_KD_PACKAGE = "package org.opengamestudio"
 
 //<!-- Shoulds -->
@@ -263,6 +264,23 @@ fun appShouldResetOutputJSExport(c: AppContext): AppContext {
     if (c.recentField == "kdSrc") {
         c.outputJSExport = c.outputEntityContents + c.kdSrc + c.fobjContents
         c.recentField = "outputJSExport"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate output for `kotlin` type
+//
+// Conditions:
+// 1. Output for `jsexport` is ready
+fun appShouldResetOutputKotlin(c: AppContext): AppContext {
+    if (c.recentField == "outputJSExport") {
+        c.outputKotlin = c.outputJSExport
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_JSEXPORT, "")
+        c.recentField = "outputKotlin"
         return c
     }
 
