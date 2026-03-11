@@ -171,10 +171,10 @@ fun appShouldParseInputFilePath(c: AppContext): AppContext {
 // Parse output paths
 //
 // 1. Input file contents are available
-fun appShouldParseOutput(c: AppContext): AppContext {
+fun appShouldParseOutputPaths(c: AppContext): AppContext {
     if (c.recentField == "inputFileLines") {
-        c.output = parseOutputPaths(c.inputFileLines)
-        c.recentField = "output"
+        c.outputPaths = parseOutputPaths(c.inputFileLines)
+        c.recentField = "outputPaths"
         return c
     }
 

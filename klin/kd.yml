@@ -32,8 +32,6 @@ AppContext:
         isDbg: Bool
         # Source code from root src/ dir files
         kdSrc: String
-        # Paths to save generated contents to
-        output: [String: String]
         # Output of type `c++`
         outputCPP: String
         outputEntityContents: String
@@ -44,7 +42,16 @@ AppContext:
         outputJSExport: String
         # Output of type `kotlin`
         outputKotlin: String
+        # Paths to save generated contents to
+        outputPaths: [OutputPath]
         # Output of type `swift`
         outputSwift: String
         # Kotlin source code to insert as is at the beginning of each generated file
         rawKotlin: String
+
+OutputPath:
+    prefix-kotlin: @JsExport
+    type: struct
+    fields:
+        path: String
+        type: String

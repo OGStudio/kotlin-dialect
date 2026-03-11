@@ -24,7 +24,7 @@ object AppProto {
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
-            ::appShouldParseOutput,
+            ::appShouldParseOutputPaths,
             ::appShouldResetFObjContents,
             ::appShouldResetKDSrc,
             ::appShouldResetOutputJSExport,

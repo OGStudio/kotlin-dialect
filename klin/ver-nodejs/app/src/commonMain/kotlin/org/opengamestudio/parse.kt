@@ -191,8 +191,8 @@ fun parseEntityTypes(lines: Array<String>): Map<Int, String> {
 }
 
 // Collect output paths into the map of Path -> Type
-fun parseOutputPaths(lines: Array<String>): Map<String, String> {
-    var d = mutableMapOf<String, String>()
+fun parseOutputPaths(lines: Array<String>): Array<OutputPath> {
+    var items = arrayOf<OutputPath>()
     var isCollectingPaths = false
     var lastPath = ""
     for (ln in lines) {
@@ -211,7 +211,12 @@ fun parseOutputPaths(lines: Array<String>): Map<String, String> {
         ) {
             val prefixLen = PREFIX_OUTPUT_TYPE.length
             val type = ln.substring(prefixLen)
-            d[lastPath] = type
+
+            // Add an item
+            var item = OutputPath()
+            item.path = lastPath
+            item.type = type
+            items += item
         }
         // Path
         else if (
@@ -225,5 +230,5 @@ fun parseOutputPaths(lines: Array<String>): Map<String, String> {
         }
     }
 
-    return d
+    return items
 }

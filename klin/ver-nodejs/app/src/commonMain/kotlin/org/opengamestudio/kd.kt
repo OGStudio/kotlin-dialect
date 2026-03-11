@@ -25,8 +25,6 @@ data class AppContext(
     var isDbg: Boolean = false,
     // Source code from root src/ dir files
     var kdSrc: String = "",
-    // Paths to save generated contents to
-    var output: Map<String, String> = mapOf(),
     // Output of type `c++`
     var outputCPP: String = "",
     var outputEntityContents: String = "",
@@ -37,6 +35,8 @@ data class AppContext(
     var outputJSExport: String = "",
     // Output of type `kotlin`
     var outputKotlin: String = "",
+    // Paths to save generated contents to
+    var outputPaths: Array<OutputPath> = arrayOf(),
     // Output of type `swift`
     var outputSwift: String = "",
     // Kotlin source code to insert as is at the beginning of each generated file
@@ -74,8 +74,6 @@ data class AppContext(
             return isDbg as T
         } else if (name == "kdSrc") {
             return kdSrc as T
-        } else if (name == "output") {
-            return output as T
         } else if (name == "outputCPP") {
             return outputCPP as T
         } else if (name == "outputEntityContents") {
@@ -88,6 +86,8 @@ data class AppContext(
             return outputJSExport as T
         } else if (name == "outputKotlin") {
             return outputKotlin as T
+        } else if (name == "outputPaths") {
+            return outputPaths as T
         } else if (name == "outputSwift") {
             return outputSwift as T
         } else if (name == "rawKotlin") {
@@ -134,8 +134,6 @@ data class AppContext(
             isDbg = value as Boolean
         } else if (name == "kdSrc") {
             kdSrc = value as String
-        } else if (name == "output") {
-            output = value as Map<String, String>
         } else if (name == "outputCPP") {
             outputCPP = value as String
         } else if (name == "outputEntityContents") {
@@ -148,6 +146,8 @@ data class AppContext(
             outputJSExport = value as String
         } else if (name == "outputKotlin") {
             outputKotlin = value as String
+        } else if (name == "outputPaths") {
+            outputPaths = value as Array<OutputPath>
         } else if (name == "outputSwift") {
             outputSwift = value as String
         } else if (name == "rawKotlin") {
@@ -155,6 +155,13 @@ data class AppContext(
         }
     }
 }
+
+
+@JsExport
+data class OutputPath(
+    var path: String = "",
+    var type: String = "",
+) {}
 /**
  * This file is a part of Kotlin dialect:
  *     https://github.com/OGStudio/kotlin-dialect
@@ -327,13 +334,13 @@ object F {
     const val isDbg = "isDbg"
     const val kdSrc = "kdSrc"
     const val none = "none"
-    const val output = "output"
     const val outputCPP = "outputCPP"
     const val outputEntityContents = "outputEntityContents"
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
     const val outputJSExport = "outputJSExport"
     const val outputKotlin = "outputKotlin"
+    const val outputPaths = "outputPaths"
     const val outputSwift = "outputSwift"
     const val rawKotlin = "rawKotlin"
 
