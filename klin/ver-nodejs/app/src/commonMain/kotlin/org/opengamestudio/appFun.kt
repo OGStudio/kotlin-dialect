@@ -201,6 +201,21 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
+// Cycle through output paths to try to save them all
+//
+// Conditions:
+// 1. Output of the last currently supported type is available (swift as of 2026-03-11)
+fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
+    if (c.recentField == "outputSwift") {
+        c.currentOutputPathId = 0
+        c.recentField = "currentOutputPathId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate a special structure to reference fields
 //
 // Conditions:
@@ -270,6 +285,20 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
     return c
 }
 
+// Generate output for `swift` type
+//
+// Conditions:
+// 1. Output for `kotlin` is ready
+fun appShouldResetOutputSwift(c: AppContext): AppContext {
+    if (c.recentField == "outputKotlin") {
+        c.outputSwift = "//TODO swift gen"
+        c.recentField = "outputSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
 
 /*
 // Generate a final text

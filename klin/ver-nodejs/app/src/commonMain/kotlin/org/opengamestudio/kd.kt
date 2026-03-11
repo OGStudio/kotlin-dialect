@@ -7,6 +7,8 @@ data class AppContext(
     // Command line arguments
     var arguments: Array<String> = arrayOf(),
     var consoleOutput: String = "",
+    // Output path that is being saved at the moment
+    var currentOutputPathId: Int = 0,
     var didLaunch: Boolean = false,
     var didWriteOutputFile: Boolean = false,
     // Entity comments with entities referenced by index
@@ -48,6 +50,8 @@ data class AppContext(
             return arguments as T
         } else if (name == "consoleOutput") {
             return consoleOutput as T
+        } else if (name == "currentOutputPathId") {
+            return currentOutputPathId as T
         } else if (name == "didLaunch") {
             return didLaunch as T
         } else if (name == "didWriteOutputFile") {
@@ -108,6 +112,8 @@ data class AppContext(
             arguments = value as Array<String>
         } else if (name == "consoleOutput") {
             consoleOutput = value as String
+        } else if (name == "currentOutputPathId") {
+            currentOutputPathId = value as Int
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
         } else if (name == "didWriteOutputFile") {
@@ -320,6 +326,7 @@ fun registerOneliners(
 object F {
     const val arguments = "arguments"
     const val consoleOutput = "consoleOutput"
+    const val currentOutputPathId = "currentOutputPathId"
     const val didLaunch = "didLaunch"
     const val didWriteOutputFile = "didWriteOutputFile"
     const val entityComments = "entityComments"

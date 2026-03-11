@@ -14,6 +14,8 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Output path that is being saved at the moment
+        currentOutputPathId: Int
         didLaunch: Bool
         # Entity comments with entities referenced by index
         entityComments: [Int: String]

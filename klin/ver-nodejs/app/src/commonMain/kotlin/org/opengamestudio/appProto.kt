@@ -23,12 +23,14 @@ object AppProto {
             ::appShouldCollectRawKotlin,
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
-            ::appShouldPrintToConsole,
             ::appShouldParseOutputPaths,
+            ::appShouldPrintToConsole,
+            ::appShouldResetCurrentOutputPathId,
             ::appShouldResetFObjContents,
             ::appShouldResetKDSrc,
             ::appShouldResetOutputJSExport,
             ::appShouldResetOutputKotlin,
+            ::appShouldResetOutputSwift,
             //::appShouldResetOutputFileContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
