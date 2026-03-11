@@ -192,7 +192,7 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
     ) {
-        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
+        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml"
         c.recentField = "consoleOutput"
         return c
     }
