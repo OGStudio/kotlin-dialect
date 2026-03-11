@@ -182,24 +182,6 @@ fun appShouldParseOutput(c: AppContext): AppContext {
     return c
 }
 
-// TODO: REMOVE Parse output file path
-//
-// Conditions:
-// 1. At app launch output file was specified with command line argument
-fun appShouldParseOutputFilePath(c: AppContext): AppContext {
-    if (
-        c.recentField == "didLaunch" &&
-        cliArgumentValue(c.arguments, ARGUMENT_OUT).length > 0
-    ) {
-        c.outputFile = cliArgumentValue(c.arguments, ARGUMENT_OUT)
-        c.recentField = "outputFile"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
 // Print to console
 //
 // Conditions:

@@ -46,9 +46,8 @@ fun cliHasArgument(
 // Shortened debug string
 fun debugShortString(v: Any): String {
     val str = debugString(v)
-    // Only return 100 symbols
-    //return str.take(100)
-    return str
+    // Only return limited number of symbols
+    return str.take(DBG_LEN)
 }
 
 // Debug representation of a value

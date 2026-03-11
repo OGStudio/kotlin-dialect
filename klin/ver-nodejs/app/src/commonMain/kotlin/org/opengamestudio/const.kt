@@ -8,8 +8,7 @@
 package org.opengamestudio
 
 const val ARGUMENT_FILE = "--file"
-const val ARGUMENT_OUT = "--out"
-const val DBG_LEN = 50
+const val DBG_LEN = 400
 const val DICTIONARY_DELIMITER = ": "
 const val FIELD_DELIMITER = ": "
 const val NEWLINE = "\n"

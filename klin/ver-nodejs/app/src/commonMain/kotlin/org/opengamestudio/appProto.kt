@@ -25,7 +25,6 @@ object AppProto {
             ::appShouldParseInputFilePath,
             ::appShouldPrintToConsole,
             ::appShouldParseOutput,
-            ::appShouldParseOutputFilePath,
             ::appShouldResetFObjContents,
             ::appShouldResetKDSrc,
             ::appShouldResetOutputJSExport,
