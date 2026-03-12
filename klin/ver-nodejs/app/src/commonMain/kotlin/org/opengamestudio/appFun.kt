@@ -216,6 +216,23 @@ fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
     return c
 }
 
+// Extract input file directory
+//
+// Conditions:
+// 1. Input file is ready
+fun appShouldResetInputFileDir(c: AppContext): AppContext {
+    if (c.recentField == "inputFile") {
+        val parts = c.inputFile.split(PATH_DELIMITER)
+        val dirParts = parts.dropLast(1)
+        c.inputFileDir = dirParts.joinToString(separator = PATH_DELIMITER)
+        c.recentField = "inputFileDir"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate a special structure to reference fields
 //
 // Conditions:
@@ -260,7 +277,7 @@ fun appShouldResetKDSrc(c: AppContext): AppContext {
 fun appShouldResetOutputFile(c: AppContext): AppContext {
     if (c.recentField == "currentOutputPathId") {
         val item = c.outputPaths[c.currentOutputPathId]
-        c.outputFile = item.path
+        c.outputFile = c.inputFileDir + PATH_DELIMITER + item.path
         c.recentField = "outputFile"
         return c
     }

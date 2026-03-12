@@ -23,6 +23,7 @@ data class AppContext(
     var entityTypes: Map<Int, String> = mapOf(),
     var fobjContents: String = "",
     var inputFile: String = "",
+    var inputFileDir: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
     // Source code from root src/ dir files
@@ -72,6 +73,8 @@ data class AppContext(
             return fobjContents as T
         } else if (name == "inputFile") {
             return inputFile as T
+        } else if (name == "inputFileDir") {
+            return inputFileDir as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
         } else if (name == "isDbg") {
@@ -134,6 +137,8 @@ data class AppContext(
             fobjContents = value as String
         } else if (name == "inputFile") {
             inputFile = value as String
+        } else if (name == "inputFileDir") {
+            inputFileDir = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
@@ -323,6 +328,7 @@ fun registerOneliners(
 }
 
 // Special object to reference context fields with a compile time validation
+@JsExport
 object F {
     const val arguments = "arguments"
     const val consoleOutput = "consoleOutput"
@@ -337,6 +343,7 @@ object F {
     const val entityTypes = "entityTypes"
     const val fobjContents = "fobjContents"
     const val inputFile = "inputFile"
+    const val inputFileDir = "inputFileDir"
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
     const val kdSrc = "kdSrc"

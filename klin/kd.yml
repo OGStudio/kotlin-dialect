@@ -1,4 +1,4 @@
-version: 1
+version: 3
 
 output:
     ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio/kd.kt:
@@ -30,6 +30,7 @@ AppContext:
         fobjContents: String
         didWriteOutputFile: Bool
         inputFile: String
+        inputFileDir: String
         inputFileLines: [String]
         isDbg: Bool
         # Source code from root src/ dir files

@@ -27,6 +27,7 @@ object AppProto {
             ::appShouldPrintToConsole,
             ::appShouldResetCurrentOutputPathId,
             ::appShouldResetFObjContents,
+            ::appShouldResetInputFileDir,
             ::appShouldResetKDSrc,
             ::appShouldResetOutputFile,
             ::appShouldResetOutputFileContents,
