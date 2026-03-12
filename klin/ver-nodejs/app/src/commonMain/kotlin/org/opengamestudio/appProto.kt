@@ -28,10 +28,11 @@ object AppProto {
             ::appShouldResetCurrentOutputPathId,
             ::appShouldResetFObjContents,
             ::appShouldResetKDSrc,
+            ::appShouldResetOutputFile,
+            ::appShouldResetOutputFileContents,
             ::appShouldResetOutputJSExport,
             ::appShouldResetOutputKotlin,
             ::appShouldResetOutputSwift,
-            //::appShouldResetOutputFileContents,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
         }

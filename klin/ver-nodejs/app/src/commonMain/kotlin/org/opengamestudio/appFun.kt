@@ -253,6 +253,38 @@ fun appShouldResetKDSrc(c: AppContext): AppContext {
     return c
 }
 
+// Select the path to write to
+//
+// Conditions:
+// 1. Current output path id was changed
+fun appShouldResetOutputFile(c: AppContext): AppContext {
+    if (c.recentField == "currentOutputPathId") {
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.outputFile = item.path
+        c.recentField = "outputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Select the text to save
+//
+// Conditions:
+// 1. Output file was selected
+fun appShouldResetOutputFileContents(c: AppContext): AppContext {
+    if (c.recentField == "outputFile") {
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.outputFileContents = outputFileContents(c.outputJSExport, c.outputKotlin, c.outputSwift, item.type)
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate output for `jsexport` type
 //
 // Conditions:
@@ -299,23 +331,6 @@ fun appShouldResetOutputSwift(c: AppContext): AppContext {
     c.recentField = "none"
     return c
 }
-
-/*
-// Generate a final text
-//
-// Conditions:
-// 1. F object is ready
-fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "fobjContents") {
-        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.fobjContents
-        c.recentField = "outputFileContents"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-*/
 
 //<!-- Other functions -->
 

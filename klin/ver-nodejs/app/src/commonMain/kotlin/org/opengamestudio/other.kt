@@ -85,6 +85,26 @@ fun debugString(v: Any): String {
     return "$v"
 }
 
+// Provide output to save based on its type
+fun outputFileContents(
+    outputJSExport: String,
+    outputKotlin: String,
+    outputSwift: String,
+    type: String
+): String {
+    if (type == OUTPUT_TYPE_JSEXPORT) {
+        return outputJSExport
+    }
+    else if (type == OUTPUT_TYPE_KOTLIN) {
+        return outputKotlin
+    }
+    else if (type == OUTPUT_TYPE_SWIFT) {
+        return outputSwift
+    }
+
+    return "outputFC-N/A"
+}
+
 // Collect raw Kotlin source code
 fun parseRawKotlin(lines: Array<String>): String {
     var contents = ""
