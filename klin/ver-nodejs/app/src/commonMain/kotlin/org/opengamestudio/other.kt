@@ -119,6 +119,20 @@ fun parseRawKotlin(lines: Array<String>): String {
     return contents
 }
 
+// Collect raw Swift source code
+fun parseRawSwift(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_SWIFT)) {
+            val prefixLen = PREFIX_RAW_SWIFT.length
+            val code = ln.substring(prefixLen)
+            contents += code + NEWLINE
+        }
+    }
+
+    return contents
+}
+
 fun setupComponentDebugging(
     ctrl: KDController,
     prefix: String

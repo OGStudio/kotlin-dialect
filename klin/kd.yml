@@ -49,8 +49,10 @@ AppContext:
         outputPaths: [OutputPath]
         # Output of type `swift`
         outputSwift: String
-        # Kotlin source code to insert as is at the beginning of each generated file
+        # Kotlin code to insert as is at the beginning of the file
         rawKotlin: String
+        # Swift code to insert as is at the beginning of the file
+        rawSwift: String
 
 OutputPath:
     prefix-kotlin: @JsExport

@@ -127,6 +127,21 @@ fun appShouldCollectRawKotlin(c: AppContext): AppContext {
     return c
 }
 
+// Collect raw Swift source code
+//
+// Conditions:
+// 1. Input file contents are available
+fun appShouldCollectRawSwift(c: AppContext): AppContext {
+    if (c.recentField == "inputFileLines") {
+        c.rawSwift = parseRawSwift(c.inputFileLines)
+        c.recentField = "rawSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate Kotlin version of the entities
 //
 // Conditions:

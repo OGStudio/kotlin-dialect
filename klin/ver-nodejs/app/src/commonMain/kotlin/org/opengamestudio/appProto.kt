@@ -21,6 +21,7 @@ object AppProto {
             ::appShouldCollectEntityPrefixesKotlin,
             ::appShouldCollectEntityTypes,
             ::appShouldCollectRawKotlin,
+            ::appShouldCollectRawSwift,
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
             ::appShouldParseOutputPaths,

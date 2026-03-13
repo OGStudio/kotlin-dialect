@@ -42,8 +42,10 @@ data class AppContext(
     var outputPaths: Array<OutputPath> = arrayOf(),
     // Output of type `swift`
     var outputSwift: String = "",
-    // Kotlin source code to insert as is at the beginning of each generated file
+    // Kotlin code to insert as is at the beginning of the file
     var rawKotlin: String = "",
+    // Swift code to insert as is at the beginning of the file
+    var rawSwift: String = "",
     override var recentField: String = "",
 ): KDContext {
     override fun <T> field(name: String): T {
@@ -99,6 +101,8 @@ data class AppContext(
             return outputSwift as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
+        } else if (name == "rawSwift") {
+            return rawSwift as T
         }
         return "unknown-field-name" as T
     }
@@ -163,6 +167,8 @@ data class AppContext(
             outputSwift = value as String
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
+        } else if (name == "rawSwift") {
+            rawSwift = value as String
         }
     }
 }
@@ -357,5 +363,6 @@ object F {
     const val outputPaths = "outputPaths"
     const val outputSwift = "outputSwift"
     const val rawKotlin = "rawKotlin"
+    const val rawSwift = "rawSwift"
 
 }
