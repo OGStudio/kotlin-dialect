@@ -365,7 +365,7 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputSwift(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        c.outputSwift = "//TODO swift gen"
+        c.outputSwift = c.rawSwift
         c.recentField = "outputSwift"
         return c
     }
