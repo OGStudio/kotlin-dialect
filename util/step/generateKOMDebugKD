@@ -3,6 +3,4 @@
 STEP=$((STEP+1))
 echo -e "\n> > > > Step №$STEP. Generate debug KD for KOM"
 
-node $BUILD_DIR/app.js \
-    --file=$SDIR/../../kom/kd.yml \
-    --out=/tmp/kom-dbg-kd.kt
+node $BUILD_DIR/app.js --file=$SDIR/../../kom/kd.yml

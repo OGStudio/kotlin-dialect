@@ -152,3 +152,10 @@ fun registerOneliners(
         ctrl.registerFieldCallback(field, callback);
     }
 }
+
+// Special object to reference context fields with a compile time validation
+
+object F {
+    const val none = "none"
+
+}

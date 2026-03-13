@@ -3,6 +3,4 @@
 STEP=$((STEP+1))
 echo -e "\n> > > > Step №$STEP. Generate KD for tests"
 
-node $BUILD_DIR/app.js \
-    --file=$SDIR/../test/kd.yml \
-    --out=$SDIR/../test/kd.kt
+node $SDIR/../dist/app.js --file=$SDIR/../test/kd.yml

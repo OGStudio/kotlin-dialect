@@ -10,6 +10,6 @@ source $T/buildKlin
 
 # Proceed with tests
 source $T/generateTestKD
-source $T/stripTestKDJS
+#source $T/stripTestKDJS
 source $T/buildTest
 source $T/runTest
