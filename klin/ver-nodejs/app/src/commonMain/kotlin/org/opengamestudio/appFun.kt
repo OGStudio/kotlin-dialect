@@ -204,10 +204,20 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
 // Cycle through output paths to try to save them all
 //
 // Conditions:
-// 1. Output of the last currently supported type is available (swift as of 2026-03-11)
+// 1. Output of the last currently supported type has been generated
+// 2. Finished saving to an output path and there are paths left
 fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
     if (c.recentField == "outputSwift") {
         c.currentOutputPathId = 0
+        c.recentField = "currentOutputPathId"
+        return c
+    }
+
+    if (
+        c.recentField == "didWriteOutputFile" &&
+        c.currentOutputPathId + 1 < c.outputPaths.size
+    ) {
+        c.currentOutputPathId += 1
         c.recentField = "currentOutputPathId"
         return c
     }
