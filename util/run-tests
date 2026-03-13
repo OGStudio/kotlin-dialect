@@ -5,11 +5,9 @@ T=$SDIR/step
 source $SDIR/other
 
 STEP=0
-# Build Klin just in case it wasn't yet built
+# Build Klin in case it's not yet built
 source $T/buildKlin
-
 # Proceed with tests
 source $T/generateTestKD
-#source $T/stripTestKDJS
 source $T/buildTest
 source $T/runTest
