@@ -21,7 +21,10 @@ data class AppContext(
     var entityNames: Array<String> = arrayOf(),
     var entityPrefixesKotlin: Map<Int, String> = mapOf(),
     var entityTypes: Map<Int, String> = mapOf(),
-    var fobjContents: String = "",
+    // Special F object for Kotlin
+    var fobjKotlin: String = "",
+    // Special F struct for Swift
+    var fobjSwift: String = "",
     var inputFile: String = "",
     var inputFileDir: String = "",
     var inputFileLines: Array<String> = arrayOf(),
@@ -73,8 +76,10 @@ data class AppContext(
             return entityPrefixesKotlin as T
         } else if (name == "entityTypes") {
             return entityTypes as T
-        } else if (name == "fobjContents") {
-            return fobjContents as T
+        } else if (name == "fobjKotlin") {
+            return fobjKotlin as T
+        } else if (name == "fobjSwift") {
+            return fobjSwift as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileDir") {
@@ -141,8 +146,10 @@ data class AppContext(
             entityPrefixesKotlin = value as Map<Int, String>
         } else if (name == "entityTypes") {
             entityTypes = value as Map<Int, String>
-        } else if (name == "fobjContents") {
-            fobjContents = value as String
+        } else if (name == "fobjKotlin") {
+            fobjKotlin = value as String
+        } else if (name == "fobjSwift") {
+            fobjSwift = value as String
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileDir") {
@@ -353,7 +360,8 @@ object F {
     const val entityNames = "entityNames"
     const val entityPrefixesKotlin = "entityPrefixesKotlin"
     const val entityTypes = "entityTypes"
-    const val fobjContents = "fobjContents"
+    const val fobjKotlin = "fobjKotlin"
+    const val fobjSwift = "fobjSwift"
     const val inputFile = "inputFile"
     const val inputFileDir = "inputFileDir"
     const val inputFileLines = "inputFileLines"

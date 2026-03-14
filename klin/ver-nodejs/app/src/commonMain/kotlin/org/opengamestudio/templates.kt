@@ -7,14 +7,22 @@
 
 package org.opengamestudio
 
-const val TEMPLATE_FOBJ = """
+const val TEMPLATE_FOBJ_KOTLIN = """
 // Special object to reference context fields with a compile time validation
 @JsExport
 object F {
 %ITEMS%
 }
 """
-const val TEMPLATE_FOBJ_ITEM = """    const val %NAME% = "%NAME%"
+const val TEMPLATE_FOBJ_KOTLIN_ITEM = """    const val %NAME% = "%NAME%"
+"""
+const val TEMPLATE_FOBJ_SWIFT = """
+// Special object to reference context fields with a compile time validation
+struct F {
+%ITEMS%
+}
+"""
+const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
 """
 
 const val TEMPLATE_KOTLIN_CONTEXT = """

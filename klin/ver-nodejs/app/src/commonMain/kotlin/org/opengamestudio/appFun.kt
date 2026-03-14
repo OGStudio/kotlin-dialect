@@ -241,6 +241,40 @@ fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
     return c
 }
 
+// Generate a special structure to reference fields in Kotlin
+//
+// Conditions:
+// 1. Output of Kotlin entities' is available
+fun appShouldResetFObjKotlin(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjKotlin = fobjKotlin(fields)
+        c.recentField = "fobjKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate a special structure to reference fields in Swift
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetFObjSwift(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjSwift = fobjSwift(fields)
+        c.recentField = "fobjSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Extract input file directory
 //
 // Conditions:
@@ -251,23 +285,6 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
         val dirParts = parts.dropLast(1)
         c.inputFileDir = dirParts.joinToString(separator = PATH_DELIMITER)
         c.recentField = "inputFileDir"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
-// Generate a special structure to reference fields
-//
-// Conditions:
-// 1. Output of Kotlin entities' is available
-fun appShouldResetFObjContents(c: AppContext): AppContext {
-    if (c.recentField == "outputEntityContents") {
-        val ids = fobjContexts(c.entityTypes)
-        var fields = fobjFields(c.entityFields, ids)
-        c.fobjContents = fobjJVM(fields)
-        c.recentField = "fobjContents"
         return c
     }
 
@@ -313,7 +330,7 @@ fun appShouldResetOutputFileContents(c: AppContext): AppContext {
 // 1. src/*.kt contents are ready
 fun appShouldResetOutputJSExport(c: AppContext): AppContext {
     if (c.recentField == "srcKotlin") {
-        c.outputJSExport = c.outputEntityContents + c.srcKotlin + c.fobjContents
+        c.outputJSExport = c.outputEntityContents + c.srcKotlin + c.fobjKotlin
         c.recentField = "outputJSExport"
         return c
     }
@@ -345,7 +362,7 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputSwift(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        c.outputSwift = c.rawSwift + c.srcSwift
+        c.outputSwift = c.rawSwift + c.srcSwift + c.fobjSwift
         c.recentField = "outputSwift"
         return c
     }

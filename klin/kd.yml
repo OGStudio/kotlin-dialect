@@ -27,7 +27,10 @@ AppContext:
         entityNames: [String]
         entityPrefixesKotlin: [Int: String]
         entityTypes: [Int: String]
-        fobjContents: String
+        # Special F object for Kotlin
+        fobjKotlin: String
+        # Special F struct for Swift
+        fobjSwift: String
         didWriteOutputFile: Bool
         inputFile: String
         inputFileDir: String
