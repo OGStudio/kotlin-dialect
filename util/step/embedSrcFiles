@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STEP=$((STEP+1))
-echo -e "\n> > > > Step №$STEP. Embed KD files"
+echo -e "\n> > > > Step №$STEP. Embed src/* files"
 KOTLIN_TMP=/tmp/kotlin.tmp
 SWIFT_TMP=/tmp/swift.tmp
 KOTLIN_TMP64=/tmp/kotlin.tmp64

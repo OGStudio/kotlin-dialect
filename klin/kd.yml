@@ -33,8 +33,6 @@ AppContext:
         inputFileDir: String
         inputFileLines: [String]
         isDbg: Bool
-        # Source code from root src/ dir files
-        kdSrc: String
         # Output of type `c++`
         outputCPP: String
         outputEntityContents: String
@@ -53,6 +51,10 @@ AppContext:
         rawKotlin: String
         # Swift code to insert as is at the beginning of the file
         rawSwift: String
+        # Source code of src/*.kt
+        srcKotlin: String
+        # Source code of src/*.swift
+        srcSwift: String
 
 OutputPath:
     prefix-kotlin: @JsExport

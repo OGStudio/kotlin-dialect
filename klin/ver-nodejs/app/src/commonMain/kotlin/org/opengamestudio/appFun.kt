@@ -275,26 +275,6 @@ fun appShouldResetFObjContents(c: AppContext): AppContext {
     return c
 }
 
-// Generate KDController/Context/registerOneliners/etc. contents
-//
-// Conditions:
-// 1. Output of Kotlin entities' is available
-@OptIn(ExperimentalEncodingApi::class)
-fun appShouldResetKDSrc(c: AppContext): AppContext {
-    if (c.recentField == "outputEntityContents") {
-        val contents = base64ToString(embKotlin64)
-        // Remove duplicated import and package lines
-        c.kdSrc = contents
-            .replace(APP_KD_IMPORT, "")
-            .replace(APP_KD_PACKAGE, "")
-        c.recentField = "kdSrc"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
 // Select the path to write to
 //
 // Conditions:
@@ -330,10 +310,10 @@ fun appShouldResetOutputFileContents(c: AppContext): AppContext {
 // Generate output for `jsexport` type
 //
 // Conditions:
-// 1. KD src is ready
+// 1. src/*.kt contents are ready
 fun appShouldResetOutputJSExport(c: AppContext): AppContext {
-    if (c.recentField == "kdSrc") {
-        c.outputJSExport = c.outputEntityContents + c.kdSrc + c.fobjContents
+    if (c.recentField == "srcKotlin") {
+        c.outputJSExport = c.outputEntityContents + c.srcKotlin + c.fobjContents
         c.recentField = "outputJSExport"
         return c
     }
@@ -367,6 +347,26 @@ fun appShouldResetOutputSwift(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputSwift = c.rawSwift
         c.recentField = "outputSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Provide src/*.kt files' contents
+//
+// Conditions:
+// 1. Output of Kotlin entities' is available
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetSrcKotlin(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        val contents = base64ToString(embKotlin64)
+        // Remove duplicated import and package lines
+        c.srcKotlin = contents
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_PACKAGE, "")
+        c.recentField = "srcKotlin"
         return c
     }
 

@@ -6,5 +6,5 @@ source $SDIR/other
 
 STEP=0
 source $T/generateKlinKD
-source $T/embedKDFiles
+source $T/embedSrcFiles
 source $T/buildKlin

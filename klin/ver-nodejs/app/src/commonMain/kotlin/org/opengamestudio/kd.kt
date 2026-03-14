@@ -26,8 +26,6 @@ data class AppContext(
     var inputFileDir: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
-    // Source code from root src/ dir files
-    var kdSrc: String = "",
     // Output of type `c++`
     var outputCPP: String = "",
     var outputEntityContents: String = "",
@@ -46,6 +44,10 @@ data class AppContext(
     var rawKotlin: String = "",
     // Swift code to insert as is at the beginning of the file
     var rawSwift: String = "",
+    // Source code of src/*.kt
+    var srcKotlin: String = "",
+    // Source code of src/*.swift
+    var srcSwift: String = "",
     override var recentField: String = "",
 ): KDContext {
     override fun <T> field(name: String): T {
@@ -81,8 +83,6 @@ data class AppContext(
             return inputFileLines as T
         } else if (name == "isDbg") {
             return isDbg as T
-        } else if (name == "kdSrc") {
-            return kdSrc as T
         } else if (name == "outputCPP") {
             return outputCPP as T
         } else if (name == "outputEntityContents") {
@@ -103,6 +103,10 @@ data class AppContext(
             return rawKotlin as T
         } else if (name == "rawSwift") {
             return rawSwift as T
+        } else if (name == "srcKotlin") {
+            return srcKotlin as T
+        } else if (name == "srcSwift") {
+            return srcSwift as T
         }
         return "unknown-field-name" as T
     }
@@ -147,8 +151,6 @@ data class AppContext(
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
             isDbg = value as Boolean
-        } else if (name == "kdSrc") {
-            kdSrc = value as String
         } else if (name == "outputCPP") {
             outputCPP = value as String
         } else if (name == "outputEntityContents") {
@@ -169,6 +171,10 @@ data class AppContext(
             rawKotlin = value as String
         } else if (name == "rawSwift") {
             rawSwift = value as String
+        } else if (name == "srcKotlin") {
+            srcKotlin = value as String
+        } else if (name == "srcSwift") {
+            srcSwift = value as String
         }
     }
 }
@@ -352,7 +358,6 @@ object F {
     const val inputFileDir = "inputFileDir"
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
-    const val kdSrc = "kdSrc"
     const val none = "none"
     const val outputCPP = "outputCPP"
     const val outputEntityContents = "outputEntityContents"
@@ -364,5 +369,7 @@ object F {
     const val outputSwift = "outputSwift"
     const val rawKotlin = "rawKotlin"
     const val rawSwift = "rawSwift"
+    const val srcKotlin = "srcKotlin"
+    const val srcSwift = "srcSwift"
 
 }
