@@ -345,7 +345,7 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputSwift(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        c.outputSwift = c.rawSwift
+        c.outputSwift = c.rawSwift + c.srcSwift
         c.recentField = "outputSwift"
         return c
     }
@@ -367,6 +367,22 @@ fun appShouldResetSrcKotlin(c: AppContext): AppContext {
             .replace(APP_KD_IMPORT, "")
             .replace(APP_KD_PACKAGE, "")
         c.recentField = "srcKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Provide src/*.kt files' contents
+//
+// Conditions:
+// 1. src/*.kt contents are ready
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetSrcSwift(c: AppContext): AppContext {
+    if (c.recentField == "srcKotlin") {
+        c.srcSwift = base64ToString(embSwift64)
+        c.recentField = "srcSwift"
         return c
     }
 

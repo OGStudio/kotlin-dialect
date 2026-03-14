@@ -35,6 +35,7 @@ object AppProto {
             ::appShouldResetOutputKotlin,
             ::appShouldResetOutputSwift,
             ::appShouldResetSrcKotlin,
+            ::appShouldResetSrcSwift,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as AppContext) }
         }
