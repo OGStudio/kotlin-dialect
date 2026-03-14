@@ -1,0 +1,6 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Generate debug KD for Klin"
+
+node $BUILD_DIR/app.js --file=$SDIR/../klin/kd.yml

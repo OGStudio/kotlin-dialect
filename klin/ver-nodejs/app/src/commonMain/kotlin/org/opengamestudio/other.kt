@@ -43,13 +43,18 @@ fun cliHasArgument(
     return false
 }
 
+// Shortened debug string
+fun debugShortString(v: Any): String {
+    val str = debugString(v)
+    // Only return limited number of symbols
+    return str.take(DBG_LEN)
+}
+
 // Debug representation of a value
 fun debugString(v: Any): String {
     // Prepend a string with its length
-    // Only return 50 symbols
     if (v is String) {
-        val limv = v.take(50)
-        return "S(${v.length})$limv"
+        return "S(${v.length})$v"
     }
 
     // Prepend an array with its size
@@ -80,6 +85,26 @@ fun debugString(v: Any): String {
     return "$v"
 }
 
+// Provide output to save based on its type
+fun outputFileContents(
+    outputJSExport: String,
+    outputKotlin: String,
+    outputSwift: String,
+    type: String
+): String {
+    if (type == OUTPUT_TYPE_JSEXPORT) {
+        return outputJSExport
+    }
+    else if (type == OUTPUT_TYPE_KOTLIN) {
+        return outputKotlin
+    }
+    else if (type == OUTPUT_TYPE_SWIFT) {
+        return outputSwift
+    }
+
+    return "outputFC-N/A"
+}
+
 // Collect raw Kotlin source code
 fun parseRawKotlin(lines: Array<String>): String {
     var contents = ""
@@ -94,12 +119,26 @@ fun parseRawKotlin(lines: Array<String>): String {
     return contents
 }
 
+// Collect raw Swift source code
+fun parseRawSwift(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_SWIFT)) {
+            val prefixLen = PREFIX_RAW_SWIFT.length
+            val code = ln.substring(prefixLen)
+            contents += code + NEWLINE
+        }
+    }
+
+    return contents
+}
+
 fun setupComponentDebugging(
     ctrl: KDController,
     prefix: String
 ) {
     ctrl.registerCallback { c ->
-        val value = debugString(c.fieldAny(c.recentField))
+        val value = debugShortString(c.fieldAny(c.recentField))
         if (c.field("isDbg")) {
             println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
         }

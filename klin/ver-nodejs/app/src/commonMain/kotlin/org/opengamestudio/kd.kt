@@ -7,6 +7,8 @@ data class AppContext(
     // Command line arguments
     var arguments: Array<String> = arrayOf(),
     var consoleOutput: String = "",
+    // Output path that is being saved at the moment
+    var currentOutputPathId: Int = 0,
     var didLaunch: Boolean = false,
     var didWriteOutputFile: Boolean = false,
     // Entity comments with entities referenced by index
@@ -21,16 +23,29 @@ data class AppContext(
     var entityTypes: Map<Int, String> = mapOf(),
     var fobjContents: String = "",
     var inputFile: String = "",
+    var inputFileDir: String = "",
     var inputFileLines: Array<String> = arrayOf(),
     var isDbg: Boolean = false,
+    // Source code from root src/ dir files
+    var kdSrc: String = "",
+    // Output of type `c++`
+    var outputCPP: String = "",
     var outputEntityContents: String = "",
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
-    var outputKDContents: String = "",
-    var outputPaths: Map<String, String> = mapOf(),
-    // Kotlin source code to insert as is at the beginning of each generated file
+    // Output of type `jsexport`
+    var outputJSExport: String = "",
+    // Output of type `kotlin`
+    var outputKotlin: String = "",
+    // Paths to save generated contents to
+    var outputPaths: Array<OutputPath> = arrayOf(),
+    // Output of type `swift`
+    var outputSwift: String = "",
+    // Kotlin code to insert as is at the beginning of the file
     var rawKotlin: String = "",
+    // Swift code to insert as is at the beginning of the file
+    var rawSwift: String = "",
     override var recentField: String = "",
 ): KDContext {
     override fun <T> field(name: String): T {
@@ -38,6 +53,8 @@ data class AppContext(
             return arguments as T
         } else if (name == "consoleOutput") {
             return consoleOutput as T
+        } else if (name == "currentOutputPathId") {
+            return currentOutputPathId as T
         } else if (name == "didLaunch") {
             return didLaunch as T
         } else if (name == "didWriteOutputFile") {
@@ -58,22 +75,34 @@ data class AppContext(
             return fobjContents as T
         } else if (name == "inputFile") {
             return inputFile as T
+        } else if (name == "inputFileDir") {
+            return inputFileDir as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
         } else if (name == "isDbg") {
             return isDbg as T
+        } else if (name == "kdSrc") {
+            return kdSrc as T
+        } else if (name == "outputCPP") {
+            return outputCPP as T
         } else if (name == "outputEntityContents") {
             return outputEntityContents as T
         } else if (name == "outputFile") {
             return outputFile as T
         } else if (name == "outputFileContents") {
             return outputFileContents as T
-        } else if (name == "outputKDContents") {
-            return outputKDContents as T
+        } else if (name == "outputJSExport") {
+            return outputJSExport as T
+        } else if (name == "outputKotlin") {
+            return outputKotlin as T
         } else if (name == "outputPaths") {
             return outputPaths as T
+        } else if (name == "outputSwift") {
+            return outputSwift as T
         } else if (name == "rawKotlin") {
             return rawKotlin as T
+        } else if (name == "rawSwift") {
+            return rawSwift as T
         }
         return "unknown-field-name" as T
     }
@@ -90,6 +119,8 @@ data class AppContext(
             arguments = value as Array<String>
         } else if (name == "consoleOutput") {
             consoleOutput = value as String
+        } else if (name == "currentOutputPathId") {
+            currentOutputPathId = value as Int
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
         } else if (name == "didWriteOutputFile") {
@@ -110,25 +141,44 @@ data class AppContext(
             fobjContents = value as String
         } else if (name == "inputFile") {
             inputFile = value as String
+        } else if (name == "inputFileDir") {
+            inputFileDir = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
         } else if (name == "isDbg") {
             isDbg = value as Boolean
+        } else if (name == "kdSrc") {
+            kdSrc = value as String
+        } else if (name == "outputCPP") {
+            outputCPP = value as String
         } else if (name == "outputEntityContents") {
             outputEntityContents = value as String
         } else if (name == "outputFile") {
             outputFile = value as String
         } else if (name == "outputFileContents") {
             outputFileContents = value as String
-        } else if (name == "outputKDContents") {
-            outputKDContents = value as String
+        } else if (name == "outputJSExport") {
+            outputJSExport = value as String
+        } else if (name == "outputKotlin") {
+            outputKotlin = value as String
         } else if (name == "outputPaths") {
-            outputPaths = value as Map<String, String>
+            outputPaths = value as Array<OutputPath>
+        } else if (name == "outputSwift") {
+            outputSwift = value as String
         } else if (name == "rawKotlin") {
             rawKotlin = value as String
+        } else if (name == "rawSwift") {
+            rawSwift = value as String
         }
     }
 }
+
+
+@JsExport
+data class OutputPath(
+    var path: String = "",
+    var type: String = "",
+) {}
 /**
  * This file is a part of Kotlin dialect:
  *     https://github.com/OGStudio/kotlin-dialect
@@ -283,9 +333,12 @@ fun registerOneliners(
     }
 }
 
+// Special object to reference context fields with a compile time validation
+@JsExport
 object F {
     const val arguments = "arguments"
     const val consoleOutput = "consoleOutput"
+    const val currentOutputPathId = "currentOutputPathId"
     const val didLaunch = "didLaunch"
     const val didWriteOutputFile = "didWriteOutputFile"
     const val entityComments = "entityComments"
@@ -296,14 +349,20 @@ object F {
     const val entityTypes = "entityTypes"
     const val fobjContents = "fobjContents"
     const val inputFile = "inputFile"
+    const val inputFileDir = "inputFileDir"
     const val inputFileLines = "inputFileLines"
     const val isDbg = "isDbg"
+    const val kdSrc = "kdSrc"
     const val none = "none"
+    const val outputCPP = "outputCPP"
     const val outputEntityContents = "outputEntityContents"
     const val outputFile = "outputFile"
     const val outputFileContents = "outputFileContents"
-    const val outputKDContents = "outputKDContents"
+    const val outputJSExport = "outputJSExport"
+    const val outputKotlin = "outputKotlin"
     const val outputPaths = "outputPaths"
+    const val outputSwift = "outputSwift"
     const val rawKotlin = "rawKotlin"
+    const val rawSwift = "rawSwift"
 
 }
