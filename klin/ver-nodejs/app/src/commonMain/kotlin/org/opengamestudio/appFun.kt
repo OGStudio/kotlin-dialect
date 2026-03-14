@@ -282,7 +282,7 @@ fun appShouldResetFObjContents(c: AppContext): AppContext {
 @OptIn(ExperimentalEncodingApi::class)
 fun appShouldResetKDSrc(c: AppContext): AppContext {
     if (c.recentField == "outputEntityContents") {
-        val contents = base64ToString(emb64)
+        val contents = base64ToString(embKotlin64)
         // Remove duplicated import and package lines
         c.kdSrc = contents
             .replace(APP_KD_IMPORT, "")
