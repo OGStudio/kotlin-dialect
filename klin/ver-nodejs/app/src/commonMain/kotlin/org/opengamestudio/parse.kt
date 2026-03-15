@@ -190,31 +190,45 @@ fun parseEntityTypes(lines: Array<String>): Map<Int, String> {
     return d
 }
 
-// Collect output paths
-fun parseOutputPaths(lines: Array<String>): Map<String, String> {
-    var d = mutableMapOf<String, String>()
+// Collect output paths into the map of Path -> Type
+fun parseOutputPaths(lines: Array<String>): Array<OutputPath> {
+    var items = arrayOf<OutputPath>()
+    var isCollectingPaths = false
+    var lastPath = ""
     for (ln in lines) {
-        if (ln.startsWith(PREFIX_OUTPUT_JS)) {
-            val prefixLen = PREFIX_OUTPUT_JS.length
-            val path = ln.substring(prefixLen)
-            d[OUTPUT_JS] = path
+        // Start parsing
+        if (ln.startsWith(OUTPUT)) {
+            isCollectingPaths = true
         }
-        else if (ln.startsWith(PREFIX_OUTPUT_JVM)) {
-            val prefixLen = PREFIX_OUTPUT_JVM.length
-            val path = ln.substring(prefixLen)
-            d[OUTPUT_JVM] = path
+        // Stop parsing
+        else if (!ln.startsWith(PREFIX_OUTPUT_PATH)) {
+            isCollectingPaths = false
         }
-        else if (ln.startsWith(PREFIX_OUTPUT_IOS)) {
-            val prefixLen = PREFIX_OUTPUT_IOS.length
-            val path = ln.substring(prefixLen)
-            d[OUTPUT_IOS] = path
+        // Path type
+        else if (
+            isCollectingPaths &&
+            ln.startsWith(PREFIX_OUTPUT_TYPE)
+        ) {
+            val prefixLen = PREFIX_OUTPUT_TYPE.length
+            val type = ln.substring(prefixLen)
+
+            // Add an item
+            var item = OutputPath()
+            item.path = lastPath
+            item.type = type
+            items += item
         }
-        else if (ln.startsWith(PREFIX_OUTPUT_IOS_SDK)) {
-            val prefixLen = PREFIX_OUTPUT_IOS_SDK.length
-            val path = ln.substring(prefixLen)
-            d[OUTPUT_IOS_SDK] = path
+        // Path
+        else if (
+            isCollectingPaths &&
+            ln.startsWith(PREFIX_OUTPUT_PATH)
+        ) {
+            val prefixLen = PREFIX_OUTPUT_PATH.length
+            val totalLen = ln.length - 1 /* Exclude `:` at the end */
+            val path = ln.substring(prefixLen, totalLen)
+            lastPath = path
         }
     }
 
-    return d
+    return items
 }

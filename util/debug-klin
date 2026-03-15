@@ -5,6 +5,5 @@ T=$SDIR/step
 source $SDIR/other
 
 STEP=0
-source $T/generateKlinKD
-source $T/embedSrcFiles
-source $T/buildKlin
+source $T/generateKlinDebugKD
+source $T/generateKOMDebugKD

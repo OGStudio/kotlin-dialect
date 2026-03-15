@@ -13,6 +13,7 @@ import kotlin.js.JsExport
 //<!-- Constants -->
 
 val APP_KD_IMPORT = "import kotlin.js.JsExport"
+val APP_KD_JSEXPORT= "@JsExport"
 val APP_KD_PACKAGE = "package org.opengamestudio"
 
 //<!-- Shoulds -->
@@ -111,20 +112,6 @@ fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     return c
 }
 
-// Collect output paths
-//
-// 1. Input file contents are available
-fun appShouldCollectOutputPaths(c: AppContext): AppContext {
-    if (c.recentField == F.inputFileLines) {
-        c.outputPaths = parseOutputPaths(c.inputFileLines)
-        c.recentField = F.outputPaths
-        return c
-    }
-
-    c.recentField = F.none
-    return c
-}
-
 // Collect raw Kotlin source code
 //
 // Conditions:
@@ -133,6 +120,21 @@ fun appShouldCollectRawKotlin(c: AppContext): AppContext {
     if (c.recentField == "inputFileLines") {
         c.rawKotlin = parseRawKotlin(c.inputFileLines)
         c.recentField = "rawKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect raw Swift source code
+//
+// Conditions:
+// 1. Input file contents are available
+fun appShouldCollectRawSwift(c: AppContext): AppContext {
+    if (c.recentField == "inputFileLines") {
+        c.rawSwift = parseRawSwift(c.inputFileLines)
+        c.recentField = "rawSwift"
         return c
     }
 
@@ -181,17 +183,13 @@ fun appShouldParseInputFilePath(c: AppContext): AppContext {
     return c
 }
 
-// Parse output file path
+// Parse output paths
 //
-// Conditions:
-// 1. At app launch output file was specified with command line argument
-fun appShouldParseOutputFilePath(c: AppContext): AppContext {
-    if (
-        c.recentField == "didLaunch" &&
-        cliArgumentValue(c.arguments, ARGUMENT_OUT).length > 0
-    ) {
-        c.outputFile = cliArgumentValue(c.arguments, ARGUMENT_OUT)
-        c.recentField = "outputFile"
+// 1. Input file contents are available
+fun appShouldParseOutputPaths(c: AppContext): AppContext {
+    if (c.recentField == "inputFileLines") {
+        c.outputPaths = parseOutputPaths(c.inputFileLines)
+        c.recentField = "outputPaths"
         return c
     }
 
@@ -209,7 +207,7 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
     ) {
-        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
+        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml"
         c.recentField = "consoleOutput"
         return c
     }
@@ -218,16 +216,24 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
-// Generate a special structure to reference fields
+// Cycle through output paths to try to save them all
 //
 // Conditions:
-// 1. Embeddable KD files' content is ready
-fun appShouldResetFObjContents(c: AppContext): AppContext {
-    if (c.recentField == "outputKDContents") {
-        val ids = fobjContexts(c.entityTypes)
-        var fields = fobjFields(c.entityFields, ids)
-        c.fobjContents = fobjJVM(fields)
-        c.recentField = "fobjContents"
+// 1. Output of the last currently supported type has been generated
+// 2. Finished saving to an output path and there are paths left
+fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
+    if (c.recentField == "outputSwift") {
+        c.currentOutputPathId = 0
+        c.recentField = "currentOutputPathId"
+        return c
+    }
+
+    if (
+        c.recentField == "didWriteOutputFile" &&
+        c.currentOutputPathId + 1 < c.outputPaths.size
+    ) {
+        c.currentOutputPathId += 1
+        c.recentField = "currentOutputPathId"
         return c
     }
 
@@ -235,13 +241,81 @@ fun appShouldResetFObjContents(c: AppContext): AppContext {
     return c
 }
 
-// Generate a final text
+// Generate a special structure to reference fields in Kotlin
 //
 // Conditions:
-// 1. F object is ready
+// 1. Output of Kotlin entities' is available
+fun appShouldResetFObjKotlin(c: AppContext): AppContext {
+    if (c.recentField == "outputEntityContents") {
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjKotlin = fobjKotlin(fields)
+        c.recentField = "fobjKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate a special structure to reference fields in Swift
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetFObjSwift(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = fobjContexts(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjSwift = fobjSwift(fields)
+        c.recentField = "fobjSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Extract input file directory
+//
+// Conditions:
+// 1. Input file is ready
+fun appShouldResetInputFileDir(c: AppContext): AppContext {
+    if (c.recentField == "inputFile") {
+        val parts = c.inputFile.split(PATH_DELIMITER)
+        val dirParts = parts.dropLast(1)
+        c.inputFileDir = dirParts.joinToString(separator = PATH_DELIMITER)
+        c.recentField = "inputFileDir"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Select the path to write to
+//
+// Conditions:
+// 1. Current output path id was changed
+fun appShouldResetOutputFile(c: AppContext): AppContext {
+    if (c.recentField == "currentOutputPathId") {
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.outputFile = c.inputFileDir + PATH_DELIMITER + item.path
+        c.recentField = "outputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Select the text to save
+//
+// Conditions:
+// 1. Output file was selected
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
-    if (c.recentField == "fobjContents") {
-        c.outputFileContents = c.outputEntityContents + c.outputKDContents + c.fobjContents
+    if (c.recentField == "outputFile") {
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.outputFileContents = outputFileContents(c.outputJSExport, c.outputKotlin, c.outputSwift, item.type)
         c.recentField = "outputFileContents"
         return c
     }
@@ -250,18 +324,82 @@ fun appShouldResetOutputFileContents(c: AppContext): AppContext {
     return c
 }
 
-// Generate KDController/Context/registerOneliners/etc. contents
+// Generate output for `jsexport` type
+//
+// Conditions:
+// 1. src/*.kt contents are ready
+fun appShouldResetOutputJSExport(c: AppContext): AppContext {
+    if (c.recentField == "srcKotlin") {
+        c.outputJSExport = c.outputEntityContents + c.srcKotlin + c.fobjKotlin
+        c.recentField = "outputJSExport"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate output for `kotlin` type
+//
+// Conditions:
+// 1. Output for `jsexport` is ready
+fun appShouldResetOutputKotlin(c: AppContext): AppContext {
+    if (c.recentField == "outputJSExport") {
+        c.outputKotlin = c.outputJSExport
+            .replace(APP_KD_IMPORT, "")
+            .replace(APP_KD_JSEXPORT, "")
+        c.recentField = "outputKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate output for `swift` type
+//
+// Conditions:
+// 1. Output for `kotlin` is ready
+fun appShouldResetOutputSwift(c: AppContext): AppContext {
+    if (c.recentField == "outputKotlin") {
+        c.outputSwift = c.rawSwift + c.srcSwift + c.fobjSwift
+        c.recentField = "outputSwift"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Provide src/*.kt files' contents
 //
 // Conditions:
 // 1. Output of Kotlin entities' is available
 @OptIn(ExperimentalEncodingApi::class)
-fun appShouldResetOutputKDContents(c: AppContext): AppContext {
+fun appShouldResetSrcKotlin(c: AppContext): AppContext {
     if (c.recentField == "outputEntityContents") {
-        val contents = base64ToString(emb64)
-        c.outputKDContents = contents
+        val contents = base64ToString(embKotlin64)
+        // Remove duplicated import and package lines
+        c.srcKotlin = contents
             .replace(APP_KD_IMPORT, "")
             .replace(APP_KD_PACKAGE, "")
-        c.recentField = "outputKDContents"
+        c.recentField = "srcKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Provide src/*.kt files' contents
+//
+// Conditions:
+// 1. src/*.kt contents are ready
+@OptIn(ExperimentalEncodingApi::class)
+fun appShouldResetSrcSwift(c: AppContext): AppContext {
+    if (c.recentField == "srcKotlin") {
+        c.srcSwift = base64ToString(embSwift64)
+        c.recentField = "srcSwift"
         return c
     }
 

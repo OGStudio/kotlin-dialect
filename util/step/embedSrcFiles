@@ -1,0 +1,33 @@
+#!/bin/bash
+
+STEP=$((STEP+1))
+echo -e "\n> > > > Step №$STEP. Embed src/* files"
+KOTLIN_TMP=/tmp/kotlin.tmp
+SWIFT_TMP=/tmp/swift.tmp
+KOTLIN_TMP64=/tmp/kotlin.tmp64
+SWIFT_TMP64=/tmp/swift.tmp64
+EMB64=$KLIN_SRC_DIR/emb64.kt
+
+# Combine Kotlin files
+cat $SRC_DIR/KDContext.kt > $KOTLIN_TMP
+cat $SRC_DIR/KDController.kt >> $KOTLIN_TMP
+cat $SRC_DIR/registerOneliners.kt >> $KOTLIN_TMP
+
+# Combine Swift files
+cat $SRC_DIR/KDControllerExtensions.swift > $SWIFT_TMP
+cat $SRC_DIR/registerOneliners.swift >> $SWIFT_TMP
+
+# Convert files to Base64
+base64 -i $KOTLIN_TMP -o $KOTLIN_TMP64
+base64 -i $SWIFT_TMP -o $SWIFT_TMP64
+
+# Generate source code file
+echo "package org.opengamestudio" > $EMB64
+
+echo -n "val embKotlin64=\"" >> $EMB64
+cat $KOTLIN_TMP64 | tr -d '\n' >> $EMB64
+echo "\"" >> $EMB64
+
+echo -n "val embSwift64=\"" >> $EMB64
+cat $SWIFT_TMP64 | tr -d '\n' >> $EMB64
+echo "\"" >> $EMB64

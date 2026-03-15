@@ -40,16 +40,28 @@ fun fobjFields(
     return d.keys.sorted().toTypedArray()
 }
 
-// Generate F(ields) object for JVM (plain Kotlin) target
-fun fobjJVM(fieldNames: Array<String>): String {
+// Generate F(ields) object for Kotlin type of output path
+fun fobjKotlin(fieldNames: Array<String>): String {
     // Collect items
     var itemContents = ""
     for (name in fieldNames) {
-        itemContents += TEMPLATE_FOBJ_ITEM
+        itemContents += TEMPLATE_FOBJ_KOTLIN_ITEM
             .replace("%NAME%", name)
     }
     // Combine
-    return TEMPLATE_FOBJ
+    return TEMPLATE_FOBJ_KOTLIN
         .replace("%ITEMS%", itemContents)
 }
 
+// Generate F(ields) struct for Swift type of output path
+fun fobjSwift(fieldNames: Array<String>): String {
+    // Collect items
+    var itemContents = ""
+    for (name in fieldNames) {
+        itemContents += TEMPLATE_FOBJ_SWIFT_ITEM
+            .replace("%NAME%", name)
+    }
+    // Combine
+    return TEMPLATE_FOBJ_SWIFT
+        .replace("%ITEMS%", itemContents)
+}

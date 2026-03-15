@@ -1,4 +1,8 @@
-version: 1
+version: 3
+
+output:
+    ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio/kd.kt:
+        type: jsexport
 
 kotlin: package org.opengamestudio
 kotlin: import kotlin.js.JsExport
@@ -10,6 +14,8 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Output path that is being saved at the moment
+        currentOutputPathId: Int
         didLaunch: Bool
         # Entity comments with entities referenced by index
         entityComments: [Int: String]
@@ -21,16 +27,41 @@ AppContext:
         entityNames: [String]
         entityPrefixesKotlin: [Int: String]
         entityTypes: [Int: String]
-        fobjContents: String
+        # Special F object for Kotlin
+        fobjKotlin: String
+        # Special F struct for Swift
+        fobjSwift: String
         didWriteOutputFile: Bool
         inputFile: String
+        inputFileDir: String
         inputFileLines: [String]
         isDbg: Bool
+        # Output of type `c++`
+        outputCPP: String
         outputEntityContents: String
         outputFile: String
         # Contents to write to output file
         outputFileContents: String
-        outputKDContents: String
-        outputPaths: [String: String]
-        # Kotlin source code to insert as is at the beginning of each generated file
+        # Output of type `jsexport`
+        outputJSExport: String
+        # Output of type `kotlin`
+        outputKotlin: String
+        # Paths to save generated contents to
+        outputPaths: [OutputPath]
+        # Output of type `swift`
+        outputSwift: String
+        # Kotlin code to insert as is at the beginning of the file
         rawKotlin: String
+        # Swift code to insert as is at the beginning of the file
+        rawSwift: String
+        # Source code of src/*.kt
+        srcKotlin: String
+        # Source code of src/*.swift
+        srcSwift: String
+
+OutputPath:
+    prefix-kotlin: @JsExport
+    type: struct
+    fields:
+        path: String
+        type: String

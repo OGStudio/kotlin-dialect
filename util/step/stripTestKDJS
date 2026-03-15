@@ -1,5 +1,0 @@
-#!/bin/bash
-
-STEP=$((STEP+1))
-echo -e "\n> > > > Step №$STEP. Strip JsExport from KD for tests"
-replace $SDIR/../test/kd.kt "@JsExport" ""
