@@ -2,7 +2,7 @@
 
 2026-03-15
 
-1. Introduce output paths inside YML file (no need to specify `--out` anymore)
+1. Introduce output paths inside YML file (command line argument `--out` has been removed)
 1. Generate kd.swift file for `swift` output path with KD files
 1. Generate F struct for Swift to use exactly the same code for Context keys as is used in Kotlin
 
