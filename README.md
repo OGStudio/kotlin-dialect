@@ -14,6 +14,14 @@ Key concepts:
 
 ## Build
 
+First, install prerequisites:
+
+| Linux | macOS | Windows |
+| --- | --- | --- |
+| ?? | `brew install gradle` | ?? |
+
+Second, build the application:
+
 $ `./util/build-klin`
 
 ## Distribute
