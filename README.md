@@ -10,7 +10,7 @@ across platforms in **native** apps.
 Key concepts:
 
 * Redux-like architecture
-* Klin, a translator to convert YML to Kotlin
+* Klin, a translator to convert YML to C++, Kotlin, Swift
 
 ## Build
 
@@ -22,7 +22,7 @@ $ `./util/dist-klin`
 
 ## Run
 
-$ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
+$ `node dist/app.js --file=/path/to/kd.yml`
 
 ## Generation of entity fields
 
