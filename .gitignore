@@ -2,8 +2,10 @@ build
 .build
 do-test*
 .DS_Store
+emb64.kt
 .gradle
 .idea
+kd.kt
 .kotlin
 kotlin-js-store
 local.properties
