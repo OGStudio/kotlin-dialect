@@ -1,6 +1,10 @@
+build
+.build
+do-test*
 .DS_Store
 .gradle
-build
-do-test*
+.idea
+.kotlin
 kotlin-js-store
 local.properties
+.swiftpm
