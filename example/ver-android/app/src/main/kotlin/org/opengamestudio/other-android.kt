@@ -7,6 +7,7 @@ import kotlinx.coroutines.*
 
 // Load data over HTTP(s)
 // https://johncodeos.com/post-get-put-delete-requests-with-httpurlconnection/
+/*
 fun loadURL(
     p: NetRequest,
     onload: (NetResponse) -> Unit,
@@ -60,3 +61,4 @@ fun loadURL(
         }
     }
 }
+*/
