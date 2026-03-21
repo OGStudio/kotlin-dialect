@@ -14,7 +14,7 @@ class MainActivity: ComponentActivity() {
         val vm = VM
         vm.androidContext = this
         // Запускаем компоненты после задания androidContext
-        mainSet(F.didLaunch, true)
+        MainComponent.setup()
 
         setContent {
             MyApplicationTheme {

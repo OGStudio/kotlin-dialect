@@ -41,3 +41,4 @@ fun mainCtrl(): KDController {
 fun mainSet(k: String, v: Any) {
     MainProto.ctrl.set(k, v)
 }
+

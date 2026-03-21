@@ -1,3 +1,4 @@
+package org.opengamestudio
 
 //<!-- Component -->
 
@@ -7,9 +8,13 @@ object MainComponent {
     init {
         val vm = VM
         val oneliners = arrayOf(
-            F.isVisible, { c: MC -> vm.isVisible = c.isVisible },
-            F.greetingText, { c: MC -> vm.greetingText = c.greetingText },
+            F.isVisible, { c: MC -> vm.mainIsVisible.value = c.isVisible },
+            F.greetingText, { c: MC -> vm.mainGreetingText.value = c.greetingText },
         )
         registerOneliners(mainCtrl(), oneliners)
+    }
+
+    fun setup() {
+        mainSet(F.didLaunch, true)
     }
 }

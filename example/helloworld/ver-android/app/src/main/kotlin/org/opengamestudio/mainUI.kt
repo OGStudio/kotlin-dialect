@@ -19,13 +19,13 @@ fun MainView(
         enter = fadeIn(),
         exit = fadeOut(),
         modifier = modifier,
-        visible = vm.mainViewIsVisible.value,
+        visible = vm.mainIsVisible.value,
     ) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Text(vm.greetingText.value)
+            Text(vm.mainGreetingText.value)
         }
     }
 }

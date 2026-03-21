@@ -9,5 +9,6 @@ kotlin: package org.opengamestudio
 MainContext:
     type: context
     fields:
+        didLaunch: Bool
         greetingText: String
         isVisible: Bool

@@ -4,10 +4,10 @@ object MainProto {
     val ctrl: KDController
 
     init {
-        ctrl = KDController(AppContext())
+        ctrl = KDController(MainContext())
         setupComponentDebugging(ctrl, "Main")
         arrayOf(
-            ::mainShouldResetText,
+            ::mainShouldResetGreetingText,
             ::mainShouldResetVisibility,
         ).forEach { f ->
             ctrl.registerFunction { c -> f(c as MainContext) }
