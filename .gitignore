@@ -5,6 +5,7 @@ do-test*
 emb64.kt
 .gradle
 .idea
+ignore.*
 kd.kt
 .kotlin
 kotlin-js-store
