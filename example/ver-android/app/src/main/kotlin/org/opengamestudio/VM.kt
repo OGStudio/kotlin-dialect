@@ -6,5 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 object VM {
     var androidContext: Context? = null
 
-    val mainViewIsVisible = mutableStateOf(true)
+    val mainViewIsVisible = mutableStateOf(false)
+    val title = mutableStateOf("TODO-Title")
 }
