@@ -7,5 +7,5 @@ object VM {
     var androidContext: Context? = null
 
     val mainViewIsVisible = mutableStateOf(false)
-    val title = mutableStateOf("TODO-Title")
+    val greetingText = mutableStateOf("TODO-Text")
 }

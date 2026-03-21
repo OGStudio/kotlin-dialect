@@ -25,7 +25,7 @@ fun MainView(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Text(vm.title.value)
+            Text(vm.greetingText.value)
         }
     }
 }
