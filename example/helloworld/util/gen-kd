@@ -1,4 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash
 SDIR=$(cd "$(dirname "$0")" ; pwd -P)
+T=$SDIR/step
+source $SDIR/other
 
-node $SDIR/../../../dist/app.js --file=$SDIR/../kd.yml
+STEP=0
+source $T/cloneKD
+source $T/genKD

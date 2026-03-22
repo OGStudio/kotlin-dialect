@@ -12,25 +12,35 @@ Key concepts:
 * Redux-like architecture
 * Klin, a translator to convert YML to C++, Kotlin, Swift
 
-## Build
+## Usage
 
-First, install prerequisites:
+`dist/` directory contains the latest Klin version
 
-| Linux | macOS | Windows |
-| --- | --- | --- |
-| ?? | `brew install gradle` | ?? |
+First, install prerequisites to run Klin:
+
+| № | Prerequisite | Linux | macOS | Windows (MSYS2) |
+| --- | --- | --- | --- | --- |
+| 1 | Node.js | ? | `brew install gradle` | `pacman -S node` |
+
+Second, run Klin to generate source code out of YML:
+
+$ `node dist/app.js --file=/path/to/kd.yml`
+
+## Building
+
+First, install prerequisites to build Klin from source:
+
+| № | Prerequisite | Linux | macOS | Windows (MSYS2) |
+| --- | --- | --- | --- | --- |
+| 1 | Gradle | ?? | `brew install gradle` | ?? |
 
 Second, build the application:
 
 $ `./util/build-klin`
 
-## Distribute
+Third, distribute the application into `dist/` directory:
 
 $ `./util/dist-klin`
-
-## Run
-
-$ `node dist/app.js --file=/path/to/kd.yml`
 
 ## Generation of entity fields
 
