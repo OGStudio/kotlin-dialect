@@ -2,27 +2,45 @@ Kotlin dialect (**KD**) is a set of tools and rules to write
 logic in Kotlin for several platforms.
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
-If you tried Kotlin Multiplatform you surely know how hard it is to set up
-correctly for multiple platforms. This project dictates one particular way
-to have your code organized to be able to easily have logic in Kotlin
-across platforms in **native** apps.
+However, if you **tried** Kotlin Multiplatform you surely know how hard it
+is to set up correctly for multiple platforms. This project dictates one
+particular way to have your code organized to be able to have single logic
+in Kotlin across platforms in **native** apps.
 
 Key concepts:
 
 * Redux-like architecture
-* Klin, a translator to convert YML to Kotlin
+* Klin, a translator to convert YML to target languages: Kotlin, Swift
 
-## Build
+## Usage
+
+`dist/` directory contains the latest Klin version
+
+First, install prerequisites to run Klin:
+
+| № | Prerequisite | Linux | macOS | Windows (MSYS2) |
+| --- | --- | --- | --- | --- |
+| 1 | Node.js | ? | `brew install node` | `pacman -S mingw-w64-x86_64-nodejs` |
+
+Second, run Klin to generate source code out of YML:
+
+$ `node dist/app.js --file=/path/to/kd.yml`
+
+## Building
+
+First, install prerequisites to build Klin from source:
+
+| № | Prerequisite | Linux | macOS | Windows (MSYS2) |
+| --- | --- | --- | --- | --- |
+| 1 | Gradle | ?? | `brew install gradle` | ?? |
+
+Second, build the application:
 
 $ `./util/build-klin`
 
-## Distribute
+Third, distribute the application into `dist/` directory:
 
 $ `./util/dist-klin`
-
-## Run
-
-$ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
 
 ## Generation of entity fields
 
@@ -36,3 +54,14 @@ $ `node dist/app.js --file=/path/to/kd.yml --out=/path/to/kd.kt`
 | 6 | `Type` | `Type`    | `Type()`          | `request: NetRequest`  | `var request: NetRequest = NetRequest()` |
 | 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+
+## Example
+
+You can find a small "Hello World" application in `example/helloworld`
+
+First, generate KD:
+
+* $ `cd example/helloworld`
+* $ `./util/gen-kd`
+
+Second, open and run `example/helloworld/ver-android` with Android Studio
