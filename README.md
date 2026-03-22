@@ -4,13 +4,13 @@ logic in Kotlin for several platforms.
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
 However, if you **tried** Kotlin Multiplatform you surely know how hard it
 is to set up correctly for multiple platforms. This project dictates one
-particular way to have your code organized to be able to easily have logic
+particular way to have your code organized to be able to have single logic
 in Kotlin across platforms in **native** apps.
 
 Key concepts:
 
 * Redux-like architecture
-* Klin, a translator to convert YML to C++, Kotlin, Swift
+* Klin, a translator to convert YML to target languages: Kotlin, Swift
 
 ## Usage
 
