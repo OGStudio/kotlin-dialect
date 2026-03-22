@@ -20,7 +20,7 @@ First, install prerequisites to run Klin:
 
 | № | Prerequisite | Linux | macOS | Windows (MSYS2) |
 | --- | --- | --- | --- | --- |
-| 1 | Node.js | ? | `brew install gradle` | `pacman -S node` |
+| 1 | Node.js | ? | `brew install node` | `pacman -S node` |
 
 Second, run Klin to generate source code out of YML:
 
