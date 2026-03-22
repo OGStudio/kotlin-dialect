@@ -54,3 +54,14 @@ $ `./util/dist-klin`
 | 6 | `Type` | `Type`    | `Type()`          | `request: NetRequest`  | `var request: NetRequest = NetRequest()` |
 | 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+
+## Example
+
+You can find a small "Hello World" application in `example/helloworld`
+
+First, generate KD:
+
+* $ `cd example/helloworld`
+* $ `./util/gen-kd`
+
+Second, open and run `example/helloworld/ver-android` with Android Studio
