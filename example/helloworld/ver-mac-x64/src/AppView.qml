@@ -2,8 +2,22 @@ import QtQuick
 import QtQuick.Controls
 
 Window {
-    width: 640
     height: 480
-    visible: true
     title: qsTr("HW")
+    visible: vm.mainIsVisible
+    width: 640
+
+    Rectangle {
+        height: 480
+        id: mainView
+        width: 640
+
+        Text {
+            anchors.horizontalCenter: mainView.horizontalCenter
+            font.bold: true
+            font.pointSize: 24
+            text: vm.mainGreetingText
+            y: 30
+        }
+    }
 }

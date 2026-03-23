@@ -1,14 +1,24 @@
 #include "VM.h"
 
 VM::VM() {
-    _inputMorningBalanceLabel = "TODO-Label";
+    _mainGreetingText = "TODO-Text";
+    _mainIsVisible = true;
 }
 
-QString VM::inputMorningBalanceLabel() const {
-    return _inputMorningBalanceLabel;
+QString VM::mainGreetingText() const {
+    return _mainGreetingText;
 }
 
-void VM::setInputMorningBalanceLabel(const QString &value) {
-    _inputMorningBalanceLabel = value;
-    emit didChangeInputMorningBalanceLabel(value);
+bool VM::mainIsVisible() const {
+    return _mainIsVisible;
+}
+
+void VM::setMainGreetingText(const QString &value) {
+    _mainGreetingText = value;
+    emit didChangeMainGreetingText(value);
+}
+
+void VM::setMainIsVisible(bool value) {
+    _mainIsVisible = value;
+    emit didChangeMainIsVisible(value);
 }

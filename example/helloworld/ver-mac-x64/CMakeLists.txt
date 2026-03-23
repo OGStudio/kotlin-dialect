@@ -7,7 +7,7 @@ qt_standard_project_setup(REQUIRES 6.8)
 set(
     SOURCES
     src/App.cpp
-    src/_main.cpp
+    src/main.cpp
     src/VM.cpp
 )
 qt_wrap_cpp(

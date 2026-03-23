@@ -6,22 +6,27 @@
 class VM: public QObject {
     Q_OBJECT
 
-    Q_PROPERTY(QString inputMorningBalanceLabel READ inputMorningBalanceLabel WRITE setInputMorningBalanceLabel NOTIFY didChangeInputMorningBalanceLabel)
+    Q_PROPERTY(QString mainGreetingText READ mainGreetingText WRITE setMainGreetingText NOTIFY didChangeMainGreetingText)
+    Q_PROPERTY(bool mainIsVisible READ mainIsVisible WRITE setMainIsVisible NOTIFY didChangeMainIsVisible)
 
     public:
         VM();
         virtual ~VM() { }
       
-        QString inputMorningBalanceLabel() const;
+        QString mainGreetingText() const;
+        bool mainIsVisible() const;
 
     public slots:
-        void setInputMorningBalanceLabel(const QString &value);
+        void setMainGreetingText(const QString &value);
+        void setMainIsVisible(bool value);
 
     signals:
-        void didChangeInputMorningBalanceLabel(const QString &value);
+        void didChangeMainGreetingText(const QString &value);
+        void didChangeMainIsVisible(bool value);
 
     private:
-        QString _inputMorningBalanceLabel;
+        QString _mainGreetingText;
+        bool _mainIsVisible;
 };
 
 #endif // HW_VM_H
