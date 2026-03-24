@@ -4,6 +4,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 qt_standard_project_setup(REQUIRES 6.8)
+
+# Application
 set(
     SOURCES
     src/App.cpp
@@ -21,4 +23,11 @@ qt_add_qml_module(
   URI ver-mac-x64
   QML_FILES src/AppView.qml
 )
-target_link_libraries(hwM64 PRIVATE Qt6::Quick)
+
+# SDK
+add_library(hw SHARED IMPORTED)
+set_target_properties(hw PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../sdk-mac-x64/hw/build/bin/native/releaseShared/libhw.dylib)
+target_include_directories(hwM64 PRIVATE ${CMAKE_SOURCE_DIR}/../sdk-mac-x64/hw/build/bin/native/releaseShared)
+
+# Link
+target_link_libraries(hwM64 PRIVATE Qt6::Quick hw)
