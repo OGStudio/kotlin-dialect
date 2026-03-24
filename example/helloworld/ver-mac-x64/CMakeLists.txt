@@ -10,6 +10,7 @@ set(
     SOURCES
     src/App.cpp
     src/main.cpp
+    src/_main.cpp
     src/VM.cpp
 )
 qt_wrap_cpp(
