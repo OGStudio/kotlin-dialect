@@ -1,10 +1,5 @@
 #include "KT.h"
 
-// MOVE to EffectRegistry
-void processOneliners() {
-    printf("ИГР KT.processO\n");
-}
-
 template<>
 void mainSet(
     const std::string &key,
@@ -27,6 +22,10 @@ void mainSet(
 
 EffectRegistry::EffectRegistry() { }
 
+void EffectRegistry::processOneliners() {
+    printf("ИГР EffectR.processO\n");
+}
+
 void EffectRegistry::registerOneliners(
     libhw_kref_org_opengamestudio_KDController ctrl,
     const std::vector<std::any> &items
@@ -34,7 +33,7 @@ void EffectRegistry::registerOneliners(
     // Make sure to do it only once
     KT.registerCallbackC(
         ctrl,
-        (void *)&processOneliners
+        (void *)&EffectRegistry::processOneliners
     );
     _items = items;
 }

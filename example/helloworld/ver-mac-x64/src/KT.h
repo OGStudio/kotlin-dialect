@@ -18,6 +18,8 @@ class EffectRegistry {
             const std::vector<std::any> &items
         );
 
+        static void processOneliners();
+
     private:
         std::vector<std::any> _items;
 };
