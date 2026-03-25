@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     );
     engine.rootContext()->setContextProperty("myapp", myapp);
     engine.rootContext()->setContextProperty("vm", myapp->vm());
-    engine.loadFromModule("ver-mac-x64", "AppView");
+    engine.loadFromModule("desktop", "AppView");
 
     return app.exec();
 }
