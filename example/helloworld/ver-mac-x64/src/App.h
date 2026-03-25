@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "main.h"
 #include "VM.h"
 
 class App: public QObject {
@@ -12,9 +13,11 @@ class App: public QObject {
         App();
         virtual ~App();
 
+        MainComponent *main();
         VM* vm();
 
     private:
+        MainComponent *_main;
         VM *_vm;
 };
 

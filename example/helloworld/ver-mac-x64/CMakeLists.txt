@@ -10,6 +10,7 @@ set(
     SOURCES
     src/App.cpp
     src/AppMain.cpp
+    src/KT.cpp
     src/main.cpp
     src/VM.cpp
 )
