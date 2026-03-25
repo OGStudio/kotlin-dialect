@@ -14,7 +14,7 @@ object MainComponent {
         registerOneliners(mainCtrl(), oneliners)
     }
 
-    fun setup() {
+    fun launch() {
         mainSet(F.didLaunch, true)
     }
 }
