@@ -57,6 +57,8 @@ $ `./util/dist-klin`
 
 ## Example
 
+[Hello world DEMO](https://kornerr.ru/vid/kd-android-hw_2026-03-27.mp4)
+
 You can find a small "Hello World" application in `example/helloworld`
 
 First, generate KD:
