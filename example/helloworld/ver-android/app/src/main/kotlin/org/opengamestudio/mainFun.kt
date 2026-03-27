@@ -5,7 +5,7 @@ package org.opengamestudio
 // Specify greeting text
 //
 // Conditions:
-// 1. Did launch
+// 1. Component did launch
 fun mainShouldResetGreetingText(c: MainContext): MainContext {
     if (c.recentField == F.didLaunch) {
         c.greetingText = "Hello, World!"
@@ -20,7 +20,7 @@ fun mainShouldResetGreetingText(c: MainContext): MainContext {
 // Set `main` window visible
 //
 // Conditions:
-// 1. Did launch
+// 1. Component did launch
 fun mainShouldResetVisibility(c: MainContext): MainContext {
     if (c.recentField == F.didLaunch) {
         c.isVisible = true
