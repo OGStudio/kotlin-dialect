@@ -57,9 +57,7 @@ $ `./util/dist-klin`
 
 ## Example
 
-<video controls width="500">
-    <source src="https://kornerr.ru/vid/kd-android-hw_2026-03-27.mp4" type="video/mp4" />
-</video>
+[Hello world video demonstation](https://kornerr.ru/vid/kd-android-hw_2026-03-27.mp4")
 
 You can find a small "Hello World" application in `example/helloworld`
 
