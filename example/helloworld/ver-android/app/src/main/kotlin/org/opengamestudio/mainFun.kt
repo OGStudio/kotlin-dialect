@@ -6,9 +6,16 @@ package org.opengamestudio
 //
 // Conditions:
 // 1. Did launch
+// 2. Did click `Change text` button
 fun mainShouldResetGreetingText(c: MainContext): MainContext {
     if (c.recentField == F.didLaunch) {
         c.greetingText = "Hello, World!"
+        c.recentField = F.greetingText
+        return c
+    }
+
+    if (c.recentField == F.didClickChangeText) {
+        c.greetingText = "Умом Россию не понять!"
         c.recentField = F.greetingText
         return c
     }
