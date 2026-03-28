@@ -315,7 +315,15 @@ fun appShouldResetOutputFile(c: AppContext): AppContext {
 fun appShouldResetOutputFileContents(c: AppContext): AppContext {
     if (c.recentField == "outputFile") {
         val item = c.outputPaths[c.currentOutputPathId]
-        c.outputFileContents = outputFileContents(c.outputJSExport, c.outputKotlin, c.outputSwift, item.type)
+        c.outputFileContents = outputFileContents(
+            c.outputCPPHeader,
+            c.outputCPPSDK,
+            c.outputCPPSource,
+            c.outputJSExport,
+            c.outputKotlin,
+            c.outputSwift,
+            item.type
+        )
         c.recentField = "outputFileContents"
         return c
     }

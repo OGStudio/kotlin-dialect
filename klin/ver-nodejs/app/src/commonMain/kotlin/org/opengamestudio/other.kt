@@ -87,6 +87,9 @@ fun debugString(v: Any): String {
 
 // Provide output to save based on its type
 fun outputFileContents(
+    outputCPPHeader: String,
+    outputCPPSDK: String,
+    outputCPPSource: String,
     outputJSExport: String,
     outputKotlin: String,
     outputSwift: String,
@@ -100,6 +103,15 @@ fun outputFileContents(
     }
     else if (type == OUTPUT_TYPE_SWIFT) {
         return outputSwift
+    }
+    else if (type == OUTPUT_TYPE_CPP_HDR) {
+        return outputCPPHeader
+    }
+    else if (type == OUTPUT_TYPE_CPP_SDK) {
+        return outputCPPSDK
+    }
+    else if (type == OUTPUT_TYPE_CPP_SRC) {
+        return outputCPPSource
     }
 
     return "outputFC-N/A"

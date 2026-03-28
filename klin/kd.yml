@@ -36,8 +36,12 @@ AppContext:
         inputFileDir: String
         inputFileLines: [String]
         isDbg: Bool
-        # Output of type `c++`
-        outputCPP: String
+        # Output of type `c++hdr`
+        outputCPPHeader: String
+        # Output of type `c++sdk`
+        outputCPPSDK: String
+        # Output of type `c++src`
+        outputCPPSource: String
         outputEntityContents: String
         outputFile: String
         # Contents to write to output file
