@@ -25,6 +25,18 @@ struct F {
 const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
 """
 
+const val TEMPLATE_KOTLIN_CONVERSIONS = """
+// Convert Bool to Any (for SDK)
+fun boolToAny(item: Boolean): Any {
+    return item as Any
+}
+
+// Convert String to Any (for SDK)
+fun strToAny(item: String): Any {
+    return item as Any
+}
+"""
+
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
 %PREFIX%

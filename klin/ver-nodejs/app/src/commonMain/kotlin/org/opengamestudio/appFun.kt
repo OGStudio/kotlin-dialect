@@ -298,7 +298,7 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        c.outputCPPSDK = c.outputKotlin
+        c.outputCPPSDK = c.outputKotlin + TEMPLATE_KOTLIN_CONVERSIONS
         c.recentField = "outputCPPSDK"
         return c
     }
