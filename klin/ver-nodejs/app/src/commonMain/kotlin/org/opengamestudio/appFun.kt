@@ -292,6 +292,22 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
     return c
 }
 
+// Generate output for `c++sdk` type
+//
+// Conditions:
+// 1. Output for `kotlin` is ready
+fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
+    if (c.recentField == "outputKotlin") {
+        c.outputCPPSDK = c.outputKotlin
+        c.recentField = "outputCPPSDK"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+
 // Select the path to write to
 //
 // Conditions:

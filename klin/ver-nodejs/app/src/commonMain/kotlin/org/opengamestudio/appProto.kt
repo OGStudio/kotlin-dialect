@@ -30,6 +30,7 @@ object AppProto {
             ::appShouldResetFObjKotlin,
             ::appShouldResetFObjSwift,
             ::appShouldResetInputFileDir,
+            ::appShouldResetOutputCPPSDK,
             ::appShouldResetOutputFile,
             ::appShouldResetOutputFileContents,
             ::appShouldResetOutputJSExport,
