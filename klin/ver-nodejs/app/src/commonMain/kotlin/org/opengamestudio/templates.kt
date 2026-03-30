@@ -7,6 +7,25 @@
 
 package org.opengamestudio
 
+const val TEMPLATE_CPP_CONVERSIONS = """
+// Convert Bool to Any (for SDK)
+fun boolToAny(item: Boolean): Any {
+    return item as Any
+}
+
+// Convert String to Any (for SDK)
+fun strToAny(item: String): Any {
+    return item as Any
+}
+"""
+const val TEMPLATE_CPP_EXTENSIONS = """
+// Register C callback into KDController
+@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+fun KDController.registerCallbackC(cb: kotlinx.cinterop.CPointer<kotlinx.cinterop.CFunction<() -> Unit>>) {
+    callbacks.add({ c -> cb() })
+}
+"""
+
 const val TEMPLATE_FOBJ_KOTLIN = """
 // Special object to reference context fields with a compile time validation
 @JsExport
@@ -23,18 +42,6 @@ struct F {
 }
 """
 const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
-"""
-
-const val TEMPLATE_KOTLIN_CONVERSIONS = """
-// Convert Bool to Any (for SDK)
-fun boolToAny(item: Boolean): Any {
-    return item as Any
-}
-
-// Convert String to Any (for SDK)
-fun strToAny(item: String): Any {
-    return item as Any
-}
 """
 
 const val TEMPLATE_KOTLIN_CONTEXT = """

@@ -236,7 +236,7 @@
   }
   function appShouldResetOutputCPPSDK(c) {
     if (c.f9_1 === 'outputKotlin') {
-      c.outputCPPSDK = c.outputKotlin + '\n// Convert Bool to Any (for SDK)\nfun boolToAny(item: Boolean): Any {\n    return item as Any\n}\n\n// Convert String to Any (for SDK)\nfun strToAny(item: String): Any {\n    return item as Any\n}\n';
+      c.outputCPPSDK = c.outputKotlin + '\n// Convert Bool to Any (for SDK)\nfun boolToAny(item: Boolean): Any {\n    return item as Any\n}\n\n// Convert String to Any (for SDK)\nfun strToAny(item: String): Any {\n    return item as Any\n}\n' + '\n// Register C callback into KDController\n@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)\nfun KDController.registerCallbackC(cb: kotlinx.cinterop.CPointer<kotlinx.cinterop.CFunction<() -> Unit>>) {\n    callbacks.add({ c -> cb() })\n}\n';
       c.f9_1 = 'outputCPPSDK';
       return c;
     }
