@@ -20,8 +20,8 @@ fun strToAny(item: String): Any {
 """
 const val TEMPLATE_CPP_EXTENSIONS = """
 // Register C callback into KDController
-@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
-fun KDController.registerCallbackC(cb: kotlinx.cinterop.CPointer<kotlinx.cinterop.CFunction<() -> Unit>>) {
+@OptIn(ExperimentalForeignApi::class)
+fun KDController.registerCallbackC(cb: CPointer<CFunction<() -> Unit>>) {
     callbacks.add({ c -> cb() })
 }
 """

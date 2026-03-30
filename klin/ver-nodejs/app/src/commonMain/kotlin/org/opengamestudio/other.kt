@@ -117,6 +117,20 @@ fun outputFileContents(
     return "outputFC-N/A"
 }
 
+// Collect raw C++ SDK source code
+fun parseRawCPPSDK(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_CPPSDK)) {
+            val prefixLen = PREFIX_RAW_CPPSDK.length
+            val code = ln.substring(prefixLen)
+            contents += code + NEWLINE
+        }
+    }
+
+    return contents
+}
+
 // Collect raw Kotlin source code
 fun parseRawKotlin(lines: Array<String>): String {
     var contents = ""

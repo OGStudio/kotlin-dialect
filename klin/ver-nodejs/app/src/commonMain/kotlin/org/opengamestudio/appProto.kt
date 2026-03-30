@@ -20,6 +20,7 @@ object AppProto {
             ::appShouldCollectEntityNames,
             ::appShouldCollectEntityPrefixesKotlin,
             ::appShouldCollectEntityTypes,
+            ::appShouldCollectRawCPPSDK,
             ::appShouldCollectRawKotlin,
             ::appShouldCollectRawSwift,
             ::appShouldGenerateKotlinEntities,

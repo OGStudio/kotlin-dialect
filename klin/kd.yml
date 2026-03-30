@@ -54,6 +54,8 @@ AppContext:
         outputPaths: [OutputPath]
         # Output of type `swift`
         outputSwift: String
+        # Kotlin code to insert as is for `c++sdk` type
+        rawCPPSDK: String
         # Kotlin code to insert as is at the beginning of the file
         rawKotlin: String
         # Swift code to insert as is at the beginning of the file

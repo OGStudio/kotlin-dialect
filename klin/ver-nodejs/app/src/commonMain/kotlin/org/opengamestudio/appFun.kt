@@ -112,6 +112,21 @@ fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     return c
 }
 
+// Collect raw C++ SDK source code
+//
+// Conditions:
+// 1. Input file contents are available
+fun appShouldCollectRawCPPSDK(c: AppContext): AppContext {
+    if (c.recentField == "inputFileLines") {
+        c.rawCPPSDK = parseRawCPPSDK(c.inputFileLines)
+        c.recentField = "rawCPPSDK"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Collect raw Kotlin source code
 //
 // Conditions:
@@ -298,7 +313,8 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        c.outputCPPSDK = c.outputKotlin + TEMPLATE_CPP_CONVERSIONS + TEMPLATE_CPP_EXTENSIONS
+        val outk = c.outputKotlin.replace(Regex("package.*"), "")
+        c.outputCPPSDK = c.rawCPPSDK +  outk + TEMPLATE_CPP_CONVERSIONS + TEMPLATE_CPP_EXTENSIONS
         c.recentField = "outputCPPSDK"
         return c
     }

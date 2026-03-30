@@ -13,47 +13,48 @@
   'use strict';
   //region block: imports
   var imul = Math.imul;
-  var split = kotlin_kotlin.$_$.i1;
-  var dropLast = kotlin_kotlin.$_$.h;
-  var joinToString = kotlin_kotlin.$_$.k;
-  var replace = kotlin_kotlin.$_$.h1;
-  var THROW_CCE = kotlin_kotlin.$_$.n1;
-  var Unit_instance = kotlin_kotlin.$_$.e;
-  var protoOf = kotlin_kotlin.$_$.a1;
-  var initMetadataForObject = kotlin_kotlin.$_$.x;
+  var split = kotlin_kotlin.$_$.j1;
+  var dropLast = kotlin_kotlin.$_$.i;
+  var joinToString = kotlin_kotlin.$_$.l;
+  var Regex_init_$Create$ = kotlin_kotlin.$_$.d;
+  var replace = kotlin_kotlin.$_$.i1;
+  var THROW_CCE = kotlin_kotlin.$_$.o1;
+  var Unit_instance = kotlin_kotlin.$_$.f;
+  var protoOf = kotlin_kotlin.$_$.b1;
+  var initMetadataForObject = kotlin_kotlin.$_$.y;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
-  var ensureNotNull = kotlin_kotlin.$_$.o1;
-  var sorted = kotlin_kotlin.$_$.n;
-  var copyToArray = kotlin_kotlin.$_$.g;
-  var charSequenceLength = kotlin_kotlin.$_$.p;
-  var emptyMap = kotlin_kotlin.$_$.i;
-  var startsWith = kotlin_kotlin.$_$.j1;
-  var endsWith = kotlin_kotlin.$_$.g1;
-  var contains = kotlin_kotlin.$_$.d1;
-  var substring = kotlin_kotlin.$_$.l1;
+  var ensureNotNull = kotlin_kotlin.$_$.p1;
+  var sorted = kotlin_kotlin.$_$.o;
+  var copyToArray = kotlin_kotlin.$_$.h;
+  var charSequenceLength = kotlin_kotlin.$_$.q;
+  var emptyMap = kotlin_kotlin.$_$.j;
+  var startsWith = kotlin_kotlin.$_$.k1;
+  var endsWith = kotlin_kotlin.$_$.h1;
+  var contains = kotlin_kotlin.$_$.e1;
+  var substring = kotlin_kotlin.$_$.m1;
   var VOID = kotlin_kotlin.$_$.a;
-  var first = kotlin_kotlin.$_$.j;
-  var last = kotlin_kotlin.$_$.l;
-  var isArray = kotlin_kotlin.$_$.y;
-  var KtMap = kotlin_kotlin.$_$.f;
-  var isInterface = kotlin_kotlin.$_$.z;
-  var toString = kotlin_kotlin.$_$.b1;
-  var hashCode = kotlin_kotlin.$_$.u;
-  var getStringHashCode = kotlin_kotlin.$_$.t;
-  var getBooleanHashCode = kotlin_kotlin.$_$.s;
-  var equals = kotlin_kotlin.$_$.r;
-  var defineProp = kotlin_kotlin.$_$.q;
-  var initMetadataForClass = kotlin_kotlin.$_$.v;
-  var initMetadataForInterface = kotlin_kotlin.$_$.w;
+  var first = kotlin_kotlin.$_$.k;
+  var last = kotlin_kotlin.$_$.m;
+  var isArray = kotlin_kotlin.$_$.z;
+  var KtMap = kotlin_kotlin.$_$.g;
+  var isInterface = kotlin_kotlin.$_$.a1;
+  var toString = kotlin_kotlin.$_$.c1;
+  var hashCode = kotlin_kotlin.$_$.v;
+  var getStringHashCode = kotlin_kotlin.$_$.u;
+  var getBooleanHashCode = kotlin_kotlin.$_$.t;
+  var equals = kotlin_kotlin.$_$.s;
+  var defineProp = kotlin_kotlin.$_$.r;
+  var initMetadataForClass = kotlin_kotlin.$_$.w;
+  var initMetadataForInterface = kotlin_kotlin.$_$.x;
   var ArrayList_init_$Create$ = kotlin_kotlin.$_$.b;
-  var Default_getInstance = kotlin_kotlin.$_$.d;
-  var decodeToString = kotlin_kotlin.$_$.e1;
-  var substring_0 = kotlin_kotlin.$_$.k1;
-  var take = kotlin_kotlin.$_$.m1;
-  var println = kotlin_kotlin.$_$.o;
-  var last_0 = kotlin_kotlin.$_$.m;
-  var dropLast_0 = kotlin_kotlin.$_$.f1;
-  var capitalize = kotlin_kotlin.$_$.c1;
+  var Default_getInstance = kotlin_kotlin.$_$.e;
+  var decodeToString = kotlin_kotlin.$_$.f1;
+  var substring_0 = kotlin_kotlin.$_$.l1;
+  var take = kotlin_kotlin.$_$.n1;
+  var println = kotlin_kotlin.$_$.p;
+  var last_0 = kotlin_kotlin.$_$.n;
+  var dropLast_0 = kotlin_kotlin.$_$.g1;
+  var capitalize = kotlin_kotlin.$_$.d1;
   //endregion
   //region block: pre-declaration
   initMetadataForObject(AppProto, 'AppProto');
@@ -70,110 +71,119 @@
   var APP_KD_JSEXPORT;
   var APP_KD_PACKAGE;
   function appCtrl() {
-    return AppProto_getInstance().e9_1;
+    return AppProto_getInstance().ma_1;
   }
   function appShouldCollectEntityComments(c) {
-    if (c.f9_1 === 'entityNames') {
+    if (c.na_1 === 'entityNames') {
       c.entityComments = parseEntityComments(c.inputFileLines);
-      c.f9_1 = 'entityComments';
+      c.na_1 = 'entityComments';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityFieldComments(c) {
-    if (c.f9_1 === 'entityFields') {
+    if (c.na_1 === 'entityFields') {
       c.entityFieldComments = parseEntityFieldComments(c.inputFileLines);
-      c.f9_1 = 'entityFieldComments';
+      c.na_1 = 'entityFieldComments';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityFields(c) {
-    if (c.f9_1 === 'entityTypes') {
+    if (c.na_1 === 'entityTypes') {
       c.entityFields = parseEntityFields(c.inputFileLines);
-      c.f9_1 = 'entityFields';
+      c.na_1 = 'entityFields';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityNames(c) {
-    if (c.f9_1 === 'inputFileLines') {
+    if (c.na_1 === 'inputFileLines') {
       c.entityNames = parseEntityNames(c.inputFileLines);
-      c.f9_1 = 'entityNames';
+      c.na_1 = 'entityNames';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityPrefixesKotlin(c) {
-    if (c.f9_1 === 'entityComments') {
+    if (c.na_1 === 'entityComments') {
       c.entityPrefixesKotlin = parseEntityPrefixes(c.inputFileLines, '    prefix-kotlin: ');
-      c.f9_1 = 'entityPrefixesKotlin';
+      c.na_1 = 'entityPrefixesKotlin';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityTypes(c) {
-    if (c.f9_1 === 'entityComments') {
+    if (c.na_1 === 'entityComments') {
       c.entityTypes = parseEntityTypes(c.inputFileLines);
-      c.f9_1 = 'entityTypes';
+      c.na_1 = 'entityTypes';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
+    return c;
+  }
+  function appShouldCollectRawCPPSDK(c) {
+    if (c.na_1 === 'inputFileLines') {
+      c.rawCPPSDK = parseRawCPPSDK(c.inputFileLines);
+      c.na_1 = 'rawCPPSDK';
+      return c;
+    }
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectRawKotlin(c) {
-    if (c.f9_1 === 'inputFileLines') {
+    if (c.na_1 === 'inputFileLines') {
       c.rawKotlin = parseRawKotlin(c.inputFileLines);
-      c.f9_1 = 'rawKotlin';
+      c.na_1 = 'rawKotlin';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectRawSwift(c) {
-    if (c.f9_1 === 'inputFileLines') {
+    if (c.na_1 === 'inputFileLines') {
       c.rawSwift = parseRawSwift(c.inputFileLines);
-      c.f9_1 = 'rawSwift';
+      c.na_1 = 'rawSwift';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldGenerateKotlinEntities(c) {
-    if (c.f9_1 === 'entityFieldComments') {
+    if (c.na_1 === 'entityFieldComments') {
       c.outputEntityContents = genKotlinEntitiesFile(c.entityComments, c.entityFieldComments, c.entityFields, c.entityNames, c.entityPrefixesKotlin, c.entityTypes, c.rawKotlin);
-      c.f9_1 = 'outputEntityContents';
+      c.na_1 = 'outputEntityContents';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldParseInputFilePath(c) {
-    if (c.f9_1 === 'didLaunch' && cliArgumentValue(c.arguments, '--file').length > 0) {
+    if (c.na_1 === 'didLaunch' && cliArgumentValue(c.arguments, '--file').length > 0) {
       c.inputFile = cliArgumentValue(c.arguments, '--file');
-      c.f9_1 = 'inputFile';
+      c.na_1 = 'inputFile';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldParseOutputPaths(c) {
-    if (c.f9_1 === 'inputFileLines') {
+    if (c.na_1 === 'inputFileLines') {
       c.outputPaths = parseOutputPaths(c.inputFileLines);
-      c.f9_1 = 'outputPaths';
+      c.na_1 = 'outputPaths';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldPrintToConsole(c) {
     var tmp;
-    if (c.f9_1 === 'didLaunch') {
+    if (c.na_1 === 'didLaunch') {
       // Inline function 'kotlin.collections.isEmpty' call
       tmp = c.arguments.length === 0;
     } else {
@@ -181,132 +191,135 @@
     }
     if (tmp) {
       c.consoleOutput = 'Usage: {bin} --file=/path/to/file.yml';
-      c.f9_1 = 'consoleOutput';
+      c.na_1 = 'consoleOutput';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetCurrentOutputPathId(c) {
-    if (c.f9_1 === 'outputSwift') {
+    if (c.na_1 === 'outputSwift') {
       c.currentOutputPathId = 0;
-      c.f9_1 = 'currentOutputPathId';
+      c.na_1 = 'currentOutputPathId';
       return c;
     }
-    if (c.f9_1 === 'didWriteOutputFile' && (c.currentOutputPathId + 1 | 0) < c.outputPaths.length) {
+    if (c.na_1 === 'didWriteOutputFile' && (c.currentOutputPathId + 1 | 0) < c.outputPaths.length) {
       c.currentOutputPathId = c.currentOutputPathId + 1 | 0;
-      c.f9_1 = 'currentOutputPathId';
+      c.na_1 = 'currentOutputPathId';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetFObjKotlin(c) {
-    if (c.f9_1 === 'outputEntityContents') {
+    if (c.na_1 === 'outputEntityContents') {
       var ids = fobjContexts(c.entityTypes);
       var fields = fobjFields(c.entityFields, ids);
       c.fobjKotlin = fobjKotlin(fields);
-      c.f9_1 = 'fobjKotlin';
+      c.na_1 = 'fobjKotlin';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetFObjSwift(c) {
-    if (c.f9_1 === 'fobjKotlin') {
+    if (c.na_1 === 'fobjKotlin') {
       var ids = fobjContexts(c.entityTypes);
       var fields = fobjFields(c.entityFields, ids);
       c.fobjSwift = fobjSwift(fields);
-      c.f9_1 = 'fobjSwift';
+      c.na_1 = 'fobjSwift';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetInputFileDir(c) {
-    if (c.f9_1 === 'inputFile') {
+    if (c.na_1 === 'inputFile') {
       var parts = split(c.inputFile, ['/']);
       var dirParts = dropLast(parts, 1);
       c.inputFileDir = joinToString(dirParts, '/');
-      c.f9_1 = 'inputFileDir';
+      c.na_1 = 'inputFileDir';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputCPPSDK(c) {
-    if (c.f9_1 === 'outputKotlin') {
-      c.outputCPPSDK = c.outputKotlin + '\n// Convert Bool to Any (for SDK)\nfun boolToAny(item: Boolean): Any {\n    return item as Any\n}\n\n// Convert String to Any (for SDK)\nfun strToAny(item: String): Any {\n    return item as Any\n}\n' + '\n// Register C callback into KDController\n@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)\nfun KDController.registerCallbackC(cb: kotlinx.cinterop.CPointer<kotlinx.cinterop.CFunction<() -> Unit>>) {\n    callbacks.add({ c -> cb() })\n}\n';
-      c.f9_1 = 'outputCPPSDK';
+    if (c.na_1 === 'outputKotlin') {
+      var tmp0 = c.outputKotlin;
+      // Inline function 'kotlin.text.replace' call
+      var outk = Regex_init_$Create$('package.*').y6(tmp0, '');
+      c.outputCPPSDK = c.rawCPPSDK + outk + '\n// Convert Bool to Any (for SDK)\nfun boolToAny(item: Boolean): Any {\n    return item as Any\n}\n\n// Convert String to Any (for SDK)\nfun strToAny(item: String): Any {\n    return item as Any\n}\n' + '\n// Register C callback into KDController\n@OptIn(ExperimentalForeignApi::class)\nfun KDController.registerCallbackC(cb: CPointer<CFunction<() -> Unit>>) {\n    callbacks.add({ c -> cb() })\n}\n';
+      c.na_1 = 'outputCPPSDK';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputFile(c) {
-    if (c.f9_1 === 'currentOutputPathId') {
+    if (c.na_1 === 'currentOutputPathId') {
       var item = c.outputPaths[c.currentOutputPathId];
       c.outputFile = c.inputFileDir + '/' + item.path;
-      c.f9_1 = 'outputFile';
+      c.na_1 = 'outputFile';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputFileContents(c) {
-    if (c.f9_1 === 'outputFile') {
+    if (c.na_1 === 'outputFile') {
       var item = c.outputPaths[c.currentOutputPathId];
       c.outputFileContents = outputFileContents(c.outputCPPHeader, c.outputCPPSDK, c.outputCPPSource, c.outputJSExport, c.outputKotlin, c.outputSwift, item.type);
-      c.f9_1 = 'outputFileContents';
+      c.na_1 = 'outputFileContents';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputJSExport(c) {
-    if (c.f9_1 === 'srcKotlin') {
+    if (c.na_1 === 'srcKotlin') {
       c.outputJSExport = c.outputEntityContents + c.srcKotlin + c.fobjKotlin;
-      c.f9_1 = 'outputJSExport';
+      c.na_1 = 'outputJSExport';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputKotlin(c) {
-    if (c.f9_1 === 'outputJSExport') {
+    if (c.na_1 === 'outputJSExport') {
       c.outputKotlin = replace(replace(c.outputJSExport, APP_KD_IMPORT, ''), APP_KD_JSEXPORT, '');
-      c.f9_1 = 'outputKotlin';
+      c.na_1 = 'outputKotlin';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetOutputSwift(c) {
-    if (c.f9_1 === 'outputKotlin') {
+    if (c.na_1 === 'outputKotlin') {
       c.outputSwift = c.rawSwift + c.srcSwift + c.fobjSwift;
-      c.f9_1 = 'outputSwift';
+      c.na_1 = 'outputSwift';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetSrcKotlin(c) {
-    if (c.f9_1 === 'outputEntityContents') {
+    if (c.na_1 === 'outputEntityContents') {
       var contents = base64ToString(get_embKotlin64());
       c.srcKotlin = replace(replace(contents, APP_KD_IMPORT, ''), APP_KD_PACKAGE, '');
-      c.f9_1 = 'srcKotlin';
+      c.na_1 = 'srcKotlin';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldResetSrcSwift(c) {
-    if (c.f9_1 === 'srcKotlin') {
+    if (c.na_1 === 'srcKotlin') {
       c.srcSwift = base64ToString(get_embSwift64());
-      c.f9_1 = 'srcSwift';
+      c.na_1 = 'srcSwift';
       return c;
     }
-    c.f9_1 = 'none';
+    c.na_1 = 'none';
     return c;
   }
   function appShouldCollectEntityComments$ref() {
@@ -349,6 +362,13 @@
       return appShouldCollectEntityTypes(p0);
     };
     l.callableName = 'appShouldCollectEntityTypes';
+    return l;
+  }
+  function appShouldCollectRawCPPSDK$ref() {
+    var l = function (p0) {
+      return appShouldCollectRawCPPSDK(p0);
+    };
+    l.callableName = 'appShouldCollectRawCPPSDK';
     return l;
   }
   function appShouldCollectRawKotlin$ref() {
@@ -484,42 +504,43 @@
   }
   function AppProto() {
     AppProto_instance = this;
-    this.e9_1 = new KDController(new AppContext());
-    setupComponentDebugging(this.e9_1, 'App');
+    this.ma_1 = new KDController(new AppContext());
+    setupComponentDebugging(this.ma_1, 'App');
     var tmp = appShouldCollectEntityComments$ref();
     var tmp_0 = appShouldCollectEntityFieldComments$ref();
     var tmp_1 = appShouldCollectEntityFields$ref();
     var tmp_2 = appShouldCollectEntityNames$ref();
     var tmp_3 = appShouldCollectEntityPrefixesKotlin$ref();
     var tmp_4 = appShouldCollectEntityTypes$ref();
-    var tmp_5 = appShouldCollectRawKotlin$ref();
-    var tmp_6 = appShouldCollectRawSwift$ref();
-    var tmp_7 = appShouldGenerateKotlinEntities$ref();
-    var tmp_8 = appShouldParseInputFilePath$ref();
-    var tmp_9 = appShouldParseOutputPaths$ref();
-    var tmp_10 = appShouldPrintToConsole$ref();
-    var tmp_11 = appShouldResetCurrentOutputPathId$ref();
-    var tmp_12 = appShouldResetFObjKotlin$ref();
-    var tmp_13 = appShouldResetFObjSwift$ref();
-    var tmp_14 = appShouldResetInputFileDir$ref();
-    var tmp_15 = appShouldResetOutputCPPSDK$ref();
-    var tmp_16 = appShouldResetOutputFile$ref();
-    var tmp_17 = appShouldResetOutputFileContents$ref();
-    var tmp_18 = appShouldResetOutputJSExport$ref();
-    var tmp_19 = appShouldResetOutputKotlin$ref();
-    var tmp_20 = appShouldResetOutputSwift$ref();
-    var tmp_21 = appShouldResetSrcKotlin$ref();
+    var tmp_5 = appShouldCollectRawCPPSDK$ref();
+    var tmp_6 = appShouldCollectRawKotlin$ref();
+    var tmp_7 = appShouldCollectRawSwift$ref();
+    var tmp_8 = appShouldGenerateKotlinEntities$ref();
+    var tmp_9 = appShouldParseInputFilePath$ref();
+    var tmp_10 = appShouldParseOutputPaths$ref();
+    var tmp_11 = appShouldPrintToConsole$ref();
+    var tmp_12 = appShouldResetCurrentOutputPathId$ref();
+    var tmp_13 = appShouldResetFObjKotlin$ref();
+    var tmp_14 = appShouldResetFObjSwift$ref();
+    var tmp_15 = appShouldResetInputFileDir$ref();
+    var tmp_16 = appShouldResetOutputCPPSDK$ref();
+    var tmp_17 = appShouldResetOutputFile$ref();
+    var tmp_18 = appShouldResetOutputFileContents$ref();
+    var tmp_19 = appShouldResetOutputJSExport$ref();
+    var tmp_20 = appShouldResetOutputKotlin$ref();
+    var tmp_21 = appShouldResetOutputSwift$ref();
+    var tmp_22 = appShouldResetSrcKotlin$ref();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
     // Inline function 'kotlin.collections.forEach' call
-    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, appShouldResetSrcSwift$ref()];
+    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, appShouldResetSrcSwift$ref()];
     var inductionVariable = 0;
     var last = indexedObject.length;
     while (inductionVariable < last) {
       var element = indexedObject[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
-      this.e9_1.registerFunction(AppProto$lambda(element));
+      this.ma_1.registerFunction(AppProto$lambda(element));
     }
   }
   var AppProto_instance;
@@ -542,13 +563,13 @@
     // Inline function 'kotlin.js.asDynamic' call
     var ids = [];
     // Inline function 'kotlin.collections.iterator' call
-    var _iterator__ex2g4s = entityTypes.b1().f();
-    while (_iterator__ex2g4s.g()) {
-      var _destruct__k2r9zo = _iterator__ex2g4s.h();
+    var _iterator__ex2g4s = entityTypes.c1().g();
+    while (_iterator__ex2g4s.h()) {
+      var _destruct__k2r9zo = _iterator__ex2g4s.i();
       // Inline function 'kotlin.collections.component1' call
-      var id = _destruct__k2r9zo.u();
+      var id = _destruct__k2r9zo.v();
       // Inline function 'kotlin.collections.component2' call
-      var type = _destruct__k2r9zo.v();
+      var type = _destruct__k2r9zo.w();
       if (type === 'context') {
         // Inline function 'kotlin.collections.plus' call
         // Inline function 'kotlin.js.asDynamic' call
@@ -566,22 +587,22 @@
     // Inline function 'kotlin.collections.mutableMapOf' call
     var d = LinkedHashMap_init_$Create$();
     // Inline function 'kotlin.collections.set' call
-    d.b2('none', true);
+    d.c2('none', true);
     var inductionVariable = 0;
     var last = ids.length;
     while (inductionVariable < last) {
       var id = ids[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
-      var fieldTypes = ensureNotNull(entityFields.y(id));
-      var _iterator__ex2g4s = fieldTypes.z().f();
-      while (_iterator__ex2g4s.g()) {
-        var fieldName = _iterator__ex2g4s.h();
+      var fieldTypes = ensureNotNull(entityFields.z(id));
+      var _iterator__ex2g4s = fieldTypes.a1().g();
+      while (_iterator__ex2g4s.h()) {
+        var fieldName = _iterator__ex2g4s.i();
         // Inline function 'kotlin.collections.set' call
-        d.b2(fieldName, true);
+        d.c2(fieldName, true);
       }
     }
     // Inline function 'kotlin.collections.toTypedArray' call
-    var this_0 = sorted(d.z());
+    var this_0 = sorted(d.a1());
     return copyToArray(this_0);
   }
   function fobjKotlin(fieldNames) {
@@ -621,13 +642,13 @@
     while (inductionVariable < last) {
       var name = entityNames[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
-      var tmp0_elvis_lhs = entityComments.y(id);
+      var tmp0_elvis_lhs = entityComments.z(id);
       var comment = tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs;
-      var tmp1_elvis_lhs = entityPrefixes.y(id);
+      var tmp1_elvis_lhs = entityPrefixes.z(id);
       var prefix = tmp1_elvis_lhs == null ? '' : tmp1_elvis_lhs;
-      var tmp2_elvis_lhs = entityTypes.y(id);
+      var tmp2_elvis_lhs = entityTypes.z(id);
       var type = tmp2_elvis_lhs == null ? '' : tmp2_elvis_lhs;
-      var tmp3_elvis_lhs = entityFieldComments.y(id);
+      var tmp3_elvis_lhs = entityFieldComments.z(id);
       var tmp;
       if (tmp3_elvis_lhs == null) {
         // Inline function 'kotlin.collections.mapOf' call
@@ -636,7 +657,7 @@
         tmp = tmp3_elvis_lhs;
       }
       var fieldComments = tmp;
-      var tmp4_elvis_lhs = entityFields.y(id);
+      var tmp4_elvis_lhs = entityFields.z(id);
       var tmp_0;
       if (tmp4_elvis_lhs == null) {
         // Inline function 'kotlin.collections.mapOf' call
@@ -698,18 +719,18 @@
   }
   function genKotlinFields(fieldComments, fields) {
     var contents = '';
-    var sortedFieldNames = sorted(fields.z());
-    var _iterator__ex2g4s = sortedFieldNames.f();
-    while (_iterator__ex2g4s.g()) {
-      var name = _iterator__ex2g4s.h();
+    var sortedFieldNames = sorted(fields.a1());
+    var _iterator__ex2g4s = sortedFieldNames.g();
+    while (_iterator__ex2g4s.h()) {
+      var name = _iterator__ex2g4s.i();
       // Inline function 'kotlin.text.isEmpty' call
       var this_0 = contents;
       if (!(charSequenceLength(this_0) === 0)) {
         contents = contents + '\n';
       }
-      var tmp0_elvis_lhs = fieldComments.y(name);
+      var tmp0_elvis_lhs = fieldComments.z(name);
       var comment = tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs;
-      var tmp1_elvis_lhs = fields.y(name);
+      var tmp1_elvis_lhs = fields.z(name);
       var type = tmp1_elvis_lhs == null ? '' : tmp1_elvis_lhs;
       contents = contents + genKotlinField(comment, name, type);
     }
@@ -751,10 +772,10 @@
   function genKotlinGetters(fields) {
     var contents = '';
     var isFirst = true;
-    var sortedFieldNames = sorted(fields.z());
-    var _iterator__ex2g4s = sortedFieldNames.f();
-    while (_iterator__ex2g4s.g()) {
-      var name = _iterator__ex2g4s.h();
+    var sortedFieldNames = sorted(fields.a1());
+    var _iterator__ex2g4s = sortedFieldNames.g();
+    while (_iterator__ex2g4s.h()) {
+      var name = _iterator__ex2g4s.i();
       contents = contents + genKotlinGetter(isFirst, name);
       isFirst = false;
     }
@@ -773,11 +794,11 @@
   function genKotlinSetters(fields) {
     var contents = '';
     var isFirst = true;
-    var sortedFieldNames = sorted(fields.z());
-    var _iterator__ex2g4s = sortedFieldNames.f();
-    while (_iterator__ex2g4s.g()) {
-      var name = _iterator__ex2g4s.h();
-      var tmp0_elvis_lhs = fields.y(name);
+    var sortedFieldNames = sorted(fields.a1());
+    var _iterator__ex2g4s = sortedFieldNames.g();
+    while (_iterator__ex2g4s.h()) {
+      var name = _iterator__ex2g4s.i();
+      var tmp0_elvis_lhs = fields.z(name);
       var type = tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs;
       contents = contents + genKotlinSetter(isFirst, name, type);
       isFirst = false;
@@ -785,7 +806,7 @@
     return contents;
   }
   var KD_FIELD_NONE;
-  function AppContext(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
+  function AppContext(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
     var tmp;
     if (arguments_0 === VOID) {
       // Inline function 'kotlin.arrayOf' call
@@ -884,6 +905,7 @@
     }
     outputPaths = tmp_7;
     outputSwift = outputSwift === VOID ? '' : outputSwift;
+    rawCPPSDK = rawCPPSDK === VOID ? '' : rawCPPSDK;
     rawKotlin = rawKotlin === VOID ? '' : rawKotlin;
     rawSwift = rawSwift === VOID ? '' : rawSwift;
     srcKotlin = srcKotlin === VOID ? '' : srcKotlin;
@@ -916,203 +938,210 @@
     this.outputKotlin = outputKotlin;
     this.outputPaths = outputPaths;
     this.outputSwift = outputSwift;
+    this.rawCPPSDK = rawCPPSDK;
     this.rawKotlin = rawKotlin;
     this.rawSwift = rawSwift;
     this.srcKotlin = srcKotlin;
     this.srcSwift = srcSwift;
-    this.f9_1 = recentField;
+    this.na_1 = recentField;
   }
-  protoOf(AppContext).g9 = function (_set____db54di) {
+  protoOf(AppContext).oa = function (_set____db54di) {
     this.arguments = _set____db54di;
   };
-  protoOf(AppContext).h9 = function () {
+  protoOf(AppContext).pa = function () {
     return this.arguments;
   };
-  protoOf(AppContext).i9 = function (_set____db54di) {
+  protoOf(AppContext).qa = function (_set____db54di) {
     this.consoleOutput = _set____db54di;
   };
-  protoOf(AppContext).j9 = function () {
+  protoOf(AppContext).ra = function () {
     return this.consoleOutput;
   };
-  protoOf(AppContext).k9 = function (_set____db54di) {
+  protoOf(AppContext).sa = function (_set____db54di) {
     this.currentOutputPathId = _set____db54di;
   };
-  protoOf(AppContext).l9 = function () {
+  protoOf(AppContext).ta = function () {
     return this.currentOutputPathId;
   };
-  protoOf(AppContext).m9 = function (_set____db54di) {
+  protoOf(AppContext).ua = function (_set____db54di) {
     this.didLaunch = _set____db54di;
   };
-  protoOf(AppContext).n9 = function () {
+  protoOf(AppContext).va = function () {
     return this.didLaunch;
   };
-  protoOf(AppContext).o9 = function (_set____db54di) {
+  protoOf(AppContext).wa = function (_set____db54di) {
     this.didWriteOutputFile = _set____db54di;
   };
-  protoOf(AppContext).p9 = function () {
+  protoOf(AppContext).xa = function () {
     return this.didWriteOutputFile;
   };
-  protoOf(AppContext).q9 = function (_set____db54di) {
+  protoOf(AppContext).ya = function (_set____db54di) {
     this.entityComments = _set____db54di;
   };
-  protoOf(AppContext).r9 = function () {
+  protoOf(AppContext).za = function () {
     return this.entityComments;
   };
-  protoOf(AppContext).s9 = function (_set____db54di) {
+  protoOf(AppContext).ab = function (_set____db54di) {
     this.entityFieldComments = _set____db54di;
   };
-  protoOf(AppContext).t9 = function () {
+  protoOf(AppContext).bb = function () {
     return this.entityFieldComments;
   };
-  protoOf(AppContext).u9 = function (_set____db54di) {
+  protoOf(AppContext).cb = function (_set____db54di) {
     this.entityFields = _set____db54di;
   };
-  protoOf(AppContext).v9 = function () {
+  protoOf(AppContext).db = function () {
     return this.entityFields;
   };
-  protoOf(AppContext).w9 = function (_set____db54di) {
+  protoOf(AppContext).eb = function (_set____db54di) {
     this.entityNames = _set____db54di;
   };
-  protoOf(AppContext).x9 = function () {
+  protoOf(AppContext).fb = function () {
     return this.entityNames;
   };
-  protoOf(AppContext).y9 = function (_set____db54di) {
+  protoOf(AppContext).gb = function (_set____db54di) {
     this.entityPrefixesKotlin = _set____db54di;
   };
-  protoOf(AppContext).z9 = function () {
+  protoOf(AppContext).hb = function () {
     return this.entityPrefixesKotlin;
   };
-  protoOf(AppContext).aa = function (_set____db54di) {
+  protoOf(AppContext).ib = function (_set____db54di) {
     this.entityTypes = _set____db54di;
   };
-  protoOf(AppContext).ba = function () {
+  protoOf(AppContext).jb = function () {
     return this.entityTypes;
   };
-  protoOf(AppContext).ca = function (_set____db54di) {
+  protoOf(AppContext).kb = function (_set____db54di) {
     this.fobjKotlin = _set____db54di;
   };
-  protoOf(AppContext).da = function () {
+  protoOf(AppContext).lb = function () {
     return this.fobjKotlin;
   };
-  protoOf(AppContext).ea = function (_set____db54di) {
+  protoOf(AppContext).mb = function (_set____db54di) {
     this.fobjSwift = _set____db54di;
   };
-  protoOf(AppContext).fa = function () {
+  protoOf(AppContext).nb = function () {
     return this.fobjSwift;
   };
-  protoOf(AppContext).ga = function (_set____db54di) {
+  protoOf(AppContext).ob = function (_set____db54di) {
     this.inputFile = _set____db54di;
   };
-  protoOf(AppContext).ha = function () {
+  protoOf(AppContext).pb = function () {
     return this.inputFile;
   };
-  protoOf(AppContext).ia = function (_set____db54di) {
+  protoOf(AppContext).qb = function (_set____db54di) {
     this.inputFileDir = _set____db54di;
   };
-  protoOf(AppContext).ja = function () {
+  protoOf(AppContext).rb = function () {
     return this.inputFileDir;
   };
-  protoOf(AppContext).ka = function (_set____db54di) {
+  protoOf(AppContext).sb = function (_set____db54di) {
     this.inputFileLines = _set____db54di;
   };
-  protoOf(AppContext).la = function () {
+  protoOf(AppContext).tb = function () {
     return this.inputFileLines;
   };
-  protoOf(AppContext).ma = function (_set____db54di) {
+  protoOf(AppContext).ub = function (_set____db54di) {
     this.isDbg = _set____db54di;
   };
-  protoOf(AppContext).na = function () {
+  protoOf(AppContext).vb = function () {
     return this.isDbg;
   };
-  protoOf(AppContext).oa = function (_set____db54di) {
+  protoOf(AppContext).wb = function (_set____db54di) {
     this.outputCPPHeader = _set____db54di;
   };
-  protoOf(AppContext).pa = function () {
+  protoOf(AppContext).xb = function () {
     return this.outputCPPHeader;
   };
-  protoOf(AppContext).qa = function (_set____db54di) {
+  protoOf(AppContext).yb = function (_set____db54di) {
     this.outputCPPSDK = _set____db54di;
   };
-  protoOf(AppContext).ra = function () {
+  protoOf(AppContext).zb = function () {
     return this.outputCPPSDK;
   };
-  protoOf(AppContext).sa = function (_set____db54di) {
+  protoOf(AppContext).ac = function (_set____db54di) {
     this.outputCPPSource = _set____db54di;
   };
-  protoOf(AppContext).ta = function () {
+  protoOf(AppContext).bc = function () {
     return this.outputCPPSource;
   };
-  protoOf(AppContext).ua = function (_set____db54di) {
+  protoOf(AppContext).cc = function (_set____db54di) {
     this.outputEntityContents = _set____db54di;
   };
-  protoOf(AppContext).va = function () {
+  protoOf(AppContext).dc = function () {
     return this.outputEntityContents;
   };
-  protoOf(AppContext).wa = function (_set____db54di) {
+  protoOf(AppContext).ec = function (_set____db54di) {
     this.outputFile = _set____db54di;
   };
-  protoOf(AppContext).xa = function () {
+  protoOf(AppContext).fc = function () {
     return this.outputFile;
   };
-  protoOf(AppContext).ya = function (_set____db54di) {
+  protoOf(AppContext).gc = function (_set____db54di) {
     this.outputFileContents = _set____db54di;
   };
-  protoOf(AppContext).za = function () {
+  protoOf(AppContext).hc = function () {
     return this.outputFileContents;
   };
-  protoOf(AppContext).ab = function (_set____db54di) {
+  protoOf(AppContext).ic = function (_set____db54di) {
     this.outputJSExport = _set____db54di;
   };
-  protoOf(AppContext).bb = function () {
+  protoOf(AppContext).jc = function () {
     return this.outputJSExport;
   };
-  protoOf(AppContext).cb = function (_set____db54di) {
+  protoOf(AppContext).kc = function (_set____db54di) {
     this.outputKotlin = _set____db54di;
   };
-  protoOf(AppContext).db = function () {
+  protoOf(AppContext).lc = function () {
     return this.outputKotlin;
   };
-  protoOf(AppContext).eb = function (_set____db54di) {
+  protoOf(AppContext).mc = function (_set____db54di) {
     this.outputPaths = _set____db54di;
   };
-  protoOf(AppContext).fb = function () {
+  protoOf(AppContext).nc = function () {
     return this.outputPaths;
   };
-  protoOf(AppContext).gb = function (_set____db54di) {
+  protoOf(AppContext).oc = function (_set____db54di) {
     this.outputSwift = _set____db54di;
   };
-  protoOf(AppContext).hb = function () {
+  protoOf(AppContext).pc = function () {
     return this.outputSwift;
   };
-  protoOf(AppContext).ib = function (_set____db54di) {
+  protoOf(AppContext).qc = function (_set____db54di) {
+    this.rawCPPSDK = _set____db54di;
+  };
+  protoOf(AppContext).rc = function () {
+    return this.rawCPPSDK;
+  };
+  protoOf(AppContext).sc = function (_set____db54di) {
     this.rawKotlin = _set____db54di;
   };
-  protoOf(AppContext).jb = function () {
+  protoOf(AppContext).tc = function () {
     return this.rawKotlin;
   };
-  protoOf(AppContext).kb = function (_set____db54di) {
+  protoOf(AppContext).uc = function (_set____db54di) {
     this.rawSwift = _set____db54di;
   };
-  protoOf(AppContext).lb = function () {
+  protoOf(AppContext).vc = function () {
     return this.rawSwift;
   };
-  protoOf(AppContext).mb = function (_set____db54di) {
+  protoOf(AppContext).wc = function (_set____db54di) {
     this.srcKotlin = _set____db54di;
   };
-  protoOf(AppContext).nb = function () {
+  protoOf(AppContext).xc = function () {
     return this.srcKotlin;
   };
-  protoOf(AppContext).ob = function (_set____db54di) {
+  protoOf(AppContext).yc = function (_set____db54di) {
     this.srcSwift = _set____db54di;
   };
-  protoOf(AppContext).pb = function () {
+  protoOf(AppContext).zc = function () {
     return this.srcSwift;
   };
-  protoOf(AppContext).qb = function (_set____db54di) {
-    this.f9_1 = _set____db54di;
+  protoOf(AppContext).ad = function (_set____db54di) {
+    this.na_1 = _set____db54di;
   };
-  protoOf(AppContext).rb = function () {
-    return this.f9_1;
+  protoOf(AppContext).bd = function () {
+    return this.na_1;
   };
   protoOf(AppContext).field = function (name) {
     switch (name) {
@@ -1197,18 +1226,21 @@
       case 'outputSwift':
         var tmp_25 = this.outputSwift;
         return !(tmp_25 == null) ? tmp_25 : THROW_CCE();
-      case 'rawKotlin':
-        var tmp_26 = this.rawKotlin;
+      case 'rawCPPSDK':
+        var tmp_26 = this.rawCPPSDK;
         return !(tmp_26 == null) ? tmp_26 : THROW_CCE();
-      case 'rawSwift':
-        var tmp_27 = this.rawSwift;
+      case 'rawKotlin':
+        var tmp_27 = this.rawKotlin;
         return !(tmp_27 == null) ? tmp_27 : THROW_CCE();
-      case 'srcKotlin':
-        var tmp_28 = this.srcKotlin;
+      case 'rawSwift':
+        var tmp_28 = this.rawSwift;
         return !(tmp_28 == null) ? tmp_28 : THROW_CCE();
-      case 'srcSwift':
-        var tmp_29 = this.srcSwift;
+      case 'srcKotlin':
+        var tmp_29 = this.srcKotlin;
         return !(tmp_29 == null) ? tmp_29 : THROW_CCE();
+      case 'srcSwift':
+        var tmp_30 = this.srcSwift;
+        return !(tmp_30 == null) ? tmp_30 : THROW_CCE();
     }
     return !('unknown-field-name' == null) ? 'unknown-field-name' : THROW_CCE();
   };
@@ -1325,124 +1357,131 @@
         var tmp_25 = this;
         tmp_25.outputSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
-      case 'rawKotlin':
+      case 'rawCPPSDK':
         var tmp_26 = this;
-        tmp_26.rawKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        tmp_26.rawCPPSDK = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        break;
+      case 'rawKotlin':
+        var tmp_27 = this;
+        tmp_27.rawKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'rawSwift':
-        var tmp_27 = this;
-        tmp_27.rawSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_28 = this;
+        tmp_28.rawSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'srcKotlin':
-        var tmp_28 = this;
-        tmp_28.srcKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_29 = this;
+        tmp_29.srcKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'srcSwift':
-        var tmp_29 = this;
-        tmp_29.srcSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_30 = this;
+        tmp_30.srcSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
     }
   };
-  protoOf(AppContext).c9 = function () {
+  protoOf(AppContext).ka = function () {
     return this.arguments;
   };
-  protoOf(AppContext).d9 = function () {
+  protoOf(AppContext).la = function () {
     return this.consoleOutput;
   };
-  protoOf(AppContext).sb = function () {
+  protoOf(AppContext).cd = function () {
     return this.currentOutputPathId;
   };
-  protoOf(AppContext).tb = function () {
+  protoOf(AppContext).dd = function () {
     return this.didLaunch;
   };
-  protoOf(AppContext).ub = function () {
+  protoOf(AppContext).ed = function () {
     return this.didWriteOutputFile;
   };
-  protoOf(AppContext).vb = function () {
+  protoOf(AppContext).fd = function () {
     return this.entityComments;
   };
-  protoOf(AppContext).wb = function () {
+  protoOf(AppContext).gd = function () {
     return this.entityFieldComments;
   };
-  protoOf(AppContext).xb = function () {
+  protoOf(AppContext).hd = function () {
     return this.entityFields;
   };
-  protoOf(AppContext).yb = function () {
+  protoOf(AppContext).id = function () {
     return this.entityNames;
   };
-  protoOf(AppContext).zb = function () {
+  protoOf(AppContext).jd = function () {
     return this.entityPrefixesKotlin;
   };
-  protoOf(AppContext).ac = function () {
+  protoOf(AppContext).kd = function () {
     return this.entityTypes;
   };
-  protoOf(AppContext).bc = function () {
+  protoOf(AppContext).ld = function () {
     return this.fobjKotlin;
   };
-  protoOf(AppContext).cc = function () {
+  protoOf(AppContext).md = function () {
     return this.fobjSwift;
   };
-  protoOf(AppContext).dc = function () {
+  protoOf(AppContext).nd = function () {
     return this.inputFile;
   };
-  protoOf(AppContext).ec = function () {
+  protoOf(AppContext).od = function () {
     return this.inputFileDir;
   };
-  protoOf(AppContext).fc = function () {
+  protoOf(AppContext).pd = function () {
     return this.inputFileLines;
   };
-  protoOf(AppContext).gc = function () {
+  protoOf(AppContext).qd = function () {
     return this.isDbg;
   };
-  protoOf(AppContext).hc = function () {
+  protoOf(AppContext).rd = function () {
     return this.outputCPPHeader;
   };
-  protoOf(AppContext).ic = function () {
+  protoOf(AppContext).sd = function () {
     return this.outputCPPSDK;
   };
-  protoOf(AppContext).jc = function () {
+  protoOf(AppContext).td = function () {
     return this.outputCPPSource;
   };
-  protoOf(AppContext).kc = function () {
+  protoOf(AppContext).ud = function () {
     return this.outputEntityContents;
   };
-  protoOf(AppContext).lc = function () {
+  protoOf(AppContext).vd = function () {
     return this.outputFile;
   };
-  protoOf(AppContext).mc = function () {
+  protoOf(AppContext).wd = function () {
     return this.outputFileContents;
   };
-  protoOf(AppContext).nc = function () {
+  protoOf(AppContext).xd = function () {
     return this.outputJSExport;
   };
-  protoOf(AppContext).oc = function () {
+  protoOf(AppContext).yd = function () {
     return this.outputKotlin;
   };
-  protoOf(AppContext).pc = function () {
+  protoOf(AppContext).zd = function () {
     return this.outputPaths;
   };
-  protoOf(AppContext).qc = function () {
+  protoOf(AppContext).ae = function () {
     return this.outputSwift;
   };
-  protoOf(AppContext).rc = function () {
+  protoOf(AppContext).be = function () {
+    return this.rawCPPSDK;
+  };
+  protoOf(AppContext).ce = function () {
     return this.rawKotlin;
   };
-  protoOf(AppContext).sc = function () {
+  protoOf(AppContext).de = function () {
     return this.rawSwift;
   };
-  protoOf(AppContext).tc = function () {
+  protoOf(AppContext).ee = function () {
     return this.srcKotlin;
   };
-  protoOf(AppContext).uc = function () {
+  protoOf(AppContext).fe = function () {
     return this.srcSwift;
   };
-  protoOf(AppContext).vc = function () {
-    return this.f9_1;
+  protoOf(AppContext).ge = function () {
+    return this.na_1;
   };
-  protoOf(AppContext).wc = function (arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
-    return new AppContext(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
+  protoOf(AppContext).he = function (arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
+    return new AppContext(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
   };
-  protoOf(AppContext).copy = function (arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField, $super) {
+  protoOf(AppContext).copy = function (arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField, $super) {
     arguments_0 = arguments_0 === VOID ? this.arguments : arguments_0;
     consoleOutput = consoleOutput === VOID ? this.consoleOutput : consoleOutput;
     currentOutputPathId = currentOutputPathId === VOID ? this.currentOutputPathId : currentOutputPathId;
@@ -1470,15 +1509,16 @@
     outputKotlin = outputKotlin === VOID ? this.outputKotlin : outputKotlin;
     outputPaths = outputPaths === VOID ? this.outputPaths : outputPaths;
     outputSwift = outputSwift === VOID ? this.outputSwift : outputSwift;
+    rawCPPSDK = rawCPPSDK === VOID ? this.rawCPPSDK : rawCPPSDK;
     rawKotlin = rawKotlin === VOID ? this.rawKotlin : rawKotlin;
     rawSwift = rawSwift === VOID ? this.rawSwift : rawSwift;
     srcKotlin = srcKotlin === VOID ? this.srcKotlin : srcKotlin;
     srcSwift = srcSwift === VOID ? this.srcSwift : srcSwift;
-    recentField = recentField === VOID ? this.f9_1 : recentField;
-    return $super === VOID ? this.wc(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) : $super.wc.call(this, arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
+    recentField = recentField === VOID ? this.na_1 : recentField;
+    return $super === VOID ? this.he(arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) : $super.he.call(this, arguments_0, consoleOutput, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
   };
   protoOf(AppContext).toString = function () {
-    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', currentOutputPathId=' + this.currentOutputPathId + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', fobjKotlin=' + this.fobjKotlin + ', fobjSwift=' + this.fobjSwift + ', inputFile=' + this.inputFile + ', inputFileDir=' + this.inputFileDir + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputCPPHeader=' + this.outputCPPHeader + ', outputCPPSDK=' + this.outputCPPSDK + ', outputCPPSource=' + this.outputCPPSource + ', outputEntityContents=' + this.outputEntityContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputJSExport=' + this.outputJSExport + ', outputKotlin=' + this.outputKotlin + ', outputPaths=' + toString(this.outputPaths) + ', outputSwift=' + this.outputSwift + ', rawKotlin=' + this.rawKotlin + ', rawSwift=' + this.rawSwift + ', srcKotlin=' + this.srcKotlin + ', srcSwift=' + this.srcSwift + ', recentField=' + this.f9_1 + ')';
+    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', currentOutputPathId=' + this.currentOutputPathId + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', fobjKotlin=' + this.fobjKotlin + ', fobjSwift=' + this.fobjSwift + ', inputFile=' + this.inputFile + ', inputFileDir=' + this.inputFileDir + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputCPPHeader=' + this.outputCPPHeader + ', outputCPPSDK=' + this.outputCPPSDK + ', outputCPPSource=' + this.outputCPPSource + ', outputEntityContents=' + this.outputEntityContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputJSExport=' + this.outputJSExport + ', outputKotlin=' + this.outputKotlin + ', outputPaths=' + toString(this.outputPaths) + ', outputSwift=' + this.outputSwift + ', rawCPPSDK=' + this.rawCPPSDK + ', rawKotlin=' + this.rawKotlin + ', rawSwift=' + this.rawSwift + ', srcKotlin=' + this.srcKotlin + ', srcSwift=' + this.srcSwift + ', recentField=' + this.na_1 + ')';
   };
   protoOf(AppContext).hashCode = function () {
     var result = hashCode(this.arguments);
@@ -1508,11 +1548,12 @@
     result = imul(result, 31) + getStringHashCode(this.outputKotlin) | 0;
     result = imul(result, 31) + hashCode(this.outputPaths) | 0;
     result = imul(result, 31) + getStringHashCode(this.outputSwift) | 0;
+    result = imul(result, 31) + getStringHashCode(this.rawCPPSDK) | 0;
     result = imul(result, 31) + getStringHashCode(this.rawKotlin) | 0;
     result = imul(result, 31) + getStringHashCode(this.rawSwift) | 0;
     result = imul(result, 31) + getStringHashCode(this.srcKotlin) | 0;
     result = imul(result, 31) + getStringHashCode(this.srcSwift) | 0;
-    result = imul(result, 31) + getStringHashCode(this.f9_1) | 0;
+    result = imul(result, 31) + getStringHashCode(this.na_1) | 0;
     return result;
   };
   protoOf(AppContext).equals = function (other) {
@@ -1575,6 +1616,8 @@
       return false;
     if (!(this.outputSwift === tmp0_other_with_cast.outputSwift))
       return false;
+    if (!(this.rawCPPSDK === tmp0_other_with_cast.rawCPPSDK))
+      return false;
     if (!(this.rawKotlin === tmp0_other_with_cast.rawKotlin))
       return false;
     if (!(this.rawSwift === tmp0_other_with_cast.rawSwift))
@@ -1583,7 +1626,7 @@
       return false;
     if (!(this.srcSwift === tmp0_other_with_cast.srcSwift))
       return false;
-    if (!(this.f9_1 === tmp0_other_with_cast.f9_1))
+    if (!(this.na_1 === tmp0_other_with_cast.na_1))
       return false;
     return true;
   };
@@ -1593,31 +1636,31 @@
     this.path = path;
     this.type = type;
   }
-  protoOf(OutputPath).xc = function (_set____db54di) {
+  protoOf(OutputPath).ie = function (_set____db54di) {
     this.path = _set____db54di;
   };
-  protoOf(OutputPath).yc = function () {
+  protoOf(OutputPath).je = function () {
     return this.path;
   };
-  protoOf(OutputPath).zc = function (_set____db54di) {
+  protoOf(OutputPath).ke = function (_set____db54di) {
     this.type = _set____db54di;
   };
-  protoOf(OutputPath).ad = function () {
+  protoOf(OutputPath).le = function () {
     return this.type;
   };
-  protoOf(OutputPath).c9 = function () {
+  protoOf(OutputPath).ka = function () {
     return this.path;
   };
-  protoOf(OutputPath).d9 = function () {
+  protoOf(OutputPath).la = function () {
     return this.type;
   };
-  protoOf(OutputPath).bd = function (path, type) {
+  protoOf(OutputPath).me = function (path, type) {
     return new OutputPath(path, type);
   };
   protoOf(OutputPath).copy = function (path, type, $super) {
     path = path === VOID ? this.path : path;
     type = type === VOID ? this.type : type;
-    return $super === VOID ? this.bd(path, type) : $super.bd.call(this, path, type);
+    return $super === VOID ? this.me(path, type) : $super.me.call(this, path, type);
   };
   protoOf(OutputPath).toString = function () {
     return 'OutputPath(path=' + this.path + ', type=' + this.type + ')';
@@ -1654,55 +1697,55 @@
     this.context = context;
     var tmp = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp.cd_1 = ArrayList_init_$Create$();
+    tmp.ne_1 = ArrayList_init_$Create$();
     var tmp_0 = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp_0.dd_1 = ArrayList_init_$Create$();
+    tmp_0.oe_1 = ArrayList_init_$Create$();
     this.isProcessingQueue = false;
     var tmp_1 = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp_1.ed_1 = ArrayList_init_$Create$();
+    tmp_1.pe_1 = ArrayList_init_$Create$();
   }
-  protoOf(KDController).fd = function (_set____db54di) {
+  protoOf(KDController).qe = function (_set____db54di) {
     this.context = _set____db54di;
   };
-  protoOf(KDController).gd = function () {
+  protoOf(KDController).re = function () {
     return this.context;
   };
-  protoOf(KDController).hd = function (_set____db54di) {
-    this.cd_1 = _set____db54di;
+  protoOf(KDController).se = function (_set____db54di) {
+    this.ne_1 = _set____db54di;
   };
-  protoOf(KDController).id = function () {
-    return this.cd_1;
+  protoOf(KDController).te = function () {
+    return this.ne_1;
   };
-  protoOf(KDController).jd = function (_set____db54di) {
-    this.dd_1 = _set____db54di;
+  protoOf(KDController).ue = function (_set____db54di) {
+    this.oe_1 = _set____db54di;
   };
-  protoOf(KDController).kd = function () {
-    return this.dd_1;
+  protoOf(KDController).ve = function () {
+    return this.oe_1;
   };
-  protoOf(KDController).ld = function (_set____db54di) {
+  protoOf(KDController).we = function (_set____db54di) {
     this.isProcessingQueue = _set____db54di;
   };
-  protoOf(KDController).md = function () {
+  protoOf(KDController).xe = function () {
     return this.isProcessingQueue;
   };
-  protoOf(KDController).nd = function (_set____db54di) {
-    this.ed_1 = _set____db54di;
+  protoOf(KDController).ye = function (_set____db54di) {
+    this.pe_1 = _set____db54di;
   };
-  protoOf(KDController).od = function () {
-    return this.ed_1;
+  protoOf(KDController).ze = function () {
+    return this.pe_1;
   };
   protoOf(KDController).executeFunctions = function () {
-    var c = this.ed_1.l2(0);
-    this.context.qb(c.recentField);
+    var c = this.pe_1.n2(0);
+    this.context.ad(c.recentField);
     this.context.setField(c.recentField, c.fieldAny(c.recentField));
-    var _iterator__ex2g4s = this.dd_1.f();
-    while (_iterator__ex2g4s.g()) {
-      var f = _iterator__ex2g4s.h();
+    var _iterator__ex2g4s = this.oe_1.g();
+    while (_iterator__ex2g4s.h()) {
+      var f = _iterator__ex2g4s.i();
       var ctx = f(this.context.selfCopy());
       if (!(ctx.recentField === KD_FIELD_NONE)) {
-        this.ed_1.o(ctx);
+        this.pe_1.e(ctx);
       }
     }
     this.reportContext();
@@ -1712,33 +1755,33 @@
       return Unit_instance;
     }
     this.isProcessingQueue = true;
-    while (this.ed_1.i() > 0) {
+    while (this.pe_1.j() > 0) {
       this.executeFunctions();
     }
     this.isProcessingQueue = false;
   };
   protoOf(KDController).registerCallback = function (cb) {
-    this.cd_1.o(cb);
+    this.ne_1.e(cb);
   };
   protoOf(KDController).registerFieldCallback = function (fieldName, cb) {
-    var tmp = this.cd_1;
-    tmp.o(KDController$registerFieldCallback$lambda(fieldName, cb));
+    var tmp = this.ne_1;
+    tmp.e(KDController$registerFieldCallback$lambda(fieldName, cb));
   };
   protoOf(KDController).registerFunction = function (f) {
-    this.dd_1.o(f);
+    this.oe_1.e(f);
   };
   protoOf(KDController).reportContext = function () {
-    var _iterator__ex2g4s = this.cd_1.f();
-    while (_iterator__ex2g4s.g()) {
-      var cb = _iterator__ex2g4s.h();
+    var _iterator__ex2g4s = this.ne_1.g();
+    while (_iterator__ex2g4s.h()) {
+      var cb = _iterator__ex2g4s.i();
       cb(this.context);
     }
   };
   protoOf(KDController).set = function (fieldName, value) {
     var c = this.context.selfCopy();
     c.setField(fieldName, value);
-    c.qb(fieldName);
-    this.ed_1.o(c);
+    c.ad(fieldName);
+    this.pe_1.e(c);
     this.processQueue();
   };
   function registerOneliners(ctrl, items) {
@@ -1785,105 +1828,109 @@
     this.outputKotlin = 'outputKotlin';
     this.outputPaths = 'outputPaths';
     this.outputSwift = 'outputSwift';
+    this.rawCPPSDK = 'rawCPPSDK';
     this.rawKotlin = 'rawKotlin';
     this.rawSwift = 'rawSwift';
     this.srcKotlin = 'srcKotlin';
     this.srcSwift = 'srcSwift';
   }
-  protoOf(F).h9 = function () {
+  protoOf(F).pa = function () {
     return this.arguments;
   };
-  protoOf(F).j9 = function () {
+  protoOf(F).ra = function () {
     return this.consoleOutput;
   };
-  protoOf(F).l9 = function () {
+  protoOf(F).ta = function () {
     return this.currentOutputPathId;
   };
-  protoOf(F).n9 = function () {
+  protoOf(F).va = function () {
     return this.didLaunch;
   };
-  protoOf(F).p9 = function () {
+  protoOf(F).xa = function () {
     return this.didWriteOutputFile;
   };
-  protoOf(F).r9 = function () {
+  protoOf(F).za = function () {
     return this.entityComments;
   };
-  protoOf(F).t9 = function () {
+  protoOf(F).bb = function () {
     return this.entityFieldComments;
   };
-  protoOf(F).v9 = function () {
+  protoOf(F).db = function () {
     return this.entityFields;
   };
-  protoOf(F).x9 = function () {
+  protoOf(F).fb = function () {
     return this.entityNames;
   };
-  protoOf(F).z9 = function () {
+  protoOf(F).hb = function () {
     return this.entityPrefixesKotlin;
   };
-  protoOf(F).ba = function () {
+  protoOf(F).jb = function () {
     return this.entityTypes;
   };
-  protoOf(F).da = function () {
+  protoOf(F).lb = function () {
     return this.fobjKotlin;
   };
-  protoOf(F).fa = function () {
+  protoOf(F).nb = function () {
     return this.fobjSwift;
   };
-  protoOf(F).ha = function () {
+  protoOf(F).pb = function () {
     return this.inputFile;
   };
-  protoOf(F).ja = function () {
+  protoOf(F).rb = function () {
     return this.inputFileDir;
   };
-  protoOf(F).la = function () {
+  protoOf(F).tb = function () {
     return this.inputFileLines;
   };
-  protoOf(F).na = function () {
+  protoOf(F).vb = function () {
     return this.isDbg;
   };
-  protoOf(F).pd = function () {
+  protoOf(F).af = function () {
     return this.none;
   };
-  protoOf(F).pa = function () {
+  protoOf(F).xb = function () {
     return this.outputCPPHeader;
   };
-  protoOf(F).ra = function () {
+  protoOf(F).zb = function () {
     return this.outputCPPSDK;
   };
-  protoOf(F).ta = function () {
+  protoOf(F).bc = function () {
     return this.outputCPPSource;
   };
-  protoOf(F).va = function () {
+  protoOf(F).dc = function () {
     return this.outputEntityContents;
   };
-  protoOf(F).xa = function () {
+  protoOf(F).fc = function () {
     return this.outputFile;
   };
-  protoOf(F).za = function () {
+  protoOf(F).hc = function () {
     return this.outputFileContents;
   };
-  protoOf(F).bb = function () {
+  protoOf(F).jc = function () {
     return this.outputJSExport;
   };
-  protoOf(F).db = function () {
+  protoOf(F).lc = function () {
     return this.outputKotlin;
   };
-  protoOf(F).fb = function () {
+  protoOf(F).nc = function () {
     return this.outputPaths;
   };
-  protoOf(F).hb = function () {
+  protoOf(F).pc = function () {
     return this.outputSwift;
   };
-  protoOf(F).jb = function () {
+  protoOf(F).rc = function () {
+    return this.rawCPPSDK;
+  };
+  protoOf(F).tc = function () {
     return this.rawKotlin;
   };
-  protoOf(F).lb = function () {
+  protoOf(F).vc = function () {
     return this.rawSwift;
   };
-  protoOf(F).nb = function () {
+  protoOf(F).xc = function () {
     return this.srcKotlin;
   };
-  protoOf(F).pb = function () {
+  protoOf(F).zc = function () {
     return this.srcSwift;
   };
   var F_instance;
@@ -1891,7 +1938,7 @@
     return F_instance;
   }
   function base64ToString(b64) {
-    return decodeToString(Default_getInstance().z7(b64));
+    return decodeToString(Default_getInstance().m9(b64));
   }
   function cliArgumentValue(args, argument) {
     var inductionVariable = 0;
@@ -1934,13 +1981,13 @@
     if (isInterface(v, KtMap)) {
       var out_0 = '';
       // Inline function 'kotlin.collections.iterator' call
-      var _iterator__ex2g4s = v.b1().f();
-      while (_iterator__ex2g4s.g()) {
-        var _destruct__k2r9zo = _iterator__ex2g4s.h();
+      var _iterator__ex2g4s = v.c1().g();
+      while (_iterator__ex2g4s.h()) {
+        var _destruct__k2r9zo = _iterator__ex2g4s.i();
         // Inline function 'kotlin.collections.component1' call
-        var key = _destruct__k2r9zo.u();
+        var key = _destruct__k2r9zo.v();
         // Inline function 'kotlin.collections.component2' call
-        var value = _destruct__k2r9zo.v();
+        var value = _destruct__k2r9zo.w();
         // Inline function 'kotlin.text.isEmpty' call
         var this_1 = out_0;
         if (!(charSequenceLength(this_1) === 0)) {
@@ -1948,7 +1995,7 @@
         }
         out_0 = out_0 + (debugString(ensureNotNull(key)) + ':' + debugString(ensureNotNull(value)));
       }
-      return 'D(' + v.i() + ')' + out_0;
+      return 'D(' + v.j() + ')' + out_0;
     }
     return toString(v);
   }
@@ -1968,6 +2015,21 @@
         return outputCPPSource;
     }
     return 'outputFC-N/A';
+  }
+  function parseRawCPPSDK(lines) {
+    var contents = '';
+    var inductionVariable = 0;
+    var last = lines.length;
+    while (inductionVariable < last) {
+      var ln = lines[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      if (startsWith(ln, 'c++sdk: ')) {
+        var prefixLen = 8;
+        var code = substring_0(ln, prefixLen);
+        contents = contents + (code + '\n');
+      }
+    }
+    return contents;
   }
   function parseRawKotlin(lines) {
     var contents = '';
@@ -2027,7 +2089,7 @@
         var comment = substring_0(ln, prefixLen);
         // Inline function 'kotlin.collections.set' call
         var key = entityId;
-        d.b2(key, comment);
+        d.c2(key, comment);
       } else {
         // Inline function 'kotlin.text.isEmpty' call
         var this_0 = parseEntityName(ln);
@@ -2048,7 +2110,7 @@
     var prefixLen = 8;
     var nameAndValue = substring_0(ln, prefixLen);
     var parts = split(nameAndValue, [': '], VOID, 2);
-    if (!(parts.i() === 2)) {
+    if (!(parts.j() === 2)) {
       // Inline function 'kotlin.arrayOf' call
       // Inline function 'kotlin.js.unsafeCast' call
       // Inline function 'kotlin.js.asDynamic' call
@@ -2110,7 +2172,7 @@
         var tmp0 = comments;
         // Inline function 'kotlin.collections.set' call
         var value = lastComment;
-        tmp0.b2(name, value);
+        tmp0.c2(name, value);
         lastComment = '';
       }
       if (isEntityEndMarker || isLastEntityEndMarker) {
@@ -2118,7 +2180,7 @@
         var tmp2 = entityId;
         // Inline function 'kotlin.collections.set' call
         var value_0 = comments;
-        d.b2(tmp2, value_0);
+        d.c2(tmp2, value_0);
         entityId = entityId + 1 | 0;
         // Inline function 'kotlin.collections.mutableMapOf' call
         comments = LinkedHashMap_init_$Create$();
@@ -2165,14 +2227,14 @@
         var name = parts[0];
         var type = parts[1];
         // Inline function 'kotlin.collections.set' call
-        fields.b2(name, type);
+        fields.c2(name, type);
       }
       if (isEntityEndMarker || isLastEntityEndMarker) {
         isParsingFields = false;
         var tmp2 = entityId;
         // Inline function 'kotlin.collections.set' call
         var value = fields;
-        d.b2(tmp2, value);
+        d.c2(tmp2, value);
         entityId = entityId + 1 | 0;
         // Inline function 'kotlin.collections.mutableMapOf' call
         fields = LinkedHashMap_init_$Create$();
@@ -2226,7 +2288,7 @@
         var value = substring_0(ln, prefixLen);
         // Inline function 'kotlin.collections.set' call
         var key = entityId;
-        d.b2(key, value);
+        d.c2(key, value);
       } else {
         // Inline function 'kotlin.text.isEmpty' call
         var this_0 = parseEntityName(ln);
@@ -2251,7 +2313,7 @@
         var type = substring_0(ln, prefixLen);
         // Inline function 'kotlin.collections.set' call
         var key = entityId;
-        d.b2(key, type);
+        d.c2(key, type);
       } else {
         // Inline function 'kotlin.text.isEmpty' call
         var this_0 = parseEntityName(ln);
@@ -2304,9 +2366,9 @@
   //region block: post-declaration
   protoOf(AppContext).fieldAny = fieldAny;
   defineProp(protoOf(AppContext), 'recentField', function () {
-    return this.rb();
+    return this.bd();
   }, function (value) {
-    this.qb(value);
+    this.ad(value);
   });
   //endregion
   //region block: init
