@@ -39,6 +39,12 @@ const val TEMPLATE_CPP_HEADER_START = """
 """
 
 const val TEMPLATE_FOBJ_CPP = """
+// Special structure to reference keys with a compile time check
+struct FStruct {
+%FSTRUCT_ITEMS%
+};
+inline FStruct F;
+
 // Special structure to reference keys in QML
 class FObj: public QObject {
     Q_OBJECT
@@ -48,12 +54,6 @@ class FObj: public QObject {
         FObj(): QObject() { }
 %IMPL_ITEMS%
 };
-
-// Special structure to reference keys with a compile time check
-struct FStruct {
-%FSTRUCT_ITEMS%
-};
-inline FStruct F;
 """
 const val TEMPLATE_FOBJ_CPP_FSTRUCT_ITEM = """    static inline constexpr const char *%NAME% = "%NAME%";
 """

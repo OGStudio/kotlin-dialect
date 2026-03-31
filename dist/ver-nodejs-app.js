@@ -618,7 +618,7 @@
       inductionVariable_1 = inductionVariable_1 + 1 | 0;
       fobjImplContents = fobjImplContents + replace('        QString key_%NAME%() const { return F.%NAME%; }\n', '%NAME%', name_1);
     }
-    return replace(replace(replace('\n// Special structure to reference keys in QML\nclass FObj: public QObject {\n    Q_OBJECT\n%PROPERTY_ITEMS%\n\n    public:\n        FObj(): QObject() { }\n%IMPL_ITEMS%\n};\n\n// Special structure to reference keys with a compile time check\nstruct FStruct {\n%FSTRUCT_ITEMS%\n};\ninline FStruct F;\n', '%FSTRUCT_ITEMS%', fstructContents), '%IMPL_ITEMS%', fobjImplContents), '%PROPERTY_ITEMS%', fobjPropertyContents);
+    return replace(replace(replace('\n// Special structure to reference keys with a compile time check\nstruct FStruct {\n%FSTRUCT_ITEMS%\n};\ninline FStruct F;\n\n// Special structure to reference keys in QML\nclass FObj: public QObject {\n    Q_OBJECT\n%PROPERTY_ITEMS%\n\n    public:\n        FObj(): QObject() { }\n%IMPL_ITEMS%\n};\n', '%FSTRUCT_ITEMS%', fstructContents), '%IMPL_ITEMS%', fobjImplContents), '%PROPERTY_ITEMS%', fobjPropertyContents);
   }
   function fobjFields(entityFields, ids) {
     // Inline function 'kotlin.collections.mutableMapOf' call
