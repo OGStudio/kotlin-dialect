@@ -27,6 +27,9 @@ AppContext:
         entityNames: [String]
         entityPrefixesKotlin: [Int: String]
         entityTypes: [Int: String]
+        # Special F object for C++
+        fobjCPPHeader: String
+        fobjCPPSource: String
         # Special F object for Kotlin
         fobjKotlin: String
         # Special F struct for Swift

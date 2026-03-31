@@ -256,6 +256,23 @@ fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
     return c
 }
 
+// Generate a special structure (.h) to reference fields in C++
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetFObjCPPHeader(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        var fields = fobjFields(c.entityFields, ids)
+        c.fobjCPPHeader = fobjCPPHeader(fields)
+        c.recentField = "fobjCPPHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate a special structure to reference fields in Kotlin
 //
 // Conditions:
@@ -307,15 +324,16 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
     return c
 }
 
-// Generate output for `c++sdk` type
+// Generate output for `c++hdr` type
 //
 // Conditions:
 // 1. Output for `kotlin` is ready
-fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
+fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        val outk = c.outputKotlin.replace(Regex("package.*"), "")
-        c.outputCPPSDK = c.rawCPPSDK +  outk + TEMPLATE_CPP_CONVERSIONS + TEMPLATE_CPP_EXTENSIONS
-        c.recentField = "outputCPPSDK"
+        c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
+            c.fobjCPPHeader + 
+            TEMPLATE_CPP_HEADER_END
+        c.recentField = "outputCPPHeader"
         return c
     }
 
@@ -323,6 +341,21 @@ fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
     return c
 }
 
+// Generate output for `c++sdk` type
+//
+// Conditions:
+// 1. Output for `kotlin` is ready
+fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
+    if (c.recentField == "outputKotlin") {
+        val outk = c.outputKotlin.replace(Regex("package.*"), "")
+        c.outputCPPSDK = c.rawCPPSDK + outk + TEMPLATE_CPP_CONVERSIONS + TEMPLATE_CPP_EXTENSIONS
+        c.recentField = "outputCPPSDK"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
 
 // Select the path to write to
 //
