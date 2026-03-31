@@ -120,19 +120,19 @@ if (typeof String.prototype.endsWith === 'undefined') {
   initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtList, Collection]);
   initMetadataForClass(AbstractMap, 'AbstractMap', VOID, VOID, [KtMap]);
   initMetadataForClass(AbstractMutableMap, 'AbstractMutableMap', VOID, AbstractMap, [AbstractMap, KtMap]);
-  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtSet]);
+  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtSet, Collection]);
   initMetadataForCompanion(Companion_2);
   initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, KtList, Collection]);
   initMetadataForClass(HashMap, 'HashMap', HashMap_init_$Create$, AbstractMutableMap, [AbstractMutableMap, KtMap]);
-  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapValues, 'HashMapValues', VOID, AbstractMutableCollection, [Collection, AbstractMutableCollection]);
-  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapEntrySet, 'HashMapEntrySet', VOID, HashMapEntrySetBase);
   initMetadataForClass(HashMapKeysDefault$iterator$1);
   initMetadataForClass(HashMapKeysDefault, 'HashMapKeysDefault', VOID, AbstractMutableSet);
   initMetadataForClass(HashMapValuesDefault$iterator$1);
   initMetadataForClass(HashMapValuesDefault, 'HashMapValuesDefault', VOID, AbstractMutableCollection);
-  initMetadataForClass(HashSet, 'HashSet', HashSet_init_$Create$, AbstractMutableSet, [AbstractMutableSet, Collection, KtSet]);
+  initMetadataForClass(HashSet, 'HashSet', HashSet_init_$Create$, AbstractMutableSet, [AbstractMutableSet, KtSet, Collection]);
   initMetadataForCompanion(Companion_3);
   initMetadataForClass(Itr, 'Itr');
   initMetadataForClass(KeysItr, 'KeysItr', VOID, Itr);
@@ -178,7 +178,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   initMetadataForClass(InternalHashMap, 'InternalHashMap', InternalHashMap_init_$Create$, VOID, [InternalMap]);
   initMetadataForObject(EmptyHolder, 'EmptyHolder');
   initMetadataForClass(LinkedHashMap, 'LinkedHashMap', LinkedHashMap_init_$Create$, HashMap, [HashMap, KtMap]);
-  initMetadataForClass(LinkedHashSet, 'LinkedHashSet', LinkedHashSet_init_$Create$, HashSet, [HashSet, Collection, KtSet]);
+  initMetadataForClass(LinkedHashSet, 'LinkedHashSet', LinkedHashSet_init_$Create$, HashSet, [HashSet, KtSet, Collection]);
   initMetadataForClass(BaseOutput, 'BaseOutput');
   initMetadataForClass(NodeJsOutput, 'NodeJsOutput', VOID, BaseOutput);
   initMetadataForClass(BufferedOutput, 'BufferedOutput', BufferedOutput, BaseOutput);
@@ -2255,17 +2255,6 @@ if (typeof String.prototype.endsWith === 'undefined') {
       throw UnsupportedOperationException_init_$Create$();
   };
   var _stableSortingIsSupported;
-  function sortArray(array) {
-    if (getStableSortingIsSupported()) {
-      var comparison = sortArray$lambda;
-      // Inline function 'kotlin.js.asDynamic' call
-      array.sort(comparison);
-    } else {
-      // Inline function 'kotlin.js.unsafeCast' call
-      // Inline function 'kotlin.js.asDynamic' call
-      mergeSort(array, 0, get_lastIndex(array), naturalOrder());
-    }
-  }
   function sortArrayWith(array, comparator) {
     if (getStableSortingIsSupported()) {
       var comparison = sortArrayWith$lambda(comparator);
@@ -2275,6 +2264,17 @@ if (typeof String.prototype.endsWith === 'undefined') {
       // Inline function 'kotlin.js.unsafeCast' call
       // Inline function 'kotlin.js.asDynamic' call
       mergeSort(array, 0, get_lastIndex(array), comparator);
+    }
+  }
+  function sortArray(array) {
+    if (getStableSortingIsSupported()) {
+      var comparison = sortArray$lambda;
+      // Inline function 'kotlin.js.asDynamic' call
+      array.sort(comparison);
+    } else {
+      // Inline function 'kotlin.js.unsafeCast' call
+      // Inline function 'kotlin.js.asDynamic' call
+      mergeSort(array, 0, get_lastIndex(array), naturalOrder());
     }
   }
   function getStableSortingIsSupported() {
@@ -2369,13 +2369,13 @@ if (typeof String.prototype.endsWith === 'undefined') {
        while (!(i === end));
     return target;
   }
-  function sortArray$lambda(a, b) {
-    return compareTo(a, b);
-  }
   function sortArrayWith$lambda($comparator) {
     return function (a, b) {
       return $comparator.compare(a, b);
     };
+  }
+  function sortArray$lambda(a, b) {
+    return compareTo(a, b);
   }
   function getStableSortingIsSupported$lambda(a, b) {
     return (a & 3) - (b & 3) | 0;

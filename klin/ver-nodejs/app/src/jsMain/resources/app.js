@@ -21,7 +21,7 @@ function AppComponent() {
         KT.registerOneliners(KT.appCtrl(), oneliners);
 
         // Defaults.
-        //appSet("isDbg", true);
+        appSet("isDbg", true);
         appSet("arguments", process.argv);
     };
 

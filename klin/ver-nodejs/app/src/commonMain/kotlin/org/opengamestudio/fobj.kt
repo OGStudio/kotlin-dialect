@@ -7,17 +7,6 @@
 
 package org.opengamestudio
 
-// Collect entity ids of contexts only
-fun fobjContexts(entityTypes: Map<Int, String>): Array<Int> {
-    var ids = arrayOf<Int>()
-    for ((id, type) in entityTypes) {
-        if (type == TYPE_CONTEXT) {
-            ids += id
-        }
-    }
-    return ids
-}
-
 // Collect field names
 fun fobjFields(
     entityFields: Map<Int, Map<String, String>>,

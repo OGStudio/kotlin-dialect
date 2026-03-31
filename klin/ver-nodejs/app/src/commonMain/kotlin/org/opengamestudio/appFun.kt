@@ -262,7 +262,7 @@ fun appShouldResetCurrentOutputPathId(c: AppContext): AppContext {
 // 1. Output of Kotlin entities' is available
 fun appShouldResetFObjKotlin(c: AppContext): AppContext {
     if (c.recentField == "outputEntityContents") {
-        val ids = fobjContexts(c.entityTypes)
+        val ids = contextIds(c.entityTypes)
         var fields = fobjFields(c.entityFields, ids)
         c.fobjKotlin = fobjKotlin(fields)
         c.recentField = "fobjKotlin"
@@ -279,7 +279,7 @@ fun appShouldResetFObjKotlin(c: AppContext): AppContext {
 // 1. F object for Kotlin is ready
 fun appShouldResetFObjSwift(c: AppContext): AppContext {
     if (c.recentField == "fobjKotlin") {
-        val ids = fobjContexts(c.entityTypes)
+        val ids = contextIds(c.entityTypes)
         var fields = fobjFields(c.entityFields, ids)
         c.fobjSwift = fobjSwift(fields)
         c.recentField = "fobjSwift"

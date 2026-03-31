@@ -213,7 +213,7 @@
   }
   function appShouldResetFObjKotlin(c) {
     if (c.na_1 === 'outputEntityContents') {
-      var ids = fobjContexts(c.entityTypes);
+      var ids = contextIds(c.entityTypes);
       var fields = fobjFields(c.entityFields, ids);
       c.fobjKotlin = fobjKotlin(fields);
       c.na_1 = 'fobjKotlin';
@@ -224,7 +224,7 @@
   }
   function appShouldResetFObjSwift(c) {
     if (c.na_1 === 'fobjKotlin') {
-      var ids = fobjContexts(c.entityTypes);
+      var ids = contextIds(c.entityTypes);
       var fields = fobjFields(c.entityFields, ids);
       c.fobjSwift = fobjSwift(fields);
       c.na_1 = 'fobjSwift';
@@ -557,32 +557,6 @@
     return embSwift64;
   }
   var embSwift64;
-  function fobjContexts(entityTypes) {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var ids = [];
-    // Inline function 'kotlin.collections.iterator' call
-    var _iterator__ex2g4s = entityTypes.c1().g();
-    while (_iterator__ex2g4s.h()) {
-      var _destruct__k2r9zo = _iterator__ex2g4s.i();
-      // Inline function 'kotlin.collections.component1' call
-      var id = _destruct__k2r9zo.v();
-      // Inline function 'kotlin.collections.component2' call
-      var type = _destruct__k2r9zo.w();
-      if (type === 'context') {
-        // Inline function 'kotlin.collections.plus' call
-        // Inline function 'kotlin.js.asDynamic' call
-        var tmp$ret$6 = ids;
-        // Inline function 'kotlin.arrayOf' call
-        // Inline function 'kotlin.js.unsafeCast' call
-        // Inline function 'kotlin.js.asDynamic' call
-        var tmp$ret$9 = [id];
-        ids = tmp$ret$6.concat(tmp$ret$9);
-      }
-    }
-    return ids;
-  }
   function fobjFields(entityFields, ids) {
     // Inline function 'kotlin.collections.mutableMapOf' call
     var d = LinkedHashMap_init_$Create$();
@@ -1953,6 +1927,32 @@
       }
     }
     return '';
+  }
+  function contextIds(entityTypes) {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var ids = [];
+    // Inline function 'kotlin.collections.iterator' call
+    var _iterator__ex2g4s = entityTypes.c1().g();
+    while (_iterator__ex2g4s.h()) {
+      var _destruct__k2r9zo = _iterator__ex2g4s.i();
+      // Inline function 'kotlin.collections.component1' call
+      var id = _destruct__k2r9zo.v();
+      // Inline function 'kotlin.collections.component2' call
+      var type = _destruct__k2r9zo.w();
+      if (type === 'context') {
+        // Inline function 'kotlin.collections.plus' call
+        // Inline function 'kotlin.js.asDynamic' call
+        var tmp$ret$6 = ids;
+        // Inline function 'kotlin.arrayOf' call
+        // Inline function 'kotlin.js.unsafeCast' call
+        // Inline function 'kotlin.js.asDynamic' call
+        var tmp$ret$9 = [id];
+        ids = tmp$ret$6.concat(tmp$ret$9);
+      }
+    }
+    return ids;
   }
   function debugShortString(v) {
     var str = debugString(v);

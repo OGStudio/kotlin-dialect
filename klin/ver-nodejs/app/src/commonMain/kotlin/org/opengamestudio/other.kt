@@ -43,6 +43,17 @@ fun cliHasArgument(
     return false
 }
 
+// Collect entity ids of contexts only
+fun contextIds(entityTypes: Map<Int, String>): Array<Int> {
+    var ids = arrayOf<Int>()
+    for ((id, type) in entityTypes) {
+        if (type == TYPE_CONTEXT) {
+            ids += id
+        }
+    }
+    return ids
+}
+
 // Shortened debug string
 fun debugShortString(v: Any): String {
     val str = debugString(v)
