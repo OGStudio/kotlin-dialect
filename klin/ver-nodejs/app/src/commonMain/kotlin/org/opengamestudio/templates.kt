@@ -37,6 +37,8 @@ const val TEMPLATE_CPP_HEADER_START = """
 #include <QObject>
 #include <QString>
 """
+const val TEMPLATE_CPP_SET_HEADER = """template<typename T> void %PREFIX%Set(const std::string &key, T value);
+"""
 
 const val TEMPLATE_FOBJ_CPP = """
 // Special structure to reference keys with a compile time check

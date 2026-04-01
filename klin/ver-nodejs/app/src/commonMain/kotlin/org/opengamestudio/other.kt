@@ -43,7 +43,7 @@ fun cliHasArgument(
     return false
 }
 
-// Collect entity ids of contexts only
+// Collect context entity ids
 fun contextIds(entityTypes: Map<Int, String>): Array<Int> {
     var ids = arrayOf<Int>()
     for ((id, type) in entityTypes) {
@@ -52,6 +52,19 @@ fun contextIds(entityTypes: Map<Int, String>): Array<Int> {
         }
     }
     return ids
+}
+
+// Collect context entity names
+fun contextNames(
+    entityIds: Array<Int>,
+    entityNames: Array<String>
+): Array<String> {
+    var items = arrayOf<String>()
+    for (id in entityIds) {
+        val name = entityNames[id]
+        items += name
+    }
+    return items
 }
 
 // Shortened debug string

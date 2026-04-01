@@ -1,0 +1,28 @@
+/**
+ * This file is a part of Kotlin dialect:
+ *     https://github.com/OGStudio/kotlin-dialect
+ * License: CC0
+ * Version: 2.0.0
+ */
+
+package org.opengamestudio
+
+fun cppEntityPrefixes(entityNames: Array<String>): Array<String> {
+    var items = arrayOf<String>()
+    for (fullName in entityNames) {
+        val nameLen = fullName.length
+        val suffixLen = CONTEXT_SUFFIX.length
+        val name = fullName.substring(0, nameLen - suffixLen)
+        items += name
+    }
+    return items
+}
+
+fun cppSetHeader(entityPrefixes: Array<String>): String {
+    var o = ""
+    for (prefix in entityPrefixes) {
+        o += TEMPLATE_CPP_SET_HEADER.replace("%PREFIX%", prefix.lowercase())
+    }
+    return o
+}
+

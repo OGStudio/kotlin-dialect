@@ -14,6 +14,8 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Declarations of xyzSet() calls
+        cppSetHeader: String
         # Output path that is being saved at the moment
         currentOutputPathId: Int
         didLaunch: Bool
