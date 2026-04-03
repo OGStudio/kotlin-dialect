@@ -7,9 +7,9 @@ is to set up correctly for multiple platforms. This project dictates one
 particular way to have your code organized to be able to have single logic
 in Kotlin across platforms in **native** apps.
 
-Key concepts:
+Key features:
 
-* Redux-like architecture
+* Redux-like architecture with Controller/Context (aka Store), Shoulds (aka Reducers), and Effects
 * Klin, a translator to convert YML to target languages: Kotlin, Swift
 
 ## Usage
