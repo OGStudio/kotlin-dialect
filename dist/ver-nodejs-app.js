@@ -209,6 +209,18 @@
     c.na_1 = 'none';
     return c;
   }
+  function appShouldResetCPPSetSource(c) {
+    if (c.na_1 === 'fobjKotlin') {
+      var ids = contextIds(c.entityTypes);
+      var names = contextNames(ids, c.entityNames);
+      var prefixes = cppEntityPrefixes(names);
+      c.cppSetSource = cppSetSource(prefixes);
+      c.na_1 = 'cppSetSource';
+      return c;
+    }
+    c.na_1 = 'none';
+    return c;
+  }
   function appShouldResetCurrentOutputPathId(c) {
     if (c.na_1 === 'outputSwift') {
       c.currentOutputPathId = 0;
@@ -283,6 +295,15 @@
       var outk = Regex_init_$Create$('package.*').y6(tmp0, '');
       c.outputCPPSDK = c.rawCPPSDK + outk + '\n// Convert Bool to Any (for SDK)\nfun boolToAny(item: Boolean): Any {\n    return item as Any\n}\n\n// Convert String to Any (for SDK)\nfun strToAny(item: String): Any {\n    return item as Any\n}\n' + '\n// Register C callback into KDController\n@OptIn(ExperimentalForeignApi::class)\nfun KDController.registerCallbackC(cb: CPointer<CFunction<() -> Unit>>) {\n    callbacks.add({ c -> cb() })\n}\n';
       c.na_1 = 'outputCPPSDK';
+      return c;
+    }
+    c.na_1 = 'none';
+    return c;
+  }
+  function appShouldResetOutputCPPSource(c) {
+    if (c.na_1 === 'outputKotlin') {
+      c.outputCPPSource = '\n#include "ignore.kd.h"\n#include "KT.h"\n' + c.cppSetSource;
+      c.na_1 = 'outputCPPSource';
       return c;
     }
     c.na_1 = 'none';
@@ -452,6 +473,13 @@
     l.callableName = 'appShouldResetCPPSetHeader';
     return l;
   }
+  function appShouldResetCPPSetSource$ref() {
+    var l = function (p0) {
+      return appShouldResetCPPSetSource(p0);
+    };
+    l.callableName = 'appShouldResetCPPSetSource';
+    return l;
+  }
   function appShouldResetCurrentOutputPathId$ref() {
     var l = function (p0) {
       return appShouldResetCurrentOutputPathId(p0);
@@ -499,6 +527,13 @@
       return appShouldResetOutputCPPSDK(p0);
     };
     l.callableName = 'appShouldResetOutputCPPSDK';
+    return l;
+  }
+  function appShouldResetOutputCPPSource$ref() {
+    var l = function (p0) {
+      return appShouldResetOutputCPPSource(p0);
+    };
+    l.callableName = 'appShouldResetOutputCPPSource';
     return l;
   }
   function appShouldResetOutputFile$ref() {
@@ -573,24 +608,26 @@
     var tmp_10 = appShouldParseOutputPaths$ref();
     var tmp_11 = appShouldPrintToConsole$ref();
     var tmp_12 = appShouldResetCPPSetHeader$ref();
-    var tmp_13 = appShouldResetCurrentOutputPathId$ref();
-    var tmp_14 = appShouldResetFObjCPPHeader$ref();
-    var tmp_15 = appShouldResetFObjKotlin$ref();
-    var tmp_16 = appShouldResetFObjSwift$ref();
-    var tmp_17 = appShouldResetInputFileDir$ref();
-    var tmp_18 = appShouldResetOutputCPPHeader$ref();
-    var tmp_19 = appShouldResetOutputCPPSDK$ref();
-    var tmp_20 = appShouldResetOutputFile$ref();
-    var tmp_21 = appShouldResetOutputFileContents$ref();
-    var tmp_22 = appShouldResetOutputJSExport$ref();
-    var tmp_23 = appShouldResetOutputKotlin$ref();
-    var tmp_24 = appShouldResetOutputSwift$ref();
-    var tmp_25 = appShouldResetSrcKotlin$ref();
+    var tmp_13 = appShouldResetCPPSetSource$ref();
+    var tmp_14 = appShouldResetCurrentOutputPathId$ref();
+    var tmp_15 = appShouldResetFObjCPPHeader$ref();
+    var tmp_16 = appShouldResetFObjKotlin$ref();
+    var tmp_17 = appShouldResetFObjSwift$ref();
+    var tmp_18 = appShouldResetInputFileDir$ref();
+    var tmp_19 = appShouldResetOutputCPPHeader$ref();
+    var tmp_20 = appShouldResetOutputCPPSDK$ref();
+    var tmp_21 = appShouldResetOutputCPPSource$ref();
+    var tmp_22 = appShouldResetOutputFile$ref();
+    var tmp_23 = appShouldResetOutputFileContents$ref();
+    var tmp_24 = appShouldResetOutputJSExport$ref();
+    var tmp_25 = appShouldResetOutputKotlin$ref();
+    var tmp_26 = appShouldResetOutputSwift$ref();
+    var tmp_27 = appShouldResetSrcKotlin$ref();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
     // Inline function 'kotlin.collections.forEach' call
-    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, appShouldResetSrcSwift$ref()];
+    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, tmp_26, tmp_27, appShouldResetSrcSwift$ref()];
     var inductionVariable = 0;
     var last = indexedObject.length;
     while (inductionVariable < last) {
@@ -641,6 +678,21 @@
       // Inline function 'kotlin.js.asDynamic' call
       var tmp$ret$1 = prefix.toLowerCase();
       o = tmp + replace('template<typename T> void %PREFIX%Set(const std::string &key, T value);\n', '%PREFIX%', tmp$ret$1);
+    }
+    return o;
+  }
+  function cppSetSource(entityPrefixes) {
+    var o = '';
+    var inductionVariable = 0;
+    var last = entityPrefixes.length;
+    while (inductionVariable < last) {
+      var prefix = entityPrefixes[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      var tmp = o;
+      // Inline function 'kotlin.text.lowercase' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var tmp$ret$1 = prefix.toLowerCase();
+      o = tmp + replace('template<> void %PREFIX%Set(\n    const std::string &key,\n    bool value\n) {\n    KT.KDController.set(KT.%PREFIX%Ctrl(), key.c_str(), KT.boolToAny(value));\n}\n\ntemplate<> void %PREFIX%Set(\n    const std::string &key,\n    const char *value\n) {\n    KT.KDController.set(KT.%PREFIX%Ctrl(), key.c_str(), KT.strToAny(value));\n}\n', '%PREFIX%', tmp$ret$1);
     }
     return o;
   }
@@ -902,7 +954,7 @@
     return contents;
   }
   var KD_FIELD_NONE;
-  function AppContext(arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
+  function AppContext(arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
     var tmp;
     if (arguments_0 === VOID) {
       // Inline function 'kotlin.arrayOf' call
@@ -915,6 +967,7 @@
     arguments_0 = tmp;
     consoleOutput = consoleOutput === VOID ? '' : consoleOutput;
     cppSetHeader = cppSetHeader === VOID ? '' : cppSetHeader;
+    cppSetSource = cppSetSource === VOID ? '' : cppSetSource;
     currentOutputPathId = currentOutputPathId === VOID ? 0 : currentOutputPathId;
     didLaunch = didLaunch === VOID ? false : didLaunch;
     didWriteOutputFile = didWriteOutputFile === VOID ? false : didWriteOutputFile;
@@ -1013,6 +1066,7 @@
     this.arguments = arguments_0;
     this.consoleOutput = consoleOutput;
     this.cppSetHeader = cppSetHeader;
+    this.cppSetSource = cppSetSource;
     this.currentOutputPathId = currentOutputPathId;
     this.didLaunch = didLaunch;
     this.didWriteOutputFile = didWriteOutputFile;
@@ -1066,201 +1120,207 @@
     return this.cppSetHeader;
   };
   protoOf(AppContext).ua = function (_set____db54di) {
-    this.currentOutputPathId = _set____db54di;
+    this.cppSetSource = _set____db54di;
   };
   protoOf(AppContext).va = function () {
-    return this.currentOutputPathId;
+    return this.cppSetSource;
   };
   protoOf(AppContext).wa = function (_set____db54di) {
-    this.didLaunch = _set____db54di;
+    this.currentOutputPathId = _set____db54di;
   };
   protoOf(AppContext).xa = function () {
-    return this.didLaunch;
+    return this.currentOutputPathId;
   };
   protoOf(AppContext).ya = function (_set____db54di) {
-    this.didWriteOutputFile = _set____db54di;
+    this.didLaunch = _set____db54di;
   };
   protoOf(AppContext).za = function () {
-    return this.didWriteOutputFile;
+    return this.didLaunch;
   };
   protoOf(AppContext).ab = function (_set____db54di) {
-    this.entityComments = _set____db54di;
+    this.didWriteOutputFile = _set____db54di;
   };
   protoOf(AppContext).bb = function () {
-    return this.entityComments;
+    return this.didWriteOutputFile;
   };
   protoOf(AppContext).cb = function (_set____db54di) {
-    this.entityFieldComments = _set____db54di;
+    this.entityComments = _set____db54di;
   };
   protoOf(AppContext).db = function () {
-    return this.entityFieldComments;
+    return this.entityComments;
   };
   protoOf(AppContext).eb = function (_set____db54di) {
-    this.entityFields = _set____db54di;
+    this.entityFieldComments = _set____db54di;
   };
   protoOf(AppContext).fb = function () {
-    return this.entityFields;
+    return this.entityFieldComments;
   };
   protoOf(AppContext).gb = function (_set____db54di) {
-    this.entityNames = _set____db54di;
+    this.entityFields = _set____db54di;
   };
   protoOf(AppContext).hb = function () {
-    return this.entityNames;
+    return this.entityFields;
   };
   protoOf(AppContext).ib = function (_set____db54di) {
-    this.entityPrefixesKotlin = _set____db54di;
+    this.entityNames = _set____db54di;
   };
   protoOf(AppContext).jb = function () {
-    return this.entityPrefixesKotlin;
+    return this.entityNames;
   };
   protoOf(AppContext).kb = function (_set____db54di) {
-    this.entityTypes = _set____db54di;
+    this.entityPrefixesKotlin = _set____db54di;
   };
   protoOf(AppContext).lb = function () {
-    return this.entityTypes;
+    return this.entityPrefixesKotlin;
   };
   protoOf(AppContext).mb = function (_set____db54di) {
-    this.fobjCPPHeader = _set____db54di;
+    this.entityTypes = _set____db54di;
   };
   protoOf(AppContext).nb = function () {
-    return this.fobjCPPHeader;
+    return this.entityTypes;
   };
   protoOf(AppContext).ob = function (_set____db54di) {
-    this.fobjCPPSource = _set____db54di;
+    this.fobjCPPHeader = _set____db54di;
   };
   protoOf(AppContext).pb = function () {
-    return this.fobjCPPSource;
+    return this.fobjCPPHeader;
   };
   protoOf(AppContext).qb = function (_set____db54di) {
-    this.fobjKotlin = _set____db54di;
+    this.fobjCPPSource = _set____db54di;
   };
   protoOf(AppContext).rb = function () {
-    return this.fobjKotlin;
+    return this.fobjCPPSource;
   };
   protoOf(AppContext).sb = function (_set____db54di) {
-    this.fobjSwift = _set____db54di;
+    this.fobjKotlin = _set____db54di;
   };
   protoOf(AppContext).tb = function () {
-    return this.fobjSwift;
+    return this.fobjKotlin;
   };
   protoOf(AppContext).ub = function (_set____db54di) {
-    this.inputFile = _set____db54di;
+    this.fobjSwift = _set____db54di;
   };
   protoOf(AppContext).vb = function () {
-    return this.inputFile;
+    return this.fobjSwift;
   };
   protoOf(AppContext).wb = function (_set____db54di) {
-    this.inputFileDir = _set____db54di;
+    this.inputFile = _set____db54di;
   };
   protoOf(AppContext).xb = function () {
-    return this.inputFileDir;
+    return this.inputFile;
   };
   protoOf(AppContext).yb = function (_set____db54di) {
-    this.inputFileLines = _set____db54di;
+    this.inputFileDir = _set____db54di;
   };
   protoOf(AppContext).zb = function () {
-    return this.inputFileLines;
+    return this.inputFileDir;
   };
   protoOf(AppContext).ac = function (_set____db54di) {
-    this.isDbg = _set____db54di;
+    this.inputFileLines = _set____db54di;
   };
   protoOf(AppContext).bc = function () {
-    return this.isDbg;
+    return this.inputFileLines;
   };
   protoOf(AppContext).cc = function (_set____db54di) {
-    this.outputCPPHeader = _set____db54di;
+    this.isDbg = _set____db54di;
   };
   protoOf(AppContext).dc = function () {
-    return this.outputCPPHeader;
+    return this.isDbg;
   };
   protoOf(AppContext).ec = function (_set____db54di) {
-    this.outputCPPSDK = _set____db54di;
+    this.outputCPPHeader = _set____db54di;
   };
   protoOf(AppContext).fc = function () {
-    return this.outputCPPSDK;
+    return this.outputCPPHeader;
   };
   protoOf(AppContext).gc = function (_set____db54di) {
-    this.outputCPPSource = _set____db54di;
+    this.outputCPPSDK = _set____db54di;
   };
   protoOf(AppContext).hc = function () {
-    return this.outputCPPSource;
+    return this.outputCPPSDK;
   };
   protoOf(AppContext).ic = function (_set____db54di) {
-    this.outputEntityContents = _set____db54di;
+    this.outputCPPSource = _set____db54di;
   };
   protoOf(AppContext).jc = function () {
-    return this.outputEntityContents;
+    return this.outputCPPSource;
   };
   protoOf(AppContext).kc = function (_set____db54di) {
-    this.outputFile = _set____db54di;
+    this.outputEntityContents = _set____db54di;
   };
   protoOf(AppContext).lc = function () {
-    return this.outputFile;
+    return this.outputEntityContents;
   };
   protoOf(AppContext).mc = function (_set____db54di) {
-    this.outputFileContents = _set____db54di;
+    this.outputFile = _set____db54di;
   };
   protoOf(AppContext).nc = function () {
-    return this.outputFileContents;
+    return this.outputFile;
   };
   protoOf(AppContext).oc = function (_set____db54di) {
-    this.outputJSExport = _set____db54di;
+    this.outputFileContents = _set____db54di;
   };
   protoOf(AppContext).pc = function () {
-    return this.outputJSExport;
+    return this.outputFileContents;
   };
   protoOf(AppContext).qc = function (_set____db54di) {
-    this.outputKotlin = _set____db54di;
+    this.outputJSExport = _set____db54di;
   };
   protoOf(AppContext).rc = function () {
-    return this.outputKotlin;
+    return this.outputJSExport;
   };
   protoOf(AppContext).sc = function (_set____db54di) {
-    this.outputPaths = _set____db54di;
+    this.outputKotlin = _set____db54di;
   };
   protoOf(AppContext).tc = function () {
-    return this.outputPaths;
+    return this.outputKotlin;
   };
   protoOf(AppContext).uc = function (_set____db54di) {
-    this.outputSwift = _set____db54di;
+    this.outputPaths = _set____db54di;
   };
   protoOf(AppContext).vc = function () {
-    return this.outputSwift;
+    return this.outputPaths;
   };
   protoOf(AppContext).wc = function (_set____db54di) {
-    this.rawCPPSDK = _set____db54di;
+    this.outputSwift = _set____db54di;
   };
   protoOf(AppContext).xc = function () {
-    return this.rawCPPSDK;
+    return this.outputSwift;
   };
   protoOf(AppContext).yc = function (_set____db54di) {
-    this.rawKotlin = _set____db54di;
+    this.rawCPPSDK = _set____db54di;
   };
   protoOf(AppContext).zc = function () {
-    return this.rawKotlin;
+    return this.rawCPPSDK;
   };
   protoOf(AppContext).ad = function (_set____db54di) {
-    this.rawSwift = _set____db54di;
+    this.rawKotlin = _set____db54di;
   };
   protoOf(AppContext).bd = function () {
-    return this.rawSwift;
+    return this.rawKotlin;
   };
   protoOf(AppContext).cd = function (_set____db54di) {
-    this.srcKotlin = _set____db54di;
+    this.rawSwift = _set____db54di;
   };
   protoOf(AppContext).dd = function () {
-    return this.srcKotlin;
+    return this.rawSwift;
   };
   protoOf(AppContext).ed = function (_set____db54di) {
-    this.srcSwift = _set____db54di;
+    this.srcKotlin = _set____db54di;
   };
   protoOf(AppContext).fd = function () {
-    return this.srcSwift;
+    return this.srcKotlin;
   };
   protoOf(AppContext).gd = function (_set____db54di) {
-    this.na_1 = _set____db54di;
+    this.srcSwift = _set____db54di;
   };
   protoOf(AppContext).hd = function () {
+    return this.srcSwift;
+  };
+  protoOf(AppContext).id = function (_set____db54di) {
+    this.na_1 = _set____db54di;
+  };
+  protoOf(AppContext).jd = function () {
     return this.na_1;
   };
   protoOf(AppContext).field = function (name) {
@@ -1274,102 +1334,105 @@
       case 'cppSetHeader':
         var tmp_1 = this.cppSetHeader;
         return !(tmp_1 == null) ? tmp_1 : THROW_CCE();
-      case 'currentOutputPathId':
-        var tmp_2 = this.currentOutputPathId;
+      case 'cppSetSource':
+        var tmp_2 = this.cppSetSource;
         return !(tmp_2 == null) ? tmp_2 : THROW_CCE();
-      case 'didLaunch':
-        var tmp_3 = this.didLaunch;
+      case 'currentOutputPathId':
+        var tmp_3 = this.currentOutputPathId;
         return !(tmp_3 == null) ? tmp_3 : THROW_CCE();
-      case 'didWriteOutputFile':
-        var tmp_4 = this.didWriteOutputFile;
+      case 'didLaunch':
+        var tmp_4 = this.didLaunch;
         return !(tmp_4 == null) ? tmp_4 : THROW_CCE();
-      case 'entityComments':
-        var tmp_5 = this.entityComments;
+      case 'didWriteOutputFile':
+        var tmp_5 = this.didWriteOutputFile;
         return !(tmp_5 == null) ? tmp_5 : THROW_CCE();
-      case 'entityFieldComments':
-        var tmp_6 = this.entityFieldComments;
+      case 'entityComments':
+        var tmp_6 = this.entityComments;
         return !(tmp_6 == null) ? tmp_6 : THROW_CCE();
-      case 'entityFields':
-        var tmp_7 = this.entityFields;
+      case 'entityFieldComments':
+        var tmp_7 = this.entityFieldComments;
         return !(tmp_7 == null) ? tmp_7 : THROW_CCE();
-      case 'entityNames':
-        var tmp_8 = this.entityNames;
+      case 'entityFields':
+        var tmp_8 = this.entityFields;
         return !(tmp_8 == null) ? tmp_8 : THROW_CCE();
-      case 'entityPrefixesKotlin':
-        var tmp_9 = this.entityPrefixesKotlin;
+      case 'entityNames':
+        var tmp_9 = this.entityNames;
         return !(tmp_9 == null) ? tmp_9 : THROW_CCE();
-      case 'entityTypes':
-        var tmp_10 = this.entityTypes;
+      case 'entityPrefixesKotlin':
+        var tmp_10 = this.entityPrefixesKotlin;
         return !(tmp_10 == null) ? tmp_10 : THROW_CCE();
-      case 'fobjCPPHeader':
-        var tmp_11 = this.fobjCPPHeader;
+      case 'entityTypes':
+        var tmp_11 = this.entityTypes;
         return !(tmp_11 == null) ? tmp_11 : THROW_CCE();
-      case 'fobjCPPSource':
-        var tmp_12 = this.fobjCPPSource;
+      case 'fobjCPPHeader':
+        var tmp_12 = this.fobjCPPHeader;
         return !(tmp_12 == null) ? tmp_12 : THROW_CCE();
-      case 'fobjKotlin':
-        var tmp_13 = this.fobjKotlin;
+      case 'fobjCPPSource':
+        var tmp_13 = this.fobjCPPSource;
         return !(tmp_13 == null) ? tmp_13 : THROW_CCE();
-      case 'fobjSwift':
-        var tmp_14 = this.fobjSwift;
+      case 'fobjKotlin':
+        var tmp_14 = this.fobjKotlin;
         return !(tmp_14 == null) ? tmp_14 : THROW_CCE();
-      case 'inputFile':
-        var tmp_15 = this.inputFile;
+      case 'fobjSwift':
+        var tmp_15 = this.fobjSwift;
         return !(tmp_15 == null) ? tmp_15 : THROW_CCE();
-      case 'inputFileDir':
-        var tmp_16 = this.inputFileDir;
+      case 'inputFile':
+        var tmp_16 = this.inputFile;
         return !(tmp_16 == null) ? tmp_16 : THROW_CCE();
-      case 'inputFileLines':
-        var tmp_17 = this.inputFileLines;
+      case 'inputFileDir':
+        var tmp_17 = this.inputFileDir;
         return !(tmp_17 == null) ? tmp_17 : THROW_CCE();
-      case 'isDbg':
-        var tmp_18 = this.isDbg;
+      case 'inputFileLines':
+        var tmp_18 = this.inputFileLines;
         return !(tmp_18 == null) ? tmp_18 : THROW_CCE();
-      case 'outputCPPHeader':
-        var tmp_19 = this.outputCPPHeader;
+      case 'isDbg':
+        var tmp_19 = this.isDbg;
         return !(tmp_19 == null) ? tmp_19 : THROW_CCE();
-      case 'outputCPPSDK':
-        var tmp_20 = this.outputCPPSDK;
+      case 'outputCPPHeader':
+        var tmp_20 = this.outputCPPHeader;
         return !(tmp_20 == null) ? tmp_20 : THROW_CCE();
-      case 'outputCPPSource':
-        var tmp_21 = this.outputCPPSource;
+      case 'outputCPPSDK':
+        var tmp_21 = this.outputCPPSDK;
         return !(tmp_21 == null) ? tmp_21 : THROW_CCE();
-      case 'outputEntityContents':
-        var tmp_22 = this.outputEntityContents;
+      case 'outputCPPSource':
+        var tmp_22 = this.outputCPPSource;
         return !(tmp_22 == null) ? tmp_22 : THROW_CCE();
-      case 'outputFile':
-        var tmp_23 = this.outputFile;
+      case 'outputEntityContents':
+        var tmp_23 = this.outputEntityContents;
         return !(tmp_23 == null) ? tmp_23 : THROW_CCE();
-      case 'outputFileContents':
-        var tmp_24 = this.outputFileContents;
+      case 'outputFile':
+        var tmp_24 = this.outputFile;
         return !(tmp_24 == null) ? tmp_24 : THROW_CCE();
-      case 'outputJSExport':
-        var tmp_25 = this.outputJSExport;
+      case 'outputFileContents':
+        var tmp_25 = this.outputFileContents;
         return !(tmp_25 == null) ? tmp_25 : THROW_CCE();
-      case 'outputKotlin':
-        var tmp_26 = this.outputKotlin;
+      case 'outputJSExport':
+        var tmp_26 = this.outputJSExport;
         return !(tmp_26 == null) ? tmp_26 : THROW_CCE();
-      case 'outputPaths':
-        var tmp_27 = this.outputPaths;
+      case 'outputKotlin':
+        var tmp_27 = this.outputKotlin;
         return !(tmp_27 == null) ? tmp_27 : THROW_CCE();
-      case 'outputSwift':
-        var tmp_28 = this.outputSwift;
+      case 'outputPaths':
+        var tmp_28 = this.outputPaths;
         return !(tmp_28 == null) ? tmp_28 : THROW_CCE();
-      case 'rawCPPSDK':
-        var tmp_29 = this.rawCPPSDK;
+      case 'outputSwift':
+        var tmp_29 = this.outputSwift;
         return !(tmp_29 == null) ? tmp_29 : THROW_CCE();
-      case 'rawKotlin':
-        var tmp_30 = this.rawKotlin;
+      case 'rawCPPSDK':
+        var tmp_30 = this.rawCPPSDK;
         return !(tmp_30 == null) ? tmp_30 : THROW_CCE();
-      case 'rawSwift':
-        var tmp_31 = this.rawSwift;
+      case 'rawKotlin':
+        var tmp_31 = this.rawKotlin;
         return !(tmp_31 == null) ? tmp_31 : THROW_CCE();
-      case 'srcKotlin':
-        var tmp_32 = this.srcKotlin;
+      case 'rawSwift':
+        var tmp_32 = this.rawSwift;
         return !(tmp_32 == null) ? tmp_32 : THROW_CCE();
-      case 'srcSwift':
-        var tmp_33 = this.srcSwift;
+      case 'srcKotlin':
+        var tmp_33 = this.srcKotlin;
         return !(tmp_33 == null) ? tmp_33 : THROW_CCE();
+      case 'srcSwift':
+        var tmp_34 = this.srcSwift;
+        return !(tmp_34 == null) ? tmp_34 : THROW_CCE();
     }
     return !('unknown-field-name' == null) ? 'unknown-field-name' : THROW_CCE();
   };
@@ -1390,133 +1453,137 @@
         var tmp_1 = this;
         tmp_1.cppSetHeader = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
-      case 'currentOutputPathId':
+      case 'cppSetSource':
         var tmp_2 = this;
-        tmp_2.currentOutputPathId = (!(value == null) ? typeof value === 'number' : false) ? value : THROW_CCE();
+        tmp_2.cppSetSource = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        break;
+      case 'currentOutputPathId':
+        var tmp_3 = this;
+        tmp_3.currentOutputPathId = (!(value == null) ? typeof value === 'number' : false) ? value : THROW_CCE();
         break;
       case 'didLaunch':
-        var tmp_3 = this;
-        tmp_3.didLaunch = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
+        var tmp_4 = this;
+        tmp_4.didLaunch = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
         break;
       case 'didWriteOutputFile':
-        var tmp_4 = this;
-        tmp_4.didWriteOutputFile = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
+        var tmp_5 = this;
+        tmp_5.didWriteOutputFile = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
         break;
       case 'entityComments':
-        var tmp_5 = this;
-        tmp_5.entityComments = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
+        var tmp_6 = this;
+        tmp_6.entityComments = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
       case 'entityFieldComments':
-        var tmp_6 = this;
-        tmp_6.entityFieldComments = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
+        var tmp_7 = this;
+        tmp_7.entityFieldComments = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
       case 'entityFields':
-        var tmp_7 = this;
-        tmp_7.entityFields = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
+        var tmp_8 = this;
+        tmp_8.entityFields = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
       case 'entityNames':
-        var tmp_8 = this;
-        tmp_8.entityNames = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
+        var tmp_9 = this;
+        tmp_9.entityNames = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
         break;
       case 'entityPrefixesKotlin':
-        var tmp_9 = this;
-        tmp_9.entityPrefixesKotlin = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
+        var tmp_10 = this;
+        tmp_10.entityPrefixesKotlin = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
       case 'entityTypes':
-        var tmp_10 = this;
-        tmp_10.entityTypes = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
+        var tmp_11 = this;
+        tmp_11.entityTypes = (!(value == null) ? isInterface(value, KtMap) : false) ? value : THROW_CCE();
         break;
       case 'fobjCPPHeader':
-        var tmp_11 = this;
-        tmp_11.fobjCPPHeader = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_12 = this;
+        tmp_12.fobjCPPHeader = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'fobjCPPSource':
-        var tmp_12 = this;
-        tmp_12.fobjCPPSource = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_13 = this;
+        tmp_13.fobjCPPSource = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'fobjKotlin':
-        var tmp_13 = this;
-        tmp_13.fobjKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_14 = this;
+        tmp_14.fobjKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'fobjSwift':
-        var tmp_14 = this;
-        tmp_14.fobjSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_15 = this;
+        tmp_15.fobjSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'inputFile':
-        var tmp_15 = this;
-        tmp_15.inputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_16 = this;
+        tmp_16.inputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'inputFileDir':
-        var tmp_16 = this;
-        tmp_16.inputFileDir = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_17 = this;
+        tmp_17.inputFileDir = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'inputFileLines':
-        var tmp_17 = this;
-        tmp_17.inputFileLines = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
+        var tmp_18 = this;
+        tmp_18.inputFileLines = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
         break;
       case 'isDbg':
-        var tmp_18 = this;
-        tmp_18.isDbg = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
+        var tmp_19 = this;
+        tmp_19.isDbg = (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE();
         break;
       case 'outputCPPHeader':
-        var tmp_19 = this;
-        tmp_19.outputCPPHeader = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_20 = this;
+        tmp_20.outputCPPHeader = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputCPPSDK':
-        var tmp_20 = this;
-        tmp_20.outputCPPSDK = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_21 = this;
+        tmp_21.outputCPPSDK = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputCPPSource':
-        var tmp_21 = this;
-        tmp_21.outputCPPSource = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_22 = this;
+        tmp_22.outputCPPSource = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputEntityContents':
-        var tmp_22 = this;
-        tmp_22.outputEntityContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_23 = this;
+        tmp_23.outputEntityContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputFile':
-        var tmp_23 = this;
-        tmp_23.outputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_24 = this;
+        tmp_24.outputFile = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputFileContents':
-        var tmp_24 = this;
-        tmp_24.outputFileContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_25 = this;
+        tmp_25.outputFileContents = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputJSExport':
-        var tmp_25 = this;
-        tmp_25.outputJSExport = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_26 = this;
+        tmp_26.outputJSExport = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputKotlin':
-        var tmp_26 = this;
-        tmp_26.outputKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_27 = this;
+        tmp_27.outputKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'outputPaths':
-        var tmp_27 = this;
-        tmp_27.outputPaths = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
+        var tmp_28 = this;
+        tmp_28.outputPaths = (!(value == null) ? isArray(value) : false) ? value : THROW_CCE();
         break;
       case 'outputSwift':
-        var tmp_28 = this;
-        tmp_28.outputSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_29 = this;
+        tmp_29.outputSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'rawCPPSDK':
-        var tmp_29 = this;
-        tmp_29.rawCPPSDK = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_30 = this;
+        tmp_30.rawCPPSDK = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'rawKotlin':
-        var tmp_30 = this;
-        tmp_30.rawKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_31 = this;
+        tmp_31.rawKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'rawSwift':
-        var tmp_31 = this;
-        tmp_31.rawSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_32 = this;
+        tmp_32.rawSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'srcKotlin':
-        var tmp_32 = this;
-        tmp_32.srcKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_33 = this;
+        tmp_33.srcKotlin = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
       case 'srcSwift':
-        var tmp_33 = this;
-        tmp_33.srcSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
+        var tmp_34 = this;
+        tmp_34.srcSwift = (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE();
         break;
     }
   };
@@ -1526,115 +1593,119 @@
   protoOf(AppContext).la = function () {
     return this.consoleOutput;
   };
-  protoOf(AppContext).id = function () {
+  protoOf(AppContext).kd = function () {
     return this.cppSetHeader;
   };
-  protoOf(AppContext).jd = function () {
-    return this.currentOutputPathId;
-  };
-  protoOf(AppContext).kd = function () {
-    return this.didLaunch;
-  };
   protoOf(AppContext).ld = function () {
-    return this.didWriteOutputFile;
+    return this.cppSetSource;
   };
   protoOf(AppContext).md = function () {
-    return this.entityComments;
+    return this.currentOutputPathId;
   };
   protoOf(AppContext).nd = function () {
-    return this.entityFieldComments;
+    return this.didLaunch;
   };
   protoOf(AppContext).od = function () {
-    return this.entityFields;
+    return this.didWriteOutputFile;
   };
   protoOf(AppContext).pd = function () {
-    return this.entityNames;
+    return this.entityComments;
   };
   protoOf(AppContext).qd = function () {
-    return this.entityPrefixesKotlin;
+    return this.entityFieldComments;
   };
   protoOf(AppContext).rd = function () {
-    return this.entityTypes;
+    return this.entityFields;
   };
   protoOf(AppContext).sd = function () {
-    return this.fobjCPPHeader;
+    return this.entityNames;
   };
   protoOf(AppContext).td = function () {
-    return this.fobjCPPSource;
+    return this.entityPrefixesKotlin;
   };
   protoOf(AppContext).ud = function () {
-    return this.fobjKotlin;
+    return this.entityTypes;
   };
   protoOf(AppContext).vd = function () {
-    return this.fobjSwift;
+    return this.fobjCPPHeader;
   };
   protoOf(AppContext).wd = function () {
-    return this.inputFile;
+    return this.fobjCPPSource;
   };
   protoOf(AppContext).xd = function () {
-    return this.inputFileDir;
+    return this.fobjKotlin;
   };
   protoOf(AppContext).yd = function () {
-    return this.inputFileLines;
+    return this.fobjSwift;
   };
   protoOf(AppContext).zd = function () {
-    return this.isDbg;
+    return this.inputFile;
   };
   protoOf(AppContext).ae = function () {
-    return this.outputCPPHeader;
+    return this.inputFileDir;
   };
   protoOf(AppContext).be = function () {
-    return this.outputCPPSDK;
+    return this.inputFileLines;
   };
   protoOf(AppContext).ce = function () {
-    return this.outputCPPSource;
+    return this.isDbg;
   };
   protoOf(AppContext).de = function () {
-    return this.outputEntityContents;
+    return this.outputCPPHeader;
   };
   protoOf(AppContext).ee = function () {
-    return this.outputFile;
+    return this.outputCPPSDK;
   };
   protoOf(AppContext).fe = function () {
-    return this.outputFileContents;
+    return this.outputCPPSource;
   };
   protoOf(AppContext).ge = function () {
-    return this.outputJSExport;
+    return this.outputEntityContents;
   };
   protoOf(AppContext).he = function () {
-    return this.outputKotlin;
+    return this.outputFile;
   };
   protoOf(AppContext).ie = function () {
-    return this.outputPaths;
+    return this.outputFileContents;
   };
   protoOf(AppContext).je = function () {
-    return this.outputSwift;
+    return this.outputJSExport;
   };
   protoOf(AppContext).ke = function () {
-    return this.rawCPPSDK;
+    return this.outputKotlin;
   };
   protoOf(AppContext).le = function () {
-    return this.rawKotlin;
+    return this.outputPaths;
   };
   protoOf(AppContext).me = function () {
-    return this.rawSwift;
+    return this.outputSwift;
   };
   protoOf(AppContext).ne = function () {
-    return this.srcKotlin;
+    return this.rawCPPSDK;
   };
   protoOf(AppContext).oe = function () {
-    return this.srcSwift;
+    return this.rawKotlin;
   };
   protoOf(AppContext).pe = function () {
+    return this.rawSwift;
+  };
+  protoOf(AppContext).qe = function () {
+    return this.srcKotlin;
+  };
+  protoOf(AppContext).re = function () {
+    return this.srcSwift;
+  };
+  protoOf(AppContext).se = function () {
     return this.na_1;
   };
-  protoOf(AppContext).qe = function (arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
-    return new AppContext(arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
+  protoOf(AppContext).te = function (arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) {
+    return new AppContext(arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
   };
-  protoOf(AppContext).copy = function (arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField, $super) {
+  protoOf(AppContext).copy = function (arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField, $super) {
     arguments_0 = arguments_0 === VOID ? this.arguments : arguments_0;
     consoleOutput = consoleOutput === VOID ? this.consoleOutput : consoleOutput;
     cppSetHeader = cppSetHeader === VOID ? this.cppSetHeader : cppSetHeader;
+    cppSetSource = cppSetSource === VOID ? this.cppSetSource : cppSetSource;
     currentOutputPathId = currentOutputPathId === VOID ? this.currentOutputPathId : currentOutputPathId;
     didLaunch = didLaunch === VOID ? this.didLaunch : didLaunch;
     didWriteOutputFile = didWriteOutputFile === VOID ? this.didWriteOutputFile : didWriteOutputFile;
@@ -1668,15 +1739,16 @@
     srcKotlin = srcKotlin === VOID ? this.srcKotlin : srcKotlin;
     srcSwift = srcSwift === VOID ? this.srcSwift : srcSwift;
     recentField = recentField === VOID ? this.na_1 : recentField;
-    return $super === VOID ? this.qe(arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) : $super.qe.call(this, arguments_0, consoleOutput, cppSetHeader, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
+    return $super === VOID ? this.te(arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField) : $super.te.call(this, arguments_0, consoleOutput, cppSetHeader, cppSetSource, currentOutputPathId, didLaunch, didWriteOutputFile, entityComments, entityFieldComments, entityFields, entityNames, entityPrefixesKotlin, entityTypes, fobjCPPHeader, fobjCPPSource, fobjKotlin, fobjSwift, inputFile, inputFileDir, inputFileLines, isDbg, outputCPPHeader, outputCPPSDK, outputCPPSource, outputEntityContents, outputFile, outputFileContents, outputJSExport, outputKotlin, outputPaths, outputSwift, rawCPPSDK, rawKotlin, rawSwift, srcKotlin, srcSwift, recentField);
   };
   protoOf(AppContext).toString = function () {
-    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', cppSetHeader=' + this.cppSetHeader + ', currentOutputPathId=' + this.currentOutputPathId + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', fobjCPPHeader=' + this.fobjCPPHeader + ', fobjCPPSource=' + this.fobjCPPSource + ', fobjKotlin=' + this.fobjKotlin + ', fobjSwift=' + this.fobjSwift + ', inputFile=' + this.inputFile + ', inputFileDir=' + this.inputFileDir + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputCPPHeader=' + this.outputCPPHeader + ', outputCPPSDK=' + this.outputCPPSDK + ', outputCPPSource=' + this.outputCPPSource + ', outputEntityContents=' + this.outputEntityContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputJSExport=' + this.outputJSExport + ', outputKotlin=' + this.outputKotlin + ', outputPaths=' + toString(this.outputPaths) + ', outputSwift=' + this.outputSwift + ', rawCPPSDK=' + this.rawCPPSDK + ', rawKotlin=' + this.rawKotlin + ', rawSwift=' + this.rawSwift + ', srcKotlin=' + this.srcKotlin + ', srcSwift=' + this.srcSwift + ', recentField=' + this.na_1 + ')';
+    return 'AppContext(arguments=' + toString(this.arguments) + ', consoleOutput=' + this.consoleOutput + ', cppSetHeader=' + this.cppSetHeader + ', cppSetSource=' + this.cppSetSource + ', currentOutputPathId=' + this.currentOutputPathId + ', didLaunch=' + this.didLaunch + ', didWriteOutputFile=' + this.didWriteOutputFile + ', entityComments=' + toString(this.entityComments) + ', entityFieldComments=' + toString(this.entityFieldComments) + ', entityFields=' + toString(this.entityFields) + ', entityNames=' + toString(this.entityNames) + ', entityPrefixesKotlin=' + toString(this.entityPrefixesKotlin) + ', entityTypes=' + toString(this.entityTypes) + ', fobjCPPHeader=' + this.fobjCPPHeader + ', fobjCPPSource=' + this.fobjCPPSource + ', fobjKotlin=' + this.fobjKotlin + ', fobjSwift=' + this.fobjSwift + ', inputFile=' + this.inputFile + ', inputFileDir=' + this.inputFileDir + ', inputFileLines=' + toString(this.inputFileLines) + ', isDbg=' + this.isDbg + ', outputCPPHeader=' + this.outputCPPHeader + ', outputCPPSDK=' + this.outputCPPSDK + ', outputCPPSource=' + this.outputCPPSource + ', outputEntityContents=' + this.outputEntityContents + ', outputFile=' + this.outputFile + ', outputFileContents=' + this.outputFileContents + ', outputJSExport=' + this.outputJSExport + ', outputKotlin=' + this.outputKotlin + ', outputPaths=' + toString(this.outputPaths) + ', outputSwift=' + this.outputSwift + ', rawCPPSDK=' + this.rawCPPSDK + ', rawKotlin=' + this.rawKotlin + ', rawSwift=' + this.rawSwift + ', srcKotlin=' + this.srcKotlin + ', srcSwift=' + this.srcSwift + ', recentField=' + this.na_1 + ')';
   };
   protoOf(AppContext).hashCode = function () {
     var result = hashCode(this.arguments);
     result = imul(result, 31) + getStringHashCode(this.consoleOutput) | 0;
     result = imul(result, 31) + getStringHashCode(this.cppSetHeader) | 0;
+    result = imul(result, 31) + getStringHashCode(this.cppSetSource) | 0;
     result = imul(result, 31) + this.currentOutputPathId | 0;
     result = imul(result, 31) + getBooleanHashCode(this.didLaunch) | 0;
     result = imul(result, 31) + getBooleanHashCode(this.didWriteOutputFile) | 0;
@@ -1723,6 +1795,8 @@
     if (!(this.consoleOutput === tmp0_other_with_cast.consoleOutput))
       return false;
     if (!(this.cppSetHeader === tmp0_other_with_cast.cppSetHeader))
+      return false;
+    if (!(this.cppSetSource === tmp0_other_with_cast.cppSetSource))
       return false;
     if (!(this.currentOutputPathId === tmp0_other_with_cast.currentOutputPathId))
       return false;
@@ -1798,16 +1872,16 @@
     this.path = path;
     this.type = type;
   }
-  protoOf(OutputPath).re = function (_set____db54di) {
+  protoOf(OutputPath).ue = function (_set____db54di) {
     this.path = _set____db54di;
   };
-  protoOf(OutputPath).se = function () {
+  protoOf(OutputPath).ve = function () {
     return this.path;
   };
-  protoOf(OutputPath).te = function (_set____db54di) {
+  protoOf(OutputPath).we = function (_set____db54di) {
     this.type = _set____db54di;
   };
-  protoOf(OutputPath).ue = function () {
+  protoOf(OutputPath).xe = function () {
     return this.type;
   };
   protoOf(OutputPath).ka = function () {
@@ -1816,13 +1890,13 @@
   protoOf(OutputPath).la = function () {
     return this.type;
   };
-  protoOf(OutputPath).ve = function (path, type) {
+  protoOf(OutputPath).ye = function (path, type) {
     return new OutputPath(path, type);
   };
   protoOf(OutputPath).copy = function (path, type, $super) {
     path = path === VOID ? this.path : path;
     type = type === VOID ? this.type : type;
-    return $super === VOID ? this.ve(path, type) : $super.ve.call(this, path, type);
+    return $super === VOID ? this.ye(path, type) : $super.ye.call(this, path, type);
   };
   protoOf(OutputPath).toString = function () {
     return 'OutputPath(path=' + this.path + ', type=' + this.type + ')';
@@ -1859,55 +1933,55 @@
     this.context = context;
     var tmp = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp.we_1 = ArrayList_init_$Create$();
+    tmp.ze_1 = ArrayList_init_$Create$();
     var tmp_0 = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp_0.xe_1 = ArrayList_init_$Create$();
+    tmp_0.af_1 = ArrayList_init_$Create$();
     this.isProcessingQueue = false;
     var tmp_1 = this;
     // Inline function 'kotlin.collections.mutableListOf' call
-    tmp_1.ye_1 = ArrayList_init_$Create$();
+    tmp_1.bf_1 = ArrayList_init_$Create$();
   }
-  protoOf(KDController).ze = function (_set____db54di) {
+  protoOf(KDController).cf = function (_set____db54di) {
     this.context = _set____db54di;
   };
-  protoOf(KDController).af = function () {
+  protoOf(KDController).df = function () {
     return this.context;
   };
-  protoOf(KDController).bf = function (_set____db54di) {
-    this.we_1 = _set____db54di;
+  protoOf(KDController).ef = function (_set____db54di) {
+    this.ze_1 = _set____db54di;
   };
-  protoOf(KDController).cf = function () {
-    return this.we_1;
+  protoOf(KDController).ff = function () {
+    return this.ze_1;
   };
-  protoOf(KDController).df = function (_set____db54di) {
-    this.xe_1 = _set____db54di;
+  protoOf(KDController).gf = function (_set____db54di) {
+    this.af_1 = _set____db54di;
   };
-  protoOf(KDController).ef = function () {
-    return this.xe_1;
+  protoOf(KDController).hf = function () {
+    return this.af_1;
   };
-  protoOf(KDController).ff = function (_set____db54di) {
+  protoOf(KDController).if = function (_set____db54di) {
     this.isProcessingQueue = _set____db54di;
   };
-  protoOf(KDController).gf = function () {
+  protoOf(KDController).jf = function () {
     return this.isProcessingQueue;
   };
-  protoOf(KDController).hf = function (_set____db54di) {
-    this.ye_1 = _set____db54di;
+  protoOf(KDController).kf = function (_set____db54di) {
+    this.bf_1 = _set____db54di;
   };
-  protoOf(KDController).if = function () {
-    return this.ye_1;
+  protoOf(KDController).lf = function () {
+    return this.bf_1;
   };
   protoOf(KDController).executeFunctions = function () {
-    var c = this.ye_1.n2(0);
-    this.context.gd(c.recentField);
+    var c = this.bf_1.n2(0);
+    this.context.id(c.recentField);
     this.context.setField(c.recentField, c.fieldAny(c.recentField));
-    var _iterator__ex2g4s = this.xe_1.g();
+    var _iterator__ex2g4s = this.af_1.g();
     while (_iterator__ex2g4s.h()) {
       var f = _iterator__ex2g4s.i();
       var ctx = f(this.context.selfCopy());
       if (!(ctx.recentField === KD_FIELD_NONE)) {
-        this.ye_1.e(ctx);
+        this.bf_1.e(ctx);
       }
     }
     this.reportContext();
@@ -1917,23 +1991,23 @@
       return Unit_instance;
     }
     this.isProcessingQueue = true;
-    while (this.ye_1.j() > 0) {
+    while (this.bf_1.j() > 0) {
       this.executeFunctions();
     }
     this.isProcessingQueue = false;
   };
   protoOf(KDController).registerCallback = function (cb) {
-    this.we_1.e(cb);
+    this.ze_1.e(cb);
   };
   protoOf(KDController).registerFieldCallback = function (fieldName, cb) {
-    var tmp = this.we_1;
+    var tmp = this.ze_1;
     tmp.e(KDController$registerFieldCallback$lambda(fieldName, cb));
   };
   protoOf(KDController).registerFunction = function (f) {
-    this.xe_1.e(f);
+    this.af_1.e(f);
   };
   protoOf(KDController).reportContext = function () {
-    var _iterator__ex2g4s = this.we_1.g();
+    var _iterator__ex2g4s = this.ze_1.g();
     while (_iterator__ex2g4s.h()) {
       var cb = _iterator__ex2g4s.i();
       cb(this.context);
@@ -1942,8 +2016,8 @@
   protoOf(KDController).set = function (fieldName, value) {
     var c = this.context.selfCopy();
     c.setField(fieldName, value);
-    c.gd(fieldName);
-    this.ye_1.e(c);
+    c.id(fieldName);
+    this.bf_1.e(c);
     this.processQueue();
   };
   function registerOneliners(ctrl, items) {
@@ -1965,6 +2039,7 @@
     this.arguments = 'arguments';
     this.consoleOutput = 'consoleOutput';
     this.cppSetHeader = 'cppSetHeader';
+    this.cppSetSource = 'cppSetSource';
     this.currentOutputPathId = 'currentOutputPathId';
     this.didLaunch = 'didLaunch';
     this.didWriteOutputFile = 'didWriteOutputFile';
@@ -2009,102 +2084,105 @@
     return this.cppSetHeader;
   };
   protoOf(F).va = function () {
-    return this.currentOutputPathId;
+    return this.cppSetSource;
   };
   protoOf(F).xa = function () {
-    return this.didLaunch;
+    return this.currentOutputPathId;
   };
   protoOf(F).za = function () {
-    return this.didWriteOutputFile;
+    return this.didLaunch;
   };
   protoOf(F).bb = function () {
-    return this.entityComments;
+    return this.didWriteOutputFile;
   };
   protoOf(F).db = function () {
-    return this.entityFieldComments;
+    return this.entityComments;
   };
   protoOf(F).fb = function () {
-    return this.entityFields;
+    return this.entityFieldComments;
   };
   protoOf(F).hb = function () {
-    return this.entityNames;
+    return this.entityFields;
   };
   protoOf(F).jb = function () {
-    return this.entityPrefixesKotlin;
+    return this.entityNames;
   };
   protoOf(F).lb = function () {
-    return this.entityTypes;
+    return this.entityPrefixesKotlin;
   };
   protoOf(F).nb = function () {
-    return this.fobjCPPHeader;
+    return this.entityTypes;
   };
   protoOf(F).pb = function () {
-    return this.fobjCPPSource;
+    return this.fobjCPPHeader;
   };
   protoOf(F).rb = function () {
-    return this.fobjKotlin;
+    return this.fobjCPPSource;
   };
   protoOf(F).tb = function () {
-    return this.fobjSwift;
+    return this.fobjKotlin;
   };
   protoOf(F).vb = function () {
-    return this.inputFile;
+    return this.fobjSwift;
   };
   protoOf(F).xb = function () {
-    return this.inputFileDir;
+    return this.inputFile;
   };
   protoOf(F).zb = function () {
-    return this.inputFileLines;
+    return this.inputFileDir;
   };
   protoOf(F).bc = function () {
-    return this.isDbg;
-  };
-  protoOf(F).jf = function () {
-    return this.none;
+    return this.inputFileLines;
   };
   protoOf(F).dc = function () {
-    return this.outputCPPHeader;
+    return this.isDbg;
+  };
+  protoOf(F).mf = function () {
+    return this.none;
   };
   protoOf(F).fc = function () {
-    return this.outputCPPSDK;
+    return this.outputCPPHeader;
   };
   protoOf(F).hc = function () {
-    return this.outputCPPSource;
+    return this.outputCPPSDK;
   };
   protoOf(F).jc = function () {
-    return this.outputEntityContents;
+    return this.outputCPPSource;
   };
   protoOf(F).lc = function () {
-    return this.outputFile;
+    return this.outputEntityContents;
   };
   protoOf(F).nc = function () {
-    return this.outputFileContents;
+    return this.outputFile;
   };
   protoOf(F).pc = function () {
-    return this.outputJSExport;
+    return this.outputFileContents;
   };
   protoOf(F).rc = function () {
-    return this.outputKotlin;
+    return this.outputJSExport;
   };
   protoOf(F).tc = function () {
-    return this.outputPaths;
+    return this.outputKotlin;
   };
   protoOf(F).vc = function () {
-    return this.outputSwift;
+    return this.outputPaths;
   };
   protoOf(F).xc = function () {
-    return this.rawCPPSDK;
+    return this.outputSwift;
   };
   protoOf(F).zc = function () {
-    return this.rawKotlin;
+    return this.rawCPPSDK;
   };
   protoOf(F).bd = function () {
-    return this.rawSwift;
+    return this.rawKotlin;
   };
   protoOf(F).dd = function () {
-    return this.srcKotlin;
+    return this.rawSwift;
   };
   protoOf(F).fd = function () {
+    return this.srcKotlin;
+  };
+  protoOf(F).hd = function () {
     return this.srcSwift;
   };
   var F_instance;
@@ -2588,9 +2666,9 @@
   //region block: post-declaration
   protoOf(AppContext).fieldAny = fieldAny;
   defineProp(protoOf(AppContext), 'recentField', function () {
-    return this.hd();
+    return this.jd();
   }, function (value) {
-    this.gd(value);
+    this.id(value);
   });
   //endregion
   //region block: init

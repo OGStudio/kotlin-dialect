@@ -26,3 +26,10 @@ fun cppSetHeader(entityPrefixes: Array<String>): String {
     return o
 }
 
+fun cppSetSource(entityPrefixes: Array<String>): String {
+    var o = ""
+    for (prefix in entityPrefixes) {
+        o += TEMPLATE_CPP_SET_SOURCE.replace("%PREFIX%", prefix.lowercase())
+    }
+    return o
+}

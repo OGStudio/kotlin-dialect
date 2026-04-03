@@ -39,6 +39,24 @@ const val TEMPLATE_CPP_HEADER_START = """
 """
 const val TEMPLATE_CPP_SET_HEADER = """template<typename T> void %PREFIX%Set(const std::string &key, T value);
 """
+const val TEMPLATE_CPP_SET_SOURCE = """template<> void %PREFIX%Set(
+    const std::string &key,
+    bool value
+) {
+    KT.KDController.set(KT.%PREFIX%Ctrl(), key.c_str(), KT.boolToAny(value));
+}
+
+template<> void %PREFIX%Set(
+    const std::string &key,
+    const char *value
+) {
+    KT.KDController.set(KT.%PREFIX%Ctrl(), key.c_str(), KT.strToAny(value));
+}
+"""
+const val TEMPLATE_CPP_SOURCE_START = """
+#include "ignore.kd.h"
+#include "KT.h"
+"""
 
 const val TEMPLATE_FOBJ_CPP = """
 // Special structure to reference keys with a compile time check
