@@ -19,7 +19,7 @@ fun strToAny(item: String): Any {
 }
 """
 const val TEMPLATE_CPP_EFFECTS_HEADER = """
-class %PREFIX%EffectRegistry {
+class %NAME%EffectRegistry {
     public:
         static void processOneliners();
         static void registerOneliners(
@@ -30,6 +30,39 @@ class %PREFIX%EffectRegistry {
     private:
         static std::vector<std::any> _items;
 };
+"""
+const val TEMPLATE_CPP_EFFECTS_SOURCE = """
+std::vector<std::any> %NAME%EffectRegistry::_items;
+
+void %NAME%EffectRegistry::processOneliners() {
+    auto %PREFIX%Ctx = KT.%PREFIX%CtrlCtx();
+    auto recentField = KT.%PREFIX%CtrlCtxField();
+
+    int halfCount = _items.size() / 2;
+    for (int i = 0; i < halfCount; ++i) {
+        auto effectField = std::any_cast<const char *>(_items[i * 2]);
+        if (strcmp(effectField, recentField) == 0) {
+            auto callback = std::any_cast<std::function<void(%NAME%Context)>>(_items[i * 2 + 1]);
+            auto c = %NAME%Context(%PREFIX%Ctx);
+            callback(c);
+        }
+    }
+
+    KTSym->DisposeString(recentField);
+}
+
+void %NAME%EffectRegistry::registerOneliners(
+    KTRef(KDController) ctrl,
+    const std::vector<std::any> &items
+) {
+    // This should only be run once. Yes, it's ugly
+    // but it keeps API consistent with other platforms.
+    KT.registerCallbackC(
+        ctrl,
+        (void *)&%NAME%EffectRegistry::processOneliners
+    );
+    _items = items;
+}
 """
 const val TEMPLATE_CPP_EXTENSIONS = """
 // Register C callback into KDController

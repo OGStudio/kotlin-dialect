@@ -209,6 +209,18 @@
     c.na_1 = 'none';
     return c;
   }
+  function appShouldResetCPPEffectsSource(c) {
+    if (c.na_1 === 'fobjKotlin') {
+      var ids = contextIds(c.entityTypes);
+      var names = contextNames(ids, c.entityNames);
+      var prefixes = cppEntityPrefixes(names);
+      c.cppEffectsSource = cppEffectsSource(prefixes);
+      c.na_1 = 'cppEffectsSource';
+      return c;
+    }
+    c.na_1 = 'none';
+    return c;
+  }
   function appShouldResetCPPSetHeader(c) {
     if (c.na_1 === 'fobjKotlin') {
       var ids = contextIds(c.entityTypes);
@@ -314,7 +326,7 @@
   }
   function appShouldResetOutputCPPSource(c) {
     if (c.na_1 === 'outputKotlin') {
-      c.outputCPPSource = '\n#include "ignore.kd.h"\n#include "KT.h"\n' + c.cppSetSource;
+      c.outputCPPSource = '\n#include "ignore.kd.h"\n#include "KT.h"\n' + c.cppEffectsSource + c.cppSetSource;
       c.na_1 = 'outputCPPSource';
       return c;
     }
@@ -485,6 +497,13 @@
     l.callableName = 'appShouldResetCPPEffectsHeader';
     return l;
   }
+  function appShouldResetCPPEffectsSource$ref() {
+    var l = function (p0) {
+      return appShouldResetCPPEffectsSource(p0);
+    };
+    l.callableName = 'appShouldResetCPPEffectsSource';
+    return l;
+  }
   function appShouldResetCPPSetHeader$ref() {
     var l = function (p0) {
       return appShouldResetCPPSetHeader(p0);
@@ -627,27 +646,28 @@
     var tmp_10 = appShouldParseOutputPaths$ref();
     var tmp_11 = appShouldPrintToConsole$ref();
     var tmp_12 = appShouldResetCPPEffectsHeader$ref();
-    var tmp_13 = appShouldResetCPPSetHeader$ref();
-    var tmp_14 = appShouldResetCPPSetSource$ref();
-    var tmp_15 = appShouldResetCurrentOutputPathId$ref();
-    var tmp_16 = appShouldResetFObjCPPHeader$ref();
-    var tmp_17 = appShouldResetFObjKotlin$ref();
-    var tmp_18 = appShouldResetFObjSwift$ref();
-    var tmp_19 = appShouldResetInputFileDir$ref();
-    var tmp_20 = appShouldResetOutputCPPHeader$ref();
-    var tmp_21 = appShouldResetOutputCPPSDK$ref();
-    var tmp_22 = appShouldResetOutputCPPSource$ref();
-    var tmp_23 = appShouldResetOutputFile$ref();
-    var tmp_24 = appShouldResetOutputFileContents$ref();
-    var tmp_25 = appShouldResetOutputJSExport$ref();
-    var tmp_26 = appShouldResetOutputKotlin$ref();
-    var tmp_27 = appShouldResetOutputSwift$ref();
-    var tmp_28 = appShouldResetSrcKotlin$ref();
+    var tmp_13 = appShouldResetCPPEffectsSource$ref();
+    var tmp_14 = appShouldResetCPPSetHeader$ref();
+    var tmp_15 = appShouldResetCPPSetSource$ref();
+    var tmp_16 = appShouldResetCurrentOutputPathId$ref();
+    var tmp_17 = appShouldResetFObjCPPHeader$ref();
+    var tmp_18 = appShouldResetFObjKotlin$ref();
+    var tmp_19 = appShouldResetFObjSwift$ref();
+    var tmp_20 = appShouldResetInputFileDir$ref();
+    var tmp_21 = appShouldResetOutputCPPHeader$ref();
+    var tmp_22 = appShouldResetOutputCPPSDK$ref();
+    var tmp_23 = appShouldResetOutputCPPSource$ref();
+    var tmp_24 = appShouldResetOutputFile$ref();
+    var tmp_25 = appShouldResetOutputFileContents$ref();
+    var tmp_26 = appShouldResetOutputJSExport$ref();
+    var tmp_27 = appShouldResetOutputKotlin$ref();
+    var tmp_28 = appShouldResetOutputSwift$ref();
+    var tmp_29 = appShouldResetSrcKotlin$ref();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
     // Inline function 'kotlin.collections.forEach' call
-    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, tmp_26, tmp_27, tmp_28, appShouldResetSrcSwift$ref()];
+    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, tmp_26, tmp_27, tmp_28, tmp_29, appShouldResetSrcSwift$ref()];
     var inductionVariable = 0;
     var last = indexedObject.length;
     while (inductionVariable < last) {
@@ -667,9 +687,25 @@
     var inductionVariable = 0;
     var last = entityPrefixes.length;
     while (inductionVariable < last) {
-      var prefix = entityPrefixes[inductionVariable];
+      var name = entityPrefixes[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
-      o = o + replace('\nclass %PREFIX%EffectRegistry {\n    public:\n        static void processOneliners();\n        static void registerOneliners(\n            KTRef(KDController) ctrl,\n            const std::vector<std::any> &items\n        );\n\n    private:\n        static std::vector<std::any> _items;\n};\n', '%PREFIX%', prefix);
+      o = o + replace('\nclass %NAME%EffectRegistry {\n    public:\n        static void processOneliners();\n        static void registerOneliners(\n            KTRef(KDController) ctrl,\n            const std::vector<std::any> &items\n        );\n\n    private:\n        static std::vector<std::any> _items;\n};\n', '%NAME%', name);
+    }
+    return o;
+  }
+  function cppEffectsSource(entityPrefixes) {
+    var o = '';
+    var inductionVariable = 0;
+    var last = entityPrefixes.length;
+    while (inductionVariable < last) {
+      var name = entityPrefixes[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      var tmp = o;
+      var tmp_0 = replace("\nstd::vector<std::any> %NAME%EffectRegistry::_items;\n\nvoid %NAME%EffectRegistry::processOneliners() {\n    auto %PREFIX%Ctx = KT.%PREFIX%CtrlCtx();\n    auto recentField = KT.%PREFIX%CtrlCtxField();\n\n    int halfCount = _items.size() / 2;\n    for (int i = 0; i < halfCount; ++i) {\n        auto effectField = std::any_cast<const char *>(_items[i * 2]);\n        if (strcmp(effectField, recentField) == 0) {\n            auto callback = std::any_cast<std::function<void(%NAME%Context)>>(_items[i * 2 + 1]);\n            auto c = %NAME%Context(%PREFIX%Ctx);\n            callback(c);\n        }\n    }\n\n    KTSym->DisposeString(recentField);\n}\n\nvoid %NAME%EffectRegistry::registerOneliners(\n    KTRef(KDController) ctrl,\n    const std::vector<std::any> &items\n) {\n    // This should only be run once. Yes, it's ugly\n    // but it keeps API consistent with other platforms.\n    KT.registerCallbackC(\n        ctrl,\n        (void *)&%NAME%EffectRegistry::processOneliners\n    );\n    _items = items;\n}\n", '%NAME%', name);
+      // Inline function 'kotlin.text.lowercase' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var tmp$ret$1 = name.toLowerCase();
+      o = tmp + replace(tmp_0, '%PREFIX%', tmp$ret$1);
     }
     return o;
   }

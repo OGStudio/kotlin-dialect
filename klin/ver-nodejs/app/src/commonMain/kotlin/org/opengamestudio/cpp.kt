@@ -9,8 +9,18 @@ package org.opengamestudio
 
 fun cppEffectsHeader(entityPrefixes: Array<String>): String {
     var o = ""
-    for (prefix in entityPrefixes) {
-        o += TEMPLATE_CPP_EFFECTS_HEADER.replace("%PREFIX%", prefix)
+    for (name in entityPrefixes) {
+        o += TEMPLATE_CPP_EFFECTS_HEADER.replace("%NAME%", name)
+    }
+    return o
+}
+
+fun cppEffectsSource(entityPrefixes: Array<String>): String {
+    var o = ""
+    for (name in entityPrefixes) {
+        o += TEMPLATE_CPP_EFFECTS_SOURCE
+            .replace("%NAME%", name)
+            .replace("%PREFIX%", name.lowercase())
     }
     return o
 }

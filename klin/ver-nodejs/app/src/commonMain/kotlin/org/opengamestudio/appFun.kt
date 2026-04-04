@@ -249,6 +249,24 @@ fun appShouldResetCPPEffectsHeader(c: AppContext): AppContext {
     return c
 }
 
+// Generate XYZEffectRegistry for C++ source
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPEffectsSource(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val names = contextNames(ids, c.entityNames)
+        val prefixes = cppEntityPrefixes(names)
+        c.cppEffectsSource = cppEffectsSource(prefixes)
+        c.recentField = "cppEffectsSource"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate xyzSet() calls for C++ header
 //
 // Conditions:
@@ -421,6 +439,7 @@ fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
 fun appShouldResetOutputCPPSource(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPSource = TEMPLATE_CPP_SOURCE_START +
+            c.cppEffectsSource +
             c.cppSetSource
         c.recentField = "outputCPPSource"
         return c
