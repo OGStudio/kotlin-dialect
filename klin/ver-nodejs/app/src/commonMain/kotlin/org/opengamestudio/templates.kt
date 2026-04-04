@@ -18,6 +18,19 @@ fun strToAny(item: String): Any {
     return item as Any
 }
 """
+const val TEMPLATE_CPP_EFFECTS_HEADER = """
+class %PREFIX%EffectRegistry {
+    public:
+        static void processOneliners();
+        static void registerOneliners(
+            KTRef(KDController) ctrl,
+            const std::vector<std::any> &items
+        );
+
+    private:
+        static std::vector<std::any> _items;
+};
+"""
 const val TEMPLATE_CPP_EXTENSIONS = """
 // Register C callback into KDController
 @OptIn(ExperimentalForeignApi::class)
