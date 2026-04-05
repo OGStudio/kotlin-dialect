@@ -43,6 +43,30 @@ fun cliHasArgument(
     return false
 }
 
+// Collect context entity ids
+fun contextIds(entityTypes: Map<Int, String>): Array<Int> {
+    var ids = arrayOf<Int>()
+    for ((id, type) in entityTypes) {
+        if (type == TYPE_CONTEXT) {
+            ids += id
+        }
+    }
+    return ids
+}
+
+// Collect context entity names
+fun contextNames(
+    entityIds: Array<Int>,
+    entityNames: Array<String>
+): Array<String> {
+    var items = arrayOf<String>()
+    for (id in entityIds) {
+        val name = entityNames[id]
+        items += name
+    }
+    return items
+}
+
 // Shortened debug string
 fun debugShortString(v: Any): String {
     val str = debugString(v)
@@ -87,6 +111,9 @@ fun debugString(v: Any): String {
 
 // Provide output to save based on its type
 fun outputFileContents(
+    outputCPPHeader: String,
+    outputCPPSDK: String,
+    outputCPPSource: String,
     outputJSExport: String,
     outputKotlin: String,
     outputSwift: String,
@@ -101,8 +128,31 @@ fun outputFileContents(
     else if (type == OUTPUT_TYPE_SWIFT) {
         return outputSwift
     }
+    else if (type == OUTPUT_TYPE_CPP_HDR) {
+        return outputCPPHeader
+    }
+    else if (type == OUTPUT_TYPE_CPP_SDK) {
+        return outputCPPSDK
+    }
+    else if (type == OUTPUT_TYPE_CPP_SRC) {
+        return outputCPPSource
+    }
 
     return "outputFC-N/A"
+}
+
+// Collect raw C++ SDK source code
+fun parseRawCPPSDK(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_CPPSDK)) {
+            val prefixLen = PREFIX_RAW_CPPSDK.length
+            val code = ln.substring(prefixLen)
+            contents += code + NEWLINE
+        }
+    }
+
+    return contents
 }
 
 // Collect raw Kotlin source code
