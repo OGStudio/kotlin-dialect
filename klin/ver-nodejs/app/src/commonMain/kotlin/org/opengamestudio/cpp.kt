@@ -7,10 +7,34 @@
 
 package org.opengamestudio
 
-fun cppContextsHeader(entityPrefixes: Array<String>): String {
+fun cppContextFieldsHeader(
+    contextIds: Array<Int>,
+    entityFields: Map<Int, Map<String, String>>
+): Array<String> {
+    var contexts = arrayOf<String>()
+    for (id in contextIds) {
+        val fields = entityFields[id] ?: mapOf<String, String>()
+        val sortedFieldNames = fields.keys.sorted()
+        var fieldsText = ""
+        for (name in sortedFieldNames) {
+            fieldsText += name + "\n"
+        }
+        contexts += fieldsText
+    }
+    return contexts
+}
+
+fun cppContextsHeader(
+    contextFields: Array<String>,
+    contextPrefixes: Array<String>
+): String {
     var o = ""
-    for (name in entityPrefixes) {
-        o += TEMPLATE_CPP_CONTEXT_HEADER.replace("%NAME%", name)
+    for (i in contextPrefixes.indices) {
+        val fieldsText = contextFields[i]
+        val name = contextPrefixes[i]
+        o += TEMPLATE_CPP_CONTEXT_HEADER
+            .replace("%ITEMS%", fieldsText)
+            .replace("%NAME%", name)
     }
     return o
 }
