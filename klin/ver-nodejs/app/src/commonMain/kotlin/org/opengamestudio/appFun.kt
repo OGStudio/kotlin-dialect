@@ -240,7 +240,11 @@ fun appShouldResetCPPContextsHeader(c: AppContext): AppContext {
         val ids = contextIds(c.entityTypes)
         val names = contextNames(ids, c.entityNames)
         val prefixes = cppEntityPrefixes(names)
-        val fields = cppContextFieldsHeader(ids, c.entityFields)
+        val fields = cppContextFieldsHeader(
+            ids,
+            c.entityFields,
+            ::cppContextFieldFormatterHeader
+        )
         c.cppContextsHeader = cppContextsHeader(fields, prefixes)
         c.recentField = "cppContextsHeader"
         return c

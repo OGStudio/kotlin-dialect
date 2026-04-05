@@ -7,9 +7,28 @@
 
 package org.opengamestudio
 
+fun cppContextFieldFormatterHeader(
+    name: String,
+    type: String
+): String {
+    // Quietly ignore unknown types
+    var template = ""
+    if (type == "Bool") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER
+    }
+    else if (type == "Int") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER
+    }
+    else if (type == "String") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER
+    }
+    return template.replace("%FIELD%", name)
+}
+
 fun cppContextFieldsHeader(
     contextIds: Array<Int>,
-    entityFields: Map<Int, Map<String, String>>
+    entityFields: Map<Int, Map<String, String>>,
+    fieldFormatter: (String, String) -> String
 ): Array<String> {
     var contexts = arrayOf<String>()
     for (id in contextIds) {
@@ -17,7 +36,8 @@ fun cppContextFieldsHeader(
         val sortedFieldNames = fields.keys.sorted()
         var fieldsText = ""
         for (name in sortedFieldNames) {
-            fieldsText += name + "\n"
+            val type = fields[name] ?: ""
+            fieldsText += fieldFormatter(name, type)
         }
         contexts += fieldsText
     }
