@@ -7,6 +7,14 @@
 
 package org.opengamestudio
 
+fun cppContextsHeader(entityPrefixes: Array<String>): String {
+    var o = ""
+    for (name in entityPrefixes) {
+        o += TEMPLATE_CPP_CONTEXT_HEADER.replace("%NAME%", name)
+    }
+    return o
+}
+
 fun cppEffectsHeader(entityPrefixes: Array<String>): String {
     var o = ""
     for (name in entityPrefixes) {

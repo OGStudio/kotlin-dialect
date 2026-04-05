@@ -231,6 +231,24 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
+// Generate XYZContext for C++ header
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPContextsHeader(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val names = contextNames(ids, c.entityNames)
+        val prefixes = cppEntityPrefixes(names)
+        c.cppContextsHeader = cppContextsHeader(prefixes)
+        c.recentField = "cppContextsHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZEffectRegistry for C++ header
 //
 // Conditions:
@@ -404,6 +422,7 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
+            c.cppContextsHeader +
             c.cppEffectsHeader + 
             c.cppSetHeader +
             c.fobjCPPHeader + 

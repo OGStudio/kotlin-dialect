@@ -7,6 +7,26 @@
 
 package org.opengamestudio
 
+const val TEMPLATE_CPP_CONTEXT_HEADER = """
+class %NAME%Context {
+    public:
+        %NAME%Context(KTRef(%NAME%Context) ctx);
+
+%ITEMS%
+
+    private:
+        KTRef(%NAME%Context) ctx;
+};
+"""
+const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
+        bool %FIELD%();
+"""
+const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
+        int %FIELD%();
+"""
+const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER = """
+        QString %FIELD%() const &;
+"""
 const val TEMPLATE_CPP_CONVERSIONS = """
 // Convert Bool to Any (for SDK)
 fun boolToAny(item: Boolean): Any {

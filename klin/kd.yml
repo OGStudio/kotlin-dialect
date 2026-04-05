@@ -14,6 +14,10 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Declaration of XYZContext
+        cppContextsHeader: String
+        # Implementat of XYZContext
+        cppContextsSource: String
         # Declaration of XYZEffectRegistry
         cppEffectsHeader: String
         # Implementation of XYZEffectRegistry
