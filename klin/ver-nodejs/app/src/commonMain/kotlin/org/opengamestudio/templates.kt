@@ -10,7 +10,7 @@ package org.opengamestudio
 const val TEMPLATE_CPP_CONTEXT_HEADER = """
 class %NAME%Context {
     public:
-        %NAME%Context(KTRef(%NAME%Context) ctx);
+        %NAME%Context(KTRef(%NAME%Context) ctx): ctx(ctx) { }
 
 %ITEMS%
 
@@ -21,11 +21,29 @@ class %NAME%Context {
 const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
         bool %FIELD%();
 """
+const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_SOURCE = """
+bool %NAME%::%FIELD%() {
+    return KT.%NAME%.get_%FIELD%(ctx);
+}
+"""
 const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
         int %FIELD%();
 """
+const val TEMPLATE_CPP_CONTEXT_ITEM_INT_SOURCE = """
+int %NAME%::%FIELD%() {
+    return KT.%NAME%.get_%FIELD%(ctx);
+}
+"""
 const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER = """
         QString %FIELD%() const &;
+"""
+const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE = """
+QString %NAME%::%FIELD%() const & {
+    const char *raw = KT.%NAME%.get_%FIELD%(ctx);
+    QString str(raw);
+    KTSym->DisposeString(raw);
+    return str;
+}
 """
 const val TEMPLATE_CPP_CONVERSIONS = """
 // Convert Bool to Any (for SDK)

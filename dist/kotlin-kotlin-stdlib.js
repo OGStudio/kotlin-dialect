@@ -57,12 +57,6 @@ if (typeof Math.clz32 === 'undefined') {
     };
   }(Math.log, Math.LN2);
 }
-if (typeof String.prototype.startsWith === 'undefined') {
-  Object.defineProperty(String.prototype, 'startsWith', {value: function (searchString, position) {
-    position = position || 0;
-    return this.lastIndexOf(searchString, position) === position;
-  }});
-}
 if (typeof String.prototype.endsWith === 'undefined') {
   Object.defineProperty(String.prototype, 'endsWith', {value: function (searchString, position) {
     var subjectString = this.toString();
@@ -72,6 +66,12 @@ if (typeof String.prototype.endsWith === 'undefined') {
     position -= searchString.length;
     var lastIndex = subjectString.indexOf(searchString, position);
     return lastIndex !== -1 && lastIndex === position;
+  }});
+}
+if (typeof String.prototype.startsWith === 'undefined') {
+  Object.defineProperty(String.prototype, 'startsWith', {value: function (searchString, position) {
+    position = position || 0;
+    return this.lastIndexOf(searchString, position) === position;
   }});
 }
 //endregion
@@ -117,22 +117,22 @@ if (typeof String.prototype.endsWith === 'undefined') {
   initMetadataForClass(AbstractCollection, 'AbstractCollection', VOID, VOID, [Collection]);
   initMetadataForClass(AbstractMutableCollection, 'AbstractMutableCollection', VOID, AbstractCollection, [AbstractCollection, Collection]);
   initMetadataForClass(IteratorImpl, 'IteratorImpl');
-  initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtList]);
+  initMetadataForClass(AbstractMutableList, 'AbstractMutableList', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtList, Collection]);
   initMetadataForClass(AbstractMap, 'AbstractMap', VOID, VOID, [KtMap]);
   initMetadataForClass(AbstractMutableMap, 'AbstractMutableMap', VOID, AbstractMap, [AbstractMap, KtMap]);
-  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, Collection, KtSet]);
+  initMetadataForClass(AbstractMutableSet, 'AbstractMutableSet', VOID, AbstractMutableCollection, [AbstractMutableCollection, KtSet, Collection]);
   initMetadataForCompanion(Companion_2);
-  initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, Collection, KtList]);
+  initMetadataForClass(ArrayList, 'ArrayList', ArrayList_init_$Create$, AbstractMutableList, [AbstractMutableList, KtList, Collection]);
   initMetadataForClass(HashMap, 'HashMap', HashMap_init_$Create$, AbstractMutableMap, [AbstractMutableMap, KtMap]);
-  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapKeys, 'HashMapKeys', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapValues, 'HashMapValues', VOID, AbstractMutableCollection, [Collection, AbstractMutableCollection]);
-  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [Collection, KtSet, AbstractMutableSet]);
+  initMetadataForClass(HashMapEntrySetBase, 'HashMapEntrySetBase', VOID, AbstractMutableSet, [KtSet, Collection, AbstractMutableSet]);
   initMetadataForClass(HashMapEntrySet, 'HashMapEntrySet', VOID, HashMapEntrySetBase);
   initMetadataForClass(HashMapKeysDefault$iterator$1);
   initMetadataForClass(HashMapKeysDefault, 'HashMapKeysDefault', VOID, AbstractMutableSet);
   initMetadataForClass(HashMapValuesDefault$iterator$1);
   initMetadataForClass(HashMapValuesDefault, 'HashMapValuesDefault', VOID, AbstractMutableCollection);
-  initMetadataForClass(HashSet, 'HashSet', HashSet_init_$Create$, AbstractMutableSet, [AbstractMutableSet, Collection, KtSet]);
+  initMetadataForClass(HashSet, 'HashSet', HashSet_init_$Create$, AbstractMutableSet, [AbstractMutableSet, KtSet, Collection]);
   initMetadataForCompanion(Companion_3);
   initMetadataForClass(Itr, 'Itr');
   initMetadataForClass(KeysItr, 'KeysItr', VOID, Itr);
@@ -178,7 +178,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   initMetadataForClass(InternalHashMap, 'InternalHashMap', InternalHashMap_init_$Create$, VOID, [InternalMap]);
   initMetadataForObject(EmptyHolder, 'EmptyHolder');
   initMetadataForClass(LinkedHashMap, 'LinkedHashMap', LinkedHashMap_init_$Create$, HashMap, [HashMap, KtMap]);
-  initMetadataForClass(LinkedHashSet, 'LinkedHashSet', LinkedHashSet_init_$Create$, HashSet, [HashSet, Collection, KtSet]);
+  initMetadataForClass(LinkedHashSet, 'LinkedHashSet', LinkedHashSet_init_$Create$, HashSet, [HashSet, KtSet, Collection]);
   initMetadataForClass(BaseOutput, 'BaseOutput');
   initMetadataForClass(NodeJsOutput, 'NodeJsOutput', VOID, BaseOutput);
   initMetadataForClass(BufferedOutput, 'BufferedOutput', BufferedOutput, BaseOutput);
@@ -237,11 +237,49 @@ if (typeof String.prototype.endsWith === 'undefined') {
   }
   function Number_0() {
   }
+  function joinToString(_this__u8e3s4, separator, prefix, postfix, limit, truncated, transform) {
+    separator = separator === VOID ? ', ' : separator;
+    prefix = prefix === VOID ? '' : prefix;
+    postfix = postfix === VOID ? '' : postfix;
+    limit = limit === VOID ? -1 : limit;
+    truncated = truncated === VOID ? '...' : truncated;
+    transform = transform === VOID ? null : transform;
+    return joinTo(_this__u8e3s4, StringBuilder_init_$Create$_0(), separator, prefix, postfix, limit, truncated, transform).toString();
+  }
   function last(_this__u8e3s4) {
     // Inline function 'kotlin.collections.isEmpty' call
     if (_this__u8e3s4.length === 0)
       throw NoSuchElementException_init_$Create$_0('Array is empty.');
     return _this__u8e3s4[get_lastIndex(_this__u8e3s4)];
+  }
+  function joinTo(_this__u8e3s4, buffer, separator, prefix, postfix, limit, truncated, transform) {
+    separator = separator === VOID ? ', ' : separator;
+    prefix = prefix === VOID ? '' : prefix;
+    postfix = postfix === VOID ? '' : postfix;
+    limit = limit === VOID ? -1 : limit;
+    truncated = truncated === VOID ? '...' : truncated;
+    transform = transform === VOID ? null : transform;
+    buffer.e(prefix);
+    var count = 0;
+    var inductionVariable = 0;
+    var last = _this__u8e3s4.length;
+    $l$loop: while (inductionVariable < last) {
+      var element = _this__u8e3s4[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      count = count + 1 | 0;
+      if (count > 1) {
+        buffer.e(separator);
+      }
+      if (limit < 0 || count <= limit) {
+        appendElement(buffer, element, transform);
+      } else
+        break $l$loop;
+    }
+    if (limit >= 0 && count > limit) {
+      buffer.e(truncated);
+    }
+    buffer.e(postfix);
+    return buffer;
   }
   function get_lastIndex(_this__u8e3s4) {
     return _this__u8e3s4.length - 1 | 0;
@@ -280,7 +318,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     while (inductionVariable < last) {
       var item = _this__u8e3s4[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
-      destination.e(item);
+      destination.f(item);
     }
     return destination;
   }
@@ -296,44 +334,6 @@ if (typeof String.prototype.endsWith === 'undefined') {
         throw IllegalArgumentException_init_$Create$_0('Array has more than one element.');
     }
     return tmp;
-  }
-  function joinToString(_this__u8e3s4, separator, prefix, postfix, limit, truncated, transform) {
-    separator = separator === VOID ? ', ' : separator;
-    prefix = prefix === VOID ? '' : prefix;
-    postfix = postfix === VOID ? '' : postfix;
-    limit = limit === VOID ? -1 : limit;
-    truncated = truncated === VOID ? '...' : truncated;
-    transform = transform === VOID ? null : transform;
-    return joinTo(_this__u8e3s4, StringBuilder_init_$Create$_0(), separator, prefix, postfix, limit, truncated, transform).toString();
-  }
-  function joinTo(_this__u8e3s4, buffer, separator, prefix, postfix, limit, truncated, transform) {
-    separator = separator === VOID ? ', ' : separator;
-    prefix = prefix === VOID ? '' : prefix;
-    postfix = postfix === VOID ? '' : postfix;
-    limit = limit === VOID ? -1 : limit;
-    truncated = truncated === VOID ? '...' : truncated;
-    transform = transform === VOID ? null : transform;
-    buffer.f(prefix);
-    var count = 0;
-    var inductionVariable = 0;
-    var last = _this__u8e3s4.length;
-    $l$loop: while (inductionVariable < last) {
-      var element = _this__u8e3s4[inductionVariable];
-      inductionVariable = inductionVariable + 1 | 0;
-      count = count + 1 | 0;
-      if (count > 1) {
-        buffer.f(separator);
-      }
-      if (limit < 0 || count <= limit) {
-        appendElement(buffer, element, transform);
-      } else
-        break $l$loop;
-    }
-    if (limit >= 0 && count > limit) {
-      buffer.f(truncated);
-    }
-    buffer.f(postfix);
-    return buffer;
   }
   function joinToString_0(_this__u8e3s4, separator, prefix, postfix, limit, truncated, transform) {
     separator = separator === VOID ? ', ' : separator;
@@ -351,14 +351,14 @@ if (typeof String.prototype.endsWith === 'undefined') {
     limit = limit === VOID ? -1 : limit;
     truncated = truncated === VOID ? '...' : truncated;
     transform = transform === VOID ? null : transform;
-    buffer.f(prefix);
+    buffer.e(prefix);
     var count = 0;
     var _iterator__ex2g4s = _this__u8e3s4.g();
     $l$loop: while (_iterator__ex2g4s.h()) {
       var element = _iterator__ex2g4s.i();
       count = count + 1 | 0;
       if (count > 1) {
-        buffer.f(separator);
+        buffer.e(separator);
       }
       if (limit < 0 || count <= limit) {
         appendElement(buffer, element, transform);
@@ -366,9 +366,9 @@ if (typeof String.prototype.endsWith === 'undefined') {
         break $l$loop;
     }
     if (limit >= 0 && count > limit) {
-      buffer.f(truncated);
+      buffer.e(truncated);
     }
-    buffer.f(postfix);
+    buffer.e(postfix);
     return buffer;
   }
   function dropLast(_this__u8e3s4, n) {
@@ -437,7 +437,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     var _iterator__ex2g4s = _this__u8e3s4.g();
     $l$loop: while (_iterator__ex2g4s.h()) {
       var item = _iterator__ex2g4s.i();
-      list.e(item);
+      list.f(item);
       count = count + 1 | 0;
       if (count === n)
         break $l$loop;
@@ -504,7 +504,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     var _iterator__ex2g4s = _this__u8e3s4.g();
     while (_iterator__ex2g4s.h()) {
       var item = _iterator__ex2g4s.i();
-      destination.e(item);
+      destination.f(item);
     }
     return destination;
   }
@@ -2023,7 +2023,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     AbstractMutableCollection.call(this);
     this.l2_1 = 0;
   }
-  protoOf(AbstractMutableList).e = function (element) {
+  protoOf(AbstractMutableList).f = function (element) {
     this.h2();
     this.m2(this.j(), element);
     return true;
@@ -2211,7 +2211,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     var tmp = this_0;
     return (tmp == null ? true : !(tmp == null)) ? tmp : THROW_CCE();
   };
-  protoOf(ArrayList).e = function (element) {
+  protoOf(ArrayList).f = function (element) {
     this.h2();
     // Inline function 'kotlin.js.asDynamic' call
     this.n_1.push(element);
@@ -2443,7 +2443,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(HashMapKeys).t = function (element) {
     return this.n3_1.m3(element);
   };
-  protoOf(HashMapKeys).e = function (element) {
+  protoOf(HashMapKeys).f = function (element) {
     throw UnsupportedOperationException_init_$Create$();
   };
   protoOf(HashMapKeys).g = function () {
@@ -2470,7 +2470,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(HashMapValues).r3 = function (element) {
     throw UnsupportedOperationException_init_$Create$();
   };
-  protoOf(HashMapValues).e = function (element) {
+  protoOf(HashMapValues).f = function (element) {
     return this.r3((element == null ? true : !(element == null)) ? element : THROW_CCE());
   };
   protoOf(HashMapValues).g = function () {
@@ -2503,7 +2503,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(HashMapEntrySetBase).x3 = function (element) {
     throw UnsupportedOperationException_init_$Create$();
   };
-  protoOf(HashMapEntrySetBase).e = function (element) {
+  protoOf(HashMapEntrySetBase).f = function (element) {
     return this.x3((!(element == null) ? isInterface(element, Entry) : false) ? element : THROW_CCE());
   };
   protoOf(HashMapEntrySetBase).u = function (elements) {
@@ -2525,7 +2525,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(HashMapKeysDefault).c4 = function (element) {
     throw UnsupportedOperationException_init_$Create$_0('Add is not supported on keys');
   };
-  protoOf(HashMapKeysDefault).e = function (element) {
+  protoOf(HashMapKeysDefault).f = function (element) {
     return this.c4((element == null ? true : !(element == null)) ? element : THROW_CCE());
   };
   protoOf(HashMapKeysDefault).m3 = function (element) {
@@ -2559,7 +2559,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   protoOf(HashMapValuesDefault).r3 = function (element) {
     throw UnsupportedOperationException_init_$Create$_0('Add is not supported on values');
   };
-  protoOf(HashMapValuesDefault).e = function (element) {
+  protoOf(HashMapValuesDefault).f = function (element) {
     return this.r3((element == null ? true : !(element == null)) ? element : THROW_CCE());
   };
   protoOf(HashMapValuesDefault).q3 = function (element) {
@@ -2601,7 +2601,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
   function HashSet_init_$Create$_0(initialCapacity) {
     return HashSet_init_$Init$_2(initialCapacity, objectCreate(protoOf(HashSet)));
   }
-  protoOf(HashSet).e = function (element) {
+  protoOf(HashSet).f = function (element) {
     return this.f4_1.c2(element, true) == null;
   };
   protoOf(HashSet).t = function (element) {
@@ -3549,7 +3549,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     this.t5_1 = this.t5_1 + toString(value);
     return this;
   };
-  protoOf(StringBuilder).f = function (value) {
+  protoOf(StringBuilder).e = function (value) {
     this.t5_1 = this.t5_1 + toString_0(value);
     return this;
   };
@@ -3681,7 +3681,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     do {
       var foundMatch = ensureNotNull(match);
       sb.j6(input, lastStart, foundMatch.a7().e7());
-      sb.f(transform(foundMatch));
+      sb.e(transform(foundMatch));
       lastStart = foundMatch.a7().f7() + 1 | 0;
       match = foundMatch.i();
     }
@@ -5304,15 +5304,15 @@ if (typeof String.prototype.endsWith === 'undefined') {
   };
   function appendElement(_this__u8e3s4, element, transform) {
     if (!(transform == null))
-      _this__u8e3s4.f(transform(element));
+      _this__u8e3s4.e(transform(element));
     else {
       if (element == null ? true : isCharSequence(element))
-        _this__u8e3s4.f(element);
+        _this__u8e3s4.e(element);
       else {
         if (element instanceof Char)
           _this__u8e3s4.w5(element.x9_1);
         else {
-          _this__u8e3s4.f(toString_1(element));
+          _this__u8e3s4.e(toString_1(element));
         }
       }
     }
@@ -5423,7 +5423,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     while (_iterator__ex2g4s.h()) {
       var item = _iterator__ex2g4s.i();
       var tmp$ret$1 = substring_1(_this__u8e3s4, item);
-      destination.e(tmp$ret$1);
+      destination.f(tmp$ret$1);
     }
     return destination;
   }
@@ -5451,7 +5451,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
       // Inline function 'kotlin.text.substring' call
       var endIndex = nextIndex;
       var tmp$ret$0 = toString_1(charSequenceSubSequence(_this__u8e3s4, tmp2, endIndex));
-      result.e(tmp$ret$0);
+      result.f(tmp$ret$0);
       currentOffset = nextIndex + delimiter.length | 0;
       if (isLimited && result.j() === (limit - 1 | 0))
         break $l$loop;
@@ -5462,7 +5462,7 @@ if (typeof String.prototype.endsWith === 'undefined') {
     // Inline function 'kotlin.text.substring' call
     var endIndex_0 = charSequenceLength(_this__u8e3s4);
     var tmp$ret$1 = toString_1(charSequenceSubSequence(_this__u8e3s4, tmp2_0, endIndex_0));
-    result.e(tmp$ret$1);
+    result.f(tmp$ret$1);
     return result;
   }
   function rangesDelimitedBy(_this__u8e3s4, delimiters, startIndex, ignoreCase, limit) {
@@ -5875,36 +5875,37 @@ if (typeof String.prototype.endsWith === 'undefined') {
   _.$_$.j = emptyMap;
   _.$_$.k = first;
   _.$_$.l = joinToString_0;
-  _.$_$.m = last_0;
-  _.$_$.n = last;
-  _.$_$.o = sorted;
-  _.$_$.p = println;
-  _.$_$.q = charSequenceLength;
-  _.$_$.r = defineProp;
-  _.$_$.s = equals;
-  _.$_$.t = getBooleanHashCode;
-  _.$_$.u = getStringHashCode;
-  _.$_$.v = hashCode;
-  _.$_$.w = initMetadataForClass;
-  _.$_$.x = initMetadataForInterface;
-  _.$_$.y = initMetadataForObject;
-  _.$_$.z = isArray;
-  _.$_$.a1 = isInterface;
-  _.$_$.b1 = protoOf;
-  _.$_$.c1 = toString_1;
-  _.$_$.d1 = capitalize;
-  _.$_$.e1 = contains;
-  _.$_$.f1 = decodeToString;
-  _.$_$.g1 = dropLast_0;
-  _.$_$.h1 = endsWith;
-  _.$_$.i1 = replace;
-  _.$_$.j1 = split;
-  _.$_$.k1 = startsWith;
-  _.$_$.l1 = substring_0;
-  _.$_$.m1 = substring;
-  _.$_$.n1 = take_0;
-  _.$_$.o1 = THROW_CCE;
-  _.$_$.p1 = ensureNotNull;
+  _.$_$.m = joinToString;
+  _.$_$.n = last_0;
+  _.$_$.o = last;
+  _.$_$.p = sorted;
+  _.$_$.q = println;
+  _.$_$.r = charSequenceLength;
+  _.$_$.s = defineProp;
+  _.$_$.t = equals;
+  _.$_$.u = getBooleanHashCode;
+  _.$_$.v = getStringHashCode;
+  _.$_$.w = hashCode;
+  _.$_$.x = initMetadataForClass;
+  _.$_$.y = initMetadataForInterface;
+  _.$_$.z = initMetadataForObject;
+  _.$_$.a1 = isArray;
+  _.$_$.b1 = isInterface;
+  _.$_$.c1 = protoOf;
+  _.$_$.d1 = toString_1;
+  _.$_$.e1 = capitalize;
+  _.$_$.f1 = contains;
+  _.$_$.g1 = decodeToString;
+  _.$_$.h1 = dropLast_0;
+  _.$_$.i1 = endsWith;
+  _.$_$.j1 = replace;
+  _.$_$.k1 = split;
+  _.$_$.l1 = startsWith;
+  _.$_$.m1 = substring_0;
+  _.$_$.n1 = substring;
+  _.$_$.o1 = take_0;
+  _.$_$.p1 = THROW_CCE;
+  _.$_$.q1 = ensureNotNull;
   //endregion
   return _;
 }));

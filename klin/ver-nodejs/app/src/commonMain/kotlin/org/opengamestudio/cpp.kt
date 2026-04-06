@@ -25,6 +25,27 @@ fun cppContextFieldFormatterHeader(
     return template.replace("%FIELD%", name)
 }
 
+fun cppContextFieldFormatterSource(
+    entityName: String,
+    fieldName: String,
+    type: String
+): String {
+    // Quietly ignore unknown types
+    var template = ""
+    if (type == "Bool") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_BOOL_SOURCE
+    }
+    else if (type == "Int") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_INT_SOURCE
+    }
+    else if (type == "String") {
+        template = TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE
+    }
+    return template
+        .replace("%FIELD%", fieldName)
+        .replace("%NAME%", entityName)
+}
+
 fun cppContextFieldsHeader(
     contextIds: Array<Int>,
     entityFields: Map<Int, Map<String, String>>,
@@ -42,6 +63,27 @@ fun cppContextFieldsHeader(
         contexts += fieldsText
     }
     return contexts
+}
+
+fun cppContextFieldsSource(
+    contextIds: Array<Int>,
+    entityFields: Map<Int, Map<String, String>>,
+    entityNames: Array<String>,
+    fieldFormatter: (String, String, String) -> String
+): Array<String> {
+    var items = arrayOf<String>()
+    for (id in contextIds) {
+        val entityName = entityNames[id] ?: ""
+        val fields = entityFields[id] ?: mapOf<String, String>()
+        val sortedFieldNames = fields.keys.sorted()
+        var text = ""
+        for (fieldName in sortedFieldNames) {
+            val type = fields[fieldName] ?: ""
+            text += fieldFormatter(entityName, fieldName, type)
+        }
+        items += text
+    }
+    return items
 }
 
 fun cppContextsHeader(

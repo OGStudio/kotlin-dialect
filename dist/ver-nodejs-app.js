@@ -13,48 +13,49 @@
   'use strict';
   //region block: imports
   var imul = Math.imul;
-  var split = kotlin_kotlin.$_$.j1;
+  var joinToString = kotlin_kotlin.$_$.m;
+  var split = kotlin_kotlin.$_$.k1;
   var dropLast = kotlin_kotlin.$_$.i;
-  var joinToString = kotlin_kotlin.$_$.l;
+  var joinToString_0 = kotlin_kotlin.$_$.l;
   var Regex_init_$Create$ = kotlin_kotlin.$_$.d;
-  var replace = kotlin_kotlin.$_$.i1;
-  var THROW_CCE = kotlin_kotlin.$_$.o1;
+  var replace = kotlin_kotlin.$_$.j1;
+  var THROW_CCE = kotlin_kotlin.$_$.p1;
   var Unit_instance = kotlin_kotlin.$_$.f;
-  var protoOf = kotlin_kotlin.$_$.b1;
-  var initMetadataForObject = kotlin_kotlin.$_$.y;
+  var protoOf = kotlin_kotlin.$_$.c1;
+  var initMetadataForObject = kotlin_kotlin.$_$.z;
   var emptyMap = kotlin_kotlin.$_$.j;
-  var sorted = kotlin_kotlin.$_$.o;
-  var substring = kotlin_kotlin.$_$.m1;
+  var sorted = kotlin_kotlin.$_$.p;
+  var substring = kotlin_kotlin.$_$.n1;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
-  var ensureNotNull = kotlin_kotlin.$_$.p1;
+  var ensureNotNull = kotlin_kotlin.$_$.q1;
   var copyToArray = kotlin_kotlin.$_$.h;
-  var charSequenceLength = kotlin_kotlin.$_$.q;
-  var startsWith = kotlin_kotlin.$_$.k1;
-  var endsWith = kotlin_kotlin.$_$.h1;
-  var contains = kotlin_kotlin.$_$.e1;
+  var charSequenceLength = kotlin_kotlin.$_$.r;
+  var startsWith = kotlin_kotlin.$_$.l1;
+  var endsWith = kotlin_kotlin.$_$.i1;
+  var contains = kotlin_kotlin.$_$.f1;
   var VOID = kotlin_kotlin.$_$.a;
   var first = kotlin_kotlin.$_$.k;
-  var last = kotlin_kotlin.$_$.m;
-  var isArray = kotlin_kotlin.$_$.z;
+  var last = kotlin_kotlin.$_$.n;
+  var isArray = kotlin_kotlin.$_$.a1;
   var KtMap = kotlin_kotlin.$_$.g;
-  var isInterface = kotlin_kotlin.$_$.a1;
-  var toString = kotlin_kotlin.$_$.c1;
-  var hashCode = kotlin_kotlin.$_$.v;
-  var getStringHashCode = kotlin_kotlin.$_$.u;
-  var getBooleanHashCode = kotlin_kotlin.$_$.t;
-  var equals = kotlin_kotlin.$_$.s;
-  var defineProp = kotlin_kotlin.$_$.r;
-  var initMetadataForClass = kotlin_kotlin.$_$.w;
-  var initMetadataForInterface = kotlin_kotlin.$_$.x;
+  var isInterface = kotlin_kotlin.$_$.b1;
+  var toString = kotlin_kotlin.$_$.d1;
+  var hashCode = kotlin_kotlin.$_$.w;
+  var getStringHashCode = kotlin_kotlin.$_$.v;
+  var getBooleanHashCode = kotlin_kotlin.$_$.u;
+  var equals = kotlin_kotlin.$_$.t;
+  var defineProp = kotlin_kotlin.$_$.s;
+  var initMetadataForClass = kotlin_kotlin.$_$.x;
+  var initMetadataForInterface = kotlin_kotlin.$_$.y;
   var ArrayList_init_$Create$ = kotlin_kotlin.$_$.b;
   var Default_getInstance = kotlin_kotlin.$_$.e;
-  var decodeToString = kotlin_kotlin.$_$.f1;
-  var substring_0 = kotlin_kotlin.$_$.l1;
-  var take = kotlin_kotlin.$_$.n1;
-  var println = kotlin_kotlin.$_$.p;
-  var last_0 = kotlin_kotlin.$_$.n;
-  var dropLast_0 = kotlin_kotlin.$_$.g1;
-  var capitalize = kotlin_kotlin.$_$.d1;
+  var decodeToString = kotlin_kotlin.$_$.g1;
+  var substring_0 = kotlin_kotlin.$_$.m1;
+  var take = kotlin_kotlin.$_$.o1;
+  var println = kotlin_kotlin.$_$.q;
+  var last_0 = kotlin_kotlin.$_$.o;
+  var dropLast_0 = kotlin_kotlin.$_$.h1;
+  var capitalize = kotlin_kotlin.$_$.e1;
   //endregion
   //region block: pre-declaration
   initMetadataForObject(AppProto, 'AppProto');
@@ -211,6 +212,19 @@
     c.na_1 = 'none';
     return c;
   }
+  function appShouldResetCPPContextsSource(c) {
+    if (c.na_1 === 'fobjKotlin') {
+      var ids = contextIds(c.entityTypes);
+      var tmp = c.entityFields;
+      var tmp_0 = c.entityNames;
+      var fields = cppContextFieldsSource(ids, tmp, tmp_0, cppContextFieldFormatterSource$ref());
+      c.cppContextsSource = joinToString(fields, '\n');
+      c.na_1 = 'cppContextsSource';
+      return c;
+    }
+    c.na_1 = 'none';
+    return c;
+  }
   function appShouldResetCPPEffectsHeader(c) {
     if (c.na_1 === 'fobjKotlin') {
       var ids = contextIds(c.entityTypes);
@@ -310,7 +324,7 @@
     if (c.na_1 === 'inputFile') {
       var parts = split(c.inputFile, ['/']);
       var dirParts = dropLast(parts, 1);
-      c.inputFileDir = joinToString(dirParts, '/');
+      c.inputFileDir = joinToString_0(dirParts, '/');
       c.na_1 = 'inputFileDir';
       return c;
     }
@@ -340,7 +354,7 @@
   }
   function appShouldResetOutputCPPSource(c) {
     if (c.na_1 === 'outputKotlin') {
-      c.outputCPPSource = '\n#include "ignore.kd.h"\n#include "KT.h"\n' + c.cppEffectsSource + c.cppSetSource;
+      c.outputCPPSource = '\n#include "ignore.kd.h"\n#include "KT.h"\n' + c.cppContextsSource + c.cppEffectsSource + c.cppSetSource;
       c.na_1 = 'outputCPPSource';
       return c;
     }
@@ -418,6 +432,13 @@
       return cppContextFieldFormatterHeader(p0, p1);
     };
     l.callableName = 'cppContextFieldFormatterHeader';
+    return l;
+  }
+  function cppContextFieldFormatterSource$ref() {
+    var l = function (p0, p1, p2) {
+      return cppContextFieldFormatterSource(p0, p1, p2);
+    };
+    l.callableName = 'cppContextFieldFormatterSource';
     return l;
   }
   function appShouldCollectEntityComments$ref() {
@@ -516,6 +537,13 @@
       return appShouldResetCPPContextsHeader(p0);
     };
     l.callableName = 'appShouldResetCPPContextsHeader';
+    return l;
+  }
+  function appShouldResetCPPContextsSource$ref() {
+    var l = function (p0) {
+      return appShouldResetCPPContextsSource(p0);
+    };
+    l.callableName = 'appShouldResetCPPContextsSource';
     return l;
   }
   function appShouldResetCPPEffectsHeader$ref() {
@@ -674,29 +702,30 @@
     var tmp_10 = appShouldParseOutputPaths$ref();
     var tmp_11 = appShouldPrintToConsole$ref();
     var tmp_12 = appShouldResetCPPContextsHeader$ref();
-    var tmp_13 = appShouldResetCPPEffectsHeader$ref();
-    var tmp_14 = appShouldResetCPPEffectsSource$ref();
-    var tmp_15 = appShouldResetCPPSetHeader$ref();
-    var tmp_16 = appShouldResetCPPSetSource$ref();
-    var tmp_17 = appShouldResetCurrentOutputPathId$ref();
-    var tmp_18 = appShouldResetFObjCPPHeader$ref();
-    var tmp_19 = appShouldResetFObjKotlin$ref();
-    var tmp_20 = appShouldResetFObjSwift$ref();
-    var tmp_21 = appShouldResetInputFileDir$ref();
-    var tmp_22 = appShouldResetOutputCPPHeader$ref();
-    var tmp_23 = appShouldResetOutputCPPSDK$ref();
-    var tmp_24 = appShouldResetOutputCPPSource$ref();
-    var tmp_25 = appShouldResetOutputFile$ref();
-    var tmp_26 = appShouldResetOutputFileContents$ref();
-    var tmp_27 = appShouldResetOutputJSExport$ref();
-    var tmp_28 = appShouldResetOutputKotlin$ref();
-    var tmp_29 = appShouldResetOutputSwift$ref();
-    var tmp_30 = appShouldResetSrcKotlin$ref();
+    var tmp_13 = appShouldResetCPPContextsSource$ref();
+    var tmp_14 = appShouldResetCPPEffectsHeader$ref();
+    var tmp_15 = appShouldResetCPPEffectsSource$ref();
+    var tmp_16 = appShouldResetCPPSetHeader$ref();
+    var tmp_17 = appShouldResetCPPSetSource$ref();
+    var tmp_18 = appShouldResetCurrentOutputPathId$ref();
+    var tmp_19 = appShouldResetFObjCPPHeader$ref();
+    var tmp_20 = appShouldResetFObjKotlin$ref();
+    var tmp_21 = appShouldResetFObjSwift$ref();
+    var tmp_22 = appShouldResetInputFileDir$ref();
+    var tmp_23 = appShouldResetOutputCPPHeader$ref();
+    var tmp_24 = appShouldResetOutputCPPSDK$ref();
+    var tmp_25 = appShouldResetOutputCPPSource$ref();
+    var tmp_26 = appShouldResetOutputFile$ref();
+    var tmp_27 = appShouldResetOutputFileContents$ref();
+    var tmp_28 = appShouldResetOutputJSExport$ref();
+    var tmp_29 = appShouldResetOutputKotlin$ref();
+    var tmp_30 = appShouldResetOutputSwift$ref();
+    var tmp_31 = appShouldResetSrcKotlin$ref();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
     // Inline function 'kotlin.collections.forEach' call
-    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, tmp_26, tmp_27, tmp_28, tmp_29, tmp_30, appShouldResetSrcSwift$ref()];
+    var indexedObject = [tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22, tmp_23, tmp_24, tmp_25, tmp_26, tmp_27, tmp_28, tmp_29, tmp_30, tmp_31, appShouldResetSrcSwift$ref()];
     var inductionVariable = 0;
     var last = indexedObject.length;
     while (inductionVariable < last) {
@@ -725,6 +754,21 @@
         break;
     }
     return replace(template, '%FIELD%', name);
+  }
+  function cppContextFieldFormatterSource(entityName, fieldName, type) {
+    var template = '';
+    switch (type) {
+      case 'Bool':
+        template = '\nbool %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+        break;
+      case 'Int':
+        template = '\nint %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+        break;
+      case 'String':
+        template = '\nQString %NAME%::%FIELD%() const & {\n    const char *raw = KT.%NAME%.get_%FIELD%(ctx);\n    QString str(raw);\n    KTSym->DisposeString(raw);\n    return str;\n}\n';
+        break;
+    }
+    return replace(replace(template, '%FIELD%', fieldName), '%NAME%', entityName);
   }
   function cppContextFieldsHeader(contextIds, entityFields, fieldFormatter) {
     // Inline function 'kotlin.arrayOf' call
@@ -765,6 +809,47 @@
     }
     return contexts;
   }
+  function cppContextFieldsSource(contextIds, entityFields, entityNames, fieldFormatter) {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var items = [];
+    var inductionVariable = 0;
+    var last = contextIds.length;
+    while (inductionVariable < last) {
+      var id = contextIds[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      var tmp0_elvis_lhs = entityNames[id];
+      var entityName = tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs;
+      var tmp1_elvis_lhs = entityFields.z(id);
+      var tmp;
+      if (tmp1_elvis_lhs == null) {
+        // Inline function 'kotlin.collections.mapOf' call
+        tmp = emptyMap();
+      } else {
+        tmp = tmp1_elvis_lhs;
+      }
+      var fields = tmp;
+      var sortedFieldNames = sorted(fields.a1());
+      var text = '';
+      var _iterator__ex2g4s = sortedFieldNames.g();
+      while (_iterator__ex2g4s.h()) {
+        var fieldName = _iterator__ex2g4s.i();
+        var tmp2_elvis_lhs = fields.z(fieldName);
+        var type = tmp2_elvis_lhs == null ? '' : tmp2_elvis_lhs;
+        text = text + fieldFormatter(entityName, fieldName, type);
+      }
+      var tmp0 = items;
+      // Inline function 'kotlin.collections.plus' call
+      // Inline function 'kotlin.js.asDynamic' call
+      // Inline function 'kotlin.arrayOf' call
+      // Inline function 'kotlin.js.unsafeCast' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var tmp$ret$7 = [text];
+      items = tmp0.concat(tmp$ret$7);
+    }
+    return items;
+  }
   function cppContextsHeader(contextFields, contextPrefixes) {
     var o = '';
     var inductionVariable = 0;
@@ -775,7 +860,7 @@
         inductionVariable = inductionVariable + 1 | 0;
         var fieldsText = contextFields[i];
         var name = contextPrefixes[i];
-        o = o + replace(replace('\nclass %NAME%Context {\n    public:\n        %NAME%Context(KTRef(%NAME%Context) ctx);\n\n%ITEMS%\n\n    private:\n        KTRef(%NAME%Context) ctx;\n};\n', '%ITEMS%', fieldsText), '%NAME%', name);
+        o = o + replace(replace('\nclass %NAME%Context {\n    public:\n        %NAME%Context(KTRef(%NAME%Context) ctx): ctx(ctx) { }\n\n%ITEMS%\n\n    private:\n        KTRef(%NAME%Context) ctx;\n};\n', '%ITEMS%', fieldsText), '%NAME%', name);
       }
        while (inductionVariable <= last);
     return o;
@@ -2234,7 +2319,7 @@
       var f = _iterator__ex2g4s.i();
       var ctx = f(this.context.selfCopy());
       if (!(ctx.recentField === KD_FIELD_NONE)) {
-        this.nf_1.e(ctx);
+        this.nf_1.f(ctx);
       }
     }
     this.reportContext();
@@ -2250,14 +2335,14 @@
     this.isProcessingQueue = false;
   };
   protoOf(KDController).registerCallback = function (cb) {
-    this.lf_1.e(cb);
+    this.lf_1.f(cb);
   };
   protoOf(KDController).registerFieldCallback = function (fieldName, cb) {
     var tmp = this.lf_1;
-    tmp.e(KDController$registerFieldCallback$lambda(fieldName, cb));
+    tmp.f(KDController$registerFieldCallback$lambda(fieldName, cb));
   };
   protoOf(KDController).registerFunction = function (f) {
-    this.mf_1.e(f);
+    this.mf_1.f(f);
   };
   protoOf(KDController).reportContext = function () {
     var _iterator__ex2g4s = this.lf_1.g();
@@ -2270,7 +2355,7 @@
     var c = this.context.selfCopy();
     c.setField(fieldName, value);
     c.qd(fieldName);
-    this.nf_1.e(c);
+    this.nf_1.f(c);
     this.processQueue();
   };
   function registerOneliners(ctrl, items) {

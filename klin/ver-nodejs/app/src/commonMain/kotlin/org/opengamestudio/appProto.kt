@@ -28,6 +28,7 @@ object AppProto {
             ::appShouldParseOutputPaths,
             ::appShouldPrintToConsole,
             ::appShouldResetCPPContextsHeader,
+            ::appShouldResetCPPContextsSource,
             ::appShouldResetCPPEffectsHeader,
             ::appShouldResetCPPEffectsSource,
             ::appShouldResetCPPSetHeader,
