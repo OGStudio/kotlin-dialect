@@ -150,6 +150,7 @@ const val TEMPLATE_CPP_HEADER_START = """
 #include <string>
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include "KT.h"
 """
 const val TEMPLATE_CPP_SET_HEADER = """template<typename T> void %PREFIX%Set(const std::string &key, T value);
