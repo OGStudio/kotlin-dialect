@@ -249,6 +249,24 @@ fun appShouldResetCPPAPIHeader(c: AppContext): AppContext {
     return c
 }
 
+// Generate API for C++ source
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPAPISource(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val names = contextNames(ids, c.entityNames)
+        val prefixes = cppEntityPrefixes(names)
+        c.cppAPISource = cppAPISource(prefixes)
+        c.recentField = "cppAPISource"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZContext for C++ header
 //
 // Conditions:
@@ -504,6 +522,7 @@ fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
 fun appShouldResetOutputCPPSource(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPSource = TEMPLATE_CPP_SOURCE_START +
+            c.cppAPISource +
             c.cppContextsSource +
             c.cppEffectsSource +
             c.cppSetSource

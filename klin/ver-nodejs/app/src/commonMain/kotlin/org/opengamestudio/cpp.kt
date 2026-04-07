@@ -17,6 +17,16 @@ fun cppAPIHeader(prefixes: Array<String>): String {
     return TEMPLATE_CPP_API_HEADER.replace("%ITEMS%", itemsText)
 }
 
+fun cppAPISource(prefixes: Array<String>): String {
+    var o = ""
+    for (i in prefixes.indices) {
+        val name = prefixes[i]
+        o += TEMPLATE_CPP_API_ITEM_SOURCE
+            .replace("%PREFIX%", name.lowercase())
+    }
+    return o
+}
+
 fun cppContextFieldFormatterHeader(
     name: String,
     type: String
