@@ -485,10 +485,10 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
+            c.cppSetHeader +
             c.cppAPIHeader +
             c.cppContextsHeader +
             c.cppEffectsHeader + 
-            c.cppSetHeader +
             c.fobjCPPHeader + 
             TEMPLATE_CPP_HEADER_END
         c.recentField = "outputCPPHeader"
@@ -522,10 +522,10 @@ fun appShouldResetOutputCPPSDK(c: AppContext): AppContext {
 fun appShouldResetOutputCPPSource(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPSource = TEMPLATE_CPP_SOURCE_START +
+            c.cppSetSource +
             c.cppAPISource +
             c.cppContextsSource +
-            c.cppEffectsSource +
-            c.cppSetSource
+            c.cppEffectsSource
         c.recentField = "outputCPPSource"
         return c
     }
