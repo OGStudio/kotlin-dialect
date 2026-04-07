@@ -7,6 +7,16 @@
 
 package org.opengamestudio
 
+fun cppAPIHeader(prefixes: Array<String>): String {
+    var itemsText = ""
+    for (i in prefixes.indices) {
+        val name = prefixes[i]
+        itemsText += TEMPLATE_CPP_API_ITEM_HEADER
+            .replace("%PREFIX%", name.lowercase())
+    }
+    return TEMPLATE_CPP_API_HEADER.replace("%ITEMS%", itemsText)
+}
+
 fun cppContextFieldFormatterHeader(
     name: String,
     type: String

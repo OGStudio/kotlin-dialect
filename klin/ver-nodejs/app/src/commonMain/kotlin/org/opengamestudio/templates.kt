@@ -7,6 +7,36 @@
 
 package org.opengamestudio
 
+const val TEMPLATE_CPP_API_HEADER = """
+class API: public QObject {
+    Q_OBJECT
+
+    public slots:
+%ITEMS%
+};
+"""
+const val TEMPLATE_CPP_API_ITEM_HEADER = """
+        void %PREFIX%Set(const QString &key, const QVariant &value);
+"""
+const val TEMPLATE_CPP_API_ITEM_SOURCE = """
+void API::%PREFIX%Set(const QString &key, const QVariant &value) {
+    auto skey = key.toStdString();
+    auto type = value.userType();
+
+    // Bool
+    if (type == QMetaType::Bool) {
+        ::%PREFIX%Set(skey, value.toBool());
+    }
+    // QString
+    else if (type == QMetaType::QString) {
+        ::%PREFIX%Set(skey, value.toString().toStdString().c_str());
+    }
+    // Unknown
+    else {
+        printf("ERR UI.%PREFIX%S unknown type for key '%s'\n", skey.c_str());
+    }
+}
+"""
 const val TEMPLATE_CPP_CONTEXT_HEADER = """
 class %NAME%Context {
     public:

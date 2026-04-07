@@ -14,6 +14,10 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Declaration of API
+        cppAPIHeader: String
+        # Implementat of API
+        cppAPISource: String
         # Declaration of XYZContext
         cppContextsHeader: String
         # Implementat of XYZContext

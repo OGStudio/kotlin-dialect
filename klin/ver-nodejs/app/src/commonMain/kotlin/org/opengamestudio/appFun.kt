@@ -231,6 +231,24 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
+// Generate API for C++ header
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPAPIHeader(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val names = contextNames(ids, c.entityNames)
+        val prefixes = cppEntityPrefixes(names)
+        c.cppAPIHeader = cppAPIHeader(prefixes)
+        c.recentField = "cppAPIHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZContext for C++ header
 //
 // Conditions:
@@ -449,6 +467,7 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
+            c.cppAPIHeader +
             c.cppContextsHeader +
             c.cppEffectsHeader + 
             c.cppSetHeader +
