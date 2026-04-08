@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+/**
+ * This file is a part of Kotlin dialect:
+ *     https://github.com/OGStudio/kotlin-dialect
+ * License: CC0
+ * Version: 3.1.0
+ */
 
 let fs = require("fs");
 let KT = require("./ver-nodejs-app").org.opengamestudio;
