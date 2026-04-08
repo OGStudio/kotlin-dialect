@@ -1,4 +1,4 @@
-Kotlin dialect (**KD**) is a set of tools and rules to write
+Kotlin Dialect (**KD**) is a set of tools and rules to write
 logic in Kotlin for several platforms.
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
