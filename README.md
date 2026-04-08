@@ -10,7 +10,7 @@ in Kotlin across platforms in **native** apps.
 Key features:
 
 * Redux-like architecture with Controller/Context (aka Store), Shoulds (aka Reducers), and Effects
-* Klin, a translator to convert YML to target languages: Kotlin, Swift
+* Klin, a translator to convert YML to target languages: Kotlin, Swift, C++
 
 ## Usage
 
@@ -42,7 +42,7 @@ Third, distribute the application into `dist/` directory:
 
 $ `./util/dist-klin`
 
-## Generation of entity fields
+## Generation of Kotlin entity fields
 
 | № | YML type | Kotlin type | Default value | YML example | Kotlin example |
 |---|---       |---          |---            |---          |---             |
@@ -54,4 +54,12 @@ $ `./util/dist-klin`
 | 6 | `Type` | `Type`    | `Type()`          | `request: NetRequest`  | `var request: NetRequest = NetRequest()` |
 | 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+
+## Supported C++ entity field types
+
+| № | YML type | C++ type |
+|---|---       |---          |
+| 1 | `Bool`   | `bool`   |
+| 1 | `Int`   | `int`   |
+| 1 | `String`   | `QString`   |
 
