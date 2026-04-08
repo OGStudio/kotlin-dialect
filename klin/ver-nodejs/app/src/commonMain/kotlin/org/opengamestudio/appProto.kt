@@ -2,7 +2,7 @@
  * This file is a part of Kotlin dialect:
  *     https://github.com/OGStudio/kotlin-dialect
  * License: CC0
- * Version: 2.0.0
+ * Version: 3.1.0
  */
 
 package org.opengamestudio
@@ -20,16 +20,29 @@ object AppProto {
             ::appShouldCollectEntityNames,
             ::appShouldCollectEntityPrefixesKotlin,
             ::appShouldCollectEntityTypes,
+            ::appShouldCollectRawCPPSDK,
             ::appShouldCollectRawKotlin,
             ::appShouldCollectRawSwift,
             ::appShouldGenerateKotlinEntities,
             ::appShouldParseInputFilePath,
             ::appShouldParseOutputPaths,
             ::appShouldPrintToConsole,
+            ::appShouldResetCPPAPIHeader,
+            ::appShouldResetCPPAPISource,
+            ::appShouldResetCPPContextsHeader,
+            ::appShouldResetCPPContextsSource,
+            ::appShouldResetCPPEffectsHeader,
+            ::appShouldResetCPPEffectsSource,
+            ::appShouldResetCPPSetHeader,
+            ::appShouldResetCPPSetSource,
             ::appShouldResetCurrentOutputPathId,
+            ::appShouldResetFObjCPPHeader,
             ::appShouldResetFObjKotlin,
             ::appShouldResetFObjSwift,
             ::appShouldResetInputFileDir,
+            ::appShouldResetOutputCPPHeader,
+            ::appShouldResetOutputCPPSDK,
+            ::appShouldResetOutputCPPSource,
             ::appShouldResetOutputFile,
             ::appShouldResetOutputFileContents,
             ::appShouldResetOutputJSExport,

@@ -1,4 +1,4 @@
-Kotlin dialect (**KD**) is a set of tools and rules to write
+Kotlin Dialect (**KD**) is a set of tools and rules to write
 logic in Kotlin for several platforms.
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
@@ -7,16 +7,18 @@ is to set up correctly for multiple platforms. This project dictates one
 particular way to have your code organized to be able to have single logic
 in Kotlin across platforms in **native** apps.
 
-Key concepts:
+Key features:
 
-* Redux-like architecture
-* Klin, a translator to convert YML to target languages: Kotlin, Swift
+* Redux-like architecture with Controller/Context (aka Store), Shoulds (aka Reducers), and Effects
+* Klin, a translator to convert YML to target languages: Kotlin, Swift, C++
 
 ## Usage
 
 `dist/` directory contains the latest Klin version
 
-First, install prerequisites to run Klin:
+Klin is a small Node.js application (generated out of Kotlin Dialect source code, of course).
+
+Install prerequisites to run Klin:
 
 | № | Prerequisite | Linux | macOS | Windows (MSYS2) |
 | --- | --- | --- | --- | --- |
@@ -26,9 +28,10 @@ Second, run Klin to generate source code out of YML:
 
 $ `node dist/app.js --file=/path/to/kd.yml`
 
-## Building
+## Building Klin from source
 
-First, install prerequisites to build Klin from source:
+As a user, you don't need it. However, if you feel adventurous,
+first install dependencies:
 
 | № | Prerequisite | Linux | macOS | Windows (MSYS2) |
 | --- | --- | --- | --- | --- |
@@ -42,7 +45,7 @@ Third, distribute the application into `dist/` directory:
 
 $ `./util/dist-klin`
 
-## Generation of entity fields
+## Generation of Kotlin entity fields
 
 | № | YML type | Kotlin type | Default value | YML example | Kotlin example |
 |---|---       |---          |---            |---          |---             |
@@ -55,15 +58,15 @@ $ `./util/dist-klin`
 | 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
 
-## Example
+## Supported C++ entity field types
 
-[Hello world DEMO](https://kornerr.ru/vid/kd-android-hw_2026-03-27.mp4)
+Since Kotlin Native only generates a pretty ugly C code out of Kotlin,
+Klin generates C++ wrappers to achieve almost the same look&feel in a C++ Qt app.
 
-You can find a small "Hello World" application in `example/helloworld`
+| № | YML type | C++ type |
+|---|---       |---       |
+| 1 | `Bool`   | `bool`   |
+| 2 | `Int`    | `int`    |
+| 3 | `String` | `QString`|
 
-First, generate KD:
-
-* $ `cd example/helloworld`
-* $ `./util/gen-kd`
-
-Second, open and run `example/helloworld/ver-android` with Android Studio
+Why Qt? Because Qt has QML, a declarative UI.

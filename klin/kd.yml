@@ -14,6 +14,22 @@ AppContext:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
+        # Declaration of API
+        cppAPIHeader: String
+        # Implementat of API
+        cppAPISource: String
+        # Declaration of XYZContext
+        cppContextsHeader: String
+        # Implementat of XYZContext
+        cppContextsSource: String
+        # Declaration of XYZEffectRegistry
+        cppEffectsHeader: String
+        # Implementation of XYZEffectRegistry
+        cppEffectsSource: String
+        # Declarations of xyzSet() calls
+        cppSetHeader: String
+        # Implementations of xyzSet() calls
+        cppSetSource: String
         # Output path that is being saved at the moment
         currentOutputPathId: Int
         didLaunch: Bool
@@ -27,6 +43,9 @@ AppContext:
         entityNames: [String]
         entityPrefixesKotlin: [Int: String]
         entityTypes: [Int: String]
+        # Special F object for C++
+        fobjCPPHeader: String
+        fobjCPPSource: String
         # Special F object for Kotlin
         fobjKotlin: String
         # Special F struct for Swift
@@ -36,8 +55,12 @@ AppContext:
         inputFileDir: String
         inputFileLines: [String]
         isDbg: Bool
-        # Output of type `c++`
-        outputCPP: String
+        # Output of type `c++hdr`
+        outputCPPHeader: String
+        # Output of type `c++sdk`
+        outputCPPSDK: String
+        # Output of type `c++src`
+        outputCPPSource: String
         outputEntityContents: String
         outputFile: String
         # Contents to write to output file
@@ -50,6 +73,8 @@ AppContext:
         outputPaths: [OutputPath]
         # Output of type `swift`
         outputSwift: String
+        # Kotlin code to insert as is for `c++sdk` type
+        rawCPPSDK: String
         # Kotlin code to insert as is at the beginning of the file
         rawKotlin: String
         # Swift code to insert as is at the beginning of the file
