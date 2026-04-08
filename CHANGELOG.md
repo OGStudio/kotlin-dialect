@@ -2,7 +2,8 @@
 
 2026-04-08
 
-TODO
+1. Generate C++ wrappers with Qt in mind
+1. Move example to a separate repository for easier forking: https://github.com/OGStudio/kotlin-dialect-example
 
 # [3.0](https://github.com/OGStudio/kotlin-dialect/pull/3)
 
