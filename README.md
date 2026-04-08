@@ -55,15 +55,3 @@ $ `./util/dist-klin`
 | 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
 
-## Example
-
-[Hello world DEMO](https://kornerr.ru/vid/kd-android-hw_2026-03-27.mp4)
-
-You can find a small "Hello World" application in `example/helloworld`
-
-First, generate KD:
-
-* $ `cd example/helloworld`
-* $ `./util/gen-kd`
-
-Second, open and run `example/helloworld/ver-android` with Android Studio
