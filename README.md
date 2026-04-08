@@ -60,8 +60,8 @@ $ `./util/dist-klin`
 
 ## Supported C++ entity field types
 
-Since Kotlin Native only generate C code out of Kotlin, Klin also generates
-C++ wrappers to achieve almost the same look&feel in a C++ Qt app.
+Since Kotlin Native only generates a pretty ugly C code out of Kotlin,
+Klin generates C++ wrappers to achieve almost the same look&feel in a C++ Qt app.
 
 | № | YML type | C++ type |
 |---|---       |---       |
