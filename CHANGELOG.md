@@ -1,3 +1,9 @@
+# [3.1](https://github.com/OGStudio/kotlin-dialect/pull/7)
+
+2026-04-08
+
+TODO
+
 # [3.0](https://github.com/OGStudio/kotlin-dialect/pull/3)
 
 2026-03-15
