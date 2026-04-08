@@ -16,7 +16,9 @@ Key features:
 
 `dist/` directory contains the latest Klin version
 
-First, install prerequisites to run Klin:
+Klin is a small Node.js application (generated out of Kotlin Dialect source code, of course).
+
+Install prerequisites to run Klin:
 
 | № | Prerequisite | Linux | macOS | Windows (MSYS2) |
 | --- | --- | --- | --- | --- |
@@ -26,9 +28,10 @@ Second, run Klin to generate source code out of YML:
 
 $ `node dist/app.js --file=/path/to/kd.yml`
 
-## Building
+## Building Klin from source
 
-First, install prerequisites to build Klin from source:
+As a user, you don't need it. However, if you feel adventurous,
+first install dependencies:
 
 | № | Prerequisite | Linux | macOS | Windows (MSYS2) |
 | --- | --- | --- | --- | --- |
@@ -57,9 +60,13 @@ $ `./util/dist-klin`
 
 ## Supported C++ entity field types
 
-| № | YML type | C++ type |
-|---|---       |---          |
-| 1 | `Bool`   | `bool`   |
-| 1 | `Int`   | `int`   |
-| 1 | `String`   | `QString`   |
+Since Kotlin Native only generate C code out of Kotlin, Klin also generates
+C++ wrappers to achieve almost the same look&feel in a C++ Qt app.
 
+| № | YML type | C++ type |
+|---|---       |---       |
+| 1 | `Bool`   | `bool`   |
+| 2 | `Int`    | `int`    |
+| 3 | `String` | `QString`|
+
+Why Qt? Because Qt has QML, a declarative UI unlike other popular frameworks.
