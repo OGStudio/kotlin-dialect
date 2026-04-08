@@ -69,4 +69,4 @@ Klin generates C++ wrappers to achieve almost the same look&feel in a C++ Qt app
 | 2 | `Int`    | `int`    |
 | 3 | `String` | `QString`|
 
-Why Qt? Because Qt has QML, a declarative UI unlike other popular frameworks.
+Why Qt? Because Qt has QML, a declarative UI.
