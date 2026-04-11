@@ -44,6 +44,7 @@ function appReadFile(fileName) {
 
 function appWriteFile(fileName, contents) {
     fs.writeFileSync(fileName, contents);
+    /**/console.log("ИГР appWF fileName: ", fileName);
     appSet("didWriteOutputFile", true);
 }
 
