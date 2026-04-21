@@ -2983,6 +2983,7 @@
       var i = inductionVariable;
       var ln = lines[inductionVariable];
       inductionVariable = inductionVariable + 1 | 0;
+      println("\u0418\u0413\u0420 parseEF-01 i: '" + i + "'");
       var isSectionMarker = ln === '    fields:';
       var tmp;
       if (isParsingFields) {
@@ -3003,6 +3004,7 @@
       var isLastEntityEndMarker = isParsingFields && i === (lines.length - 1 | 0);
       if (isSectionMarker) {
         isParsingFields = true;
+        println("\u0418\u0413\u0420 parseEF-02 isPF: '" + isParsingFields + "'");
       }
       if (isField) {
         var parts = parseEntityField(ln);
@@ -3010,6 +3012,7 @@
         var type = parts[1];
         // Inline function 'kotlin.collections.set' call
         fields.c2(name, type);
+        println("\u0418\u0413\u0420 parseEF-03 field name/type: '" + name + "'/'" + type + "'");
       }
       if (isEntityEndMarker || isLastEntityEndMarker) {
         isParsingFields = false;
@@ -3020,6 +3023,7 @@
         entityId = entityId + 1 | 0;
         // Inline function 'kotlin.collections.mutableMapOf' call
         fields = LinkedHashMap_init_$Create$();
+        println("\u0418\u0413\u0420 parseEF-04 isPF: '" + isParsingFields + "'");
       }
     }
     return d;

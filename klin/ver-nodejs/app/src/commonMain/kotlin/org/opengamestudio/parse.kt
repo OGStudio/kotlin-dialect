@@ -96,6 +96,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
     var isParsingFields = false
 
     for ((i, ln) in lines.withIndex()) {
+        /**/println("ИГР parseEF-01 i: '$i'")
         val isSectionMarker = (ln == SECTION_FIELDS)
         val isField = isParsingFields && !parseEntityField(ln).isEmpty()
         val isEntityEndMarker = isParsingFields && ln.isEmpty()
@@ -103,6 +104,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
 
         if (isSectionMarker) {
             isParsingFields = true
+            /**/println("ИГР parseEF-02 isPF: '$isParsingFields'")
         }
 
         if (isField) {
@@ -110,6 +112,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
             val name = parts[0]
             val type = parts[1]
             fields[name] = type
+            /**/println("ИГР parseEF-03 field name/type: '$name'/'$type'")
         }
 
         if (
@@ -120,6 +123,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
             d[entityId] = fields
             entityId++
             fields = mutableMapOf<String, String>()
+            /**/println("ИГР parseEF-04 isPF: '$isParsingFields'")
         }
     }
 
