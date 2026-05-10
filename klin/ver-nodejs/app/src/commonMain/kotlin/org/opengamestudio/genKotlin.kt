@@ -94,9 +94,13 @@ fun genKotlinFieldDefault(type: String): String {
     if (type == "Bool") {
         return "false"
     }
-    // `Double` -> `0`
+    // `Double` -> `0.0`
     if (type == "Double") {
-        return "0"
+        return "0.0"
+    }
+    // `Float` -> `0f`
+    if (type == "Float") {
+        return "0f"
     }
     // `Int` -> `0`
     if (type == "Int") {
@@ -159,6 +163,10 @@ fun genKotlinFieldType(type: String): String {
     // `Double` -> `Double`
     if (type == "Double") {
         return "Double"
+    }
+    // `Float` -> `Float`
+    if (type == "Float") {
+        return "Float"
     }
     // `Long` -> `Long`
     if (type == "Long") {
