@@ -3,7 +3,7 @@
  * This file is a part of Kotlin dialect:
  *     https://github.com/OGStudio/kotlin-dialect
  * License: CC0
- * Version: 3.1.0
+ * Version: 3.2.0
  */
 
 let fs = require("fs");
