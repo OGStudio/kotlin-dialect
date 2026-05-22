@@ -16,7 +16,7 @@ Key features:
 
 `dist/` directory contains the latest Klin version
 
-Klin is a small Node.js application (generated out of Kotlin Dialect source code, of course).
+Klin is a small Node.js application (generated out of Kotlin source code).
 
 Install prerequisites to run Klin:
 
