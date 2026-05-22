@@ -2,8 +2,8 @@
 
 2026-05-22
 
-1. Klin now supports `Float` type in YML
-1. Klin now generates `0.0` as default value for `Double` and `0f` for `Float`
+1. Introduce `Float` type to YML
+1. Generate `0.0` as a default value for `Double` and `0f` for `Float`
 
 # [3.1](https://github.com/OGStudio/kotlin-dialect/pull/7)
 
