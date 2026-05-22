@@ -1172,7 +1172,10 @@
       return 'false';
     }
     if (type === 'Double') {
-      return '0';
+      return '0.0';
+    }
+    if (type === 'Float') {
+      return '0f';
     }
     if (type === 'Int') {
       return '0';
@@ -1216,6 +1219,9 @@
     }
     if (type === 'Double') {
       return 'Double';
+    }
+    if (type === 'Float') {
+      return 'Float';
     }
     if (type === 'Long') {
       return 'Long';

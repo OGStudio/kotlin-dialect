@@ -2,7 +2,7 @@
  * This file is a part of Kotlin dialect:
  *     https://github.com/OGStudio/kotlin-dialect
  * License: CC0
- * Version: 3.1.0
+ * Version: 3.2.0
  */
 
 package org.opengamestudio
@@ -218,6 +218,7 @@ const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
 %PREFIX%
+@Suppress("UNCHECKED_CAST")
 data class %NAME%(
 %FIELDS%
     override var recentField: String = "",
