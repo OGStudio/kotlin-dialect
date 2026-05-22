@@ -1,4 +1,4 @@
-# [3.2](https://github.com/OGStudio/kotlin-dialect/pull/8)
+# [3.2](https://github.com/OGStudio/kotlin-dialect/pull/8 https://github.com/OGStudio/kotlin-dialect/pull/9)
 
 2026-05-22
 
