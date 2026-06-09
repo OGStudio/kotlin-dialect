@@ -1,5 +1,5 @@
 Kotlin Dialect (**KD**) is a set of tools and rules to write
-logic in Kotlin for several platforms (UI stays native).
+logic in Kotlin for several platforms.
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
 However, if you **tried** Kotlin Multiplatform you surely know how hard it
@@ -11,6 +11,7 @@ Key features:
 
 * Redux-like architecture with Controller/Context (aka Store), Shoulds (aka Reducers), and Effects
 * Klin, a translator to convert YML to target languages: Kotlin, Swift, C++
+* UI is unaffected by KD, thus, you have to write it for each platform
 
 ## Usage
 
