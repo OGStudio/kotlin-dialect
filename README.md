@@ -1,5 +1,5 @@
 Kotlin Dialect (**KD**) is a set of tools and rules to write
-logic in Kotlin for several platforms.
+logic in Kotlin for several platforms (UI stays native).
 
 If you know what Kotlin Multiplatfrom is, you probably wonder what's the fuss.
 However, if you **tried** Kotlin Multiplatform you surely know how hard it
