@@ -70,3 +70,7 @@ Klin generates C++ wrappers to achieve almost the same look&feel in a C++ Qt app
 | 3 | `String` | `QString`|
 
 Why Qt? Because Qt has QML, a declarative UI.
+
+## Examples
+
+Have a look at [Kotlin Dialect Example](https://github.com/OGStudio/kotlin-dialect-example) repository.
