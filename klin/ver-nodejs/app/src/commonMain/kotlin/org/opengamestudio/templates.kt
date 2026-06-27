@@ -48,6 +48,16 @@ class %NAME%Context {
         KTRef(%NAME%Context) ctx;
 };
 """
+
+const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_HEADER = """
+        %TYPE%s %FIELD%();
+"""
+const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_SOURCE = """
+%TYPE%s %NAME%::%FIELD%() {
+    return %TYPE%s(KT.%NAME%.get_%FIELD%(ctx));
+}
+"""
+
 const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
         bool %FIELD%();
 """
@@ -56,6 +66,7 @@ bool %NAME%::%FIELD%() {
     return KT.%NAME%.get_%FIELD%(ctx);
 }
 """
+
 const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
         int %FIELD%();
 """

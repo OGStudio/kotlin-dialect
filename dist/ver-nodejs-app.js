@@ -24,16 +24,16 @@
   var protoOf = kotlin_kotlin.$_$.c1;
   var initMetadataForObject = kotlin_kotlin.$_$.z;
   var println = kotlin_kotlin.$_$.q;
+  var substring = kotlin_kotlin.$_$.n1;
+  var startsWith = kotlin_kotlin.$_$.l1;
+  var endsWith = kotlin_kotlin.$_$.i1;
+  var contains = kotlin_kotlin.$_$.f1;
   var emptyMap = kotlin_kotlin.$_$.j;
   var sorted = kotlin_kotlin.$_$.p;
-  var substring = kotlin_kotlin.$_$.n1;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
   var ensureNotNull = kotlin_kotlin.$_$.q1;
   var copyToArray = kotlin_kotlin.$_$.h;
   var charSequenceLength = kotlin_kotlin.$_$.r;
-  var startsWith = kotlin_kotlin.$_$.l1;
-  var endsWith = kotlin_kotlin.$_$.i1;
-  var contains = kotlin_kotlin.$_$.f1;
   var VOID = kotlin_kotlin.$_$.a;
   var first = kotlin_kotlin.$_$.k;
   var last = kotlin_kotlin.$_$.n;
@@ -818,37 +818,33 @@
   }
   function cppContextFieldFormatterHeader(name, type) {
     var template = '';
-    switch (type) {
-      case 'Bool':
-        template = '\n        bool %FIELD%();\n';
-        break;
-      case 'Int':
-        template = '\n        int %FIELD%();\n';
-        break;
-      case 'String':
-        template = '\n        QString %FIELD%() const &;\n';
-        break;
-      default:
-        println("\u0418\u0413\u0420 hdr Uknown type: '" + type + "'");
-        break;
+    if (type === 'Bool') {
+      template = '\n        bool %FIELD%();\n';
+    } else if (type === 'Int') {
+      template = '\n        int %FIELD%();\n';
+    } else if (type === 'String') {
+      template = '\n        QString %FIELD%() const &;\n';
+    } else if (startsWith(type, '[') && endsWith(type, ']') && !contains(type, ': ')) {
+      var innerString = substring(type, 1, type.length - 1 | 0);
+      template = replace('\n        %TYPE%s %FIELD%();\n', '%TYPE%', innerString);
+    } else {
+      println("\u0418\u0413\u0420 hdr Uknown type: '" + type + "'");
     }
     return replace(template, '%FIELD%', name);
   }
   function cppContextFieldFormatterSource(entityName, fieldName, type) {
     var template = '';
-    switch (type) {
-      case 'Bool':
-        template = '\nbool %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
-        break;
-      case 'Int':
-        template = '\nint %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
-        break;
-      case 'String':
-        template = '\nQString %NAME%::%FIELD%() const & {\n    const char *raw = KT.%NAME%.get_%FIELD%(ctx);\n    QString str(raw);\n    KTSym->DisposeString(raw);\n    return str;\n}\n';
-        break;
-      default:
-        println("\u0418\u0413\u0420 src Uknown type: '" + type + "'");
-        break;
+    if (type === 'Bool') {
+      template = '\nbool %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+    } else if (type === 'Int') {
+      template = '\nint %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+    } else if (type === 'String') {
+      template = '\nQString %NAME%::%FIELD%() const & {\n    const char *raw = KT.%NAME%.get_%FIELD%(ctx);\n    QString str(raw);\n    KTSym->DisposeString(raw);\n    return str;\n}\n';
+    } else if (startsWith(type, '[') && endsWith(type, ']') && !contains(type, ': ')) {
+      var innerString = substring(type, 1, type.length - 1 | 0);
+      template = replace('\n%TYPE%s %NAME%::%FIELD%() {\n    return %TYPE%s(KT.%NAME%.get_%FIELD%(ctx));\n}\n', '%TYPE%', innerString);
+    } else {
+      println("\u0418\u0413\u0420 src Uknown type: '" + type + "'");
     }
     return replace(replace(template, '%FIELD%', fieldName), '%NAME%', entityName);
   }
