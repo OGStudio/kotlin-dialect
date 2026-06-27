@@ -215,6 +215,16 @@ struct F {
 const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
 """
 
+const val TEMPLATE_KOTLIN_ARRAY_FUNCTIONS = """
+// Get an item of an array by id
+// Purpose: For C++
+fun arrElement(a: Array<Any?>, id: Int) = a.get(id)
+
+// Get array length
+// Purpose: For C++
+fun arrSize(a: Array<Any?>) = a.size
+"""
+
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
 %PREFIX%

@@ -597,7 +597,8 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
     if (c.recentField == "outputJSExport") {
         c.outputKotlin = c.outputJSExport
             .replace(APP_KD_IMPORT, "")
-            .replace(APP_KD_JSEXPORT, "")
+            .replace(APP_KD_JSEXPORT, "") +
+            TEMPLATE_KOTLIN_ARRAY_FUNCTIONS
         c.recentField = "outputKotlin"
         return c
     }

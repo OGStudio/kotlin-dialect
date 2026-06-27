@@ -416,7 +416,7 @@
   }
   function appShouldResetOutputKotlin(c) {
     if (c.na_1 === 'outputJSExport') {
-      c.outputKotlin = replace(replace(c.outputJSExport, APP_KD_IMPORT, ''), APP_KD_JSEXPORT, '');
+      c.outputKotlin = replace(replace(c.outputJSExport, APP_KD_IMPORT, ''), APP_KD_JSEXPORT, '') + '\n// Get an item of an array by id\n// Purpose: For C++\nfun arrElement(a: Array<Any?>, id: Int) = a.get(id)\n\n// Get array length\n// Purpose: For C++\nfun arrSize(a: Array<Any?>) = a.size\n';
       c.na_1 = 'outputKotlin';
       return c;
     }
