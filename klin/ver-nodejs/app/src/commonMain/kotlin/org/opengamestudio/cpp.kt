@@ -42,6 +42,9 @@ fun cppContextFieldFormatterHeader(
     else if (type == "String") {
         template = TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER
     }
+    else {
+        println("ИГР hdr Uknown type: '$type'")
+    }
     return template.replace("%FIELD%", name)
 }
 
@@ -60,6 +63,9 @@ fun cppContextFieldFormatterSource(
     }
     else if (type == "String") {
         template = TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE
+    }
+    else {
+        println("ИГР src Uknown type: '$type'")
     }
     return template
         .replace("%FIELD%", fieldName)

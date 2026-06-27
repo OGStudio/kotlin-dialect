@@ -23,6 +23,7 @@
   var Unit_instance = kotlin_kotlin.$_$.f;
   var protoOf = kotlin_kotlin.$_$.c1;
   var initMetadataForObject = kotlin_kotlin.$_$.z;
+  var println = kotlin_kotlin.$_$.q;
   var emptyMap = kotlin_kotlin.$_$.j;
   var sorted = kotlin_kotlin.$_$.p;
   var substring = kotlin_kotlin.$_$.n1;
@@ -52,7 +53,6 @@
   var decodeToString = kotlin_kotlin.$_$.g1;
   var substring_0 = kotlin_kotlin.$_$.m1;
   var take = kotlin_kotlin.$_$.o1;
-  var println = kotlin_kotlin.$_$.q;
   var last_0 = kotlin_kotlin.$_$.o;
   var dropLast_0 = kotlin_kotlin.$_$.h1;
   var capitalize = kotlin_kotlin.$_$.e1;
@@ -828,6 +828,9 @@
       case 'String':
         template = '\n        QString %FIELD%() const &;\n';
         break;
+      default:
+        println("\u0418\u0413\u0420 hdr Uknown type: '" + type + "'");
+        break;
     }
     return replace(template, '%FIELD%', name);
   }
@@ -842,6 +845,9 @@
         break;
       case 'String':
         template = '\nQString %NAME%::%FIELD%() const & {\n    const char *raw = KT.%NAME%.get_%FIELD%(ctx);\n    QString str(raw);\n    KTSym->DisposeString(raw);\n    return str;\n}\n';
+        break;
+      default:
+        println("\u0418\u0413\u0420 src Uknown type: '" + type + "'");
         break;
     }
     return replace(replace(template, '%FIELD%', fieldName), '%NAME%', entityName);
