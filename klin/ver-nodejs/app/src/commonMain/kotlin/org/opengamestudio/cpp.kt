@@ -27,6 +27,46 @@ fun cppAPISource(prefixes: Array<String>): String {
     return o
 }
 
+fun cppArrayTypesGen(arrayTypes: Map<String, Boolean>): String {
+    var o = ""
+    val sortedNames = arrayTypes.keys.sorted()
+    for (name in sortedNames) {
+        o += TEMPLATE_CPP_ARRAY_TYPE_HEADER.replace("%TYPE%", name)
+    }
+    return o
+}
+
+fun cppContextArrayTypes(
+    contextIds: Array<Int>,
+    entityFields: Map<Int, Map<String, String>>,
+    arrayTypeExtractor: (String) -> String
+): Map<String, Boolean> {
+    var types = mapOf<String, Boolean>()
+    for (id in contextIds) {
+        val fields = entityFields[id] ?: mapOf<String, String>()
+        for ((_, type) in fields) {
+            val extracted = arrayTypeExtractor(type)
+            if (extracted.isNotEmpty()) {
+                types += mapOf(extracted to true)
+            }
+        }
+    }
+    return types
+}
+
+fun cppContextFieldExtractArrayType(
+    type: String
+): String {
+    if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        !type.contains(DICTIONARY_DELIMITER)
+    ) {
+        return type.substring(1, type.length - 1)
+    }
+    return ""
+}
+
 fun cppContextFieldFormatterHeader(
     name: String,
     type: String

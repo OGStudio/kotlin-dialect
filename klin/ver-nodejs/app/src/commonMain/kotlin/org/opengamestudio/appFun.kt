@@ -267,6 +267,27 @@ fun appShouldResetCPPAPISource(c: AppContext): AppContext {
     return c
 }
 
+// Collect array type names from context fields
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPArrayTypes(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val types = cppContextArrayTypes(
+            ids,
+            c.entityFields,
+            ::cppContextFieldExtractArrayType
+        )
+        c.cppArrayTypes = types
+        c.recentField = "cppArrayTypes"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZContext for C++ header
 //
 // Conditions:
@@ -484,10 +505,12 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
+        val arrayTypes = cppArrayTypesGen(c.cppArrayTypes)
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
             c.cppSetHeader +
             c.cppAPIHeader +
             c.cppContextsHeader +
+            arrayTypes +
             c.cppEffectsHeader + 
             c.fobjCPPHeader + 
             TEMPLATE_CPP_HEADER_END

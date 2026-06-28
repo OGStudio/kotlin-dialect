@@ -29,6 +29,7 @@ object AppProto {
             ::appShouldPrintToConsole,
             ::appShouldResetCPPAPIHeader,
             ::appShouldResetCPPAPISource,
+            ::appShouldResetCPPArrayTypes,
             ::appShouldResetCPPContextsHeader,
             ::appShouldResetCPPContextsSource,
             ::appShouldResetCPPEffectsHeader,

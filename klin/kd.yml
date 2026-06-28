@@ -18,6 +18,8 @@ AppContext:
         cppAPIHeader: String
         # Implementat of API
         cppAPISource: String
+        # Array type names found in Contexts' fields
+        cppArrayTypes: [String: Bool]
         # Declaration of XYZContext
         cppContextsHeader: String
         # Implementat of XYZContext

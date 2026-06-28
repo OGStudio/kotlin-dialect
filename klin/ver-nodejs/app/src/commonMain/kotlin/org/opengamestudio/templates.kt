@@ -37,6 +37,17 @@ void API::%PREFIX%Set(const QString &key, const QVariant &value) {
     }
 }
 """
+const val TEMPLATE_CPP_ARRAY_TYPE_HEADER = """
+class %TYPE%s : public QList<%TYPE%*> {
+    public:
+        %TYPE%s(KTLibRef(Array) kref) {
+            int n = KT.arrSize(kref);
+            for (int i = 0; i < n; ++i) {
+                append(new %TYPE%(KT.anyAs%TYPE%(KT.arrElement(kref, i))));
+            }
+        }
+};
+"""
 const val TEMPLATE_CPP_CONTEXT_HEADER = """
 class %NAME%Context {
     public:
