@@ -64,11 +64,12 @@ $ `./util/dist-klin`
 Since Kotlin Native only generates a pretty ugly C code out of Kotlin,
 Klin generates C++ wrappers to achieve almost the same look&feel in a C++ Qt app.
 
-| № | YML type | C++ type |
-|---|---       |---       |
-| 1 | `Bool`   | `bool`   |
-| 2 | `Int`    | `int`    |
-| 3 | `String` | `QString`|
+| № | YML type | C++ type | Details |
+|---|---       |---       |--- |
+| 1 | `Bool`   | `bool`   | |
+| 2 | `Int`    | `int`    | |
+| 3 | `String` | `QString`| |
+| 3 | `[Type]` | `QString<Type*>`| Partial support: Klin only generates `Types` wrapper but not `Type` wrapper |
 
 Why Qt? Because Qt has QML, a declarative UI.
 
