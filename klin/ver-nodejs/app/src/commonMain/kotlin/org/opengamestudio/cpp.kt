@@ -27,11 +27,12 @@ fun cppAPISource(prefixes: Array<String>): String {
     return o
 }
 
-fun cppArrayTypesGen(arrayTypes: Map<String, Boolean>): String {
+fun cppArrayTypesHeader(types: Map<String, Boolean>): String {
     var o = ""
-    val sortedNames = arrayTypes.keys.sorted()
+    val sortedTypes = types.keys.sorted()
     for (name in sortedNames) {
-        o += TEMPLATE_CPP_ARRAY_TYPE_HEADER.replace("%TYPE%", name)
+        o += TEMPLATE_CPP_ARRAY_TYPE_HEADER
+            .replace("%TYPE%", name)
     }
     return o
 }

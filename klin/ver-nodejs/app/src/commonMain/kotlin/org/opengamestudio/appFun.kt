@@ -288,6 +288,21 @@ fun appShouldResetCPPArrayTypes(c: AppContext): AppContext {
     return c
 }
 
+// Generate array types C++ header
+//
+// Conditions:
+// 1. Array types' dictionary has been collected
+fun appShouldResetCPPArrayTypesHeader(c: AppContext): AppContext {
+    if (c.recentField == "cppArrayTypes") {
+        c.cppArrayTypesHeader = cppArrayTypesHeader(c.cppArrayTypes)
+        c.recentField = "cppArrayTypesHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZContext for C++ header
 //
 // Conditions:
@@ -505,12 +520,11 @@ fun appShouldResetInputFileDir(c: AppContext): AppContext {
 // 1. Output for `kotlin` is ready
 fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
     if (c.recentField == "outputKotlin") {
-        val arrayTypes = cppArrayTypesGen(c.cppArrayTypes)
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
             c.cppSetHeader +
             c.cppAPIHeader +
             c.cppContextsHeader +
-            arrayTypes +
+            c.cppArrayTypesHeader +
             c.cppEffectsHeader + 
             c.fobjCPPHeader + 
             TEMPLATE_CPP_HEADER_END

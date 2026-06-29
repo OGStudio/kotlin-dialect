@@ -30,6 +30,7 @@ object AppProto {
             ::appShouldResetCPPAPIHeader,
             ::appShouldResetCPPAPISource,
             ::appShouldResetCPPArrayTypes,
+            ::appShouldResetCPPArrayTypesHeader,
             ::appShouldResetCPPContextsHeader,
             ::appShouldResetCPPContextsSource,
             ::appShouldResetCPPEffectsHeader,
