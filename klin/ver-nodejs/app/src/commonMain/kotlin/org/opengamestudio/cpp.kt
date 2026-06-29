@@ -29,10 +29,10 @@ fun cppAPISource(prefixes: Array<String>): String {
 
 fun cppArrayTypesHeader(types: Map<String, Boolean>): String {
     var o = ""
-    val sortedTypes = types.keys.sorted()
-    for (name in sortedNames) {
+    val sortedItems = types.keys.sorted()
+    for (item in sortedItems) {
         o += TEMPLATE_CPP_ARRAY_TYPE_HEADER
-            .replace("%TYPE%", name)
+            .replace("%TYPE%", item)
     }
     return o
 }
