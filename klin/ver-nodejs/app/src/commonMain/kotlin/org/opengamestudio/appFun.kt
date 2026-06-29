@@ -523,8 +523,8 @@ fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
             c.cppSetHeader +
             c.cppAPIHeader +
-            c.cppContextsHeader +
             c.cppArrayTypesHeader +
+            c.cppContextsHeader +
             c.cppEffectsHeader + 
             c.fobjCPPHeader + 
             TEMPLATE_CPP_HEADER_END
