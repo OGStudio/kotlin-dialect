@@ -18,7 +18,7 @@ AppContext:
         cppAPIHeader: String
         # Implementat of API
         cppAPISource: String
-        # Array type names found in Contexts' fields
+        # Array type names found in Contexts' fields (struct entities only)
         cppArrayTypes: [String: Bool]
         # Generated C++ header for array types
         cppArrayTypesHeader: String

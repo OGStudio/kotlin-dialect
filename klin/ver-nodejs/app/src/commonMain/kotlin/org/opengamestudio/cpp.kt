@@ -27,6 +27,64 @@ fun cppAPISource(prefixes: Array<String>): String {
     return o
 }
 
+fun cppArrayElementFieldDeclarations(
+    fields: Map<String, String>
+): String {
+    var o = ""
+    val sortedFieldNames = fields.keys.sorted()
+    for (name in sortedFieldNames) {
+        val type = fields[name] ?: ""
+        val cppType = cppElementType(type)
+        o += TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_DECLARATION
+            .replace("%TYPE%", cppType)
+            .replace("%NAME%", name)
+    }
+    return o
+}
+
+fun cppArrayElementHeader(
+    name: String,
+    fields: Map<String, String>
+): String {
+    val propertyDeclarations = cppArrayElementPropertyDeclarations(fields)
+    val fieldDeclarations = cppArrayElementFieldDeclarations(fields)
+    return TEMPLATE_CPP_ARRAY_ELEMENT_HEADER
+        .replace("%NAME%", name)
+        .replace("%PROPERTY_DECLARATIONS%", propertyDeclarations)
+        .replace("%FIELD_DECLARATIONS%", fieldDeclarations)
+}
+
+fun cppArrayElementPropertyDeclarations(
+    fields: Map<String, String>
+): String {
+    var o = ""
+    val sortedFieldNames = fields.keys.sorted()
+    for (name in sortedFieldNames) {
+        val type = fields[name] ?: ""
+        val cppType = cppElementType(type)
+        o += TEMPLATE_CPP_ARRAY_ELEMENT_PROPERTY_DECLARATION
+            .replace("%TYPE%", cppType)
+            .replace("%NAME%", name)
+    }
+    return o
+}
+
+fun cppArrayElementsHeader(
+    arrayElements: Map<String, Boolean>,
+    entityFields: Map<Int, Map<String, String>>,
+    entityNames: Array<String>
+): String {
+    var o = ""
+    for (id in entityNames.indices) {
+        val name = entityNames[id]
+        if (arrayElements[name] == true) {
+            val fields = entityFields[id] ?: mapOf<String, String>()
+            o += cppArrayElementHeader(name, fields)
+        }
+    }
+    return o
+}
+
 fun cppArrayTypesHeader(types: Map<String, Boolean>): String {
     var o = ""
     val sortedItems = types.keys.sorted()
@@ -210,6 +268,20 @@ fun cppEffectsSource(entityPrefixes: Array<String>): String {
             .replace("%PREFIX%", name.lowercase())
     }
     return o
+}
+
+fun cppElementType(type: String): String {
+    if (type == "Bool") {
+        return "bool"
+    }
+    else if (type == "Int") {
+        return "int"
+    }
+    else if (type == "String") {
+        return "QString"
+    }
+
+    return ""
 }
 
 fun cppEntityPrefixes(entityNames: Array<String>): Array<String> {

@@ -303,6 +303,25 @@ fun appShouldResetCPPArrayTypesHeader(c: AppContext): AppContext {
     return c
 }
 
+// Generate array element class C++ headers
+//
+// Conditions:
+// 1. Array type names have been collected
+fun appShouldResetCPPArrayElementsHeader(c: AppContext): AppContext {
+    if (c.recentField == "cppArrayTypes") {
+        c.cppArrayElementsHeader = cppArrayElementsHeader(
+            c.cppArrayTypes,
+            c.entityFields,
+            c.entityNames
+        )
+        c.recentField = "cppArrayElementsHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate XYZContext for C++ header
 //
 // Conditions:
@@ -523,6 +542,7 @@ fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
             c.cppSetHeader +
             c.cppAPIHeader +
+            c.cppArrayElementsHeader +
             c.cppArrayTypesHeader +
             c.cppContextsHeader +
             c.cppEffectsHeader + 
