@@ -37,6 +37,30 @@ void API::%PREFIX%Set(const QString &key, const QVariant &value) {
     }
 }
 """
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_DECLARATION = """
+        %TYPE% %NAME%() const;
+"""
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_HEADER = """
+class %NAME% : public QObject {
+    Q_OBJECT
+%PROPERTY_DECLARATIONS%
+
+    public:
+        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr);
+
+%FIELD_DECLARATIONS%
+
+    private:
+        KTRef(%NAME%) raw;
+};
+"""
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_PROPERTY_DECLARATION = """
+    Q_PROPERTY(%TYPE% %NAME% READ %NAME% CONSTANT)
+"""
+
 const val TEMPLATE_CPP_ARRAY_TYPE_HEADER = """
 class %TYPE%s : public QList<%TYPE%*> {
     public:
