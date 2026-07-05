@@ -42,6 +42,23 @@ fun cppArrayElementFieldDeclarations(
     return o
 }
 
+fun cppArrayElementFieldImpl(
+    entityName: String,
+    fieldName: String,
+    type: String
+): String {
+    var template = ""
+    if (type == "Int") {
+        template = TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_INT
+    }
+    else if (type == "String") {
+        template = TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_STRING
+    }
+    return template
+        .replace("%ENTITY%", entityName)
+        .replace("%FIELD%", fieldName)
+}
+
 fun cppArrayElementHeader(
     name: String,
     fields: Map<String, String>
@@ -80,6 +97,26 @@ fun cppArrayElementsHeader(
         if (arrayElements[name] == true) {
             val fields = entityFields[id] ?: mapOf<String, String>()
             o += cppArrayElementHeader(name, fields)
+        }
+    }
+    return o
+}
+
+fun cppArrayElementsSource(
+    arrayElements: Map<String, Boolean>,
+    entityFields: Map<Int, Map<String, String>>,
+    entityNames: Array<String>
+): String {
+    var o = ""
+    for (id in entityNames.indices) {
+        val name = entityNames[id]
+        if (arrayElements[name] == true) {
+            val fields = entityFields[id] ?: mapOf<String, String>()
+            val sortedFieldNames = fields.keys.sorted()
+            for (fieldName in sortedFieldNames) {
+                val type = fields[fieldName] ?: ""
+                o += cppArrayElementFieldImpl(name, fieldName, type)
+            }
         }
     }
     return o

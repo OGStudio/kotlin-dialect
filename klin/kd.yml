@@ -20,6 +20,8 @@ AppContext:
         cppAPISource: String
         # Generated C++ header for array elements' headers
         cppArrayElementsHeader: String
+        # Generated C++ source for array elements' implementations
+        cppArrayElementsSource: String
         # Array type names found in Contexts' fields (struct entities only)
         cppArrayTypes: [String: Bool]
         # Generated C++ header for array types
