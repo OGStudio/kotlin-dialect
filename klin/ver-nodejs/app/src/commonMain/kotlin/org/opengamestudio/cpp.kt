@@ -48,14 +48,30 @@ fun cppArrayElementFieldImpl(
     type: String
 ): String {
     var template = ""
-    if (type == "Int") {
-        template = TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_INT
+    // Bool
+    if (type == "Bool") {
+        template = TEMPLATE_CPP_FIELD_IMPL_BOOL
     }
+    // Int
+    else if (type == "Int") {
+        template = TEMPLATE_CPP_FIELD_IMPL_INT
+    }
+    // String
     else if (type == "String") {
-        template = TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_STRING
+        template = TEMPLATE_CPP_FIELD_IMPL_STRING
+    }
+    // [Type]
+    else if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        !type.contains(DICTIONARY_DELIMITER)
+    ) {
+        val innerString = type.substring(1, type.length - 1)
+        template = TEMPLATE_CPP_FIELD_IMPL_ARRAY
+            .replace("%TYPE%", innerString)
     }
     return template
-        .replace("%ENTITY%", entityName)
+        .replace("%NAME%", entityName)
         .replace("%FIELD%", fieldName)
 }
 
@@ -206,15 +222,15 @@ fun cppContextFieldFormatterSource(
     var template = ""
     // Bool
     if (type == "Bool") {
-        template = TEMPLATE_CPP_CONTEXT_ITEM_BOOL_SOURCE
+        template = TEMPLATE_CPP_FIELD_IMPL_BOOL
     }
     // Int
     else if (type == "Int") {
-        template = TEMPLATE_CPP_CONTEXT_ITEM_INT_SOURCE
+        template = TEMPLATE_CPP_FIELD_IMPL_INT
     }
     // String
     else if (type == "String") {
-        template = TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE
+        template = TEMPLATE_CPP_FIELD_IMPL_STRING
     }
     // [Type]
     else if (
@@ -223,15 +239,15 @@ fun cppContextFieldFormatterSource(
         !type.contains(DICTIONARY_DELIMITER) // Exclude dictionary
     ) {
         val innerString = type.substring(1, type.length - 1)
-        template = TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_SOURCE
+        template = TEMPLATE_CPP_FIELD_IMPL_ARRAY
             .replace("%TYPE%", innerString)
     }
     else {
         println("ИГР src Uknown type: '$type'")
     }
     return template
-        .replace("%FIELD%", fieldName)
         .replace("%NAME%", entityName)
+        .replace("%FIELD%", fieldName)
 }
 
 fun cppContextFieldsHeader(

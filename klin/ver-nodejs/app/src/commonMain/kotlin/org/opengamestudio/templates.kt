@@ -41,17 +41,27 @@ void API::%PREFIX%Set(const QString &key, const QVariant &value) {
 const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_DECLARATION = """
         %TYPE% %NAME%() const;
 """
-const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_INT = """
-int %ENTITY%::%FIELD%() const {
-    return KT.%ENTITY%.get_%FIELD%(raw);
+const val TEMPLATE_CPP_FIELD_IMPL_BOOL = """
+bool %NAME%::%FIELD%() const {
+    return KT.%NAME%.get_%FIELD%(handle);
 }
 """
-const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_STRING = """
-QString %ENTITY%::%FIELD%() const {
-    const char *s = KT.%ENTITY%.get_%FIELD%(raw);
+const val TEMPLATE_CPP_FIELD_IMPL_INT = """
+int %NAME%::%FIELD%() const {
+    return KT.%NAME%.get_%FIELD%(handle);
+}
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_STRING = """
+QString %NAME%::%FIELD%() const {
+    const char *s = KT.%NAME%.get_%FIELD%(handle);
     QString str(s);
     KTSym->DisposeString(s);
     return str;
+}
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_ARRAY = """
+%TYPE%s %NAME%::%FIELD%() const {
+    return %TYPE%s(KT.%NAME%.get_%FIELD%(handle));
 }
 """
 
@@ -61,12 +71,12 @@ class %NAME% : public QObject {
 %PROPERTY_DECLARATIONS%
 
     public:
-        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr) : QObject(parent), raw(raw) { }
+        %NAME%(KTRef(%NAME%) handle, QObject *parent = nullptr) : QObject(parent), handle(handle) { }
 
 %FIELD_DECLARATIONS%
 
     private:
-        KTRef(%NAME%) raw;
+        KTRef(%NAME%) handle;
 };
 """
 
@@ -88,51 +98,26 @@ class %TYPE%s : public QList<%TYPE%*> {
 const val TEMPLATE_CPP_CONTEXT_HEADER = """
 class %NAME%Context {
     public:
-        %NAME%Context(KTRef(%NAME%Context) ctx): ctx(ctx) { }
+        %NAME%Context(KTRef(%NAME%Context) handle): handle(handle) { }
 
 %ITEMS%
 
     private:
-        KTRef(%NAME%Context) ctx;
+        KTRef(%NAME%Context) handle;
 };
 """
 
 const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_HEADER = """
         %TYPE%s %FIELD%();
 """
-const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_SOURCE = """
-%TYPE%s %NAME%::%FIELD%() {
-    return %TYPE%s(KT.%NAME%.get_%FIELD%(ctx));
-}
-"""
-
 const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
         bool %FIELD%();
 """
-const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_SOURCE = """
-bool %NAME%::%FIELD%() {
-    return KT.%NAME%.get_%FIELD%(ctx);
-}
-"""
-
 const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
         int %FIELD%();
 """
-const val TEMPLATE_CPP_CONTEXT_ITEM_INT_SOURCE = """
-int %NAME%::%FIELD%() {
-    return KT.%NAME%.get_%FIELD%(ctx);
-}
-"""
 const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER = """
         QString %FIELD%() const &;
-"""
-const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE = """
-QString %NAME%::%FIELD%() const & {
-    const char *raw = KT.%NAME%.get_%FIELD%(ctx);
-    QString str(raw);
-    KTSym->DisposeString(raw);
-    return str;
-}
 """
 const val TEMPLATE_CPP_CONVERSIONS = """
 // Convert Bool to Any (for SDK)

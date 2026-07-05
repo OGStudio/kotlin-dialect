@@ -24,15 +24,15 @@
   var protoOf = kotlin_kotlin.$_$.e1;
   var initMetadataForObject = kotlin_kotlin.$_$.b1;
   var sorted = kotlin_kotlin.$_$.r;
+  var substring = kotlin_kotlin.$_$.p1;
+  var startsWith = kotlin_kotlin.$_$.n1;
+  var endsWith = kotlin_kotlin.$_$.k1;
+  var contains = kotlin_kotlin.$_$.h1;
   var emptyMap = kotlin_kotlin.$_$.j;
   var charSequenceLength = kotlin_kotlin.$_$.t;
   var to = kotlin_kotlin.$_$.t1;
   var mapOf = kotlin_kotlin.$_$.p;
   var plus = kotlin_kotlin.$_$.q;
-  var substring = kotlin_kotlin.$_$.p1;
-  var startsWith = kotlin_kotlin.$_$.n1;
-  var endsWith = kotlin_kotlin.$_$.k1;
-  var contains = kotlin_kotlin.$_$.h1;
   var println = kotlin_kotlin.$_$.s;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.c;
   var ensureNotNull = kotlin_kotlin.$_$.s1;
@@ -912,17 +912,22 @@
   }
   function cppArrayElementFieldImpl(entityName, fieldName, type) {
     var template = '';
-    if (type === 'Int') {
-      template = '\nint %ENTITY%::%FIELD%() const {\n    return KT.%ENTITY%.get_%FIELD%(raw);\n}\n';
+    if (type === 'Bool') {
+      template = '\nbool %NAME%::%FIELD%() const {\n    return KT.%NAME%.get_%FIELD%(handle);\n}\n';
+    } else if (type === 'Int') {
+      template = '\nint %NAME%::%FIELD%() const {\n    return KT.%NAME%.get_%FIELD%(handle);\n}\n';
     } else if (type === 'String') {
-      template = '\nQString %ENTITY%::%FIELD%() const {\n    const char *s = KT.%ENTITY%.get_%FIELD%(raw);\n    QString str(s);\n    KTSym->DisposeString(s);\n    return str;\n}\n';
+      template = '\nQString %NAME%::%FIELD%() const {\n    const char *s = KT.%NAME%.get_%FIELD%(handle);\n    QString str(s);\n    KTSym->DisposeString(s);\n    return str;\n}\n';
+    } else if (startsWith(type, '[') && endsWith(type, ']') && !contains(type, ': ')) {
+      var innerString = substring(type, 1, type.length - 1 | 0);
+      template = replace('\n%TYPE%s %NAME%::%FIELD%() const {\n    return %TYPE%s(KT.%NAME%.get_%FIELD%(handle));\n}\n', '%TYPE%', innerString);
     }
-    return replace(replace(template, '%ENTITY%', entityName), '%FIELD%', fieldName);
+    return replace(replace(template, '%NAME%', entityName), '%FIELD%', fieldName);
   }
   function cppArrayElementHeader(name, fields) {
     var propertyDeclarations = cppArrayElementPropertyDeclarations(fields);
     var fieldDeclarations = cppArrayElementFieldDeclarations(fields);
-    return replace(replace(replace('\nclass %NAME% : public QObject {\n    Q_OBJECT\n%PROPERTY_DECLARATIONS%\n\n    public:\n        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr) : QObject(parent), raw(raw) { }\n\n%FIELD_DECLARATIONS%\n\n    private:\n        KTRef(%NAME%) raw;\n};\n', '%NAME%', name), '%PROPERTY_DECLARATIONS%', propertyDeclarations), '%FIELD_DECLARATIONS%', fieldDeclarations);
+    return replace(replace(replace('\nclass %NAME% : public QObject {\n    Q_OBJECT\n%PROPERTY_DECLARATIONS%\n\n    public:\n        %NAME%(KTRef(%NAME%) handle, QObject *parent = nullptr) : QObject(parent), handle(handle) { }\n\n%FIELD_DECLARATIONS%\n\n    private:\n        KTRef(%NAME%) handle;\n};\n', '%NAME%', name), '%PROPERTY_DECLARATIONS%', propertyDeclarations), '%FIELD_DECLARATIONS%', fieldDeclarations);
   }
   function cppArrayElementPropertyDeclarations(fields) {
     var o = '';
@@ -1060,18 +1065,18 @@
   function cppContextFieldFormatterSource(entityName, fieldName, type) {
     var template = '';
     if (type === 'Bool') {
-      template = '\nbool %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+      template = '\nbool %NAME%::%FIELD%() const {\n    return KT.%NAME%.get_%FIELD%(handle);\n}\n';
     } else if (type === 'Int') {
-      template = '\nint %NAME%::%FIELD%() {\n    return KT.%NAME%.get_%FIELD%(ctx);\n}\n';
+      template = '\nint %NAME%::%FIELD%() const {\n    return KT.%NAME%.get_%FIELD%(handle);\n}\n';
     } else if (type === 'String') {
-      template = '\nQString %NAME%::%FIELD%() const & {\n    const char *raw = KT.%NAME%.get_%FIELD%(ctx);\n    QString str(raw);\n    KTSym->DisposeString(raw);\n    return str;\n}\n';
+      template = '\nQString %NAME%::%FIELD%() const {\n    const char *s = KT.%NAME%.get_%FIELD%(handle);\n    QString str(s);\n    KTSym->DisposeString(s);\n    return str;\n}\n';
     } else if (startsWith(type, '[') && endsWith(type, ']') && !contains(type, ': ')) {
       var innerString = substring(type, 1, type.length - 1 | 0);
-      template = replace('\n%TYPE%s %NAME%::%FIELD%() {\n    return %TYPE%s(KT.%NAME%.get_%FIELD%(ctx));\n}\n', '%TYPE%', innerString);
+      template = replace('\n%TYPE%s %NAME%::%FIELD%() const {\n    return %TYPE%s(KT.%NAME%.get_%FIELD%(handle));\n}\n', '%TYPE%', innerString);
     } else {
       println("\u0418\u0413\u0420 src Uknown type: '" + type + "'");
     }
-    return replace(replace(template, '%FIELD%', fieldName), '%NAME%', entityName);
+    return replace(replace(template, '%NAME%', entityName), '%FIELD%', fieldName);
   }
   function cppContextFieldsHeader(contextIds, entityFields, fieldFormatter) {
     // Inline function 'kotlin.arrayOf' call
@@ -1163,7 +1168,7 @@
         inductionVariable = inductionVariable + 1 | 0;
         var fieldsText = contextFields[i];
         var name = contextPrefixes[i];
-        o = o + replace(replace('\nclass %NAME%Context {\n    public:\n        %NAME%Context(KTRef(%NAME%Context) ctx): ctx(ctx) { }\n\n%ITEMS%\n\n    private:\n        KTRef(%NAME%Context) ctx;\n};\n', '%ITEMS%', fieldsText), '%NAME%', name);
+        o = o + replace(replace('\nclass %NAME%Context {\n    public:\n        %NAME%Context(KTRef(%NAME%Context) handle): handle(handle) { }\n\n%ITEMS%\n\n    private:\n        KTRef(%NAME%Context) handle;\n};\n', '%ITEMS%', fieldsText), '%NAME%', name);
       }
        while (inductionVariable <= last);
     return o;
