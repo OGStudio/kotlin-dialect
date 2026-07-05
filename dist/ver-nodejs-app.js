@@ -1049,14 +1049,14 @@
   function cppContextFieldFormatterHeader(name, type) {
     var template = '';
     if (type === 'Bool') {
-      template = '\n        bool %FIELD%();\n';
+      template = '\n        bool %FIELD%() const;\n';
     } else if (type === 'Int') {
-      template = '\n        int %FIELD%();\n';
+      template = '\n        int %FIELD%() const;\n';
     } else if (type === 'String') {
-      template = '\n        QString %FIELD%() const &;\n';
+      template = '\n        QString %FIELD%() const;\n';
     } else if (startsWith(type, '[') && endsWith(type, ']') && !contains(type, ': ')) {
       var innerString = substring(type, 1, type.length - 1 | 0);
-      template = replace('\n        %TYPE%s %FIELD%();\n', '%TYPE%', innerString);
+      template = replace('\n        %TYPE%s %FIELD%() const;\n', '%TYPE%', innerString);
     } else {
       println("\u0418\u0413\u0420 hdr Uknown type: '" + type + "'");
     }

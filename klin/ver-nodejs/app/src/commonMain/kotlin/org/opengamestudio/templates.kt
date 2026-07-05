@@ -108,16 +108,16 @@ class %NAME%Context {
 """
 
 const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_HEADER = """
-        %TYPE%s %FIELD%();
+        %TYPE%s %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
-        bool %FIELD%();
+        bool %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
-        int %FIELD%();
+        int %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER = """
-        QString %FIELD%() const &;
+        QString %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONVERSIONS = """
 // Convert Bool to Any (for SDK)
