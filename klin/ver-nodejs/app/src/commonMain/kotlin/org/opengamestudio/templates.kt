@@ -48,7 +48,7 @@ class %NAME% : public QObject {
 %PROPERTY_DECLARATIONS%
 
     public:
-        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr);
+        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr) : QObject(parent), raw(raw) { }
 
 %FIELD_DECLARATIONS%
 

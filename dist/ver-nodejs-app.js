@@ -896,7 +896,7 @@
   function cppArrayElementHeader(name, fields) {
     var propertyDeclarations = cppArrayElementPropertyDeclarations(fields);
     var fieldDeclarations = cppArrayElementFieldDeclarations(fields);
-    return replace(replace(replace('\nclass %NAME% : public QObject {\n    Q_OBJECT\n%PROPERTY_DECLARATIONS%\n\n    public:\n        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr);\n\n%FIELD_DECLARATIONS%\n\n    private:\n        KTRef(%NAME%) raw;\n};\n', '%NAME%', name), '%PROPERTY_DECLARATIONS%', propertyDeclarations), '%FIELD_DECLARATIONS%', fieldDeclarations);
+    return replace(replace(replace('\nclass %NAME% : public QObject {\n    Q_OBJECT\n%PROPERTY_DECLARATIONS%\n\n    public:\n        %NAME%(KTRef(%NAME%) raw, QObject *parent = nullptr) : QObject(parent), raw(raw) { }\n\n%FIELD_DECLARATIONS%\n\n    private:\n        KTRef(%NAME%) raw;\n};\n', '%NAME%', name), '%PROPERTY_DECLARATIONS%', propertyDeclarations), '%FIELD_DECLARATIONS%', fieldDeclarations);
   }
   function cppArrayElementPropertyDeclarations(fields) {
     var o = '';
