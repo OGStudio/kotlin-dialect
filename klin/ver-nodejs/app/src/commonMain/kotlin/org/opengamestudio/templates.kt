@@ -41,6 +41,19 @@ void API::%PREFIX%Set(const QString &key, const QVariant &value) {
 const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_DECLARATION = """
         %TYPE% %NAME%() const;
 """
+const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_INT = """
+int %ENTITY%::%FIELD%() const {
+    return KT.%ENTITY%.get_%FIELD%(raw);
+}
+"""
+const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_IMPL_STRING = """
+QString %ENTITY%::%FIELD%() const {
+    const char *s = KT.%ENTITY%.get_%FIELD%(raw);
+    QString str(s);
+    KTSym->DisposeString(s);
+    return str;
+}
+"""
 
 const val TEMPLATE_CPP_ARRAY_ELEMENT_HEADER = """
 class %NAME% : public QObject {
