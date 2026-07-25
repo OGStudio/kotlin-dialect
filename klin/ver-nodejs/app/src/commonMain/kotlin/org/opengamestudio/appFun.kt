@@ -228,8 +228,8 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     }
 
     /* 2 */ if (c.recentField == "didWriteOutputFile") {
-        val path = c.outputPaths[c.currentOutputPathId]
-        c.consoleOutput = "Klin: Generated '$path'"
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.consoleOutput = "Klin generated: '${item.path}'"
         c.recentField = "consoleOutput"
         return c
     }
