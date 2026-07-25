@@ -200,7 +200,7 @@
     }
     if (c.oa_1 === 'didWriteOutputFile') {
       var path = c.outputPaths[c.currentOutputPathId];
-      c.consoleOutput = "Klin: Generated '{path}'";
+      c.consoleOutput = "Klin: Generated '" + path.toString() + "'";
       c.oa_1 = 'consoleOutput';
       return c;
     }
