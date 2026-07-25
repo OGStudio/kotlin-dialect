@@ -198,6 +198,12 @@
       c.oa_1 = 'consoleOutput';
       return c;
     }
+    if (c.oa_1 === 'didWriteOutputFile') {
+      var path = c.outputPaths[c.currentOutputPathId];
+      c.consoleOutput = "Klin: Generated '{path}'";
+      c.oa_1 = 'consoleOutput';
+      return c;
+    }
     c.oa_1 = 'none';
     return c;
   }

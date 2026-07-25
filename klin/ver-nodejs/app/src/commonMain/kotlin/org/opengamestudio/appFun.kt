@@ -216,13 +216,20 @@ fun appShouldParseOutputPaths(c: AppContext): AppContext {
 //
 // Conditions:
 // 1. At app launch no command line arguments were provided
-// 2. Line is parsed
+// 2. Finished write one of the generated files
 fun appShouldPrintToConsole(c: AppContext): AppContext {
-    if (
+    /* 1 */ if (
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
     ) {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml"
+        c.recentField = "consoleOutput"
+        return c
+    }
+
+    /* 2 */ if (c.recentField == "didWriteOutputFile") {
+        val path = c.outputPaths[c.currentOutputPathId]
+        c.consoleOutput = "Klin: Generated '{path}'"
         c.recentField = "consoleOutput"
         return c
     }
