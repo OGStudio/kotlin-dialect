@@ -21,6 +21,7 @@ function AppComponent() {
     this._construct = function() {
         // Effects
         let oneliners = [ 
+            "consoleOutput", (c) => { console.log(c.consoleOutput); },
             "inputFile", (c) => { appReadFile(c.inputFile) },
             "outputFileContents", (c) => { appWriteFile(c.outputFile, c.outputFileContents) },
         ];
