@@ -216,13 +216,20 @@ fun appShouldParseOutputPaths(c: AppContext): AppContext {
 //
 // Conditions:
 // 1. At app launch no command line arguments were provided
-// 2. Line is parsed
+// 2. Finished write one of the generated files
 fun appShouldPrintToConsole(c: AppContext): AppContext {
-    if (
+    /* 1 */ if (
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
     ) {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml"
+        c.recentField = "consoleOutput"
+        return c
+    }
+
+    /* 2 */ if (c.recentField == "didWriteOutputFile") {
+        val item = c.outputPaths[c.currentOutputPathId]
+        c.consoleOutput = "Klin generated: '${item.path}'"
         c.recentField = "consoleOutput"
         return c
     }
@@ -260,6 +267,80 @@ fun appShouldResetCPPAPISource(c: AppContext): AppContext {
         val prefixes = cppEntityPrefixes(names)
         c.cppAPISource = cppAPISource(prefixes)
         c.recentField = "cppAPISource"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect array type names from context fields
+//
+// Conditions:
+// 1. F object for Kotlin is ready
+fun appShouldResetCPPArrayTypes(c: AppContext): AppContext {
+    if (c.recentField == "fobjKotlin") {
+        val ids = contextIds(c.entityTypes)
+        val types = cppContextArrayTypes(
+            ids,
+            c.entityFields,
+            ::cppContextFieldExtractArrayType
+        )
+        c.cppArrayTypes = types
+        c.recentField = "cppArrayTypes"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate array types C++ header
+//
+// Conditions:
+// 1. Array types' dictionary has been collected
+fun appShouldResetCPPArrayTypesHeader(c: AppContext): AppContext {
+    if (c.recentField == "cppArrayTypes") {
+        c.cppArrayTypesHeader = cppArrayTypesHeader(c.cppArrayTypes)
+        c.recentField = "cppArrayTypesHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate array element class C++ headers
+//
+// Conditions:
+// 1. Array type names have been collected
+fun appShouldResetCPPArrayElementsHeader(c: AppContext): AppContext {
+    if (c.recentField == "cppArrayTypes") {
+        c.cppArrayElementsHeader = cppArrayElementsHeader(
+            c.cppArrayTypes,
+            c.entityFields,
+            c.entityNames
+        )
+        c.recentField = "cppArrayElementsHeader"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate array element class C++ source implementations
+//
+// Conditions:
+// 1. Array type names have been collected
+fun appShouldResetCPPArrayElementsSource(c: AppContext): AppContext {
+    if (c.recentField == "cppArrayTypes") {
+        c.cppArrayElementsSource = cppArrayElementsSource(
+            c.cppArrayTypes,
+            c.entityFields,
+            c.entityNames
+        )
+        c.recentField = "cppArrayElementsSource"
         return c
     }
 
@@ -487,6 +568,8 @@ fun appShouldResetOutputCPPHeader(c: AppContext): AppContext {
         c.outputCPPHeader = TEMPLATE_CPP_HEADER_START +
             c.cppSetHeader +
             c.cppAPIHeader +
+            c.cppArrayElementsHeader +
+            c.cppArrayTypesHeader +
             c.cppContextsHeader +
             c.cppEffectsHeader + 
             c.fobjCPPHeader + 
@@ -524,6 +607,7 @@ fun appShouldResetOutputCPPSource(c: AppContext): AppContext {
         c.outputCPPSource = TEMPLATE_CPP_SOURCE_START +
             c.cppSetSource +
             c.cppAPISource +
+            c.cppArrayElementsSource +
             c.cppContextsSource +
             c.cppEffectsSource
         c.recentField = "outputCPPSource"
@@ -597,7 +681,8 @@ fun appShouldResetOutputKotlin(c: AppContext): AppContext {
     if (c.recentField == "outputJSExport") {
         c.outputKotlin = c.outputJSExport
             .replace(APP_KD_IMPORT, "")
-            .replace(APP_KD_JSEXPORT, "")
+            .replace(APP_KD_JSEXPORT, "") +
+            TEMPLATE_KOTLIN_ARRAY_FUNCTIONS
         c.recentField = "outputKotlin"
         return c
     }

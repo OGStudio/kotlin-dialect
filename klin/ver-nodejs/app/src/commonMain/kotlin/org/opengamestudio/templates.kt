@@ -37,43 +37,87 @@ void API::%PREFIX%Set(const QString &key, const QVariant &value) {
     }
 }
 """
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_FIELD_DECLARATION = """
+        %TYPE% %NAME%() const;
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_BOOL = """
+bool %NAME%::%FIELD%() const {
+    return KT.%NAME%.get_%FIELD%(handle);
+}
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_INT = """
+int %NAME%::%FIELD%() const {
+    return KT.%NAME%.get_%FIELD%(handle);
+}
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_STRING = """
+QString %NAME%::%FIELD%() const {
+    const char *s = KT.%NAME%.get_%FIELD%(handle);
+    QString str(s);
+    KTSym->DisposeString(s);
+    return str;
+}
+"""
+const val TEMPLATE_CPP_FIELD_IMPL_ARRAY = """
+%TYPE%s %NAME%::%FIELD%() const {
+    return %TYPE%s(KT.%NAME%.get_%FIELD%(handle));
+}
+"""
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_HEADER = """
+class %NAME% : public QObject {
+    Q_OBJECT
+%PROPERTY_DECLARATIONS%
+
+    public:
+        %NAME%(KTRef(%NAME%) handle, QObject *parent = nullptr) : QObject(parent), handle(handle) { }
+
+%FIELD_DECLARATIONS%
+
+    private:
+        KTRef(%NAME%) handle;
+};
+"""
+
+const val TEMPLATE_CPP_ARRAY_ELEMENT_PROPERTY_DECLARATION = """
+    Q_PROPERTY(%TYPE% %NAME% READ %NAME% CONSTANT)
+"""
+
+const val TEMPLATE_CPP_ARRAY_TYPE_HEADER = """
+class %TYPE%s : public QList<%TYPE%*> {
+    public:
+        %TYPE%s(KTLibRef(Array) kref) {
+            int n = KT.arrSize(kref);
+            for (int i = 0; i < n; ++i) {
+                append(new %TYPE%(KT.anyAs%TYPE%(KT.arrElement(kref, i))));
+            }
+        }
+};
+"""
 const val TEMPLATE_CPP_CONTEXT_HEADER = """
 class %NAME%Context {
     public:
-        %NAME%Context(KTRef(%NAME%Context) ctx): ctx(ctx) { }
+        %NAME%Context(KTRef(%NAME%Context) handle): handle(handle) { }
 
 %ITEMS%
 
     private:
-        KTRef(%NAME%Context) ctx;
+        KTRef(%NAME%Context) handle;
 };
 """
-const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
-        bool %FIELD%();
+
+const val TEMPLATE_CPP_CONTEXT_ITEM_ARRAY_HEADER = """
+        %TYPE%s %FIELD%() const;
 """
-const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_SOURCE = """
-bool %NAME%::%FIELD%() {
-    return KT.%NAME%.get_%FIELD%(ctx);
-}
+const val TEMPLATE_CPP_CONTEXT_ITEM_BOOL_HEADER = """
+        bool %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONTEXT_ITEM_INT_HEADER = """
-        int %FIELD%();
-"""
-const val TEMPLATE_CPP_CONTEXT_ITEM_INT_SOURCE = """
-int %NAME%::%FIELD%() {
-    return KT.%NAME%.get_%FIELD%(ctx);
-}
+        int %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_HEADER = """
-        QString %FIELD%() const &;
-"""
-const val TEMPLATE_CPP_CONTEXT_ITEM_STRING_SOURCE = """
-QString %NAME%::%FIELD%() const & {
-    const char *raw = KT.%NAME%.get_%FIELD%(ctx);
-    QString str(raw);
-    KTSym->DisposeString(raw);
-    return str;
-}
+        QString %FIELD%() const;
 """
 const val TEMPLATE_CPP_CONVERSIONS = """
 // Convert Bool to Any (for SDK)
@@ -213,6 +257,16 @@ struct F {
 }
 """
 const val TEMPLATE_FOBJ_SWIFT_ITEM = """    static let %NAME% = "%NAME%"
+"""
+
+const val TEMPLATE_KOTLIN_ARRAY_FUNCTIONS = """
+// Get an item of an array by id
+// Purpose: For C++
+fun arrElement(a: Array<Any?>, id: Int) = a.get(id)
+
+// Get array length
+// Purpose: For C++
+fun arrSize(a: Array<Any?>) = a.size
 """
 
 const val TEMPLATE_KOTLIN_CONTEXT = """

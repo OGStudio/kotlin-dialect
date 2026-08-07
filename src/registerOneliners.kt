@@ -11,6 +11,7 @@ import kotlin.js.JsExport
 
 // Register several oneliner callbacks to a controller
 @JsExport
+@Suppress("UNCHECKED_CAST")
 fun registerOneliners(
     ctrl: KDController,
     items: Array<Any>

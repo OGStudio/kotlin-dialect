@@ -18,6 +18,14 @@ AppContext:
         cppAPIHeader: String
         # Implementat of API
         cppAPISource: String
+        # Generated C++ header for array elements' headers
+        cppArrayElementsHeader: String
+        # Generated C++ source for array elements' implementations
+        cppArrayElementsSource: String
+        # Array type names found in Contexts' fields (struct entities only)
+        cppArrayTypes: [String: Bool]
+        # Generated C++ header for array types
+        cppArrayTypesHeader: String
         # Declaration of XYZContext
         cppContextsHeader: String
         # Implementat of XYZContext
@@ -33,6 +41,7 @@ AppContext:
         # Output path that is being saved at the moment
         currentOutputPathId: Int
         didLaunch: Bool
+        didWriteOutputFile: Bool
         # Entity comments with entities referenced by index
         entityComments: [Int: String]
         # Entity id -> Field name -> Field comment
@@ -50,7 +59,6 @@ AppContext:
         fobjKotlin: String
         # Special F struct for Swift
         fobjSwift: String
-        didWriteOutputFile: Bool
         inputFile: String
         inputFileDir: String
         inputFileLines: [String]
